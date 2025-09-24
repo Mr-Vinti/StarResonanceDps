@@ -29,13 +29,13 @@
         <Style x:Key="HeaderTitle" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="pack://application:,,,/Assets/Fonts/#SAO Welcome TT" />
+            <Setter Property="FontFamily" Value="pack://application:,,,/Assets/Fonts/#SAO Welcome TT, pack://application:,,,/Assets/Fonts/#阿里妈妈数黑体" />
             <Setter Property="FontSize" Value="16" />
         </Style>
     </UserControl.Resources>
     <Border Style="{StaticResource HeaderBorder}">
         <Grid>
-            <TextBlock Style="{StaticResource HeaderTitle}" Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:Header}}" />
+            <TextBlock Style="{StaticResource HeaderTitle}" Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:Header}}"/>
         </Grid>
     </Border>
 </UserControl>

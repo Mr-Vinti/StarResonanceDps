@@ -25,13 +25,13 @@ namespace StarResonanceDpsAnalysis.WPF.Views
             InitializeComponent();
             // Ensure selector reflects initial SelectedIndex
             Loaded += (_, _) => SyncSelectorWithTab();
-            MainTabControl.SelectionChanged += (_, _) => SyncSelectorWithTab();
+            //MainTabControl.SelectionChanged += (_, _) => SyncSelectorWithTab();
         }
 
         private void TabSelector_Click(object sender, RoutedEventArgs e)
         {
             if (sender is not ToggleButton tb || !int.TryParse(tb.Tag?.ToString(), out var index)) return;
-            MainTabControl.SelectedIndex = index;
+            //MainTabControl.SelectedIndex = index;
             SyncSelectorWithTab();
         }
 
@@ -42,7 +42,7 @@ namespace StarResonanceDpsAnalysis.WPF.Views
             foreach (var child in LogicalTreeHelper.GetChildren(TabControlIndexChanger))
             {
                 if (child is not ToggleButton t || !int.TryParse(t.Tag?.ToString(), out var tagIndex)) continue;
-                t.IsChecked = tagIndex == MainTabControl.SelectedIndex;
+                //t.IsChecked = tagIndex == MainTabControl.SelectedIndex;
             }
         }
 
