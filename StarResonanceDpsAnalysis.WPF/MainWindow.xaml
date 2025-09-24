@@ -9,8 +9,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
     Title="别查我DPS"
-    Width="675" Height="520"
-    MinWidth="675" MinHeight="360"
+    Width="675"
+    Height="520"
+    MinWidth="675"
+    MinHeight="360"
     Style="{StaticResource TransparentWindow}"
     d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
     mc:Ignorable="d">
@@ -21,95 +23,141 @@
             CaptionHeight="0"
             GlassFrameThickness="0"
             ResizeBorderThickness="6"
-            UseAeroCaptionButtons="False" />
+            UseAeroCaptionButtons="False"/>
     </WindowChrome.WindowChrome>
 
     <Window.Resources>
-        <Style x:Key="TitleGrid" TargetType="Grid">
-            
+        <Style x:Key="TitleGrid"
+               TargetType="Grid">
+
         </Style>
 
-        <Style x:Key="TitleText" TargetType="TextBlock" BasedOn="{StaticResource NormalTextBlockBaseStyle}">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,10,0,10" />
+        <Style x:Key="TitleText"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource NormalTextBlockBaseStyle}">
+            <Setter Property="HorizontalAlignment"
+                    Value="Center"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+            <Setter Property="Margin"
+                    Value="0,10,0,10"/>
         </Style>
 
-        <Style x:Key="PluginWarpPanelScrollViewer" TargetType="ScrollViewer">
-            <Setter Property="Padding" Value="5,0,5,0" />
+        <Style x:Key="PluginWarpPanelScrollViewer"
+               TargetType="ScrollViewer">
+            <Setter Property="Padding"
+                    Value="5,0,5,0"/>
         </Style>
 
-        <Style x:Key="PluginWrapPanel" TargetType="WrapPanel">
-            
+        <Style x:Key="PluginWrapPanel"
+               TargetType="WrapPanel">
+
         </Style>
 
-        <Style x:Key="PluginGroupBox" TargetType="Border">
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Width" Value="200" />
-            <Setter Property="Height" Value="265" />
-            <Setter Property="BorderBrush" Value="{StaticResource AntBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Padding" Value="10,0,10,10" />
-            <Setter Property="Margin" Value="5,10,5,5" />
-            <Setter Property="CornerRadius" Value="3" />
+        <Style x:Key="PluginGroupBox"
+               TargetType="Border">
+            <Setter Property="HorizontalAlignment"
+                    Value="Left"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Top"/>
+            <Setter Property="Width"
+                    Value="200"/>
+            <Setter Property="Height"
+                    Value="265"/>
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource AntBorderBrush}"/>
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+            <Setter Property="Padding"
+                    Value="10,0,10,10"/>
+            <Setter Property="Margin"
+                    Value="5,10,5,5"/>
+            <Setter Property="CornerRadius"
+                    Value="3"/>
         </Style>
 
-        <Style x:Key="PluginTitle" TargetType="TextBlock" BasedOn="{StaticResource NormalTextBlockBaseStyle}">
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Background" Value="#EEE" />
-            <Setter Property="Padding" Value="6,3,6,3" />
-            <Setter Property="Margin" Value="10,-12,0,0" />
+        <Style x:Key="PluginTitle"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource NormalTextBlockBaseStyle}">
+            <Setter Property="HorizontalAlignment"
+                    Value="Left"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Top"/>
+            <Setter Property="Background"
+                    Value="#EEE"/>
+            <Setter Property="Padding"
+                    Value="6,3,6,3"/>
+            <Setter Property="Margin"
+                    Value="10,-12,0,0"/>
         </Style>
 
-        <Style x:Key="PluginIntro" TargetType="TextBlock" BasedOn="{StaticResource NormalTextBlockBaseStyle}">
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Margin" Value="0,10,0,0" />
+        <Style x:Key="PluginIntro"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource NormalTextBlockBaseStyle}">
+            <Setter Property="HorizontalAlignment"
+                    Value="Stretch"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Top"/>
+            <Setter Property="TextWrapping"
+                    Value="Wrap"/>
+            <Setter Property="Margin"
+                    Value="0,10,0,0"/>
         </Style>
 
-        <Style x:Key="PluginAutoRunCheckBox" TargetType="CheckBox">
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Bottom" />
-            <Setter Property="Margin" Value="0,0,0,5" />
+        <Style x:Key="PluginAutoRunCheckBox"
+               TargetType="CheckBox">
+            <Setter Property="HorizontalAlignment"
+                    Value="Left"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Bottom"/>
+            <Setter Property="Margin"
+                    Value="0,0,0,5"/>
         </Style>
 
-        <Style x:Key="PluginRunButton" TargetType="Button">
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="VerticalAlignment" Value="Bottom" />
-            <Setter Property="Width" Value="58" />
-            <Setter Property="Height" Value="24" />
+        <Style x:Key="PluginRunButton"
+               TargetType="Button">
+            <Setter Property="HorizontalAlignment"
+                    Value="Right"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Bottom"/>
+            <Setter Property="Width"
+                    Value="58"/>
+            <Setter Property="Height"
+                    Value="24"/>
         </Style>
     </Window.Resources>
 
-    <!--<b:Interaction.Triggers>
-        <b:EventTrigger EventName="Loaded">
-            <b:InvokeCommandAction Command="{Binding CallSettingsViewCommand}" />
-            <b:InvokeCommandAction Command="{Binding CallDpsStatisticsViewCommand}" />
-            <b:InvokeCommandAction Command="{Binding CallSkillBreakdownViewCommand}" />
-            <b:InvokeCommandAction Command="{Binding CallAboutViewCommand}" />
-            <b:InvokeCommandAction Command="{Binding CallDamageReferenceViewCommand}" />
-        </b:EventTrigger>
-    </b:Interaction.Triggers>-->
+    <!-- <b:Interaction.Triggers> -->
+    <!--     <b:EventTrigger EventName="Loaded"> -->
+    <!--         <b:InvokeCommandAction Command="{Binding CallSettingsViewCommand}" /> -->
+    <!--         <b:InvokeCommandAction Command="{Binding CallDpsStatisticsViewCommand}" /> -->
+    <!--         <b:InvokeCommandAction Command="{Binding CallSkillBreakdownViewCommand}" /> -->
+    <!--         <b:InvokeCommandAction Command="{Binding CallAboutViewCommand}" /> -->
+    <!--         <b:InvokeCommandAction Command="{Binding CallDamageReferenceViewCommand}" /> -->
+    <!--     </b:EventTrigger> -->
+    <!-- </b:Interaction.Triggers> -->
 
-    <Border Background="#EFEFEF" Style="{StaticResource ShadowWindowBorder}">
+    <Border Background="#EFEFEF"
+            Style="{StaticResource ShadowWindowBorder}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-                
+
             </Grid.RowDefinitions>
 
-            <ctrl:Header Title="别查我 D P S" Grid.Row="0" />
+            <ctrl:Header Title="别查我 D P S"
+                         Grid.Row="0"/>
 
-            <Grid Style="{StaticResource TitleGrid}" Grid.Row="1">
-                <TextBlock Style="{StaticResource TitleText}" Text="插件列表"/>
+            <Grid Style="{StaticResource TitleGrid}"
+                  Grid.Row="1">
+                <TextBlock Style="{StaticResource TitleText}"
+                           Text="插件列表"/>
             </Grid>
 
-            <ScrollViewer Style="{StaticResource PluginWarpPanelScrollViewer}" Grid.Row="2">
+            <ScrollViewer Style="{StaticResource PluginWarpPanelScrollViewer}"
+                          Grid.Row="2">
                 <WrapPanel Style="{StaticResource PluginWrapPanel}">
 
                     <Border Style="{StaticResource PluginGroupBox}">
@@ -132,7 +180,8 @@
                                       Content="自启动"/>
 
                             <Button Style="{StaticResource PluginRunButton}"
-                                    Content="开启" Click="DPS_Button_Click"/>
+                                    Content="开启"
+                                    Click="DPS_Button_Click"/>
                         </Grid>
                     </Border>
 
@@ -156,7 +205,8 @@
                                       Content="自启动"/>
 
                             <Button Style="{StaticResource PluginRunButton}"
-                                    Content="开启" Click="UnderConstructionButton_Click"/>
+                                    Content="开启"
+                                    Click="UnderConstructionButton_Click"/>
                         </Grid>
                     </Border>
 
@@ -180,7 +230,8 @@
                                       Content="自启动"/>
 
                             <Button Style="{StaticResource PluginRunButton}"
-                                    Content="开启" Click="UnderConstructionButton_Click"/>
+                                    Content="开启"
+                                    Click="UnderConstructionButton_Click"/>
                         </Grid>
                     </Border>
 
@@ -204,9 +255,38 @@
                                       Content="自启动"/>
 
                             <Button Style="{StaticResource PluginRunButton}"
-                                    Content="开启" Click="UnderConstructionButton_Click"/>
+                                    Content="开启"
+                                    Click="UnderConstructionButton_Click"/>
                         </Grid>
                     </Border>
+                    <Border Style="{StaticResource PluginGroupBox}">
+                        <StackPanel>
+                            <StackPanel Grid.Row="1">
+                                <ComboBox
+                                    ItemsSource="{Binding AvailableThemes}"
+                                    SelectedIndex="0"
+                                    SelectedItem="{Binding Theme}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2"
+                                        HorizontalAlignment="Left">
+                                <TextBlock Style="{StaticResource TestTextBlockStyle}">asdf</TextBlock>
+                                <Button Command="{Binding Debug.CallDebugWindowCommand}">
+                                    Test
+                                </Button>
+                                <Button Command="{Binding CallDpsStatisticsViewCommand}">
+                                    Dps Statistic View
+                                </Button>
+                                <Button Command="{Binding CallSettingsViewCommand}">
+                                    Settings View
+                                </Button>
+                                <Button Command="{Binding CallSkillBreakdownViewCommand}">
+                                    Skill Breakdown View
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+
 
                 </WrapPanel>
             </ScrollViewer>

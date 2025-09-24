@@ -35,7 +35,7 @@
     </UserControl.Resources>
     <Border Style="{StaticResource HeaderBorder}">
         <Grid>
-            <TextBlock Style="{StaticResource HeaderTitle}" Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:Header}}"/>
+            <TextBlock Style="{StaticResource HeaderTitle}" Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:Header}}" />
         </Grid>
     </Border>
 </UserControl>

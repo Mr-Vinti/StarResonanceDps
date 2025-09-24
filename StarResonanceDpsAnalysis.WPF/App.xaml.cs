@@ -79,6 +79,7 @@ public partial class App : Application
                 services.AddTransient<DpsStatisticsView>();
                 services.AddTransient<SettingsViewModel>();
                 services.AddTransient<SettingsView>();
+                services.AddTransient<SkillBreakdownViewModel>();
                 services.AddTransient<SkillBreakdownView>();
                 services.AddTransient<AboutView>();
                 services.AddTransient<DamageReferenceView>();

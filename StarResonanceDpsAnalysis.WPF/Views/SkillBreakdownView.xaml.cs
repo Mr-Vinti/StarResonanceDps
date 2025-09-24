@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls.Primitives;
+using StarResonanceDpsAnalysis.WPF.ViewModels;
 
 namespace StarResonanceDpsAnalysis.WPF.Views;
 
@@ -8,9 +9,10 @@ namespace StarResonanceDpsAnalysis.WPF.Views;
 /// </summary>
 public partial class SkillBreakdownView : Window
 {
-    public SkillBreakdownView()
+    public SkillBreakdownView(SkillBreakdownViewModel vm)
     {
         InitializeComponent();
+        DataContext = vm;
         // Ensure selector reflects initial SelectedIndex
         Loaded += (_, _) => SyncSelectorWithTab();
         MainTabControl.SelectionChanged += (_, _) => SyncSelectorWithTab();
