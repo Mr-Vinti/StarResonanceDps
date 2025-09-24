@@ -30,5 +30,8 @@ public partial class MainViewModel(
     private void CallSkillBreakdownView() => windowManagement.SkillBreakdownView.Show();
 
     [RelayCommand]
-    private void CallAboutView() => windowManagement.AboutView.ShowDialog();    
+    private void CallAboutView() => windowManagement.AboutView.ShowDialog();
+
+    [RelayCommand]
+    private void CallDamageReferenceView() => windowManagement.DamageReferenceView.Show();
 }

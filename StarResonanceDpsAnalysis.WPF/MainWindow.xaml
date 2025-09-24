@@ -18,6 +18,7 @@
             <b:InvokeCommandAction Command="{Binding CallDpsStatisticsViewCommand}" />
             <b:InvokeCommandAction Command="{Binding CallSkillBreakdownViewCommand}" />
             <b:InvokeCommandAction Command="{Binding CallAboutViewCommand}" />
+            <b:InvokeCommandAction Command="{Binding CallDamageReferenceViewCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
     <Grid>

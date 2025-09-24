@@ -124,10 +124,10 @@
         <Style x:Key="TabSelectorToggleStyle" TargetType="ToggleButton">
             <Setter Property="MinWidth" Value="80" />
             <Setter Property="Height" Value="32" />
-            <Setter Property="Margin" Value="4" />
+            <Setter Property="Margin" Value="4,4,0,4" />
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="BorderBrush" Value="#CCC" />
+            <Setter Property="Foreground" Value="#777" />
+            <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -144,12 +144,21 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#FF4CAF50" />
-                                <Setter Property="Foreground" Value="White" />
-                                <Setter TargetName="bd" Property="BorderBrush" Value="#FF4CAF50" />
+                                <Setter TargetName="bd" Property="Background" Value="#FFF" />
+                                <Setter TargetName="bd" Property="BorderBrush" Value="#FFF" />
+                                <Setter Property="Foreground" Value="#000" />
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect 
+                                            BlurRadius="4"
+                                            Opacity="0.3"
+                                            ShadowDepth="0"
+                                            Color="#000" />
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="#999" />
+                                <Setter TargetName="bd" Property="Background" Value="#F8F8F8" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -521,9 +530,9 @@
 
                 <Border
                     Grid.Column="6"
-                    Width="300"
+                    Padding="0,0,4,0"
                     Margin="10"
-                    Background="Gray"
+                    Background="#EEE"
                     CornerRadius="20">
                     <!--  segmented selector: each ToggleButton sets the TabControl.SelectedIndex in code-behind  -->
                     <StackPanel
