@@ -33,4 +33,14 @@ public partial class SkillBreakdownView : Window
             t.IsChecked = tagIndex == MainTabControl.SelectedIndex;
         }
     }
+
+    private void Footer_ConfirmClick(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+
+    private void Footer_CancelClick(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
 }

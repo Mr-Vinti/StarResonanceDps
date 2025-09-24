@@ -23,4 +23,14 @@ public partial class SettingsView : Window
     {
         Close();
     }
+
+    private void Footer_ConfirmClick(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+
+    private void Footer_CancelClick(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
 }

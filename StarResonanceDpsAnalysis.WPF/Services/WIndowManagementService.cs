@@ -8,10 +8,12 @@ public class WindowManagementService(IServiceProvider provider) : IWindowManagem
     private DpsStatisticsView? _dpsStatisticsView;
     private SettingsView? _settingsView;
     private SkillBreakdownView? _skillBreakDownView;
+    private AboutView? _aboutView;
 
     public DpsStatisticsView DpsStatisticsView => _dpsStatisticsView ??= CreateDpsStatisticsView();
     public SettingsView SettingsView => _settingsView ??= CreateSettingsView();
     public SkillBreakdownView SkillBreakdownView => _skillBreakDownView ??= CreateSkillBreakDownView();
+    public AboutView AboutView => _aboutView ??= CreateAboutView();
 
     private DpsStatisticsView CreateDpsStatisticsView()
     {
@@ -43,6 +45,16 @@ public class WindowManagementService(IServiceProvider provider) : IWindowManagem
         };
         return view;
     }
+
+    private AboutView CreateAboutView() 
+    {
+        var view = provider.GetRequiredService<AboutView>();
+        view.Closed += (_, _) =>
+        {
+            if (_aboutView == view) _aboutView = null;
+        };
+        return view;
+    }
 }
 
 public interface IWindowManagementService
@@ -50,6 +62,7 @@ public interface IWindowManagementService
     DpsStatisticsView DpsStatisticsView { get; }
     SettingsView SettingsView { get; }
     SkillBreakdownView SkillBreakdownView { get; }
+    AboutView AboutView { get; }
 }
 
 public static class WindowManagementServiceExtensions

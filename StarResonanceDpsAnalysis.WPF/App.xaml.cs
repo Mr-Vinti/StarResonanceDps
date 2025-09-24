@@ -80,6 +80,7 @@ public partial class App : Application
                 services.AddTransient<SettingsViewModel>();
                 services.AddTransient<SettingsView>();
                 services.AddTransient<SkillBreakdownView>();
+                services.AddTransient<AboutView>();
                 services.AddSingleton<DebugFunctions>();
                 services.AddSingleton<CaptureDeviceList>(CaptureDeviceList.Instance);
                 services.AddThemes();

@@ -45,15 +45,7 @@
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
-
-        <Style x:Key="ControlButton" TargetType="Button">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Height" Value="30" />
-            <Setter Property="Width" Value="30" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-        </Style>
+        
         <Style x:Key="CardHeaderGridStyle" TargetType="Grid">
             <Setter Property="Height" Value="{StaticResource CardHeaderHeight}" />
         </Style>
@@ -272,47 +264,10 @@
                 </VirtualizingStackPanel>
             </ScrollViewer>
 
-            <Border Grid.Row="3">
-                <Border.Style>
-                    <Style TargetType="Border">
-                        <Setter Property="Height" Value="50" />
-                        <Setter Property="Background" Value="#FFF" />
-                        <Setter Property="CornerRadius">
-                            <Setter.Value>
-                                <CornerRadius
-                                    BottomLeft="{StaticResource MainCornerRadiusDouble}"
-                                    BottomRight="{StaticResource MainCornerRadiusDouble}"
-                                    TopLeft="0"
-                                    TopRight="0" />
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Border.Style>
-                <Grid Width="100" HorizontalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Button
-                        x:Name="Confirm"
-                        Grid.Column="0"
-                        Command="{Binding ConfirmCommand}"
-                        Style="{StaticResource ControlButton}">
-                        <Button.Content>
-                            <Image Source="{StaticResource ImageOkNormal}" />
-                        </Button.Content>
-                    </Button>
-                    <Button
-                        x:Name="Cancel"
-                        Grid.Column="1"
-                        Command="{Binding CancelCommand}"
-                        Style="{StaticResource ControlButton}">
-                        <Button.Content>
-                            <Image Source="{StaticResource ImageCancelNormal}" />
-                        </Button.Content>
-                    </Button>
-                </Grid>
-            </Border>
+            <ctrl:Footer Grid.Row="3"
+                         Height="50"
+                         ConfirmClick="Footer_ConfirmClick"
+                         CancelClick="Footer_CancelClick" />
         </Grid>
     </Border>
 </Window>

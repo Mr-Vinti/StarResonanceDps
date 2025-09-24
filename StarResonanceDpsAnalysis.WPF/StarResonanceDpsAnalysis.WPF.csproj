@@ -21,6 +21,8 @@
 
     <ItemGroup>
         <ApplicationDefinition Remove="App.xaml" />
+        <None Remove="Assets\Images\ApplicationIcon.ico" />
+        <None Remove="Assets\Images\ApplicationIcon.png" />
         <None Remove="Assets\Images\cancel_hover.png" />
         <None Remove="Assets\Images\cancel_normal.png" />
         <None Remove="Assets\Images\ok_hover.png" />
@@ -57,6 +59,8 @@
         <Resource Include="Assets\Fonts\HarmonyOS_Sans_SC_Regular.ttf" />
         <Resource Include="Assets\Fonts\iconfont.ttf" />
         <Resource Include="Assets\Fonts\SAOWelcomeTT-Regular.ttf" />
+        <Resource Include="Assets\Images\ApplicationIcon.ico" />
+        <Resource Include="Assets\Images\ApplicationIcon.png" />
         <Resource Include="Assets\Images\cancel_hover.png" />
         <Resource Include="Assets\Images\cancel_normal.png" />
         <Resource Include="Assets\Images\Crown.png" />
