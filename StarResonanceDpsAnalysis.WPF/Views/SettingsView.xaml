@@ -45,7 +45,7 @@
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
-        
+
         <Style x:Key="CardHeaderGridStyle" TargetType="Grid">
             <Setter Property="Height" Value="{StaticResource CardHeaderHeight}" />
         </Style>
@@ -264,10 +264,13 @@
                 </VirtualizingStackPanel>
             </ScrollViewer>
 
-            <ctrl:Footer Grid.Row="3"
-                         Height="50"
-                         ConfirmClick="Footer_ConfirmClick"
-                         CancelClick="Footer_CancelClick" />
+            <ctrl:Footer
+                Grid.Row="3"
+                Height="50"
+                CancelClick="Footer_CancelClick"
+                CancelCommand="{Binding CancelCommand}"
+                ConfirmClick="Footer_ConfirmClick"
+                ConfirmCommand="{Binding ConfirmCommand}" />
         </Grid>
     </Border>
 </Window>
