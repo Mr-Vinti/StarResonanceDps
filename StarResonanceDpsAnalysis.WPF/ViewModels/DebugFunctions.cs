@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Threading;
 using System.Windows.Data;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -19,6 +20,10 @@ namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
 public partial class DebugFunctions : BaseViewModel, IDisposable
 {
+    private const int MaxLogEntries = 500;
+    private const int FilterDebounceMs = 300;
+    private const int BatchSize = 10; // Process logs in batches to reduce UI freezing
+    
     private readonly IDataSource _dataSource;
     private readonly Dispatcher _dispatcher;
     private readonly ILogger<DebugFunctions> _logger;
@@ -26,6 +31,9 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
     private CancellationTokenSource? _replayCts;
     private Task? _replayTask;
     private readonly IDisposable? _logSubscription;
+    private Timer? _filterDebounceTimer;
+    private readonly Queue<LogEntry> _pendingLogs = new();
+    private volatile bool _isBatchProcessing = false;
 
     [ObservableProperty] private ObservableCollection<LogEntry> _logs = new();
     [ObservableProperty] private ICollectionView? _filteredLogs;
@@ -90,32 +98,114 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
 
         var sourceContext = evt.Properties.TryGetValue("SourceContext", out var sc) ? sc.ToString().Trim('"') : string.Empty;
         var rendered = evt.RenderMessage();
+        var timestamp = evt.Timestamp.LocalDateTime;
 
-        var entry = new LogEntry
-        {
-            Timestamp = evt.Timestamp.LocalDateTime,
-            Level = mappedLevel,
-            Category = sourceContext,
-            Message = rendered,
-            Exception = evt.Exception
-        };
+        var entry = new LogEntry(timestamp, mappedLevel, rendered, sourceContext, evt.Exception);
 
-        _dispatcher.Invoke(() =>
+        // Add to pending queue for batch processing
+        lock (_pendingLogs)
         {
-            Logs.Add(entry);
-            LogCount = Logs.Count;
-            LastLogTime = entry.Timestamp;
-            FilteredLogs?.Refresh();
-            UpdateFilteredLogCount();
-            LogAdded?.Invoke(this, EventArgs.Empty);
-        });
+            _pendingLogs.Enqueue(entry);
+        }
+
+        // Trigger batch processing if not already running
+        if (!_isBatchProcessing)
+        {
+            _isBatchProcessing = true;
+            _dispatcher.BeginInvoke(ProcessLogBatch, System.Windows.Threading.DispatcherPriority.Background);
+        }
+    }
+
+    private void ProcessLogBatch()
+    {
+        try
+        {
+            var processedCount = 0;
+            var shouldRefresh = false;
+            LogEntry? lastEntry = null;
+
+            // Process logs in batches
+            lock (_pendingLogs)
+            {
+                while (_pendingLogs.Count > 0 && processedCount < BatchSize)
+                {
+                    var entry = _pendingLogs.Dequeue();
+                    
+                    // Remove oldest entries if we're at the limit
+                    while (Logs.Count >= MaxLogEntries)
+                    {
+                        Logs.RemoveAt(0);
+                    }
+                    
+                    Logs.Add(entry);
+                    lastEntry = entry;
+                    processedCount++;
+                    
+                    // Check if this entry would be visible after filtering
+                    if (LogFilter(entry))
+                    {
+                        shouldRefresh = true;
+                    }
+                }
+            }
+
+            // Update properties only once per batch
+            if (processedCount > 0)
+            {
+                LogCount = Logs.Count;
+                if (lastEntry != null)
+                {
+                    LastLogTime = lastEntry.Timestamp;
+                }
+
+                if (shouldRefresh)
+                {
+                    FilteredLogs?.Refresh();
+                    UpdateFilteredLogCount();
+                    LogAdded?.Invoke(this, EventArgs.Empty);
+                }
+            }
+
+            // Continue processing if there are more logs
+            lock (_pendingLogs)
+            {
+                if (_pendingLogs.Count > 0)
+                {
+                    _dispatcher.BeginInvoke(ProcessLogBatch, System.Windows.Threading.DispatcherPriority.Background);
+                }
+                else
+                {
+                    _isBatchProcessing = false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error processing log batch");
+            _isBatchProcessing = false;
+        }
     }
 
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName is not (nameof(FilterText) or nameof(SelectedLogLevel))) return;
-        FilteredLogs?.Refresh();
-        UpdateFilteredLogCount();
+        if (e.PropertyName == nameof(FilterText))
+        {
+            // Debounce filter text changes
+            _filterDebounceTimer?.Dispose();
+            _filterDebounceTimer = new Timer(_ =>
+            {
+                _dispatcher.BeginInvoke(() =>
+                {
+                    FilteredLogs?.Refresh();
+                    UpdateFilteredLogCount();
+                }, System.Windows.Threading.DispatcherPriority.Background);
+            }, null, FilterDebounceMs, Timeout.Infinite);
+        }
+        else if (e.PropertyName == nameof(SelectedLogLevel))
+        {
+            FilteredLogs?.Refresh();
+            UpdateFilteredLogCount();
+        }
     }
 
     private bool LogFilter(object item)
@@ -139,6 +229,12 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
     [RelayCommand]
     private void ClearLogs()
     {
+        // Clear pending logs as well
+        lock (_pendingLogs)
+        {
+            _pendingLogs.Clear();
+        }
+        
         Logs.Clear();
         LogCount = 0;
         FilteredLogCount = 0;
@@ -268,6 +364,13 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
 
     public void Dispose()
     {
+        _filterDebounceTimer?.Dispose();
         _logSubscription?.Dispose();
+        
+        // Clear any pending logs
+        lock (_pendingLogs)
+        {
+            _pendingLogs.Clear();
+        }
     }
 }

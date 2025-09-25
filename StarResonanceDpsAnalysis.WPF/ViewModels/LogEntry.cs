@@ -1,13 +1,32 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.Logging;
 
 namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
-public partial class LogEntry : ObservableObject
+/// <summary>
+/// Optimized log entry for better performance - immutable with pre-computed display values
+/// </summary>
+public sealed class LogEntry
 {
-    [ObservableProperty] private DateTime _timestamp;
-    [ObservableProperty] private LogLevel _level;
-    [ObservableProperty] private string _message = string.Empty;
-    [ObservableProperty] private string _category = string.Empty;
-    [ObservableProperty] private Exception? _exception;
+    public DateTime Timestamp { get; }
+    public LogLevel Level { get; }
+    public string Message { get; }
+    public string Category { get; }
+    public Exception? Exception { get; }
+    
+    // Pre-computed display properties for better binding performance
+    public string TimeDisplay { get; }
+    public string LevelDisplay { get; }
+    
+    public LogEntry(DateTime timestamp, LogLevel level, string message, string category, Exception? exception = null)
+    {
+        Timestamp = timestamp;
+        Level = level;
+        Message = message ?? string.Empty;
+        Category = category ?? string.Empty;
+        Exception = exception;
+        
+        // Pre-compute display strings to avoid repeated formatting during binding
+        TimeDisplay = timestamp.ToString("HH:mm:ss.fff");
+        LevelDisplay = level.ToString();
+    }
 }

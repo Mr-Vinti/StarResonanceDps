@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,7 +48,14 @@ public static class PcapReplay
             {
                 // Use the parameterless GetNextPacket() which returns RawCapture (null on EOF).
                 PacketCapture ee;
-                _ = dev.GetNextPacket(out ee);
+                var rr = dev.GetNextPacket(out ee);
+                if (rr == GetPacketStatus.NoRemainingPackets)
+                    break;
+                if (rr is GetPacketStatus.Error or GetPacketStatus.ReadTimeout)
+                    continue;
+
+                if (rr != GetPacketStatus.PacketRead)
+                    continue;
                 var raw = ee.GetPacket();
 
                 try

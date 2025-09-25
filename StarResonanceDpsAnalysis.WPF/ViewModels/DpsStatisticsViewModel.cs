@@ -2,9 +2,11 @@
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using StarResonanceDpsAnalysis.Core.Analyze.Exceptions;
 using StarResonanceDpsAnalysis.Core.Data;
 using StarResonanceDpsAnalysis.Core.Data.Models;
@@ -37,6 +39,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private readonly Stopwatch _battleTimer = new();
     private readonly IConfigManager _configManager;
     private readonly IWindowManagementService _windowManagement;
+    private readonly Dispatcher _dispatcher;
     private readonly IDataSource _dataSource;
 
     private readonly Stopwatch _fullBattleTimer = new();
@@ -62,7 +65,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         ILogger<DpsStatisticsViewModel> logger,
         IConfigManager configManager,
         IWindowManagementService windowManagement,
-        DebugFunctions debugFunctions)
+        DebugFunctions debugFunctions,
+        Dispatcher dispatcher)
     {
         DebugFunctions = debugFunctions;
         _appController = appController;
@@ -71,11 +75,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         _dataSource = dataSource;
         _configManager = configManager;
         _windowManagement = windowManagement;
+        _dispatcher = dispatcher;
         _slots.CollectionChanged += SlotsChanged;
-        
+
         // Subscribe to DebugFunctions events to handle sample data requests
         DebugFunctions.SampleDataRequested += OnSampleDataRequested;
-        
+
         return;
 
         void SlotsChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -169,26 +174,26 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         var dpsList = ScopeTime == ScopeTime.Total
             ? DataStorage.ReadOnlyFullDpsDataList
             : DataStorage.ReadOnlySectionedDpsDataList;
-        dpsList = new List<DpsData>()
-        {
-            new DpsData() {TotalAttackDamage = Random.Shared.Next(19999), UID = 1},
-            new DpsData() {TotalAttackDamage = Random.Shared.Next(19999), UID = 2},
-            new DpsData() {TotalAttackDamage = Random.Shared.Next(19999), UID=3}
-        };
-        foreach (var item in dpsList)
-        {
-            item.SkillDic[123] = new SkillData()
-            {
-                CritTimes = 10,
-                LuckyTimes = 3,
-                SkillId = 1000,
-                TotalValue = 10000,
-                UseTimes = 100,
-            };
-            item.SkillDic[456] = new SkillData() { CritTimes = 5, LuckyTimes = 1, SkillId = 2000, TotalValue = 10000, UseTimes = 983 };
-            item.SkillDic[789] = new SkillData() { CritTimes = 8, LuckyTimes = 2, SkillId = 3000, TotalValue = 10000, UseTimes = 18 };
-            item.SkillDic[101112] = new SkillData() { CritTimes = 12, LuckyTimes = 4, SkillId = 4000, TotalValue = 1023, UseTimes = 123 };
-        }
+        // dpsList = new List<DpsData>()
+        // {
+        //     new DpsData() {TotalAttackDamage = Random.Shared.Next(19999), UID = 1},
+        //     new DpsData() {TotalAttackDamage = Random.Shared.Next(19999), UID = 2},
+        //     new DpsData() {TotalAttackDamage = Random.Shared.Next(19999), UID=3}
+        // };
+        // foreach (var item in dpsList)
+        // {
+        //     item.SkillDic[123] = new SkillData()
+        //     {
+        //         CritTimes = 10,
+        //         LuckyTimes = 3,
+        //         SkillId = 1000,
+        //         TotalValue = 10000,
+        //         UseTimes = 100,
+        //     };
+        //     item.SkillDic[456] = new SkillData() { CritTimes = 5, LuckyTimes = 1, SkillId = 2000, TotalValue = 10000, UseTimes = 983 };
+        //     item.SkillDic[789] = new SkillData() { CritTimes = 8, LuckyTimes = 2, SkillId = 3000, TotalValue = 10000, UseTimes = 18 };
+        //     item.SkillDic[101112] = new SkillData() { CritTimes = 12, LuckyTimes = 4, SkillId = 4000, TotalValue = 1023, UseTimes = 123 };
+        // }
         UpdateData(dpsList);
     }
 
@@ -204,7 +209,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             if (!_slotsDictionary.TryGetValue(dpsData.UID, out var slot))
             {
                 var ret = _storage.ReadOnlyPlayerInfoDatas.TryGetValue(dpsData.UID, out playerInfo);
-                var @class = ret ? ((int)playerInfo!.ProfessionID!).GetClassNameById() : Classes.Unknown;
+                var @class = ret ? playerInfo!.ProfessionID?.GetClassNameById() ?? Classes.Unknown : Classes.Unknown;
                 slot = new StatisticDataViewModel(DebugFunctions)
                 {
                     Index = 999,
@@ -248,7 +253,10 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                         }
                     },
                 };
-                Slots.Add(slot);
+                _dispatcher.Invoke(() =>
+                {
+                    Slots.Add(slot);
+                });
             }
             // Simplified update of existing slot (replaces the selected block)
             var unsignedValue = value < 0 ? 0UL : (ulong)value;
@@ -301,8 +309,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
         long GetValue(DpsData dpsData, ScopeTime scopeTime, StatisticType statisticType)
         {
-            Debug.Assert(dpsData.IsNpcData == (statisticType == StatisticType.NpcTakenDamage),
-                "dpsData.IsNpcData && statisticType == StatisticType.NpcTakenDamage"); // 保证是NPC承伤
+            // Debug.Assert(dpsData.IsNpcData == (statisticType == StatisticType.NpcTakenDamage),
+                // "dpsData.IsNpcData && statisticType == StatisticType.NpcTakenDamage"); // 保证是NPC承伤
             return (scopeTime, statisticType) switch
             {
                 (ScopeTime.Current, StatisticType.Damage) => dpsData.TotalAttackDamage,
@@ -556,26 +564,28 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         try
         {
             // Sort the collection based on the current criteria
-            switch (SortMemberPath)
+            _dispatcher.Invoke(() =>
             {
-                case "Value":
-                    Slots.SortBy(x => x.Value, SortDirection == SortDirectionEnum.Descending);
-                    break;
-                case "Name":
-                    Slots.SortBy(x => x.Player.Name, SortDirection == SortDirectionEnum.Descending);
-                    break;
-                case "Classes":
-                    Slots.SortBy(x => (int)x.Player.Class, SortDirection == SortDirectionEnum.Descending);
-                    break;
-                case "PercentOfMax":
-                    Slots.SortBy(x => x.PercentOfMax, SortDirection == SortDirectionEnum.Descending);
-                    break;
-                case "Percent":
-                    Slots.SortBy(x => x.Percent, SortDirection == SortDirectionEnum.Descending);
-                    break;
-            }
-
-            // Update the Id property to reflect the new order (1-based index)
+                switch (SortMemberPath)
+                {
+                    case "Value":
+                        Slots.SortBy(x => x.Value, SortDirection == SortDirectionEnum.Descending);
+                        break;
+                    case "Name":
+                        Slots.SortBy(x => x.Player.Name, SortDirection == SortDirectionEnum.Descending);
+                        break;
+                    case "Classes":
+                        Slots.SortBy(x => (int)x.Player.Class, SortDirection == SortDirectionEnum.Descending);
+                        break;
+                    case "PercentOfMax":
+                        Slots.SortBy(x => x.PercentOfMax, SortDirection == SortDirectionEnum.Descending);
+                        break;
+                    case "Percent":
+                        Slots.SortBy(x => x.Percent, SortDirection == SortDirectionEnum.Descending);
+                        break;
+                }
+            });
+            // Update the Index property to reflect the new order (1-based index)
             UpdateItemIndices();
         }
         catch (Exception ex)
@@ -593,13 +603,13 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         {
             DebugFunctions.SampleDataRequested -= OnSampleDataRequested;
         }
-        
+
         _storage?.Dispose();
     }
 }
 
 public sealed class DpsStatisticsDesignTimeViewModel()
-    : DpsStatisticsViewModel(null!, null!, new InstantizedDataStorage(), null!, null!, null!, null!)
+    : DpsStatisticsViewModel(null!, null!, new InstantizedDataStorage(), null!, null!, null!, null!, null!)
 {
     [Conditional("DEBUG")]
     private void InitDemoProgressBars()
