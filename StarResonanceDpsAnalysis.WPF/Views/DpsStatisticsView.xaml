@@ -180,21 +180,23 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="PopupTemplate" DataType="{x:Type viewModels:StatisticDataViewModel}">
-            <StackPanel Margin="5" Background="Red">
-                <!--  Debug info  -->
+            <StackPanel>
+                <!--  Debug info with direct binding  -->
                 <TextBlock
                     Margin="2"
-                    Foreground="White"
-                    Text="{Binding Player.Name, StringFormat='Player: {0}'}" />
+                    FontSize="10"
+                    Foreground="Yellow"
+                    IsHitTestVisible="False"
+                    Text="{Binding Player.Name, StringFormat='DEBUG: Player={0}'}"
+                    Visibility="{Binding Debug.Enabled, Converter={StaticResource BoolToVisibilityConverter}}" />
+                <!--  Show skill count  -->
                 <TextBlock
                     Margin="2"
-                    Foreground="White"
-                    Text="{Binding Value, StringFormat='Value: {0}'}" />
-                <TextBlock
-                    Margin="2"
-                    Foreground="White"
-                    Text="{Binding SkillList.Count, StringFormat='Skills Count: {0}'}" />
-
+                    FontSize="10"
+                    Foreground="Cyan"
+                    IsHitTestVisible="False"
+                    Text="{Binding SkillList.Count, StringFormat='Skills Count: {0}'}"
+                    Visibility="{Binding Debug.Enabled, Converter={StaticResource BoolToVisibilityConverter}}" />
                 <!--  Original popup content  -->
                 <ctrl:DpsDetailPopup SkillList="{Binding SkillList}" />
             </StackPanel>
@@ -212,23 +214,10 @@
                     CommandParameter="{Binding}"
                     FocusVisualStyle="{x:Null}"
                     Focusable="False"
-                    IsTabStop="False"
-                    OverridesDefaultStyle="True">
+                    IsTabStop="False">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="OverridesDefaultStyle" Value="True" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border
-                                            Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
                         </Style>
                     </Button.Style>
 
@@ -354,7 +343,6 @@
                             Width="21"
                             Command="{Binding RefreshCommand}"
                             Content="&#xE644;">
-                            <!--    -->
                             <!-- <b:Interaction.Triggers> -->
                             <!--     <b:EventTrigger EventName="MouseEnter"> -->
                             <!--         <b:InvokeCommandAction Command="{Binding RefreshButtonMouseEnteredCommand}" /> -->
@@ -464,16 +452,6 @@
                                 </TransformGroup>
                             </Button.RenderTransform>
                         </Button>
-                        <!--  鼠标经过 显示测试到时放进度条上  -->
-                        <Popup
-                            x:Name="SkillPopup"
-                            AllowsTransparency="True"
-                            IsOpen="{Binding ShowSkillListPopup}"
-                            Placement="MousePoint"
-                            StaysOpen="True">
-                            <ctrl:DpsDetailPopup SkillList="{Binding SkillList}" />
-                        </Popup>
-
                     </StackPanel>
                 </Grid>
             </Border>

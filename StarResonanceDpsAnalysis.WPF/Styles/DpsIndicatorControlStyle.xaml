@@ -66,27 +66,11 @@
                                         Opacity="0.3"
                                         ShadowDepth="2" />
                                 </Border.Effect>
-                                <StackPanel IsHitTestVisible="False">
-                                    <!--  Debug info with direct binding  -->
-                                    <TextBlock
-                                        Margin="2"
-                                        FontSize="10"
-                                        Foreground="Yellow"
-                                        IsHitTestVisible="False"
-                                        Text="{Binding PopupContent.Player.Name, RelativeSource={RelativeSource TemplatedParent}, StringFormat='DEBUG: Player={0}'}" />
-                                    <!--  Show skill count  -->
-                                    <TextBlock
-                                        Margin="2"
-                                        FontSize="10"
-                                        Foreground="Cyan"
-                                        IsHitTestVisible="False"
-                                        Text="{Binding PopupContent.SkillList.Count, RelativeSource={RelativeSource TemplatedParent}, StringFormat='Skills Count: {0}'}" />
-                                    <!--  Actual content  -->
-                                    <ContentControl
-                                        Content="{Binding PopupContent, RelativeSource={RelativeSource TemplatedParent}}"
-                                        ContentTemplate="{Binding PopupTemplate, RelativeSource={RelativeSource TemplatedParent}}"
-                                        IsHitTestVisible="False" />
-                                </StackPanel>
+                                <!--  Actual content  -->
+                                <ContentControl
+                                    Content="{Binding PopupContent, RelativeSource={RelativeSource TemplatedParent}}"
+                                    ContentTemplate="{Binding PopupTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                    IsHitTestVisible="False" />
                             </Border>
                         </Popup>
                     </Grid>

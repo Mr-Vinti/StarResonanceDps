@@ -19,7 +19,6 @@ namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
 public partial class DebugFunctions : BaseViewModel, IDisposable
 {
-    private readonly DpsStatisticsViewModel _dpsStatisticsViewModel;
     private readonly IDataSource _dataSource;
     private readonly Dispatcher _dispatcher;
     private readonly ILogger<DebugFunctions> _logger;
@@ -45,15 +44,17 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
     ];
 
     public event EventHandler? LogAdded;
+    
+    // Event to request sample data addition - removes direct dependency on DpsStatisticsViewModel
+    public event EventHandler? SampleDataRequested;
 
     public DebugFunctions(
-        DpsStatisticsViewModel dpsStatisticsViewModel,
         IDataSource dataSource,
         Dispatcher dispatcher,
-        ILogger<DebugFunctions> logger, IObservable<LogEvent> observer,
+        ILogger<DebugFunctions> logger, 
+        IObservable<LogEvent> observer,
         IOptionsMonitor<AppConfig> options)
     {
-        _dpsStatisticsViewModel = dpsStatisticsViewModel;
         _dataSource = dataSource;
         _dispatcher = dispatcher;
         _logger = logger;
@@ -182,7 +183,8 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
     [RelayCommand]
     private void AddSampleData()
     {
-        _dpsStatisticsViewModel.AddRandomData();
+        // Fire event instead of directly calling DpsStatisticsViewModel
+        SampleDataRequested?.Invoke(this, EventArgs.Empty);
     }
     #endregion
 

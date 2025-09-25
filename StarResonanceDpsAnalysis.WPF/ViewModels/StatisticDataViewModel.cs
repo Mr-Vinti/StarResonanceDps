@@ -1,11 +1,10 @@
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
 [DebuggerDisplay("Name:{Player.Name};Value:{Value}")]
-public partial class StatisticDataViewModel : BaseViewModel, IComparable<StatisticDataViewModel>
+public partial class StatisticDataViewModel(DebugFunctions debug) : BaseViewModel, IComparable<StatisticDataViewModel>
 {
     [ObservableProperty] private long _index;
     [ObservableProperty] private ulong _value;
@@ -16,7 +15,7 @@ public partial class StatisticDataViewModel : BaseViewModel, IComparable<Statist
     // [ObservableProperty] private ObservableCollection<SkillItemViewModel> _skillList = new();
     public Func<PlayerInfoViewModel, List<SkillItemViewModel>>? GetSkillList { get; set; }
     public List<SkillItemViewModel> SkillList => GetSkillList?.Invoke(_player) ?? new List<SkillItemViewModel>();
-
+    public DebugFunctions Debug { get; } = debug;
 
     public int CompareTo(StatisticDataViewModel? other)
     {

@@ -30,8 +30,9 @@ public partial class DpsStatisticsOptions : BaseViewModel
     }
 }
 
-public partial class DpsStatisticsViewModel : BaseViewModel
+public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 {
+    public DebugFunctions DebugFunctions { get; }
     private readonly IApplicationController _appController;
     private readonly Stopwatch _battleTimer = new();
     private readonly IConfigManager _configManager;
@@ -60,8 +61,10 @@ public partial class DpsStatisticsViewModel : BaseViewModel
         IDataStorage storage,
         ILogger<DpsStatisticsViewModel> logger,
         IConfigManager configManager,
-        IWindowManagementService windowManagement)
+        IWindowManagementService windowManagement,
+        DebugFunctions debugFunctions)
     {
+        DebugFunctions = debugFunctions;
         _appController = appController;
         _storage = storage;
         _logger = logger;
@@ -69,6 +72,10 @@ public partial class DpsStatisticsViewModel : BaseViewModel
         _configManager = configManager;
         _windowManagement = windowManagement;
         _slots.CollectionChanged += SlotsChanged;
+        
+        // Subscribe to DebugFunctions events to handle sample data requests
+        DebugFunctions.SampleDataRequested += OnSampleDataRequested;
+        
         return;
 
         void SlotsChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -107,6 +114,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel
                 }
             }
         }
+    }
+
+    private void OnSampleDataRequested(object? sender, EventArgs e)
+    {
+        // Handle the event from DebugFunctions
+        AddRandomData();
     }
 
     public DpsStatisticsOptions Options { get; } = new();
@@ -192,7 +205,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel
             {
                 var ret = _storage.ReadOnlyPlayerInfoDatas.TryGetValue(dpsData.UID, out playerInfo);
                 var @class = ret ? ((int)playerInfo!.ProfessionID!).GetClassNameById() : Classes.Unknown;
-                slot = new StatisticDataViewModel
+                slot = new StatisticDataViewModel(DebugFunctions)
                 {
                     Index = 999,
                     Value = (ulong)value, // TODO: 将 long 转为 ulong
@@ -360,7 +373,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel
     [RelayCommand]
     public void AddTestItem()
     {
-        var newItem = new StatisticDataViewModel
+        var newItem = new StatisticDataViewModel(DebugFunctions)
         {
             Index = Slots.Count + 1,
             Value = (ulong)_rd.Next(100, 2000),
@@ -572,10 +585,21 @@ public partial class DpsStatisticsViewModel : BaseViewModel
     }
 
     #endregion
+
+    public void Dispose()
+    {
+        // Unsubscribe from DebugFunctions events
+        if (DebugFunctions != null)
+        {
+            DebugFunctions.SampleDataRequested -= OnSampleDataRequested;
+        }
+        
+        _storage?.Dispose();
+    }
 }
 
 public sealed class DpsStatisticsDesignTimeViewModel()
-    : DpsStatisticsViewModel(null!, null!, new InstantizedDataStorage(), null!, null!, null!)
+    : DpsStatisticsViewModel(null!, null!, new InstantizedDataStorage(), null!, null!, null!, null!)
 {
     [Conditional("DEBUG")]
     private void InitDemoProgressBars()
@@ -595,7 +619,7 @@ public sealed class DpsStatisticsDesignTimeViewModel()
         for (var i = 0; i < players.Length; i++)
         {
             var (nick, @class) = players[i];
-            var barData = new StatisticDataViewModel
+            var barData = new StatisticDataViewModel(DebugFunctions)
             {
                 Index = i + 1, // 1-based index
                 Player = new PlayerInfoViewModel

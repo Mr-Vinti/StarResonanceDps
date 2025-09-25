@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;
@@ -32,7 +33,7 @@ public partial class App : Application
         var configRoot = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .AddJsonFile("appsettings.Development.json", optional: true)
+            .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
             .Build();
 
         IObservable<LogEvent>? streamRef = null;
@@ -48,7 +49,7 @@ public partial class App : Application
         _host = CreateHostBuilder(args, configRoot).Build();
         _logger = _host.Services.GetRequiredService<ILogger<App>>();
 
-        Log.Information("Application starting");
+        _logger.LogInformation("Application starting");
 
         App app = new();
         app.InitializeComponent();
@@ -56,7 +57,7 @@ public partial class App : Application
         app.MainWindow.Visibility = Visibility.Visible;
         app.Run();
 
-        Log.Information("Application exiting");
+        _logger.LogInformation("Application exiting");
         Log.CloseAndFlush();
     }
 
