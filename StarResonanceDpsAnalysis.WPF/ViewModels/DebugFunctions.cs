@@ -6,10 +6,12 @@ using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.Win32;
 using Serilog.Events;
 using StarResonanceDpsAnalysis.Core.Analyze;
 using StarResonanceDpsAnalysis.Core.Data;
+using StarResonanceDpsAnalysis.WPF.Config;
 using StarResonanceDpsAnalysis.WPF.Data;
 using StarResonanceDpsAnalysis.WPF.Views;
 
@@ -34,6 +36,7 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
     [ObservableProperty] private int _logCount;
     [ObservableProperty] private int _filteredLogCount;
     [ObservableProperty] private DateTime? _lastLogTime;
+    [ObservableProperty] private bool _enabled;
 
     public LogLevel[] AvailableLogLevels { get; } =
     [
@@ -47,7 +50,8 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
         DpsStatisticsViewModel dpsStatisticsViewModel,
         IDataSource dataSource,
         Dispatcher dispatcher,
-        ILogger<DebugFunctions> logger, IObservable<LogEvent> observer)
+        ILogger<DebugFunctions> logger, IObservable<LogEvent> observer,
+        IOptionsMonitor<AppConfig> options)
     {
         _dpsStatisticsViewModel = dpsStatisticsViewModel;
         _dataSource = dataSource;
@@ -59,8 +63,15 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
         FilteredLogs = CollectionViewSource.GetDefaultView(Logs);
         FilteredLogs.Filter = LogFilter;
         PropertyChanged += OnPropertyChanged;
+        SetProperty(options.CurrentValue, null);
+        options.OnChange(SetProperty);
 
         _logger.LogInformation("DebugFunctions initialized with Serilog observable sink");
+    }
+
+    private void SetProperty(AppConfig arg1, string? arg2)
+    {
+        Enabled = arg1.DebugEnabled;
     }
 
     private void OnSerilogEvent(LogEvent evt)

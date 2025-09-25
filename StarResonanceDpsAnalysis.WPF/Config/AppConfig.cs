@@ -96,6 +96,9 @@ public partial class AppConfig : ObservableObject
     [ObservableProperty]
     private KeyBinding _clearDataShortcut = new(Key.F9, ModifierKeys.None);
 
+    [ObservableProperty]
+    private bool _debugEnabled = false;
+
     public AppConfig Clone()
     {
         // TODO: Add unittest

@@ -12,5 +12,6 @@
     <converters:PercentOfMaxConverter x:Key="PercentOfMaxConverter" />
     <converters:StatisticTypeToStringConverter x:Key="StatisticTypeToStringConverter" />
     <converters:ScopeTimeToStringConverter x:Key="ScopeTimeToStringConverter" />
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <!-- <converters:StatisticTypeNScopeTimeToStringMultiConverter x:Key="StatisticTypeNScopeTimeToStringMultiConverter" /> -->
 </ResourceDictionary>

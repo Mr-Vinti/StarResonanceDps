@@ -9,6 +9,12 @@
         <Version>3.0.0</Version>
         <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     </PropertyGroup>
+    <ItemGroup>
+      <Compile Remove="Logging\**" />
+      <EmbeddedResource Remove="Logging\**" />
+      <None Remove="Logging\**" />
+      <Page Remove="Logging\**" />
+    </ItemGroup>
 
     <ItemGroup>
         <Content Include="appsettings.Development.json">
@@ -74,10 +80,6 @@
         <Resource Include="Assets\Images\Classes_WIndKnight.png" />
         <Resource Include="Assets\Images\ok_hover.png" />
         <Resource Include="Assets\Images\ok_normal.png" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Logging\" />
     </ItemGroup>
 
 </Project>
