@@ -52,7 +52,7 @@
             <Setter Property="BorderBrush" Value="{StaticResource AntBorderBrush}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Padding" Value="10,0,10,10" />
-            <Setter Property="Margin" Value="5,10,5,5" />
+            <Setter Property="Margin" Value="5,12,5,5" />
             <Setter Property="CornerRadius" Value="3" />
         </Style>
 
@@ -136,10 +136,9 @@
 
                             <CheckBox Content="自启动" Style="{StaticResource PluginAutoRunCheckBox}" />
 
-                            <Button
-                                Click="DPS_Button_Click"
-                                Content="开启"
-                                Style="{StaticResource PluginRunButton}" />
+                            <Button Style="{StaticResource PluginRunButton}"
+                                    Content="开启"
+                                    Command="{Binding CallDpsStatisticsViewCommand}"/>
                         </Grid>
                     </Border>
 
@@ -160,10 +159,9 @@
 
                             <CheckBox Content="自启动" Style="{StaticResource PluginAutoRunCheckBox}" />
 
-                            <Button
-                                Click="UnderConstructionButton_Click"
-                                Content="开启"
-                                Style="{StaticResource PluginRunButton}" />
+                            <Button Style="{StaticResource PluginRunButton}"
+                                    Content="开启"
+                                    Command="{Binding CallModuleSolveViewCommandCommand}"/>
                         </Grid>
                     </Border>
 
@@ -233,43 +231,29 @@
                                     SelectedItem="{Binding Theme}" />
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock Style="{StaticResource TestTextBlockStyle}">asdf</TextBlock>
+                                <TextBlock Style="{StaticResource TestTextBlockStyle}">
+                                    Theme Switch Test Text
+                                </TextBlock>
                                 <Button Command="{Binding Debug.CallDebugWindowCommand}">
-                                    Test
+                                    Pcap Test
                                 </Button>
-                                <Button Command="{Binding CallDpsStatisticsViewCommand}">
-                                    Dps Statistic View
+                                <Button Command="{Binding CallSkillBreakdownViewCommand}">
+                                    Skill Breakdown View
+                                </Button>
+                                <Button Command="{Binding CallDamageReferenceViewCommand}">
+                                    Damage Reference View
                                 </Button>
                                 <Button Command="{Binding CallSettingsViewCommand}">
                                     Settings View
                                 </Button>
-                                <Button Command="{Binding CallSkillBreakdownViewCommand}">
-                                    Skill Breakdown View
+                                <Button Command="{Binding CallAboutViewCommand}">
+                                    About View
                                 </Button>
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>
                 </WrapPanel>
             </ScrollViewer>
-
-            <!--<StackPanel Grid.Row="1">
-                <ComboBox
-                ItemsSource="{Binding AvailableThemes}"
-                SelectedIndex="0"
-                SelectedItem="{Binding Theme}" />
-            </StackPanel>
-            <StackPanel Grid.Row="2" HorizontalAlignment="Left">
-                <TextBlock Style="{StaticResource TestTextBlockStyle}">asdf</TextBlock>
-                <Button Command="{Binding Debug.CallDebugWindowCommand}">
-                    Test
-                </Button>
-                <Button Command="{Binding CallDpsStatisticsViewCommand}">
-                    Dps Statistic View
-                </Button>
-                <Button Command="{Binding CallSettingsViewCommand}">
-                    Settings View
-                </Button>
-            </StackPanel>-->
         </Grid>
     </Border>
 </Window>

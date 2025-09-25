@@ -84,6 +84,7 @@ public partial class App : Application
                 services.AddTransient<SkillBreakdownView>();
                 services.AddTransient<AboutView>();
                 services.AddTransient<DamageReferenceView>();
+                services.AddTransient<ModuleSolveView>();
                 services.AddSingleton<DebugFunctions>();
                 services.AddSingleton<CaptureDeviceList>(CaptureDeviceList.Instance);
                 services.AddThemes();

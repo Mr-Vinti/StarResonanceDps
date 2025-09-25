@@ -34,4 +34,7 @@ public partial class MainViewModel(
 
     [RelayCommand]
     private void CallDamageReferenceView() => windowManagement.DamageReferenceView.Show();
+
+    [RelayCommand]
+    private void CallModuleSolveViewCommand() => windowManagement.ModuleSolveView.Show();
 }

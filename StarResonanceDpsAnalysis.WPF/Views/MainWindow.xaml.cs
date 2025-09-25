@@ -16,11 +16,6 @@ namespace StarResonanceDpsAnalysis.WPF.Views
             DataContext = viewModel;
         }
 
-        private void DPS_Button_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Open DPS Statistics Window
-        }
-
         private void UnderConstructionButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("This feature is under construction.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
