@@ -81,16 +81,6 @@ public class WindowManagementService(IServiceProvider provider) : IWindowManagem
     }
 }
 
-public interface IWindowManagementService
-{
-    DpsStatisticsView DpsStatisticsView { get; }
-    SettingsView SettingsView { get; }
-    SkillBreakdownView SkillBreakdownView { get; }
-    AboutView AboutView { get; }
-    DamageReferenceView DamageReferenceView { get; }
-    ModuleSolveView ModuleSolveView { get; }
-}
-
 public static class WindowManagementServiceExtensions
 {
     public static IServiceCollection AddWindowManagementService(this IServiceCollection services)

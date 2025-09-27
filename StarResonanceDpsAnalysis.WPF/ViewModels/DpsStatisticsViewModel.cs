@@ -35,7 +35,7 @@ public partial class DpsStatisticsOptions : BaseViewModel
 public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 {
     public DebugFunctions DebugFunctions { get; }
-    private readonly IApplicationController _appController;
+    private readonly IApplicationControlService _appControlService;
     private readonly Stopwatch _battleTimer = new();
     private readonly IConfigManager _configManager;
     private readonly IWindowManagementService _windowManagement;
@@ -59,7 +59,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     [ObservableProperty] private StatisticType _statisticIndex;
 
     /// <inheritdoc/>
-    public DpsStatisticsViewModel(IApplicationController appController,
+    public DpsStatisticsViewModel(IApplicationControlService appControlService,
         IDataSource dataSource,
         IDataStorage storage,
         ILogger<DpsStatisticsViewModel> logger,
@@ -69,7 +69,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         Dispatcher dispatcher)
     {
         DebugFunctions = debugFunctions;
-        _appController = appController;
+        _appControlService = appControlService;
         _storage = storage;
         _logger = logger;
         _dataSource = dataSource;
@@ -487,7 +487,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     [RelayCommand]
     private void Shutdown()
     {
-        _appController.Shutdown();
+        _appControlService.Shutdown();
     }
 
     #region Sort

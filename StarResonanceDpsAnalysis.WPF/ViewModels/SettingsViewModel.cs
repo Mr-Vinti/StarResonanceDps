@@ -5,12 +5,13 @@ using StarResonanceDpsAnalysis.Core.Extends.System;
 using StarResonanceDpsAnalysis.WPF.Config;
 using StarResonanceDpsAnalysis.WPF.Converters;
 using StarResonanceDpsAnalysis.WPF.Models;
+using StarResonanceDpsAnalysis.WPF.Services;
 using AppConfig = StarResonanceDpsAnalysis.WPF.Config.AppConfig;
 using KeyBinding = StarResonanceDpsAnalysis.WPF.Models.KeyBinding;
 
 namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
-public partial class SettingsViewModel(IConfigManager configManger, IDeviceManager deviceManager) : BaseViewModel
+public partial class SettingsViewModel(IConfigManager configManger, IDeviceManagementService deviceManagementService) : BaseViewModel
 {
     [ObservableProperty] private AppConfig _appConfig = null!;
     [ObservableProperty] private List<NetworkAdapterInfo> _availableNetworkAdapters = [];
@@ -29,7 +30,7 @@ public partial class SettingsViewModel(IConfigManager configManger, IDeviceManag
 
     private async Task LoadNetworkAdaptersAsync()
     {
-        var adapters = await deviceManager.GetNetworkAdaptersAsync();
+        var adapters = await deviceManagementService.GetNetworkAdaptersAsync();
         AvailableNetworkAdapters = adapters.Select(a => new NetworkAdapterInfo(a.name, a.description)).ToList();
         AppConfig.PreferredNetworkAdapter =
             AvailableNetworkAdapters.FirstOrDefault(a => a.Name == AppConfig.PreferredNetworkAdapter?.Name);

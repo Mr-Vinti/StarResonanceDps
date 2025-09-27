@@ -90,9 +90,9 @@ public partial class App : Application
                 services.AddSingleton<CaptureDeviceList>(CaptureDeviceList.Instance);
                 services.AddThemes();
                 services.AddWindowManagementService();
-                services.AddSingleton<IApplicationController, ApplicationController>();
+                services.AddSingleton<IApplicationControlService, ApplicationControlService>();
                 services.AddSingleton<IDataSource, DpsDummyDataSource>();
-                services.AddSingleton<IDeviceManager, DeviceManager>();
+                services.AddSingleton<IDeviceManagementService, DeviceManagementService>();
                 services.AddDataStorage();
                 services.AddSingleton<IConfigManager, ConfigManger>();
                 if (_logStream != null) services.AddSingleton<IObservable<LogEvent>>(_logStream);
