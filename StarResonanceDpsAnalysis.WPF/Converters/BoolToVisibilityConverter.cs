@@ -12,6 +12,7 @@ public class BoolToVisibilityConverter : IValueConverter
         {
             return boolValue ? Visibility.Visible : Visibility.Collapsed;
         }
+
         return Visibility.Collapsed;
     }
 
@@ -21,6 +22,7 @@ public class BoolToVisibilityConverter : IValueConverter
         {
             return visibility == Visibility.Visible;
         }
+
         return false;
     }
 }

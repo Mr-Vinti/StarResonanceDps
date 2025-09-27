@@ -11,7 +11,8 @@ using KeyBinding = StarResonanceDpsAnalysis.WPF.Models.KeyBinding;
 
 namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
-public partial class SettingsViewModel(IConfigManager configManger, IDeviceManagementService deviceManagementService) : BaseViewModel
+public partial class SettingsViewModel(IConfigManager configManger, IDeviceManagementService deviceManagementService)
+    : BaseViewModel
 {
     [ObservableProperty] private AppConfig _appConfig = null!;
     [ObservableProperty] private List<NetworkAdapterInfo> _availableNetworkAdapters = [];

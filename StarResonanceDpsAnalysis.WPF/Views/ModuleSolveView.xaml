@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StarResonanceDpsAnalysis.WPF.Views"
         xmlns:ctrl="clr-namespace:StarResonanceDpsAnalysis.WPF.Controls"
         mc:Ignorable="d"
-        Title="ModuleSolveView" 
+        Title="ModuleSolveView"
         Height="775" Width="800"
         MinHeight="775" MinWidth="800"
         Style="{StaticResource TransparentWindow}">
@@ -49,13 +48,13 @@
             <Setter Property="Margin" Value="0,0,10,0" />
         </Style>
 
-        <Style x:Key="FieldTitle" TargetType="TextBlock" 
+        <Style x:Key="FieldTitle" TargetType="TextBlock"
                BasedOn="{StaticResource NormalTextBlockBaseStyle}">
 
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
 
-        <Style x:Key="TargetPropertyComboBox" TargetType="ComboBox" 
+        <Style x:Key="TargetPropertyComboBox" TargetType="ComboBox"
                BasedOn="{StaticResource AntComboBoxStyle}">
 
             <Setter Property="MinWidth" Value="100" />
@@ -68,11 +67,9 @@
         </Style>
 
         <Style x:Key="ExcludePropertyComboBox" TargetType="ComboBox"
-               BasedOn="{StaticResource AntComboBoxStyle}">
-            
-        </Style>
+               BasedOn="{StaticResource AntComboBoxStyle}" />
 
-        <Style x:Key="StretchedGroupBox" TargetType="Border" 
+        <Style x:Key="StretchedGroupBox" TargetType="Border"
                BasedOn="{StaticResource GroupBox}">
 
             <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -97,9 +94,9 @@
             <Setter Property="Background" Value="#1677FF" />
         </Style>
 
-        <Style x:Key="AnalyzeButtonText" TargetType="TextBlock" 
+        <Style x:Key="AnalyzeButtonText" TargetType="TextBlock"
                BasedOn="{StaticResource NormalTextBlockBaseStyle}">
-            
+
             <Setter Property="Padding" Value="0,10,0,10" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Foreground" Value="#FFF" />
@@ -126,380 +123,380 @@
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Border Style="{StaticResource GroupBox}" 
+                    <Border Style="{StaticResource GroupBox}"
                             Grid.Row="0">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Style="{StaticResource GroupBoxTitle}" 
+                            <TextBlock Style="{StaticResource GroupBoxTitle}"
                                        Grid.Row="0">
-                                
+
                                 目标词条和等级（0为默认）[可输入文字索引]
                             </TextBlock>
 
-                            <Grid Style="{StaticResource PropertyFieldLine}" 
+                            <Grid Style="{StaticResource PropertyFieldLine}"
                                   Grid.Row="1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Style="{StaticResource TargetPropertyFieldLeft}" Grid.Column="0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="属性1：" 
-                                               Grid.Column="0"/>
+                                    <TextBlock Style="{StaticResource FieldTitle}"
+                                               Text="属性1："
+                                               Grid.Column="0" />
 
                                     <ComboBox x:Name="Property_1"
                                               Style="{StaticResource TargetPropertyComboBox}"
-                                              Grid.Column="1"/>
+                                              Grid.Column="1" />
                                 </Grid>
 
                                 <Grid Grid.Column="1">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="期望等级：" 
-                                               Grid.Column="0"/>
+                                    <TextBlock Style="{StaticResource FieldTitle}"
+                                               Text="期望等级："
+                                               Grid.Column="0" />
 
                                     <TextBox x:Name="WishLevel_1"
-                                              Style="{StaticResource WishLevelTextBox}"
-                                              Grid.Column="1"/>
+                                             Style="{StaticResource WishLevelTextBox}"
+                                             Grid.Column="1" />
                                 </Grid>
                             </Grid>
 
-                            <Grid Style="{StaticResource PropertyFieldLine}" 
+                            <Grid Style="{StaticResource PropertyFieldLine}"
                                   Grid.Row="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Style="{StaticResource TargetPropertyFieldLeft}" Grid.Column="0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="属性2：" 
-                                               Grid.Column="0"/>
+                                    <TextBlock Style="{StaticResource FieldTitle}"
+                                               Text="属性2："
+                                               Grid.Column="0" />
 
                                     <ComboBox x:Name="Property_2"
                                               Style="{StaticResource TargetPropertyComboBox}"
-                                              Grid.Column="1"/>
+                                              Grid.Column="1" />
                                 </Grid>
 
                                 <Grid Grid.Column="1">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="期望等级：" 
-                                               Grid.Column="0"/>
+                                    <TextBlock Style="{StaticResource FieldTitle}"
+                                               Text="期望等级："
+                                               Grid.Column="0" />
 
                                     <TextBox x:Name="WishLevel_2"
-                                              Style="{StaticResource WishLevelTextBox}"
-                                              Grid.Column="1"/>
+                                             Style="{StaticResource WishLevelTextBox}"
+                                             Grid.Column="1" />
                                 </Grid>
                             </Grid>
 
-                            <Grid Style="{StaticResource PropertyFieldLine}" 
+                            <Grid Style="{StaticResource PropertyFieldLine}"
                                   Grid.Row="3">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Style="{StaticResource TargetPropertyFieldLeft}" Grid.Column="0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="属性3：" 
-                                               Grid.Column="0"/>
+                                    <TextBlock Style="{StaticResource FieldTitle}"
+                                               Text="属性3："
+                                               Grid.Column="0" />
 
                                     <ComboBox x:Name="Property_3"
                                               Style="{StaticResource TargetPropertyComboBox}"
-                                              Grid.Column="1"/>
+                                              Grid.Column="1" />
                                 </Grid>
 
                                 <Grid Grid.Column="1">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="期望等级：" 
-                                               Grid.Column="0"/>
+                                    <TextBlock Style="{StaticResource FieldTitle}"
+                                               Text="期望等级："
+                                               Grid.Column="0" />
 
                                     <TextBox x:Name="WishLevel_3"
-                                              Style="{StaticResource WishLevelTextBox}"
-                                              Grid.Column="1"/>
+                                             Style="{StaticResource WishLevelTextBox}"
+                                             Grid.Column="1" />
                                 </Grid>
                             </Grid>
 
-                            <Grid Style="{StaticResource PropertyFieldLine}" 
+                            <Grid Style="{StaticResource PropertyFieldLine}"
                                   Grid.Row="4">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Style="{StaticResource TargetPropertyFieldLeft}" Grid.Column="0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="属性4：" 
-                                               Grid.Column="0"/>
+                                    <TextBlock Style="{StaticResource FieldTitle}"
+                                               Text="属性4："
+                                               Grid.Column="0" />
 
                                     <ComboBox x:Name="Property_4"
                                               Style="{StaticResource TargetPropertyComboBox}"
-                                              Grid.Column="1"/>
+                                              Grid.Column="1" />
                                 </Grid>
 
                                 <Grid Grid.Column="1">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="期望等级：" 
-                                               Grid.Column="0"/>
+                                    <TextBlock Style="{StaticResource FieldTitle}"
+                                               Text="期望等级："
+                                               Grid.Column="0" />
 
                                     <TextBox x:Name="WishLevel_4"
-                                              Style="{StaticResource WishLevelTextBox}"
-                                              Grid.Column="1"/>
+                                             Style="{StaticResource WishLevelTextBox}"
+                                             Grid.Column="1" />
                                 </Grid>
                             </Grid>
 
-                            <Grid Style="{StaticResource PropertyFieldLine}" 
+                            <Grid Style="{StaticResource PropertyFieldLine}"
                                   Grid.Row="5">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Style="{StaticResource TargetPropertyFieldLeft}" Grid.Column="0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="属性5：" 
-                                               Grid.Column="0"/>
+                                    <TextBlock Style="{StaticResource FieldTitle}"
+                                               Text="属性5："
+                                               Grid.Column="0" />
 
                                     <ComboBox x:Name="Property_5"
                                               Style="{StaticResource TargetPropertyComboBox}"
-                                              Grid.Column="1"/>
+                                              Grid.Column="1" />
                                 </Grid>
 
                                 <Grid Grid.Column="1">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="期望等级：" 
-                                               Grid.Column="0"/>
+                                    <TextBlock Style="{StaticResource FieldTitle}"
+                                               Text="期望等级："
+                                               Grid.Column="0" />
 
                                     <TextBox x:Name="WishLevel_5"
-                                              Style="{StaticResource WishLevelTextBox}"
-                                              Grid.Column="1"/>
+                                             Style="{StaticResource WishLevelTextBox}"
+                                             Grid.Column="1" />
                                 </Grid>
                             </Grid>
 
                         </Grid>
                     </Border>
 
-                    <Border Style="{StaticResource StretchedGroupBox}" 
+                    <Border Style="{StaticResource StretchedGroupBox}"
                             Grid.Row="1">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Style="{StaticResource GroupBoxTitle}" 
+                            <TextBlock Style="{StaticResource GroupBoxTitle}"
                                        Grid.Row="0">
-            
+
                                 排除词条（与目标词条冲突）[可输入文字索引]
                             </TextBlock>
 
                             <Grid Style="{StaticResource PropertyFieldLine}"
                                   Grid.Row="1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="属性1：" 
-                                               Grid.Column="0"/>
+                                <TextBlock Style="{StaticResource FieldTitle}"
+                                           Text="属性1："
+                                           Grid.Column="0" />
 
                                 <ComboBox x:Name="ExcludeProperty_1"
-                                              Style="{StaticResource ExcludePropertyComboBox}"
-                                              Grid.Column="1"/>
+                                          Style="{StaticResource ExcludePropertyComboBox}"
+                                          Grid.Column="1" />
 
                             </Grid>
 
                             <Grid Style="{StaticResource PropertyFieldLine}"
                                   Grid.Row="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="属性2：" 
-                                               Grid.Column="0"/>
+                                <TextBlock Style="{StaticResource FieldTitle}"
+                                           Text="属性2："
+                                           Grid.Column="0" />
 
                                 <ComboBox x:Name="ExcludeProperty_2"
-                                              Style="{StaticResource ExcludePropertyComboBox}"
-                                              Grid.Column="1"/>
+                                          Style="{StaticResource ExcludePropertyComboBox}"
+                                          Grid.Column="1" />
 
                             </Grid>
 
                             <Grid Style="{StaticResource PropertyFieldLine}"
                                   Grid.Row="3">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="属性3：" 
-                                               Grid.Column="0"/>
+                                <TextBlock Style="{StaticResource FieldTitle}"
+                                           Text="属性3："
+                                           Grid.Column="0" />
 
                                 <ComboBox x:Name="ExcludeProperty_3"
-                                              Style="{StaticResource ExcludePropertyComboBox}"
-                                              Grid.Column="1"/>
+                                          Style="{StaticResource ExcludePropertyComboBox}"
+                                          Grid.Column="1" />
 
                             </Grid>
 
                             <Grid Style="{StaticResource PropertyFieldLine}"
                                   Grid.Row="4">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="属性4：" 
-                                               Grid.Column="0"/>
+                                <TextBlock Style="{StaticResource FieldTitle}"
+                                           Text="属性4："
+                                           Grid.Column="0" />
 
                                 <ComboBox x:Name="ExcludeProperty_4"
-                                              Style="{StaticResource ExcludePropertyComboBox}"
-                                              Grid.Column="1"/>
+                                          Style="{StaticResource ExcludePropertyComboBox}"
+                                          Grid.Column="1" />
 
                             </Grid>
 
                             <Grid Style="{StaticResource PropertyFieldLine}"
                                   Grid.Row="5">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="属性5：" 
-                                               Grid.Column="0"/>
+                                <TextBlock Style="{StaticResource FieldTitle}"
+                                           Text="属性5："
+                                           Grid.Column="0" />
 
                                 <ComboBox x:Name="ExcludeProperty_5"
-                                              Style="{StaticResource ExcludePropertyComboBox}"
-                                              Grid.Column="1"/>
+                                          Style="{StaticResource ExcludePropertyComboBox}"
+                                          Grid.Column="1" />
 
                             </Grid>
-                            
+
                         </Grid>
                     </Border>
 
                     <Border Style="{StaticResource FilterBorder}" Grid.Row="3">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Grid Margin="0,0,5,0" 
+                            <Grid Margin="0,0,5,0"
                                   Grid.Column="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="模组类型：" 
-                                               Grid.Column="0"/>
+                                <TextBlock Style="{StaticResource FieldTitle}"
+                                           Text="模组类型："
+                                           Grid.Column="0" />
 
                                 <ComboBox x:Name="ModuleType"
-                                              Style="{StaticResource ExcludePropertyComboBox}"
-                                              Grid.Column="1">
-                                    <ComboBoxItem Content="全部" IsSelected="True"/>
-                                    <ComboBoxItem Content="攻击模组"/>
-                                    <ComboBoxItem Content="防御模组"/>
-                                    <ComboBoxItem Content="辅助模组"/>
+                                          Style="{StaticResource ExcludePropertyComboBox}"
+                                          Grid.Column="1">
+                                    <ComboBoxItem Content="全部" IsSelected="True" />
+                                    <ComboBoxItem Content="攻击模组" />
+                                    <ComboBoxItem Content="防御模组" />
+                                    <ComboBoxItem Content="辅助模组" />
                                 </ComboBox>
                             </Grid>
 
-                            <Grid Margin="5,0,0,0" 
+                            <Grid Margin="5,0,0,0"
                                   Grid.Column="1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Style="{StaticResource FieldTitle}" 
-                                               Text="排序方式：" 
-                                               Grid.Column="0"/>
+                                <TextBlock Style="{StaticResource FieldTitle}"
+                                           Text="排序方式："
+                                           Grid.Column="0" />
 
                                 <ComboBox x:Name="SortType"
-                                              Style="{StaticResource ExcludePropertyComboBox}"
-                                              Grid.Column="1">
-                                    <ComboBoxItem Content="属性优先" IsSelected="True"/>
-                                    <ComboBoxItem Content="等级优先"/>
+                                          Style="{StaticResource ExcludePropertyComboBox}"
+                                          Grid.Column="1">
+                                    <ComboBoxItem Content="属性优先" IsSelected="True" />
+                                    <ComboBoxItem Content="等级优先" />
                                 </ComboBox>
                             </Grid>
                         </Grid>
@@ -507,20 +504,18 @@
 
                     <Button Style="{StaticResource AnalyzeButton}"
                             Grid.Row="4">
-                        
+
                         <Button.Content>
                             <Border Style="{StaticResource AnalyzeButtonBorder}">
-                                <TextBlock Style="{StaticResource AnalyzeButtonText}" 
-                                           Text="分析模组"/>
+                                <TextBlock Style="{StaticResource AnalyzeButtonText}"
+                                           Text="分析模组" />
                             </Border>
                         </Button.Content>
                     </Button>
 
                 </Grid>
 
-                <Grid Grid.Column="1">
-
-                </Grid>
+                <Grid Grid.Column="1" />
 
             </Grid>
 
@@ -531,7 +526,7 @@
             <ctrl:Footer Grid.Row="3"
                          Height="50"
                          ConfirmClick="Footer_ConfirmClick"
-                         CancelClick="Footer_CancelClick"/>
+                         CancelClick="Footer_CancelClick" />
         </Grid>
     </Border>
 </Window>

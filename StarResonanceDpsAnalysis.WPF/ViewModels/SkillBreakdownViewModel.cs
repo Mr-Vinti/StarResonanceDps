@@ -9,7 +9,6 @@ public partial class SkillBreakdownViewModel(ILogger<SkillBreakdownViewModel> lo
     private void Confirm()
     {
         logger.LogDebug("Confirm SkillBreakDown");
-
     }
 
     [RelayCommand]

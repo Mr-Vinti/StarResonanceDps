@@ -19,6 +19,7 @@ internal static class EnumExtensions
             // 意外情况：未在枚举值列表中找到，返回原值以保证行为可预测
             return value;
         }
+
         var len = values.Length;
         // Normalize offset into range [-len+1, len-1] via modulo
         // 将偏移量归一化到范围 [-len+1, len-1] 通过取模运算
@@ -30,6 +31,7 @@ internal static class EnumExtensions
     }
 
     #region StatisticType Roll Extension Methods
+
     /// <summary>
     /// 延迟缓存值到索引的映射，避免每次 Roll 时使用 Array.IndexOf（O(n)）
     /// </summary>
@@ -65,6 +67,7 @@ internal static class EnumExtensions
     {
         return value.Roll(-1);
     }
+
     #endregion
 
     #region ScopeTime Roll Extension Methods
@@ -104,5 +107,6 @@ internal static class EnumExtensions
     {
         return value.Roll(-1);
     }
+
     #endregion
 }

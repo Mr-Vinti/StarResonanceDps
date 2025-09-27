@@ -4,9 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ctrl="clr-namespace:StarResonanceDpsAnalysis.WPF.Controls"
-        xmlns:local="clr-namespace:StarResonanceDpsAnalysis.WPF.Views"
         mc:Ignorable="d"
-        Title="关于" 
+        Title="关于"
         Height="540" Width="800"
         Style="{StaticResource TransparentWindow}">
 
@@ -107,67 +106,75 @@
             <Border Style="{StaticResource GroupBoxBorder}" Grid.Row="1">
                 <Grid>
 
-                    <TextBlock Style="{StaticResource GroupBoxText}" Text="关于"/>
+                    <TextBlock Style="{StaticResource GroupBoxText}" Text="关于" />
 
-                    <Image Style="{StaticResource AppImage}" Source="pack://application:,,,/Assets/Images/ApplicationIcon.png"/>
+                    <Image Style="{StaticResource AppImage}"
+                           Source="pack://application:,,,/Assets/Images/ApplicationIcon.png" />
 
-                    <TextBlock Style="{StaticResource AppName}" Text="别查我DPS"/>
+                    <TextBlock Style="{StaticResource AppName}" Text="别查我DPS" />
                     <TextBlock Style="{StaticResource AppIntro}">
-                        <Run Text="一款专为《星痕共鸣》玩家打造的战斗数据统计工具。"/>
-                        <LineBreak/>
-                        <Run Text="该工具无需修改游戏客户端，不违反游戏服务条款。该工具旨在帮助玩家更好地理解战斗数据，减少不必要的精力消耗，提升游戏体验。使用该工具前，请确保不会将数据结果用于战力歧视等破坏游戏社区环境的行为。"/>
+                        <Run Text="一款专为《星痕共鸣》玩家打造的战斗数据统计工具。" />
+                        <LineBreak />
+                        <Run
+                            Text="该工具无需修改游戏客户端，不违反游戏服务条款。该工具旨在帮助玩家更好地理解战斗数据，减少不必要的精力消耗，提升游戏体验。使用该工具前，请确保不会将数据结果用于战力歧视等破坏游戏社区环境的行为。" />
                     </TextBlock>
 
-                    <TextBlock Style="{StaticResource AppVersionTitle}" Text="当前版本号："/>
+                    <TextBlock Style="{StaticResource AppVersionTitle}" Text="当前版本号：" />
                     <!--<TextBlock Style="{StaticResource AppVersion}" Text="{Binding AppVersion}"/>-->
-                    <TextBlock Style="{StaticResource AppVersion}" Text="3.0.0"/>
+                    <TextBlock Style="{StaticResource AppVersion}" Text="3.0.0" />
 
-                    <TextBlock Style="{StaticResource AppDevTitle}" Text="当前版本的开发者们（排名不分先后）:"/>
+                    <TextBlock Style="{StaticResource AppDevTitle}" Text="当前版本的开发者们（排名不分先后）:" />
                     <TextBlock Style="{StaticResource AppDev}">
-                        <Run Text="惊奇猫猫盒（anying1073：项目发起者）"/>
-                        <LineBreak/>
-                        <Run Text="露詩（Rocy-June）"/>
-                        <LineBreak/>
-                        <Run Text="青岚宗王腾"/>
-                        <LineBreak/>
-                        <Run Text="尻鸭（ihonliu）"/>
+                        <Run Text="惊奇猫猫盒（anying1073：项目发起者）" />
+                        <LineBreak />
+                        <Run Text="露詩（Rocy-June）" />
+                        <LineBreak />
+                        <Run Text="青岚宗王腾" />
+                        <LineBreak />
+                        <Run Text="尻鸭（ihonliu）" />
                     </TextBlock>
 
                     <TextBlock Style="{StaticResource AppOpenSourceText}">
-                        <Run Text="本项目于"/>
-                        <Hyperlink NavigateUri="https://github.com/anying1073/StarResonanceDps" RequestNavigate="Hyperlink_RequestNavigate">
+                        <Run Text="本项目于" />
+                        <Hyperlink NavigateUri="https://github.com/anying1073/StarResonanceDps"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
                             https://github.com/anying1073/StarResonanceDps
                         </Hyperlink>
-                        <Run Text="中开源，如在使用中遇到问题可以直接提出 Issue。"/>
-                        <LineBreak/>
-                        <Run Text="如果你想为本项目贡献代码，欢迎 Fork 之后提交 Pull Request。"/>
-                        <LineBreak/>
-                        <Run Text="无法访问 GitHub 或者想要寻求游戏伙伴也可以加群："/>
-                        <Hyperlink NavigateUri="https://qm.qq.com/cgi-bin/qm/qr?k=QeIozXvLSRH9dL_CTZeisQ1Ae4CZpiSc&amp;jump_from=webapi&amp;authKey=HNr5BrrIhqRPyGs2R54NucKsg7Pb9/c0a03gih69PekWfSNLh9MIi/ClXXnaMzHK" RequestNavigate="Hyperlink_RequestNavigate">
+                        <Run Text="中开源，如在使用中遇到问题可以直接提出 Issue。" />
+                        <LineBreak />
+                        <Run Text="如果你想为本项目贡献代码，欢迎 Fork 之后提交 Pull Request。" />
+                        <LineBreak />
+                        <Run Text="无法访问 GitHub 或者想要寻求游戏伙伴也可以加群：" />
+                        <Hyperlink
+                            NavigateUri="https://qm.qq.com/cgi-bin/qm/qr?k=QeIozXvLSRH9dL_CTZeisQ1Ae4CZpiSc&amp;jump_from=webapi&amp;authKey=HNr5BrrIhqRPyGs2R54NucKsg7Pb9/c0a03gih69PekWfSNLh9MIi/ClXXnaMzHK"
+                            RequestNavigate="Hyperlink_RequestNavigate">
                             678150498（1群）
                         </Hyperlink>
-                        <Hyperlink NavigateUri="https://qm.qq.com/cgi-bin/qm/qr?k=ZbyXsDqWZm9mQN0R7cg-EVYlISgbik4M&amp;jump_from=webapi&amp;authKey=S8y8TcbKHzd2yWYUz4YA+Ojrq93PfFCyENqUgXho632ELRIiK6MmnauLuEB4BjhE" RequestNavigate="Hyperlink_RequestNavigate">
+                        <Hyperlink
+                            NavigateUri="https://qm.qq.com/cgi-bin/qm/qr?k=ZbyXsDqWZm9mQN0R7cg-EVYlISgbik4M&amp;jump_from=webapi&amp;authKey=S8y8TcbKHzd2yWYUz4YA+Ojrq93PfFCyENqUgXho632ELRIiK6MmnauLuEB4BjhE"
+                            RequestNavigate="Hyperlink_RequestNavigate">
                             1022797551（2群）
                         </Hyperlink>
-                        <LineBreak/>
-                        <Run Text="在此感谢"/>
-                        <Hyperlink NavigateUri="https://github.com/dmlgzs/StarResonanceDamageCounter" RequestNavigate="Hyperlink_RequestNavigate">
+                        <LineBreak />
+                        <Run Text="在此感谢" />
+                        <Hyperlink NavigateUri="https://github.com/dmlgzs/StarResonanceDamageCounter"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
                             https://github.com/dmlgzs/StarResonanceDamageCounter
                         </Hyperlink>
-                        <Run Text="项目对于本项目的帮助于支持"/>
-                        <LineBreak/>
-                        <LineBreak/>
-                        <Run Text="Copyright (C) 2025 anying1073/StarResonanceDps Team."/>
-                        <LineBreak/>
-                        <Run Text="Powered by .NET 8, Licensed under the GNU AGPL v3."/>
+                        <Run Text="项目对于本项目的帮助于支持" />
+                        <LineBreak />
+                        <LineBreak />
+                        <Run Text="Copyright (C) 2025 anying1073/StarResonanceDps Team." />
+                        <LineBreak />
+                        <Run Text="Powered by .NET 8, Licensed under the GNU AGPL v3." />
                     </TextBlock>
                 </Grid>
             </Border>
 
-            <ctrl:Footer Grid.Row="2" 
+            <ctrl:Footer Grid.Row="2"
                          Height="50"
                          ConfirmClick="Footer_ConfirmClick"
-                         CancelClick="Footer_CancelClick"/>
+                         CancelClick="Footer_CancelClick" />
         </Grid>
     </Border>
 </Window>

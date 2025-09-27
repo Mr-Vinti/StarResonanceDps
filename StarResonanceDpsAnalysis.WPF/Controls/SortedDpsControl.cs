@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using StarResonanceDpsAnalysis.WPF.ViewModels;
 
 namespace StarResonanceDpsAnalysis.WPF.Controls;
 
@@ -23,7 +22,7 @@ public class SortedDpsControl : Control
 
     // Selected item
     public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(
-        nameof(SelectedItem), typeof(ProgressBarData), typeof(SortedDpsControl), new PropertyMetadata(null));
+        nameof(SelectedItem), typeof(object), typeof(SortedDpsControl), new PropertyMetadata(null));
 
     // Item click command
     public static readonly DependencyProperty ItemClickCommandProperty = DependencyProperty.Register(
@@ -53,9 +52,9 @@ public class SortedDpsControl : Control
         set => SetValue(ItemHeightProperty, value);
     }
 
-    public ProgressBarData? SelectedItem
+    public object? SelectedItem
     {
-        get => (ProgressBarData?)GetValue(SelectedItemProperty);
+        get => GetValue(SelectedItemProperty);
         set => SetValue(SelectedItemProperty, value);
     }
 

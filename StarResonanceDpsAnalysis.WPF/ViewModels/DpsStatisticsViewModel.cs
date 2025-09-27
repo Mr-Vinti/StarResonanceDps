@@ -6,7 +6,6 @@ using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using StarResonanceDpsAnalysis.Core.Analyze.Exceptions;
 using StarResonanceDpsAnalysis.Core.Data;
 using StarResonanceDpsAnalysis.Core.Data.Models;
@@ -34,13 +33,11 @@ public partial class DpsStatisticsOptions : BaseViewModel
 
 public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 {
-    public DebugFunctions DebugFunctions { get; }
     private readonly IApplicationControlService _appControlService;
     private readonly Stopwatch _battleTimer = new();
     private readonly IConfigManager _configManager;
-    private readonly IWindowManagementService _windowManagement;
-    private readonly Dispatcher _dispatcher;
     private readonly IDataSource _dataSource;
+    private readonly Dispatcher _dispatcher;
 
     private readonly Stopwatch _fullBattleTimer = new();
     private readonly ILogger<DpsStatisticsViewModel> _logger;
@@ -48,10 +45,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private readonly Dictionary<long, StatisticDataViewModel> _slotsDictionary = new();
     private readonly IDataStorage _storage;
     private readonly long[] _totals = new long[6]; // 6位玩家示例
+    private readonly IWindowManagementService _windowManagement;
 
     [ObservableProperty] private DateTime _battleDuration;
     [ObservableProperty] private NumberDisplayMode _numberDisplayMode = NumberDisplayMode.Wan;
     [ObservableProperty] private ScopeTime _scopeTime = ScopeTime.Current;
+    [ObservableProperty] private StatisticDataViewModel? _selectedSlot;
     [ObservableProperty] private bool _showContextMenu;
     [ObservableProperty] private BulkObservableCollection<StatisticDataViewModel> _slots = new();
     [ObservableProperty] private SortDirectionEnum _sortDirection = SortDirectionEnum.Descending;
@@ -121,14 +120,27 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         }
     }
 
+    public DebugFunctions DebugFunctions { get; }
+
+    public DpsStatisticsOptions Options { get; } = new();
+    private Stopwatch InUsingTimer => ScopeTime == ScopeTime.Total ? _fullBattleTimer : _battleTimer;
+
+    public void Dispose()
+    {
+        // Unsubscribe from DebugFunctions events
+        if (DebugFunctions != null)
+        {
+            DebugFunctions.SampleDataRequested -= OnSampleDataRequested;
+        }
+
+        _storage?.Dispose();
+    }
+
     private void OnSampleDataRequested(object? sender, EventArgs e)
     {
         // Handle the event from DebugFunctions
         AddRandomData();
     }
-
-    public DpsStatisticsOptions Options { get; } = new();
-    private Stopwatch InUsingTimer => ScopeTime == ScopeTime.Total ? _fullBattleTimer : _battleTimer;
 
     /// <summary>
     /// 读取用户缓存
@@ -174,26 +186,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         var dpsList = ScopeTime == ScopeTime.Total
             ? DataStorage.ReadOnlyFullDpsDataList
             : DataStorage.ReadOnlySectionedDpsDataList;
-        // dpsList = new List<DpsData>()
-        // {
-        //     new DpsData() {TotalAttackDamage = Random.Shared.Next(19999), UID = 1},
-        //     new DpsData() {TotalAttackDamage = Random.Shared.Next(19999), UID = 2},
-        //     new DpsData() {TotalAttackDamage = Random.Shared.Next(19999), UID=3}
-        // };
-        // foreach (var item in dpsList)
-        // {
-        //     item.SkillDic[123] = new SkillData()
-        //     {
-        //         CritTimes = 10,
-        //         LuckyTimes = 3,
-        //         SkillId = 1000,
-        //         TotalValue = 10000,
-        //         UseTimes = 100,
-        //     };
-        //     item.SkillDic[456] = new SkillData() { CritTimes = 5, LuckyTimes = 1, SkillId = 2000, TotalValue = 10000, UseTimes = 983 };
-        //     item.SkillDic[789] = new SkillData() { CritTimes = 8, LuckyTimes = 2, SkillId = 3000, TotalValue = 10000, UseTimes = 18 };
-        //     item.SkillDic[101112] = new SkillData() { CritTimes = 12, LuckyTimes = 4, SkillId = 4000, TotalValue = 1023, UseTimes = 123 };
-        // }
         UpdateData(dpsList);
     }
 
@@ -223,41 +215,30 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                         Name = ret ? playerInfo?.Name ?? $"UID: {dpsData.UID}" : $"UID: {dpsData.UID}",
                         Spec = playerInfo?.Spec ?? ClassSpec.Unknown
                     },
-                    GetSkillList = (player) =>
+                    GetSkillList = player =>
                     {
                         // Try to get real data first, fallback to test data
-                        if (_storage.ReadOnlyFullDpsDatas.ContainsKey(player.Uid))
+                        if (_storage.ReadOnlyFullDpsDatas.TryGetValue(player.Uid, out var fullDpsData))
                         {
-                            return _storage.ReadOnlyFullDpsDatas[player.Uid].ReadOnlySkillDataList.Select(item =>
+                            return fullDpsData.ReadOnlySkillDataList.Select(item =>
                             {
-                                return new SkillItemViewModel()
+                                return new SkillItemViewModel
                                 {
                                     SkillName = item.SkillId.ToString(),
                                     AvgDamage = 1000,
                                     CritCount = item.CritTimes,
                                     HitCount = item.UseTimes,
-                                    TotalDamage = item.TotalValue,
+                                    TotalDamage = item.TotalValue
                                 };
                             }).ToList();
                         }
-                        else
-                        {
-                            // Fallback test data for debugging
-                            return new List<SkillItemViewModel>
-                            {
-                                new() { SkillName = $"Skill 1000", TotalDamage = 10000, HitCount = 100, CritCount = 10, AvgDamage = 100 },
-                                new() { SkillName = $"Skill 2000", TotalDamage = 10000, HitCount = 983, CritCount = 5, AvgDamage = 10 },
-                                new() { SkillName = $"Skill 3000", TotalDamage = 10000, HitCount = 18, CritCount = 8, AvgDamage = 555 },
-                                new() { SkillName = $"Skill 4000", TotalDamage = 1023, HitCount = 123, CritCount = 12, AvgDamage = 8 }
-                            };
-                        }
-                    },
+
+                        return [];
+                    }
                 };
-                _dispatcher.Invoke(() =>
-                {
-                    Slots.Add(slot);
-                });
+                _dispatcher.Invoke(() => { Slots.Add(slot); });
             }
+
             // Simplified update of existing slot (replaces the selected block)
             var unsignedValue = value < 0 ? 0UL : (ulong)value;
             var durationTicks = dpsData.LastLoggedTick - (dpsData.StartLoggedTick ?? 0);
@@ -270,10 +251,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             if (_storage.ReadOnlyPlayerInfoDatas.TryGetValue(dpsData.UID, out playerInfo))
             {
                 slot.Player.Name = playerInfo.Name ?? $"UID: {dpsData.UID}";
-                slot.Player.Class = playerInfo.ProfessionID.HasValue == true
-                    ? ((int)playerInfo.ProfessionID!).GetClassNameById()
-                    : Classes.Unknown;
-                slot.Player.Spec = playerInfo?.Spec ?? ClassSpec.Unknown;
+                slot.Player.Class = playerInfo.ProfessionID?.GetClassNameById() ?? Classes.Unknown;
+                slot.Player.Spec = playerInfo.Spec;
             }
             else
             {
@@ -310,7 +289,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         long GetValue(DpsData dpsData, ScopeTime scopeTime, StatisticType statisticType)
         {
             // Debug.Assert(dpsData.IsNpcData == (statisticType == StatisticType.NpcTakenDamage),
-                // "dpsData.IsNpcData && statisticType == StatisticType.NpcTakenDamage"); // 保证是NPC承伤
+            // "dpsData.IsNpcData && statisticType == StatisticType.NpcTakenDamage"); // 保证是NPC承伤
             return (scopeTime, statisticType) switch
             {
                 (ScopeTime.Current, StatisticType.Damage) => dpsData.TotalAttackDamage,
@@ -395,11 +374,17 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                 Spec = ClassSpec.Unknown
             },
             // Add test skill data
-            GetSkillList = (player) => new List<SkillItemViewModel>
+            GetSkillList = player => new List<SkillItemViewModel>
             {
-                new() { SkillName = "Test Skill A", TotalDamage = 15000, HitCount = 25, CritCount = 8, AvgDamage = 600 },
+                new()
+                {
+                    SkillName = "Test Skill A", TotalDamage = 15000, HitCount = 25, CritCount = 8, AvgDamage = 600
+                },
                 new() { SkillName = "Test Skill B", TotalDamage = 8500, HitCount = 15, CritCount = 4, AvgDamage = 567 },
-                new() { SkillName = "Test Skill C", TotalDamage = 12300, HitCount = 30, CritCount = 12, AvgDamage = 410 }
+                new()
+                {
+                    SkillName = "Test Skill C", TotalDamage = 12300, HitCount = 30, CritCount = 12, AvgDamage = 410
+                }
             }
         };
 
@@ -595,54 +580,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     }
 
     #endregion
-
-    public void Dispose()
-    {
-        // Unsubscribe from DebugFunctions events
-        if (DebugFunctions != null)
-        {
-            DebugFunctions.SampleDataRequested -= OnSampleDataRequested;
-        }
-
-        _storage?.Dispose();
-    }
 }
 
 public sealed class DpsStatisticsDesignTimeViewModel()
-    : DpsStatisticsViewModel(null!, null!, new InstantizedDataStorage(), null!, null!, null!, null!, null!)
-{
-    [Conditional("DEBUG")]
-    private void InitDemoProgressBars()
-    {
-        // 2) 造几位玩家（随便举例，图标请换成你项目里存在的）
-        var players = new[]
-        {
-            ("惊奇猫猫盒-狼弓(23207)", Classes.Marksman),
-            ("无双重剑-测试(19876)", Classes.ShieldKnight),
-            ("奥术回响-测试(20111)", Classes.FrostMage),
-            ("圣光之约-测试(18770)", Classes.VerdantOracle),
-            ("影袭-测试(20990)", Classes.Stormblade),
-            ("Jojo-未知(20990)", Classes.Unknown)
-        };
-
-        Slots.BeginUpdate();
-        for (var i = 0; i < players.Length; i++)
-        {
-            var (nick, @class) = players[i];
-            var barData = new StatisticDataViewModel(DebugFunctions)
-            {
-                Index = i + 1, // 1-based index
-                Player = new PlayerInfoViewModel
-                {
-                    Uid = i + 1,
-                    Class = @class,
-                    Name = nick
-                }
-            };
-            Slots.Add(barData);
-        }
-
-        UpdateData();
-        Slots.EndUpdate();
-    }
-}
+    : DpsStatisticsViewModel(null!, null!, new InstantizedDataStorage(), null!, null!, null!,
+        new DebugFunctions(null!, null!, null!, null!), null!);

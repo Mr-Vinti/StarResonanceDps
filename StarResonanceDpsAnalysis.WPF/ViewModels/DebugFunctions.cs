@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Threading;
 using System.Windows.Data;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -13,7 +12,6 @@ using Serilog.Events;
 using StarResonanceDpsAnalysis.Core.Analyze;
 using StarResonanceDpsAnalysis.Core.Data;
 using StarResonanceDpsAnalysis.WPF.Config;
-using StarResonanceDpsAnalysis.WPF.Data;
 using StarResonanceDpsAnalysis.WPF.Views;
 
 namespace StarResonanceDpsAnalysis.WPF.ViewModels;
@@ -23,47 +21,32 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
     private const int MaxLogEntries = 500;
     private const int FilterDebounceMs = 300;
     private const int BatchSize = 10; // Process logs in batches to reduce UI freezing
-    
-    private readonly IDataSource _dataSource;
+
     private readonly Dispatcher _dispatcher;
     private readonly ILogger<DebugFunctions> _logger;
-    private readonly PacketAnalyzer _packetAnalyzer = new();
-    private CancellationTokenSource? _replayCts;
-    private Task? _replayTask;
     private readonly IDisposable? _logSubscription;
-    private Timer? _filterDebounceTimer;
+    private readonly PacketAnalyzer _packetAnalyzer = new();
     private readonly Queue<LogEntry> _pendingLogs = new();
-    private volatile bool _isBatchProcessing = false;
-
-    [ObservableProperty] private ObservableCollection<LogEntry> _logs = new();
+    [ObservableProperty] private bool _autoScrollEnabled = true;
+    [ObservableProperty] private bool _enabled;
+    private Timer? _filterDebounceTimer;
+    [ObservableProperty] private int _filteredLogCount;
     [ObservableProperty] private ICollectionView? _filteredLogs;
     [ObservableProperty] private string _filterText = string.Empty;
-    [ObservableProperty] private LogLevel _selectedLogLevel = LogLevel.Trace;
-    [ObservableProperty] private bool _autoScrollEnabled = true;
-    [ObservableProperty] private int _logCount;
-    [ObservableProperty] private int _filteredLogCount;
+    private volatile bool _isBatchProcessing;
     [ObservableProperty] private DateTime? _lastLogTime;
-    [ObservableProperty] private bool _enabled;
+    [ObservableProperty] private int _logCount;
 
-    public LogLevel[] AvailableLogLevels { get; } =
-    [
-        LogLevel.Trace, LogLevel.Debug, LogLevel.Information,
-        LogLevel.Warning, LogLevel.Error, LogLevel.Critical
-    ];
+    [ObservableProperty] private ObservableCollection<LogEntry> _logs = new();
+    private CancellationTokenSource? _replayCts;
+    private Task? _replayTask;
+    [ObservableProperty] private LogLevel _selectedLogLevel = LogLevel.Trace;
 
-    public event EventHandler? LogAdded;
-    
-    // Event to request sample data addition - removes direct dependency on DpsStatisticsViewModel
-    public event EventHandler? SampleDataRequested;
-
-    public DebugFunctions(
-        IDataSource dataSource,
-        Dispatcher dispatcher,
-        ILogger<DebugFunctions> logger, 
+    public DebugFunctions(Dispatcher dispatcher,
+        ILogger<DebugFunctions> logger,
         IObservable<LogEvent> observer,
         IOptionsMonitor<AppConfig> options)
     {
-        _dataSource = dataSource;
         _dispatcher = dispatcher;
         _logger = logger;
 
@@ -77,6 +60,29 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
 
         _logger.LogInformation("DebugFunctions initialized with Serilog observable sink");
     }
+
+    public LogLevel[] AvailableLogLevels { get; } =
+    [
+        LogLevel.Trace, LogLevel.Debug, LogLevel.Information,
+        LogLevel.Warning, LogLevel.Error, LogLevel.Critical
+    ];
+
+    public void Dispose()
+    {
+        _filterDebounceTimer?.Dispose();
+        _logSubscription?.Dispose();
+
+        // Clear any pending logs
+        lock (_pendingLogs)
+        {
+            _pendingLogs.Clear();
+        }
+    }
+
+    public event EventHandler? LogAdded;
+
+    // Event to request sample data addition - removes direct dependency on DpsStatisticsViewModel
+    public event EventHandler? SampleDataRequested;
 
     private void SetProperty(AppConfig arg1, string? arg2)
     {
@@ -96,7 +102,9 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
             _ => LogLevel.Information
         };
 
-        var sourceContext = evt.Properties.TryGetValue("SourceContext", out var sc) ? sc.ToString().Trim('"') : string.Empty;
+        var sourceContext = evt.Properties.TryGetValue("SourceContext", out var sc)
+            ? sc.ToString().Trim('"')
+            : string.Empty;
         var rendered = evt.RenderMessage();
         var timestamp = evt.Timestamp.LocalDateTime;
 
@@ -112,7 +120,7 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
         if (!_isBatchProcessing)
         {
             _isBatchProcessing = true;
-            _dispatcher.BeginInvoke(ProcessLogBatch, System.Windows.Threading.DispatcherPriority.Background);
+            _dispatcher.BeginInvoke(ProcessLogBatch, DispatcherPriority.Background);
         }
     }
 
@@ -130,17 +138,17 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
                 while (_pendingLogs.Count > 0 && processedCount < BatchSize)
                 {
                     var entry = _pendingLogs.Dequeue();
-                    
+
                     // Remove oldest entries if we're at the limit
                     while (Logs.Count >= MaxLogEntries)
                     {
                         Logs.RemoveAt(0);
                     }
-                    
+
                     Logs.Add(entry);
                     lastEntry = entry;
                     processedCount++;
-                    
+
                     // Check if this entry would be visible after filtering
                     if (LogFilter(entry))
                     {
@@ -171,7 +179,7 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
             {
                 if (_pendingLogs.Count > 0)
                 {
-                    _dispatcher.BeginInvoke(ProcessLogBatch, System.Windows.Threading.DispatcherPriority.Background);
+                    _dispatcher.BeginInvoke(ProcessLogBatch, DispatcherPriority.Background);
                 }
                 else
                 {
@@ -198,7 +206,7 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
                 {
                     FilteredLogs?.Refresh();
                     UpdateFilteredLogCount();
-                }, System.Windows.Threading.DispatcherPriority.Background);
+                }, DispatcherPriority.Background);
             }, null, FilterDebounceMs, Timeout.Infinite);
         }
         else if (e.PropertyName == nameof(SelectedLogLevel))
@@ -217,7 +225,10 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
                log.Category.Contains(FilterText, StringComparison.OrdinalIgnoreCase);
     }
 
-    private void UpdateFilteredLogCount() => FilteredLogCount = FilteredLogs?.Cast<object>().Count() ?? 0;
+    private void UpdateFilteredLogCount()
+    {
+        FilteredLogCount = FilteredLogs?.Cast<object>().Count() ?? 0;
+    }
 
     [RelayCommand]
     private void CallDebugWindow()
@@ -234,7 +245,7 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
         {
             _pendingLogs.Clear();
         }
-        
+
         Logs.Clear();
         LogCount = 0;
         FilteredLogCount = 0;
@@ -258,9 +269,11 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
             using var writer = new StreamWriter(dlg.FileName);
             foreach (var log in logsToSave)
             {
-                writer.WriteLine($"[{log.Timestamp:yyyy-MM-dd HH:mm:ss.fff}] [{log.Level}] [{log.Category}] {log.Message}");
+                writer.WriteLine(
+                    $"[{log.Timestamp:yyyy-MM-dd HH:mm:ss.fff}] [{log.Level}] [{log.Category}] {log.Message}");
                 if (log.Exception != null) writer.WriteLine($"Exception: {log.Exception}");
             }
+
             _logger.LogInformation("Logs saved to {File}", dlg.FileName);
         }
         catch (Exception ex)
@@ -276,12 +289,14 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
     }
 
     #region AddData
+
     [RelayCommand]
     private void AddSampleData()
     {
         // Fire event instead of directly calling DpsStatisticsViewModel
         SampleDataRequested?.Invoke(this, EventArgs.Empty);
     }
+
     #endregion
 
     #region Replay
@@ -295,7 +310,7 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
             Title = "Open pcap/pcapng file to replay"
         };
         if (dlg.ShowDialog() != true) return;
-        StartPcapReplay(dlg.FileName, true, 1.0);
+        StartPcapReplay(dlg.FileName);
         _logger.LogInformation("Started replaying PCAP file: {File}", Path.GetFileName(dlg.FileName));
     }
 
@@ -321,7 +336,10 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
             }
             finally
             {
-                try { _replayCts?.Dispose(); }
+                try
+                {
+                    _replayCts?.Dispose();
+                }
                 catch
                 {
                     // ignored
@@ -342,14 +360,19 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
             _replayTask?.Wait(3000);
             _logger.LogInformation("PCAP replay stopped");
         }
-        catch (AggregateException) { }
+        catch (AggregateException)
+        {
+        }
         catch (Exception ex)
         {
             _logger.LogWarning(ex, "Error stopping PCAP replay");
         }
         finally
         {
-            try { _replayCts.Dispose(); }
+            try
+            {
+                _replayCts.Dispose();
+            }
             catch
             {
                 // ignored
@@ -361,16 +384,4 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
     }
 
     #endregion
-
-    public void Dispose()
-    {
-        _filterDebounceTimer?.Dispose();
-        _logSubscription?.Dispose();
-        
-        // Clear any pending logs
-        lock (_pendingLogs)
-        {
-            _pendingLogs.Clear();
-        }
-    }
 }

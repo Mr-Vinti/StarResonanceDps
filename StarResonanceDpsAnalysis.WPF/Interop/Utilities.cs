@@ -1,14 +1,8 @@
-// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
-// All Rights Reserved.
-
 #pragma warning disable CS8601
 #pragma warning disable CS8625
 
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using StarResonanceDpsAnalysis.WPF.Interop;
 
 namespace Wpf.Ui.Win32;
 
@@ -23,7 +17,7 @@ internal class Utilities
 
     private static readonly Version _osVersion =
 #if NET5_0_OR_GREATER
-    Environment.OSVersion.Version;
+        Environment.OSVersion.Version;
 #else
     GetOSVersionFromRegistry();
 #endif
@@ -73,7 +67,7 @@ internal class Utilities
     {
         // Dispose can safely be called on an object multiple times.
         IDisposable t = disposable;
-        disposable = default(T);
+        disposable = default;
 
         if (t is null)
         {
@@ -86,8 +80,8 @@ internal class Utilities
     public static void SafeRelease<T>(ref T comObject)
         where T : class
     {
-        T t = comObject;
-        comObject = default(T);
+        var t = comObject;
+        comObject = default;
 
         if (t is null)
         {

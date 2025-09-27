@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace StarResonanceDpsAnalysis.WPF.Controls
+namespace StarResonanceDpsAnalysis.WPF.Controls;
+
+public class MultiSelectorItemsHost : ItemsControl
 {
-    public class MultiSelectorItemsHost : ItemsControl
+    protected override bool IsItemItsOwnContainerOverride(object item)
     {
-        protected override bool IsItemItsOwnContainerOverride(object item)
-        {
-            return item is MultiSelectorItem;
-        }
-
-        protected override DependencyObject GetContainerForItemOverride()
-        {
-            return new MultiSelectorItem();
-        }
+        return item is MultiSelectorItem;
     }
 
-    class MultiSelectorItem : ContentControl
+    protected override DependencyObject GetContainerForItemOverride()
     {
+        return new MultiSelectorItem();
     }
+}
+
+internal class MultiSelectorItem : ContentControl
+{
 }

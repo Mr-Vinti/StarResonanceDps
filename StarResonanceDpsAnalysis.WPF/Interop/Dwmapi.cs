@@ -7,7 +7,6 @@ internal static class Dwmapi
     [Flags]
     public enum DWMWINDOWATTRIBUTE
     {
-
         /// <summary>
         /// Allows a window to either use the accent color, or dark, according to the user Color Mode preferences.
         /// </summary>
@@ -16,7 +15,7 @@ internal static class Dwmapi
         /// <summary>
         /// Allows a window to either use the accent color, or dark, according to the user Color Mode preferences.
         /// </summary>
-        DWMWA_USE_IMMERSIVE_DARK_MODE = 20,
+        DWMWA_USE_IMMERSIVE_DARK_MODE = 20
     }
 
     /// <summary>

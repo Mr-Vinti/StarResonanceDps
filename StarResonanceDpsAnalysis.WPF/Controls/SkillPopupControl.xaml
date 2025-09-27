@@ -43,7 +43,8 @@
                 MaxHeight="360"
                 Focusable="False"
                 VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsPanel="{StaticResource StackItemsPanel}" ItemsSource="{Binding ItemsSource, ElementName=root}">
+                <ItemsControl ItemsPanel="{StaticResource StackItemsPanel}"
+                              ItemsSource="{Binding ItemsSource, ElementName=root}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border

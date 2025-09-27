@@ -162,7 +162,8 @@
                                     Text="{Binding AppConfig.MouseThroughShortcut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource KeyToStringConverter}}"
                                     ToolTip="Focus here and press a shortcut (e.g. Ctrl+F6). Press Delete to clear.">
                                     <b:Interaction.Behaviors>
-                                        <behaviors:KeyDownCommandBehavior Command="{Binding HandleMouseThroughShortcutCommand}" />
+                                        <behaviors:KeyDownCommandBehavior
+                                            Command="{Binding HandleMouseThroughShortcutCommand}" />
                                     </b:Interaction.Behaviors>
                                 </TextBox>
                                 <TextBlock Grid.Column="3">
@@ -177,7 +178,8 @@
                                     Text="{Binding AppConfig.ClearDataShortcut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource KeyToStringConverter}}"
                                     ToolTip="Focus here and press a shortcut (e.g. F9). Press Delete to clear.">
                                     <b:Interaction.Behaviors>
-                                        <behaviors:KeyDownCommandBehavior Command="{Binding HandleClearDataShortcutCommand}" />
+                                        <behaviors:KeyDownCommandBehavior
+                                            Command="{Binding HandleClearDataShortcutCommand}" />
                                     </b:Interaction.Behaviors>
                                 </TextBox>
 

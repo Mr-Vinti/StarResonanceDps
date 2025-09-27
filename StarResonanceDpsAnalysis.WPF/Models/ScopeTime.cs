@@ -6,5 +6,5 @@
 public enum ScopeTime
 {
     Total,
-    Current,
+    Current
 }

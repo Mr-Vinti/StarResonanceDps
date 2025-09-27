@@ -1,11 +1,6 @@
-using System;
-using System.Diagnostics;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
+using PacketDotNet;
 using SharpPcap;
 using SharpPcap.LibPcap;
-using PacketDotNet;
 using StarResonanceDpsAnalysis.Core.Analyze;
 
 namespace StarResonanceDpsAnalysis.Core.Data;
@@ -41,7 +36,6 @@ public static class PcapReplay
         try
         {
             DateTime? lastTs = null;
-            var isFirst = true;
 
             // Read packets until EOF or cancelled.
             while (!token.IsCancellationRequested)
@@ -90,7 +84,14 @@ public static class PcapReplay
         }
         finally
         {
-            try { dev.Close(); } catch { /* ignore */ }
+            try
+            {
+                dev.Close();
+            }
+            catch
+            {
+                /* ignore */
+            }
         }
     }
 
@@ -100,11 +101,13 @@ public static class PcapReplay
     {
         return ReplayFileEventDrivenAsync(filePath, analyzer, token);
     }
+
     /// <summary>
     /// Event-driven replay: let CaptureFileReaderDevice drive events and forward them to analyzer.
     /// This method prefers the synchronous event model (Capture()) and runs the capture on a background task.
     /// </summary>
-    private static Task ReplayFileEventDrivenAsync(string filePath, PacketAnalyzer analyzer, CancellationToken token = default)
+    private static Task ReplayFileEventDrivenAsync(string filePath, PacketAnalyzer analyzer,
+        CancellationToken token = default)
     {
         if (analyzer == null) throw new ArgumentNullException(nameof(analyzer));
         if (string.IsNullOrEmpty(filePath)) throw new ArgumentNullException(nameof(filePath));
@@ -114,9 +117,8 @@ public static class PcapReplay
         Task.Run(() =>
         {
             var dev = new CaptureFileReaderDevice(filePath);
-            PacketArrivalEventHandler? handler = null;
 
-            handler = (sender, e) =>
+            PacketArrivalEventHandler handler = (_, e) =>
             {
                 try
                 {
@@ -140,17 +142,23 @@ public static class PcapReplay
             }
             catch (Exception ex)
             {
-                try { dev.Close(); } catch { }
+                try
+                {
+                    dev.Close();
+                }
+                catch
+                {
+                    // ignored
+                }
+
                 tcs.TrySetException(ex);
             }
             finally
             {
-                if (handler != null)
-                    dev.OnPacketArrival -= handler;
+                dev.OnPacketArrival -= handler;
             }
         }, token);
 
         return tcs.Task;
     }
-
 }

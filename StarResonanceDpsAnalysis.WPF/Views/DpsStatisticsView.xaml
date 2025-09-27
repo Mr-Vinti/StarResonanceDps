@@ -164,7 +164,8 @@
                     <TextBlock.Text>
                         <MultiBinding Converter="{StaticResource HumanReadableNumberConverter}">
                             <Binding Path="Value" />
-                            <Binding Path="DataContext.NumberDisplayMode" RelativeSource="{RelativeSource AncestorType=Window}" />
+                            <Binding Path="DataContext.NumberDisplayMode"
+                                     RelativeSource="{RelativeSource AncestorType=Window}" />
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
@@ -300,7 +301,8 @@
                     <TextBlock Grid.Column="1" Style="{StaticResource StatisticTypeText}">
                         <TextBlock.Text>
                             <MultiBinding Mode="OneWay" StringFormat="{}{0} ({1})">
-                                <Binding Converter="{StaticResource StatisticTypeToStringConverter}" Path="StatisticIndex" />
+                                <Binding Converter="{StaticResource StatisticTypeToStringConverter}"
+                                         Path="StatisticIndex" />
                                 <Binding Converter="{StaticResource ScopeTimeToStringConverter}" Path="ScopeTime" />
                             </MultiBinding>
                         </TextBlock.Text>
@@ -460,7 +462,8 @@
             <ctrl:SortedDpsControl
                 Grid.Row="1"
                 ItemTemplate="{StaticResource ProgressBarDataTemplate}"
-                ItemsSource="{Binding Slots}" />
+                ItemsSource="{Binding Slots}"
+                SelectedItem="{Binding SelectedSlot}" />
 
             <Border
                 x:Name="ContentBorder"

@@ -73,13 +73,15 @@
                             </TextBlock.RenderTransform>
                         </TextBlock>
 
-                        <TextBlock Style="{StaticResource CollapsibleCardTitleName}" Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:CollapsibleCard}}" />
+                        <TextBlock Style="{StaticResource CollapsibleCardTitleName}"
+                                   Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:CollapsibleCard}}" />
                     </Grid>
                 </Border>
             </Button.Content>
         </Button>
         <Border Grid.Row="1" Style="{StaticResource CollapsibleCardContent}">
-            <ContentPresenter Content="{Binding CardContent, RelativeSource={RelativeSource AncestorType=local:CollapsibleCard}}" />
+            <ContentPresenter
+                Content="{Binding CardContent, RelativeSource={RelativeSource AncestorType=local:CollapsibleCard}}" />
         </Border>
     </Grid>
 </UserControl>

@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using System.Windows.Data;
 
-namespace StarResonanceDpsAnalysis.WPF.Converters
-{
-    public sealed class EqualsConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (values == null || values.Length < 2) return false;
-            return Equals(values[0], values[1]);
-        }
+namespace StarResonanceDpsAnalysis.WPF.Converters;
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
+public sealed class EqualsConverter : IMultiValueConverter
+{
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (values == null || values.Length < 2) return false;
+        return Equals(values[0], values[1]);
+    }
+
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+    {
+        throw new NotSupportedException();
     }
 }

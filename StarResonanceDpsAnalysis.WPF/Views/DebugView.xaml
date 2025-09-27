@@ -18,7 +18,7 @@
         <local:LogLevelToBrushConverter x:Key="LogLevelToBrushConverter" />
         <local:LogLevelToBackgroundConverter x:Key="LogLevelToBackgroundConverter" />
         <local:ExceptionToStringConverter x:Key="ExceptionToStringConverter" />
-        
+
         <!--  Optimized data template with pre-computed display values  -->
         <DataTemplate x:Key="LogEntryTemplate">
             <Grid Margin="2,1">
@@ -30,46 +30,47 @@
                 </Grid.ColumnDefinitions>
 
                 <!--  Use pre-computed TimeDisplay for better performance  -->
-                <TextBlock 
+                <TextBlock
                     Grid.Column="0"
                     Text="{Binding TimeDisplay}"
                     FontFamily="Consolas"
                     FontSize="10"
-                    Foreground="Gray" 
+                    Foreground="Gray"
                     VerticalAlignment="Center" />
 
                 <!--  Use pre-computed LevelDisplay and cached converter  -->
-                <TextBlock 
+                <TextBlock
                     Grid.Column="1"
                     Text="{Binding LevelDisplay}"
                     FontSize="10"
                     FontWeight="Bold"
-                    Foreground="{Binding Level, Converter={StaticResource LogLevelToBrushConverter}}" 
+                    Foreground="{Binding Level, Converter={StaticResource LogLevelToBrushConverter}}"
                     VerticalAlignment="Center" />
 
-                <TextBlock 
+                <TextBlock
                     Grid.Column="2"
                     Text="{Binding Category}"
                     FontFamily="Consolas"
                     FontSize="10"
                     Foreground="DarkBlue"
-                    TextTrimming="CharacterEllipsis" 
+                    TextTrimming="CharacterEllipsis"
                     VerticalAlignment="Center" />
 
-                <TextBlock 
+                <TextBlock
                     Grid.Column="3"
                     Text="{Binding Message}"
                     FontFamily="Consolas"
                     FontSize="11"
                     TextTrimming="CharacterEllipsis"
-                    ToolTip="{Binding Exception, Converter={StaticResource ExceptionToStringConverter}}" 
+                    ToolTip="{Binding Exception, Converter={StaticResource ExceptionToStringConverter}}"
                     VerticalAlignment="Center" />
             </Grid>
         </DataTemplate>
-        
+
         <!--  Optimized item container style  -->
         <Style x:Key="LogEntryContainerStyle" TargetType="ListBoxItem">
-            <Setter Property="Background" Value="{Binding Level, Converter={StaticResource LogLevelToBackgroundConverter}}" />
+            <Setter Property="Background"
+                    Value="{Binding Level, Converter={StaticResource LogLevelToBackgroundConverter}}" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="Padding" Value="1" />
             <Setter Property="Margin" Value="0" />
@@ -77,7 +78,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Border 
+                        <Border
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -171,13 +172,13 @@
             Grid.Row="1"
             BorderBrush="Gray"
             BorderThickness="1">
-            
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                
+
                 <!--  Header  -->
                 <Border Grid.Row="0" Background="LightGray" BorderBrush="Gray" BorderThickness="0,0,0,1">
                     <Grid Margin="2,4">
@@ -187,14 +188,14 @@
                             <ColumnDefinition Width="140" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <TextBlock Grid.Column="0" Text="Time" FontWeight="Bold" FontSize="10" />
                         <TextBlock Grid.Column="1" Text="Level" FontWeight="Bold" FontSize="10" />
                         <TextBlock Grid.Column="2" Text="Category" FontWeight="Bold" FontSize="10" />
                         <TextBlock Grid.Column="3" Text="Message" FontWeight="Bold" FontSize="10" />
                     </Grid>
                 </Border>
-            
+
                 <ListBox
                     x:Name="LogListBox"
                     Grid.Row="1"
@@ -210,8 +211,7 @@
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                     BorderThickness="0"
                     SelectionMode="Extended"
-                    Background="White">
-                </ListBox>
+                    Background="White" />
             </Grid>
         </Border>
 

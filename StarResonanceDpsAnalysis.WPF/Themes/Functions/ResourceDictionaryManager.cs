@@ -140,7 +140,8 @@ internal class ResourceDictionaryManager(string searchNamespace)
 
                 if (ShouldMatchDictionary(sourceUri, searchNamespaceLower, resourceLookup))
                 {
-                    applicationDictionaries[i].MergedDictionaries[j] = new ResourceDictionary { Source = newResourceUri };
+                    applicationDictionaries[i].MergedDictionaries[j] =
+                        new ResourceDictionary { Source = newResourceUri };
 
                     return true;
                 }

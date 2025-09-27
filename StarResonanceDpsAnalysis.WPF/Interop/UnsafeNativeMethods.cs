@@ -10,7 +10,6 @@ namespace StarResonanceDpsAnalysis.WPF.Interop;
 /// </summary>
 public static class UnsafeNativeMethods
 {
-
     /// <summary>
     /// Checks if provided pointer represents existing window.
     /// </summary>
@@ -43,8 +42,10 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowDarkMode(Window? window) =>
-        GetHandle(window, out IntPtr windowHandle) && ApplyWindowDarkMode(windowHandle);
+    public static bool ApplyWindowDarkMode(Window? window)
+    {
+        return GetHandle(window, out var windowHandle) && ApplyWindowDarkMode(windowHandle);
+    }
 
     /// <summary>
     /// Tries to apply ImmersiveDarkMode effect for the window handle.
@@ -82,8 +83,10 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowDarkMode(Window? window) =>
-        GetHandle(window, out IntPtr windowHandle) && RemoveWindowDarkMode(windowHandle);
+    public static bool RemoveWindowDarkMode(Window? window)
+    {
+        return GetHandle(window, out var windowHandle) && RemoveWindowDarkMode(windowHandle);
+    }
 
     /// <summary>
     /// Tries to remove ImmersiveDarkMode effect from the window handle.

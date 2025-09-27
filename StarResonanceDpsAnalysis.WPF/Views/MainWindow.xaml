@@ -2,10 +2,8 @@
     x:Class="StarResonanceDpsAnalysis.WPF.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:ctrl="clr-namespace:StarResonanceDpsAnalysis.WPF.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:StarResonanceDpsAnalysis.WPF"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
     Title="别查我DPS"
@@ -107,7 +105,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <ctrl:Header Title="别查我 D P S" Grid.Row="0" />
@@ -136,9 +134,10 @@
 
                             <CheckBox Content="自启动" Style="{StaticResource PluginAutoRunCheckBox}" />
 
-                            <Button Style="{StaticResource PluginRunButton}"
-                                    Content="开启"
-                                    Command="{Binding CallDpsStatisticsViewCommand}"/>
+                            <Button
+                                Command="{Binding CallDpsStatisticsViewCommand}"
+                                Content="开启"
+                                Style="{StaticResource PluginRunButton}" />
                         </Grid>
                     </Border>
 
@@ -159,9 +158,10 @@
 
                             <CheckBox Content="自启动" Style="{StaticResource PluginAutoRunCheckBox}" />
 
-                            <Button Style="{StaticResource PluginRunButton}"
-                                    Content="开启"
-                                    Command="{Binding CallModuleSolveViewCommandCommand}"/>
+                            <Button
+                                Command="{Binding CallModuleSolveViewCommandCommand}"
+                                Content="开启"
+                                Style="{StaticResource PluginRunButton}" />
                         </Grid>
                     </Border>
 
@@ -254,6 +254,10 @@
                     </GroupBox>
                 </WrapPanel>
             </ScrollViewer>
+            <ctrl:Footer
+                Grid.Row="3"
+                Height="50"
+                CancelCommand="{Binding ShutdownCommand}" />
         </Grid>
     </Border>
 </Window>

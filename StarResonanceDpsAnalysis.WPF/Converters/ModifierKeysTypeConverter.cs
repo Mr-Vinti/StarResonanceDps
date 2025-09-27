@@ -10,6 +10,7 @@ public class ModifierKeysTypeConverter : TypeConverter
     {
         return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
     }
+
     public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
     {
         if (value is string str)
@@ -18,8 +19,10 @@ public class ModifierKeysTypeConverter : TypeConverter
             {
                 return result;
             }
+
             return ModifierKeys.None;
         }
+
         return base.ConvertFrom(context, culture, value);
     }
 }

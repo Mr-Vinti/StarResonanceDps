@@ -1,8 +1,4 @@
-// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
-// All Rights Reserved.
-
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Interop;
 using StarResonanceDpsAnalysis.WPF.Interop;
@@ -54,7 +50,7 @@ public class SystemThemeWatcher(ApplicationThemeManager applicationThemeManager)
         if (!_observedWindows.Any())
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine(
+            Debug.WriteLine(
                 $"INFO | {typeof(SystemThemeWatcher)} changed the app theme on initialization.",
                 nameof(SystemThemeWatcher)
             );
@@ -103,7 +99,7 @@ public class SystemThemeWatcher(ApplicationThemeManager applicationThemeManager)
         if (!observedWindow.HasHook)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine(
+            Debug.WriteLine(
                 $"INFO | {observedWindow.Handle} ({observedWindow.RootVisual?.Title}) registered as watched window.",
                 nameof(SystemThemeWatcher)
             );
@@ -133,7 +129,7 @@ public class SystemThemeWatcher(ApplicationThemeManager applicationThemeManager)
                 ? throw new InvalidOperationException("Could not get window handle.")
                 : hWnd;
 
-        ObservedWindow? observedWindow = _observedWindows.FirstOrDefault(x => x.Handle == hWnd);
+        var observedWindow = _observedWindows.FirstOrDefault(x => x.Handle == hWnd);
 
         if (observedWindow is null)
         {
@@ -176,7 +172,7 @@ public class SystemThemeWatcher(ApplicationThemeManager applicationThemeManager)
         var currentApplicationTheme = applicationThemeManager.GetAppTheme();
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine(
+        Debug.WriteLine(
             $"INFO | {observedWindow.Handle} ({observedWindow.RootVisual?.Title}) triggered the application theme change to {applicationThemeManager.GetSystemTheme()}.",
             nameof(SystemThemeWatcher)
         );

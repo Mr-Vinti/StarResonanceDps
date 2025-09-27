@@ -5,12 +5,12 @@ namespace StarResonanceDpsAnalysis.WPF.Services;
 
 public class WindowManagementService(IServiceProvider provider) : IWindowManagementService
 {
-    private DpsStatisticsView? _dpsStatisticsView;
-    private SettingsView? _settingsView;
-    private SkillBreakdownView? _skillBreakDownView;
     private AboutView? _aboutView;
     private DamageReferenceView? _damageReferenceView;
+    private DpsStatisticsView? _dpsStatisticsView;
     private ModuleSolveView? _moduleSolveView;
+    private SettingsView? _settingsView;
+    private SkillBreakdownView? _skillBreakDownView;
 
     public DpsStatisticsView DpsStatisticsView => _dpsStatisticsView ??= CreateDpsStatisticsView();
     public SettingsView SettingsView => _settingsView ??= CreateSettingsView();
@@ -50,7 +50,7 @@ public class WindowManagementService(IServiceProvider provider) : IWindowManagem
         return view;
     }
 
-    private AboutView CreateAboutView() 
+    private AboutView CreateAboutView()
     {
         var view = provider.GetRequiredService<AboutView>();
         view.Closed += (_, _) =>

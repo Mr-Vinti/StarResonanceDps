@@ -1,4 +1,4 @@
-﻿namespace StarResonanceDpsAnalysis.WPF.ViewModels;
+﻿namespace StarResonanceDpsAnalysis.WPF.Models;
 
 public enum SortDirectionEnum
 {

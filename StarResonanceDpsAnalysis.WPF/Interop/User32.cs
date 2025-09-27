@@ -8,7 +8,7 @@ internal static class User32
 {
     public enum WM
     {
-        WININICHANGE = 0x001A,
+        WININICHANGE = 0x001A
     }
 
     /// <summary>
