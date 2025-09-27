@@ -24,17 +24,17 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Restore dependencies
-      run: dotnet restore StarResonanceDps.sln
+      run: dotnet restore StarResonanceDpsAnalysis.sln
 
     - name: Build solution
-      run: dotnet build StarResonanceDps.sln --configuration ${{ matrix.configuration }} --no-restore
+      run: dotnet build StarResonanceDpsAnalysis.sln --configuration ${{ matrix.configuration }} --no-restore
 
     - name: Run tests
-      run: dotnet test StarResonanceDps.sln --configuration ${{ matrix.configuration }} --no-build
+      run: dotnet test StarResonanceDpsAnalysis.sln --configuration ${{ matrix.configuration }} --no-build
 
     - name: Publish application
       run: |
-        dotnet publish StarResonanceDps.sln `
+        dotnet publish StarResonanceDpsAnalysis.sln `
           --configuration ${{ matrix.configuration }} `
           --output ./publish `
           --no-build `
@@ -44,7 +44,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: StarResonanceDps-${{ matrix.configuration }}
+        name: StarResonanceDpsAnalysis-${{ matrix.configuration }}
         path: |
           ./publish/**/*.exe
           ./publish/**/*.dll
