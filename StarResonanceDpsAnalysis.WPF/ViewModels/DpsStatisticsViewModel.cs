@@ -452,8 +452,20 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     [RelayCommand]
     private void Refresh()
     {
-        // 手动触发一次更新（如果需要）
-        throw new NotImplementedException();
+        _logger.LogDebug("Manual refresh requested");
+
+        // Reload cached player details so that recent changes in the on-disk
+        // cache are reflected in the UI.
+        LoadPlayerCache();
+
+        try
+        {
+            DataStorage_DpsDataUpdated();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to refresh DPS statistics");
+        }
     }
 
 

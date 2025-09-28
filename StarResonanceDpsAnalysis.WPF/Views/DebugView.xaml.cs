@@ -101,7 +101,18 @@ public class LogLevelToBrushConverter : IValueConverter
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        if (value is SolidColorBrush brush)
+        {
+            foreach (var pair in BrushCache)
+            {
+                if (ReferenceEquals(pair.Value, brush) || pair.Value.Color == brush.Color)
+                {
+                    return pair.Key;
+                }
+            }
+        }
+
+        return Binding.DoNothing;
     }
 }
 
@@ -143,7 +154,18 @@ public class LogLevelToBackgroundConverter : IValueConverter
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        if (value is SolidColorBrush brush)
+        {
+            foreach (var pair in BackgroundCache)
+            {
+                if (ReferenceEquals(pair.Value, brush) || pair.Value.Color == brush.Color)
+                {
+                    return pair.Key;
+                }
+            }
+        }
+
+        return Binding.DoNothing;
     }
 }
 
@@ -166,6 +188,6 @@ public class ExceptionToStringConverter : IValueConverter
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        return Binding.DoNothing;
     }
 }

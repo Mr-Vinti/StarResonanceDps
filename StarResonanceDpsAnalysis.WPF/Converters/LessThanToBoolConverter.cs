@@ -13,7 +13,11 @@ public class LessThanToBoolConverter : IValueConverter
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        // This converter is designed for one-way bindings (e.g. triggers) and
+        // cannot reliably infer the original numeric value. Returning
+        // Binding.DoNothing prevents WPF from trying to propagate changes back
+        // to the source when a two-way binding is accidentally used.
+        return Binding.DoNothing;
     }
 
     private static bool DoubleConverter(double value, object? parameter)
