@@ -1,4 +1,4 @@
-﻿using AntdUI;
+using AntdUI;
 
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 

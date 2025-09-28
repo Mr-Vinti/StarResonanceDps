@@ -1,4 +1,4 @@
-﻿using StarResonanceDpsAnalysis.WPF.Views;
+using StarResonanceDpsAnalysis.WPF.Views;
 
 namespace StarResonanceDpsAnalysis.WPF.Services;
 

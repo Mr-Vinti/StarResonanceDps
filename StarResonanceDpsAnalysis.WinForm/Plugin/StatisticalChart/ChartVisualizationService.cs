@@ -7,11 +7,11 @@ using StarResonanceDpsAnalysis.WinForm.Plugin.DamageStatistics;
 namespace StarResonanceDpsAnalysis.WinForm.Plugin
 {
     /// <summary>
-    /// Í¼±íÅäÖÃ¹ÜÀíÆ÷ - Í³Ò»´¦Àí¸÷ÀàÍ¼±íµÄÄ¬ÈÏÉèÖÃ
+    /// å›¾è¡¨é…ç½®ç®¡ç†å™¨ - ç»Ÿä¸€å¤„ç†å„ç±»å›¾è¡¨çš„é»˜è®¤è®¾ç½®
     /// </summary>
     public static class ChartConfigManager
     {
-        // Í³Ò»µÄÄ¬ÈÏ³£Á¿
+        // ç»Ÿä¸€çš„é»˜è®¤å¸¸é‡
         public const string EMPTY_TEXT = "";
         public const bool HIDE_LEGEND = false;
         public const bool SHOW_GRID = true;
@@ -22,17 +22,17 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
         public const int MIN_WIDTH = 450;
         public const int MIN_HEIGHT = 150;
 
-        public static readonly Font DefaultFont = new("Î¢ÈíÑÅºÚ", 10, FontStyle.Regular);
+        public static readonly Font DefaultFont = new("å¾®è½¯é›…é»‘", 10, FontStyle.Regular);
 
         /// <summary>
-        /// Í³Ò»Ó¦ÓÃÍ¼±íÄ¬ÈÏÅäÖÃ
+        /// ç»Ÿä¸€åº”ç”¨å›¾è¡¨é»˜è®¤é…ç½®
         /// </summary>
         public static T ApplySettings<T>(T chart) where T : UserControl
         {
-            // Í¨ÓÃ¿Ø¼şÉèÖÃ
+            // é€šç”¨æ§ä»¶è®¾ç½®
             chart.Dock = DockStyle.Fill;
 
-            // ¸ù¾İÍ¼±íÀàĞÍÓ¦ÓÃÌØ¶¨ÉèÖÃ
+            // æ ¹æ®å›¾è¡¨ç±»å‹åº”ç”¨ç‰¹å®šè®¾ç½®
             switch (chart)
             {
                 case FlatLineChart lineChart:
@@ -93,31 +93,31 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
     }
 
     /// <summary>
-    /// Í¼±íÊı¾İÀ´Ô´
+    /// å›¾è¡¨æ•°æ®æ¥æº
     /// </summary>
     public enum ChartDataSource
     {
-        Current = 0,   // µ±Ç°Õ½¶·£¨µ¥´Î£©
-        FullRecord = 1 // È«³Ì£¨»á»°£©
+        Current = 0,   // å½“å‰æˆ˜æ–—ï¼ˆå•æ¬¡ï¼‰
+        FullRecord = 1 // å…¨ç¨‹ï¼ˆä¼šè¯ï¼‰
     }
 
     /// <summary>
-    /// Í¼±íÊı¾İÀàĞÍ
+    /// å›¾è¡¨æ•°æ®ç±»å‹
     /// </summary>
     public enum ChartDataType
     {
-        Damage = 0,      // ÉËº¦
-        Healing = 1,     // ÖÎÁÆ 
-        TakenDamage = 2  // ³ĞÉË
+        Damage = 0,      // ä¼¤å®³
+        Healing = 1,     // æ²»ç–— 
+        TakenDamage = 2  // æ‰¿ä¼¤
     }
 
     /// <summary>
-    /// ÊµÊ±Í¼±í¿ÉÊÓ»¯·şÎñ
+    /// å®æ—¶å›¾è¡¨å¯è§†åŒ–æœåŠ¡
     /// </summary>
     public static class ChartVisualizationService
     {
-        #region Êı¾İ´æ´¢
-        // ===== ½«ÀúÊ·°´Êı¾İÔ´·ÖÀë£ºCurrent Óë FullRecord ¸÷×ÔÒ»·İ =====
+        #region æ•°æ®å­˜å‚¨
+        // ===== å°†å†å²æŒ‰æ•°æ®æºåˆ†ç¦»ï¼šCurrent ä¸ FullRecord å„è‡ªä¸€ä»½ =====
         private static readonly Dictionary<long, List<(DateTime Time, double Dps)>> _dpsHistoryCurrent = new();
         private static readonly Dictionary<long, List<(DateTime Time, double Hps)>> _hpsHistoryCurrent = new();
         private static readonly Dictionary<long, List<(DateTime Time, double TakenDps)>> _takenDpsHistoryCurrent = new();
@@ -136,28 +136,28 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
 
         public static bool IsCapturing { get; private set; } = false;
 
-        // ±£³Ö¾ÉµÄÄ¬ÈÏÊı¾İÔ´£¨ÓÃÓÚÎ´ÏÔÊ½Ö¸¶¨À´Ô´µÄ API£©
+        // ä¿æŒæ—§çš„é»˜è®¤æ•°æ®æºï¼ˆç”¨äºæœªæ˜¾å¼æŒ‡å®šæ¥æºçš„ APIï¼‰
         public static ChartDataSource DataSource { get; private set; } = ChartDataSource.Current;
 
-        // ÆµÂÊ½ÚÁ÷£¬±ÜÃâ¶à¸öÍ¼±íÍ¬Ê±´¥·¢ÖØ¸´²ÉÑù
+        // é¢‘ç‡èŠ‚æµï¼Œé¿å…å¤šä¸ªå›¾è¡¨åŒæ—¶è§¦å‘é‡å¤é‡‡æ ·
         private static DateTime _lastUpdateAt = DateTime.MinValue;
-        private const int MIN_UPDATE_INTERVAL_MS = 200; // Á½´Î²ÉÑùÖÁÉÙ¼ä¸ô 200ms
+        private const int MIN_UPDATE_INTERVAL_MS = 200; // ä¸¤æ¬¡é‡‡æ ·è‡³å°‘é—´éš” 200ms
 
-        // ºóÌ¨²ÉÑù¶¨Ê±Æ÷£¨¼´Ê¹Ã»ÓĞ´ò¿ªÈÎºÎÍ¼±íÒ²»á²ÉÑù£©
+        // åå°é‡‡æ ·å®šæ—¶å™¨ï¼ˆå³ä½¿æ²¡æœ‰æ‰“å¼€ä»»ä½•å›¾è¡¨ä¹Ÿä¼šé‡‡æ ·ï¼‰
         private static System.Timers.Timer? _samplingTimer;
 
-        // µ±Ç°Õ½¶·¡°´Ó0µ½>0¡±µÄ±ßÑØ¼ì²â£¬×Ô¶¯ÇĞ·Öµ¥´Î»á»°£¨¸ÄÎªÒÀÀµÕ½¶·Ê±ÖÓ£©
+        // å½“å‰æˆ˜æ–—â€œä»0åˆ°>0â€çš„è¾¹æ²¿æ£€æµ‹ï¼Œè‡ªåŠ¨åˆ‡åˆ†å•æ¬¡ä¼šè¯ï¼ˆæ”¹ä¸ºä¾èµ–æˆ˜æ–—æ—¶é’Ÿï¼‰
         private static bool _wasInCombat = false;
 
-        // ===== È«³Ì¼´Ê±ËÙÂÊ¼ÆËã£ºÊ¹ÓÃ¡°²î·Ö¡±»ñµÃÊµÊ±Öµ£¨±ÜÃâÊ¹ÓÃÀÛ¼ÆÆ½¾ù£© =====
+        // ===== å…¨ç¨‹å³æ—¶é€Ÿç‡è®¡ç®—ï¼šä½¿ç”¨â€œå·®åˆ†â€è·å¾—å®æ—¶å€¼ï¼ˆé¿å…ä½¿ç”¨ç´¯è®¡å¹³å‡ï¼‰ =====
         private static readonly Dictionary<long, (ulong Total, DateTime Ts)> _fullLastDamage = new();
         private static readonly Dictionary<long, (ulong Total, DateTime Ts)> _fullLastHealing = new();
         private static readonly Dictionary<long, (ulong Total, DateTime Ts)> _fullLastTaken = new();
         #endregion
 
-        #region Êı¾İ¸üĞÂ
+        #region æ•°æ®æ›´æ–°
         /// <summary>
-        /// ÇĞ»»Í¼±íÊı¾İÀ´Ô´£¨»á×Ô¶¯Çå¿ÕÀúÊ·£¬±ÜÃâÊı¾İ»ìÏı£©¡£
+        /// åˆ‡æ¢å›¾è¡¨æ•°æ®æ¥æºï¼ˆä¼šè‡ªåŠ¨æ¸…ç©ºå†å²ï¼Œé¿å…æ•°æ®æ··æ·†ï¼‰ã€‚
         /// </summary>
         public static void SetDataSource(ChartDataSource source, bool clearHistory = true)
         {
@@ -172,7 +172,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
             }
         }
 
-        // ÄÚ²¿£ºÏòÖ¸¶¨ÀúÊ·¼¯ºÏÌí¼ÓÒ»¸öÊı¾İµã£¨±£Áô×î´óµãÊı£©
+        // å†…éƒ¨ï¼šå‘æŒ‡å®šå†å²é›†åˆæ·»åŠ ä¸€ä¸ªæ•°æ®ç‚¹ï¼ˆä¿ç•™æœ€å¤§ç‚¹æ•°ï¼‰
         private static void AddDataPoint<T>(Dictionary<long, List<(DateTime, T)>> history, long playerId, T value)
         {
             var now = DateTime.Now;
@@ -183,7 +183,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                 history[playerId] = playerHistory;
             }
 
-            // È·±£ÊıÖµ·Ç¸º
+            // ç¡®ä¿æ•°å€¼éè´Ÿ
             var safeValue = value is double d ? (T)(object)Math.Max(0, d) : value;
             playerHistory.Add((now, safeValue));
 
@@ -191,7 +191,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                 playerHistory.RemoveAt(0);
         }
 
-        // === µ±Ç°Õ½¶·£ºÌí¼ÓÊı¾İµã£¬²¢ÔÚÊ×´Î³öÏÖÕıÖµÊ±Éè¶¨ÆğÊ¼Ê±¼ä ===
+        // === å½“å‰æˆ˜æ–—ï¼šæ·»åŠ æ•°æ®ç‚¹ï¼Œå¹¶åœ¨é¦–æ¬¡å‡ºç°æ­£å€¼æ—¶è®¾å®šèµ·å§‹æ—¶é—´ ===
         public static void AddDpsDataPointCurrent(long playerId, double dps)
         {
             if (_currentCombatStartTime is null && dps > 0)
@@ -211,7 +211,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
             AddDataPoint(_takenDpsHistoryCurrent, playerId, takenDps);
         }
 
-        // === È«³Ì£ºÌí¼ÓÊı¾İµã£¬²¢ÔÚÊ×´Î³öÏÖÕıÖµÊ±Éè¶¨ÆğÊ¼Ê±¼ä ===
+        // === å…¨ç¨‹ï¼šæ·»åŠ æ•°æ®ç‚¹ï¼Œå¹¶åœ¨é¦–æ¬¡å‡ºç°æ­£å€¼æ—¶è®¾å®šèµ·å§‹æ—¶é—´ ===
         public static void AddDpsDataPointFull(long playerId, double dps)
         {
             if (_fullCombatStartTime is null && dps > 0)
@@ -232,11 +232,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
         }
 
         /// <summary>
-        /// Í³Ò»²ÉÑù£ºÍ¬Ê±¸üĞÂ Current Óë FullRecord Á½Ì×ÀúÊ·¡£
+        /// ç»Ÿä¸€é‡‡æ ·ï¼šåŒæ—¶æ›´æ–° Current ä¸ FullRecord ä¸¤å¥—å†å²ã€‚
         /// </summary>
         public static void UpdateAllDataPoints()
         {
-            // ÈôÎ´´¦ÓÚ²ÉÑù×´Ì¬£¨ÀıÈç F9 ¸ÕÖ´ĞĞ¹ıÍ£Ö¹ÓëÇå¿Õ£©£¬Ôò²»½øĞĞÈÎºÎ¸üĞÂ£¬±ÜÃâÇå¿ÕºóÂíÉÏ±»ÖØÌî
+            // è‹¥æœªå¤„äºé‡‡æ ·çŠ¶æ€ï¼ˆä¾‹å¦‚ F9 åˆšæ‰§è¡Œè¿‡åœæ­¢ä¸æ¸…ç©ºï¼‰ï¼Œåˆ™ä¸è¿›è¡Œä»»ä½•æ›´æ–°ï¼Œé¿å…æ¸…ç©ºåé©¬ä¸Šè¢«é‡å¡«
             if (!IsCapturing) return;
 
             var now = DateTime.Now;
@@ -244,16 +244,16 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                 return;
             _lastUpdateAt = now;
 
-            // === Current£ºÀ´×Ô StatisticData µÄÊµÊ±Öµ ===
+            // === Currentï¼šæ¥è‡ª StatisticData çš„å®æ—¶å€¼ ===
             var playersCurrent = StatisticData._manager.GetPlayersWithCombatData();
             foreach (var player in playersCurrent)
                 player.UpdateRealtimeStats();
 
-            // ÓÃ¡°Õ½¶·Ê±ÖÓ×´Ì¬¡±ÅĞ¶ÏĞÂµÄÒ»³¡£¬±ÜÃâÒòÎªÊµÊ±´°¿Ú¹éÁã¶øÎóÅĞ
+            // ç”¨â€œæˆ˜æ–—æ—¶é’ŸçŠ¶æ€â€åˆ¤æ–­æ–°çš„ä¸€åœºï¼Œé¿å…å› ä¸ºå®æ—¶çª—å£å½’é›¶è€Œè¯¯åˆ¤
             var nowInCombat = StatisticData._manager.IsInCombat;
             if (!_wasInCombat && nowInCombat)
             {
-                // ĞÂÕ½¶·¿ªÊ¼£ºÇåÀíµ¥´ÎÀúÊ·£¬Ê±¼ä»ùÓëÖ÷½çÃæÊ±ÖÓ¶ÔÆë
+                // æ–°æˆ˜æ–—å¼€å§‹ï¼šæ¸…ç†å•æ¬¡å†å²ï¼Œæ—¶é—´åŸºä¸ä¸»ç•Œé¢æ—¶é’Ÿå¯¹é½
                 ClearCurrentHistory();
                 _currentCombatStartTime = DateTime.Now - StatisticData._manager.GetCombatDuration();
             }
@@ -266,12 +266,12 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
             }
             _wasInCombat = nowInCombat;
 
-            // === FullRecord£º¸ÄÎª¼ÇÂ¼¡°ÊµÊ±±ä»¯ÂÊ¡±£¨²î·Ö£©£¬¶ø²»ÊÇÀÛ¼ÆÆ½¾ù»ò×ÜÖµ ===
-            // »ñÈ¡µ±Ç°ÀÛ¼Æ×ÜÁ¿
+            // === FullRecordï¼šæ”¹ä¸ºè®°å½•â€œå®æ—¶å˜åŒ–ç‡â€ï¼ˆå·®åˆ†ï¼‰ï¼Œè€Œä¸æ˜¯ç´¯è®¡å¹³å‡æˆ–æ€»å€¼ ===
+            // è·å–å½“å‰ç´¯è®¡æ€»é‡
             var totals = FullRecord.GetPlayersWithTotals(includeZero: true);
             foreach (var p in totals)
             {
-                // Damage -> ÊµÊ±DPS£¨²î·Ö£©
+                // Damage -> å®æ—¶DPSï¼ˆå·®åˆ†ï¼‰
                 if (_fullLastDamage.TryGetValue(p.Uid, out var lastDmg))
                 {
                     var dt = (now - lastDmg.Ts).TotalSeconds;
@@ -288,7 +288,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                     _fullLastDamage[p.Uid] = (p.TotalDamage, now);
                 }
 
-                // Healing -> ÊµÊ±HPS£¨²î·Ö£©
+                // Healing -> å®æ—¶HPSï¼ˆå·®åˆ†ï¼‰
                 if (_fullLastHealing.TryGetValue(p.Uid, out var lastHeal))
                 {
                     var dt = (now - lastHeal.Ts).TotalSeconds;
@@ -305,7 +305,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                     _fullLastHealing[p.Uid] = (p.TotalHealing, now);
                 }
 
-                // Taken -> ÊµÊ±³ĞÉËÃ¿Ãë£¨²î·Ö£©
+                // Taken -> å®æ—¶æ‰¿ä¼¤æ¯ç§’ï¼ˆå·®åˆ†ï¼‰
                 if (_fullLastTaken.TryGetValue(p.Uid, out var lastTaken))
                 {
                     var dt = (now - lastTaken.Ts).TotalSeconds;
@@ -333,7 +333,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
 
             var now = DateTime.Now;
 
-            // Îª·Ç»îÔ¾Íæ¼ÒÒ²²¹ 0 Öµ£¨·ÀÖ¹³¤Ê±¼äÍ£ÁôÔÚÉÏÒ»ÊıÖµ£©
+            // ä¸ºéæ´»è·ƒç©å®¶ä¹Ÿè¡¥ 0 å€¼ï¼ˆé˜²æ­¢é•¿æ—¶é—´åœç•™åœ¨ä¸Šä¸€æ•°å€¼ï¼‰
             CheckHistoryForZeroValues(_dpsHistoryCurrent, activeCurrent, now, (id, _) => AddDpsDataPointCurrent(id, 0));
             CheckHistoryForZeroValues(_hpsHistoryCurrent, activeCurrent, now, (id, _) => AddHpsDataPointCurrent(id, 0));
             CheckHistoryForZeroValues(_takenDpsHistoryCurrent, activeCurrent, now, (id, _) => AddTakenDpsDataPointCurrent(id, 0));
@@ -385,7 +385,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
             _takenDpsHistoryFull.Clear();
             _fullCombatStartTime = null;
 
-            // Í¬²½Çå¿Õ²î·Ö¿ìÕÕ£¬±ÜÃâ¿ç»á»°Ôì³ÉË²Ê±¸ßÖµ
+            // åŒæ­¥æ¸…ç©ºå·®åˆ†å¿«ç…§ï¼Œé¿å…è·¨ä¼šè¯é€ æˆç¬æ—¶é«˜å€¼
             _fullLastDamage.Clear();
             _fullLastHealing.Clear();
             _fullLastTaken.Clear();
@@ -393,7 +393,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
 
         public static void OnCombatEnd()
         {
-            // ÔÚÕ½¶·½áÊøÊ±Ñ¹Èë 0 Öµ£¬ÒÔ±ãÇúÏß×ÔÈ»»ØÂä
+            // åœ¨æˆ˜æ–—ç»“æŸæ—¶å‹å…¥ 0 å€¼ï¼Œä»¥ä¾¿æ›²çº¿è‡ªç„¶å›è½
             foreach (var playerId in _dpsHistoryCurrent.Keys.ToList())
             {
                 var history = _dpsHistoryCurrent[playerId];
@@ -413,7 +413,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                     AddTakenDpsDataPointCurrent(playerId, 0);
             }
 
-            // È«³ÌÒ²²¹ 0 Öµ£¬±ãÓÚÍ¼ĞÎÏÎ½Ó
+            // å…¨ç¨‹ä¹Ÿè¡¥ 0 å€¼ï¼Œä¾¿äºå›¾å½¢è¡”æ¥
             foreach (var playerId in _dpsHistoryFull.Keys.ToList())
             {
                 var history = _dpsHistoryFull[playerId];
@@ -435,40 +435,40 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
         }
         #endregion
 
-        #region Í¼±í´´½¨
+        #region å›¾è¡¨åˆ›å»º
         /// <summary>
-        /// Í¨ÓÃ´´½¨·½·¨
+        /// é€šç”¨åˆ›å»ºæ–¹æ³•
         /// </summary>
-        /// <typeparam name="T">Í¼±í¿Ø¼şÀàĞÍ£º¼Ì³Ğ×Ô UserControl</typeparam>
-        /// <param name="size">Í¼±íµÄ³õÊ¼´óĞ¡</param>
-        /// <param name="customConfig">¿ÉÑ¡£º×Ô¶¨ÒåÅäÖÃ»Øµ÷£¬¿ÉĞŞ¸ÄÍ¼±í¿Ø¼şµÄ¸÷ÖÖ²ÎÊı</param>
-        /// <returns>ÒÑ´´½¨²¢Ó¦ÓÃÄ¬ÈÏÅäÖÃµÄÍ¼±íÊµÀı</returns>
+        /// <typeparam name="T">å›¾è¡¨æ§ä»¶ç±»å‹ï¼šç»§æ‰¿è‡ª UserControl</typeparam>
+        /// <param name="size">å›¾è¡¨çš„åˆå§‹å¤§å°</param>
+        /// <param name="customConfig">å¯é€‰ï¼šè‡ªå®šä¹‰é…ç½®å›è°ƒï¼Œå¯ä¿®æ”¹å›¾è¡¨æ§ä»¶çš„å„ç§å‚æ•°</param>
+        /// <returns>å·²åˆ›å»ºå¹¶åº”ç”¨é»˜è®¤é…ç½®çš„å›¾è¡¨å®ä¾‹</returns>
         private static T CreateChart<T>(Size size, Action<T>? customConfig = null) where T : UserControl, new()
         {
             var chart = new T { Size = size };
-            ChartConfigManager.ApplySettings(chart); // Ó¦ÓÃÍ³Ò»µÄÍ¼±íÅäÖÃ
-            customConfig?.Invoke(chart); // Ö´ĞĞ×Ô¶¨ÒåÅäÖÃ
+            ChartConfigManager.ApplySettings(chart); // åº”ç”¨ç»Ÿä¸€çš„å›¾è¡¨é…ç½®
+            customConfig?.Invoke(chart); // æ‰§è¡Œè‡ªå®šä¹‰é…ç½®
             return chart;
         }
 
         /// <summary>
-        /// ´´½¨ DPS Ç÷ÊÆÕÛÏßÍ¼£¨Ä¬ÈÏÊ¹ÓÃÈ«¾Ö DataSource£©
+        /// åˆ›å»º DPS è¶‹åŠ¿æŠ˜çº¿å›¾ï¼ˆé»˜è®¤ä½¿ç”¨å…¨å±€ DataSourceï¼‰
         /// </summary>
         public static FlatLineChart CreateDpsTrendChart(int width = 800, int height = 400, long? specificPlayerId = null)
         {
             var chart = CreateChart<FlatLineChart>(new Size(width, height));
 
-            RegisterChart(chart); // ×¢²áÍ¼±íÒÔ±ãÍ³Ò»¹ÜÀí
+            RegisterChart(chart); // æ³¨å†Œå›¾è¡¨ä»¥ä¾¿ç»Ÿä¸€ç®¡ç†
 
-            if (IsCapturing) // Èôµ±Ç°ÔÚ²¶»ñÊı¾İ£¬Ôò¿ªÆô×Ô¶¯Ë¢ĞÂ
+            if (IsCapturing) // è‹¥å½“å‰åœ¨æ•è·æ•°æ®ï¼Œåˆ™å¼€å¯è‡ªåŠ¨åˆ·æ–°
                 chart.StartAutoRefresh(ChartConfigManager.REFRESH_INTERVAL);
 
-            RefreshDpsTrendChart(chart, specificPlayerId); // ÔØÈë³õÊ¼Êı¾İ
+            RefreshDpsTrendChart(chart, specificPlayerId); // è½½å…¥åˆå§‹æ•°æ®
             return chart;
         }
 
         /// <summary>
-        /// ÎªÖ¸¶¨Êı¾İÔ´´´½¨ DPS ÇúÏßÍ¼£¨Current / FullRecord£©¡£
+        /// ä¸ºæŒ‡å®šæ•°æ®æºåˆ›å»º DPS æ›²çº¿å›¾ï¼ˆCurrent / FullRecordï¼‰ã€‚
         /// </summary>
         public static FlatLineChart CreateDpsTrendChartForSource(ChartDataSource source, int width = 800, int height = 400, long? specificPlayerId = null)
         {
@@ -485,62 +485,62 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
         public static FlatPieChart CreateSkillDamagePieChart(long playerId, int width = 400, int height = 400)
         {
             var chart = CreateChart<FlatPieChart>(new Size(width, height));
-            RefreshSkillDamagePieChart(chart, playerId); // ³õÊ¼Ë¢ĞÂ
+            RefreshSkillDamagePieChart(chart, playerId); // åˆå§‹åˆ·æ–°
             return chart;
         }
 
         /// <summary>
-        /// ´´½¨¶ÓÎé DPS ÌõĞÎÍ¼£¨FlatBarChart£©
+        /// åˆ›å»ºé˜Ÿä¼ DPS æ¡å½¢å›¾ï¼ˆFlatBarChartï¼‰
         /// </summary>
         public static FlatBarChart CreateTeamDpsBarChart(int width = 600, int height = 400)
         {
             var chart = CreateChart<FlatBarChart>(new Size(width, height));
-            RefreshTeamDpsBarChart(chart); // ³õÊ¼Ë¢ĞÂ
+            RefreshTeamDpsBarChart(chart); // åˆå§‹åˆ·æ–°
             return chart;
         }
 
         /// <summary>
-                /// ´´½¨ DPS É¢µãÍ¼£¨FlatScatterChart£©
+                /// åˆ›å»º DPS æ•£ç‚¹å›¾ï¼ˆFlatScatterChartï¼‰
 /// </summary>
         public static FlatScatterChart CreateDpsRadarChart(int width = 400, int height = 400)
         {
             var chart = CreateChart<FlatScatterChart>(new Size(width, height));
-            RefreshDpsRadarChart(chart); // ³õÊ¼Ë¢ĞÂ
+            RefreshDpsRadarChart(chart); // åˆå§‹åˆ·æ–°
             return chart;
         }
 
         /// <summary>
-        /// ´´½¨ÉËº¦ÀàĞÍ¶ÑµşÌõĞÎÍ¼£¨FlatBarChart£©
+        /// åˆ›å»ºä¼¤å®³ç±»å‹å †å æ¡å½¢å›¾ï¼ˆFlatBarChartï¼‰
         /// </summary>
         public static FlatBarChart CreateDamageTypeStackedChart(int width = 600, int height = 400)
         {
             var chart = CreateChart<FlatBarChart>(new Size(width, height));
-            RefreshDamageTypeStackedChart(chart); // ³õÊ¼Ë¢ĞÂ
+            RefreshDamageTypeStackedChart(chart); // åˆå§‹åˆ·æ–°
             return chart;
         }
 
         #endregion
 
-        #region Í¼±íË¢ĞÂ
+        #region å›¾è¡¨åˆ·æ–°
         /// <summary>
-        /// Ë¢ĞÂ DPS Ç÷ÊÆÍ¼Êı¾İ£¬Ö§³Öµ¥ÈË/¶àÈËÒÔ¼°²»Í¬Êı¾İÀàĞÍ£¨Ä¬ÈÏÊ¹ÓÃÈ«¾Ö DataSource£©
+        /// åˆ·æ–° DPS è¶‹åŠ¿å›¾æ•°æ®ï¼Œæ”¯æŒå•äºº/å¤šäººä»¥åŠä¸åŒæ•°æ®ç±»å‹ï¼ˆé»˜è®¤ä½¿ç”¨å…¨å±€ DataSourceï¼‰
         /// </summary>
         public static void RefreshDpsTrendChart(FlatLineChart chart, long? specificPlayerId = null, ChartDataType dataType = ChartDataType.Damage)
             => RefreshDpsTrendChart(chart, specificPlayerId, dataType, DataSource);
 
         /// <summary>
-        /// °´Ö¸¶¨Êı¾İÔ´Ë¢ĞÂÇúÏß£¨Current/FullRecord£©¡£
+        /// æŒ‰æŒ‡å®šæ•°æ®æºåˆ·æ–°æ›²çº¿ï¼ˆCurrent/FullRecordï¼‰ã€‚
         /// </summary>
         public static void RefreshDpsTrendChart(FlatLineChart chart, long? specificPlayerId, ChartDataType dataType, ChartDataSource source)
         {
-            // ¼ÇÂ¼Í¼±í×´Ì¬
+            // è®°å½•å›¾è¡¨çŠ¶æ€
             var timeScale = chart.GetTimeScale();
             var viewOffset = chart.GetViewOffset();
             var hadData = chart.HasData();
 
             chart.ClearSeries();
 
-            // Ñ¡Ôñ¶ÔÓ¦ÀúÊ·
+            // é€‰æ‹©å¯¹åº”å†å²
             Dictionary<long, List<(DateTime Time, double Value)>> historyData;
             DateTime? startTs;
             if (source == ChartDataSource.FullRecord)
@@ -561,11 +561,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                     ChartDataType.TakenDamage => _takenDpsHistoryCurrent.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Select(item => (item.Time, (double)item.TakenDps)).ToList()),
                     _ => _dpsHistoryCurrent.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Select(item => (item.Time, (double)item.Dps)).ToList()),
                 };
-                // ÓÅÏÈÓÃ¡°Ö÷½çÃæÕ½¶·Ê±³¤¡±ÍÆµ¼³öµÄ¿ªÊ¼Ê±¼ä£¬±£Ö¤Óëµ¥´Î¼ÆÊ±Ò»ÖÂ
+                // ä¼˜å…ˆç”¨â€œä¸»ç•Œé¢æˆ˜æ–—æ—¶é•¿â€æ¨å¯¼å‡ºçš„å¼€å§‹æ—¶é—´ï¼Œä¿è¯ä¸å•æ¬¡è®¡æ—¶ä¸€è‡´
                 startTs = (_currentCombatStartTime != null) ? _currentCombatStartTime : DateTime.Now - StatisticData._manager.GetCombatDuration();
             }
 
-            // ÈôÃ»ÓĞÈÎºÎÀúÊ·»òÆğÊ¼Ê±¼äÎ´Öª£¨ÀıÈçÇå¿Õºó£©£¬Ö±½Ó·µ»Ø£¨±£³Ö¡°ÔİÎŞÊı¾İ¡±¿ÕÌ¬£©
+            // è‹¥æ²¡æœ‰ä»»ä½•å†å²æˆ–èµ·å§‹æ—¶é—´æœªçŸ¥ï¼ˆä¾‹å¦‚æ¸…ç©ºåï¼‰ï¼Œç›´æ¥è¿”å›ï¼ˆä¿æŒâ€œæš‚æ— æ•°æ®â€ç©ºæ€ï¼‰
             if (historyData.Count == 0 || startTs == null)
             {
                 chart.Invalidate();
@@ -583,7 +583,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                 RefreshMultiPlayerChart(chart, historyData, startTime);
             }
 
-            // »Ö¸´ÊÓÍ¼
+            // æ¢å¤è§†å›¾
             if (hadData && chart.HasUserInteracted())
             {
                 chart.SetTimeScale(timeScale);
@@ -599,7 +599,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                 var points = ConvertToPoints(playerHistory, startTime);
                 if (points.Count > 0)
                 {
-                    // È·±£´Ó 0 Ãë¿ªÊ¼£ºÊ×¸öµãÈô´óÓÚ 0s£¬Ôò²¹Ò»¸ö (0,0)
+                    // ç¡®ä¿ä» 0 ç§’å¼€å§‹ï¼šé¦–ä¸ªç‚¹è‹¥å¤§äº 0sï¼Œåˆ™è¡¥ä¸€ä¸ª (0,0)
                     if (points[0].X > 0f)
                     {
                         points.Insert(0, new PointF(0f, 0f));
@@ -636,7 +636,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
 
             try
             {
-                // ¸ù¾İÊı¾İÀàĞÍ»ñÈ¡ÏàÓ¦µÄ¼¼ÄÜÊı¾İ
+                // æ ¹æ®æ•°æ®ç±»å‹è·å–ç›¸åº”çš„æŠ€èƒ½æ•°æ®
                 var skillData = dataType switch
                 {
                     ChartDataType.Healing => StatisticData._manager.GetPlayerSkillSummaries(playerId, topN: 8, orderByTotalDesc: true, Core.SkillType.Heal),
@@ -655,7 +655,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ë¢ĞÂ¼¼ÄÜÉËº¦±ıÍ¼Ê±³ö´í: {ex.Message}");
+                Console.WriteLine($"åˆ·æ–°æŠ€èƒ½ä¼¤å®³é¥¼å›¾æ—¶å‡ºé”™: {ex.Message}");
             }
         }
 
@@ -703,7 +703,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
         }
         #endregion
 
-        #region Í¼±í¹ÜÀí
+        #region å›¾è¡¨ç®¡ç†
         public static void RegisterChart(FlatLineChart chart)
         {
             lock (_registeredCharts)
@@ -728,7 +728,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
             IsCapturing = true;
             ExecuteOnRegisteredCharts(chart => chart.StartAutoRefresh(intervalMs));
 
-            // Æô¶¯ºóÌ¨²ÉÑù£¨¼´Ê¹ÔİÎ´´ò¿ªÈÎºÎÍ¼±íÒ²»á»ıÀÛÊı¾İ£©
+            // å¯åŠ¨åå°é‡‡æ ·ï¼ˆå³ä½¿æš‚æœªæ‰“å¼€ä»»ä½•å›¾è¡¨ä¹Ÿä¼šç§¯ç´¯æ•°æ®ï¼‰
             if (_samplingTimer == null)
             {
                 _samplingTimer = new System.Timers.Timer(Math.Max(200, intervalMs));
@@ -742,7 +742,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
             _samplingTimer.Interval = Math.Max(200, intervalMs);
             _samplingTimer.Start();
 
-            // Í¬²½Ò»´Î¡°Õ½¶·×´Ì¬¡±£¬±ÜÃâ¸ÕÆô¶¯Ê±ÎóÅĞ
+            // åŒæ­¥ä¸€æ¬¡â€œæˆ˜æ–—çŠ¶æ€â€ï¼Œé¿å…åˆšå¯åŠ¨æ—¶è¯¯åˆ¤
             _wasInCombat = StatisticData._manager.IsInCombat;
         }
 
@@ -753,11 +753,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
             {
                 try
                 {
-                    // Í£Ö¹Ë¢ĞÂ²¢³¹µ×Çå¿ÕÇúÏßÓëÊÓÍ¼
+                    // åœæ­¢åˆ·æ–°å¹¶å½»åº•æ¸…ç©ºæ›²çº¿ä¸è§†å›¾
                     chart.StopAutoRefresh();
                     chart.ClearSeries();
                     chart.FullReset();
-                    chart.Invalidate(); // Á¢¼´ÖØ»æ¿ÕÌ¬
+                    chart.Invalidate(); // ç«‹å³é‡ç»˜ç©ºæ€
                 }
                 catch (Exception ex)
                 {
@@ -775,7 +775,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                     if (weakRef.IsAlive && weakRef.Target is FlatLineChart chart)
                     {
                         try { action(chart); }
-                        catch (Exception ex) { Console.WriteLine($"Í¼±í¹ÜÀíÖ´ĞĞ³ö´í: {ex.Message}"); }
+                        catch (Exception ex) { Console.WriteLine($"å›¾è¡¨ç®¡ç†æ‰§è¡Œå‡ºé”™: {ex.Message}"); }
                     }
                 }
                 _registeredCharts.RemoveAll(wr => !wr.IsAlive);
@@ -783,7 +783,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
         }
         #endregion
 
-        #region ÆäËü¹¤¾ß
+        #region å…¶å®ƒå·¥å…·
         public static bool HasDataToVisualize() =>
             StatisticData._manager.GetPlayersWithCombatData().Any();
 
@@ -796,7 +796,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
     }
 
     /// <summary>
-    /// À©Õ¹¹¤¾ß·½·¨
+    /// æ‰©å±•å·¥å…·æ–¹æ³•
     /// </summary>
     public static class Extensions
     {

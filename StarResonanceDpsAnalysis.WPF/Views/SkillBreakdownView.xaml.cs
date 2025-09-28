@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 using StarResonanceDpsAnalysis.WPF.ViewModels;
 

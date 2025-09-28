@@ -3,11 +3,11 @@ using System.Drawing.Drawing2D;
 namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 {
     /// <summary>
-    /// ±âÆ½»¯ÏßĞÔÍ¼¿Ø¼ş - Ö§³ÖÍÏ¶¯¡¢Ëõ·ÅºÍÊµÊ±Ë¢ĞÂ¹¦ÄÜ
+    /// æ‰å¹³åŒ–çº¿æ€§å›¾æ§ä»¶ - æ”¯æŒæ‹–åŠ¨ã€ç¼©æ”¾å’Œå®æ—¶åˆ·æ–°åŠŸèƒ½
     /// </summary>
     public class FlatLineChart : UserControl
     {
-        #region ×Ö¶ÎºÍÊôĞÔ
+        #region å­—æ®µå’Œå±æ€§
 
         private readonly List<LineChartSeries> _series = new();
         private bool _isDarkTheme = false;
@@ -17,71 +17,71 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         private bool _showLegend = true;
         private bool _showGrid = true;
         private bool _showViewInfo = false;
-        private bool _autoScaleFont = true; // ĞÂÔö£º¿ØÖÆ×ÖÌå×ÔÊÊÓ¦
+        private bool _autoScaleFont = true; // æ–°å¢ï¼šæ§åˆ¶å­—ä½“è‡ªé€‚åº”
 
-        // ±ß¾àÉèÖÃ - µ÷Õû±ß¾àÊ¹Í¼±í×ó¶ÔÆë£¬±£³Ö½ÏÕ­µÄ¿í¶È
-        private const int PaddingLeft = 60;    // »Ö¸´µ½Õı³£µÄ×ó±ß¾à
-        private int _paddingRight = 160;       // ¸ÄÎªÊµÀı±äÁ¿£¬Ö§³Ö¶¯Ì¬µ÷Õû
-        private const int PaddingTop = 35;     // ±£³Ö¶¥²¿±ß¾à
-        private const int PaddingBottom = 45;  // ±£³Öµ×²¿±ß¾à
+        // è¾¹è·è®¾ç½® - è°ƒæ•´è¾¹è·ä½¿å›¾è¡¨å·¦å¯¹é½ï¼Œä¿æŒè¾ƒçª„çš„å®½åº¦
+        private const int PaddingLeft = 60;    // æ¢å¤åˆ°æ­£å¸¸çš„å·¦è¾¹è·
+        private int _paddingRight = 160;       // æ”¹ä¸ºå®ä¾‹å˜é‡ï¼Œæ”¯æŒåŠ¨æ€è°ƒæ•´
+        private const int PaddingTop = 35;     // ä¿æŒé¡¶éƒ¨è¾¹è·
+        private const int PaddingBottom = 45;  // ä¿æŒåº•éƒ¨è¾¹è·
 
-        // Íø¸ñÏßÅäÖÃ
-        private int _verticalGridLines = 5;    // ´¹Ö±Íø¸ñÏßÊıÁ¿£¨Ä¬ÈÏ6ÌõÏß£¬0-5£©
+        // ç½‘æ ¼çº¿é…ç½®
+        private int _verticalGridLines = 5;    // å‚ç›´ç½‘æ ¼çº¿æ•°é‡ï¼ˆé»˜è®¤6æ¡çº¿ï¼Œ0-5ï¼‰
 
-        // ×ÖÌå´óĞ¡ÉèÖÃ£¨»ù´¡´óĞ¡£¬»á¸ù¾İÍ¼±í´óĞ¡µ÷Õû£©
-        private const float BaseTitleFontSize = 12f;    // ¼õĞ¡±êÌâ×ÖÌå´Ó14µ½12
-        private const float BaseAxisLabelFontSize = 8f;  // ¼õÉÙÖá±êÇ©×ÖÌå´Ó9µ½8
-        private const float BaseAxisValueFontSize = 7f;  // ¼õÉÙÖáÊıÖµ×ÖÌå´Ó8µ½7
-        private const float BaseLegendFontSize = 7f;     // ¼õĞ¡Í¼Àı×ÖÌå´Ó8µ½7
-        private const float BaseNoDataFontSize = 9f;     // ¼õĞ¡ÎŞÊı¾İÌáÊ¾×ÖÌå´Ó10µ½9
+        // å­—ä½“å¤§å°è®¾ç½®ï¼ˆåŸºç¡€å¤§å°ï¼Œä¼šæ ¹æ®å›¾è¡¨å¤§å°è°ƒæ•´ï¼‰
+        private const float BaseTitleFontSize = 12f;    // å‡å°æ ‡é¢˜å­—ä½“ä»14åˆ°12
+        private const float BaseAxisLabelFontSize = 8f;  // å‡å°‘è½´æ ‡ç­¾å­—ä½“ä»9åˆ°8
+        private const float BaseAxisValueFontSize = 7f;  // å‡å°‘è½´æ•°å€¼å­—ä½“ä»8åˆ°7
+        private const float BaseLegendFontSize = 7f;     // å‡å°å›¾ä¾‹å­—ä½“ä»8åˆ°7
+        private const float BaseNoDataFontSize = 9f;     // å‡å°æ— æ•°æ®æç¤ºå­—ä½“ä»10åˆ°9
 
-        // Ëõ·ÅºÍÊÓÍ¼Ïà¹Ø
+        // ç¼©æ”¾å’Œè§†å›¾ç›¸å…³
         private float _timeScale = 1.0f;
         private float _viewOffset = 0.0f;
         private float _currentTimeSeconds = 0.0f;
 
-        // Êı¾İ³Ö¾Ã»¯
+        // æ•°æ®æŒä¹…åŒ–
         private readonly Dictionary<string, List<PointF>> _persistentData = new();
 
-        // Êó±ê½»»¥Ïà¹Ø
+        // é¼ æ ‡äº¤äº’ç›¸å…³
         private Point _lastMousePosition;
         private bool _isPanning = false;
         private ToolTip _tooltip;
         private bool _showTooltip = false;
         private string _tooltipText = "";
 
-        // ÊµÊ±Ë¢ĞÂÏà¹Ø
+        // å®æ—¶åˆ·æ–°ç›¸å…³
         private System.Windows.Forms.Timer _refreshTimer;
         private bool _autoRefreshEnabled = false;
         private int _refreshInterval = 1000;
         private Action _refreshCallback;
 
-        // ÊÓÍ¼±£³ÖÏà¹Ø
-        private bool _preserveViewOnDataUpdate = true; // ĞÂÔö£º¿ØÖÆÊı¾İ¸üĞÂÊ±ÊÇ·ñ±£³ÖÊÓÍ¼
-        private DateTime _lastUserInteraction = DateTime.MinValue; // ĞÂÔö£º¼ÇÂ¼×îºóÓÃ»§½»»¥Ê±¼ä
-        private const double UserInteractionCooldownMs = double.MaxValue; // ĞŞ¸Ä£ºÓÀ²»¹ıÆÚµÄÓÃ»§½»»¥±£»¤Ê±¼ä
-        private bool _hasUserInteracted = false; // ĞÂÔö£º±ê¼ÇÓÃ»§ÊÇ·ñÓĞ¹ı½»»¥
+        // è§†å›¾ä¿æŒç›¸å…³
+        private bool _preserveViewOnDataUpdate = true; // æ–°å¢ï¼šæ§åˆ¶æ•°æ®æ›´æ–°æ—¶æ˜¯å¦ä¿æŒè§†å›¾
+        private DateTime _lastUserInteraction = DateTime.MinValue; // æ–°å¢ï¼šè®°å½•æœ€åç”¨æˆ·äº¤äº’æ—¶é—´
+        private const double UserInteractionCooldownMs = double.MaxValue; // ä¿®æ”¹ï¼šæ°¸ä¸è¿‡æœŸçš„ç”¨æˆ·äº¤äº’ä¿æŠ¤æ—¶é—´
+        private bool _hasUserInteracted = false; // æ–°å¢ï¼šæ ‡è®°ç”¨æˆ·æ˜¯å¦æœ‰è¿‡äº¤äº’
 
-        // ×ÔÊÊÓ¦×ÖÌåÏà¹Ø
+        // è‡ªé€‚åº”å­—ä½“ç›¸å…³
         private float _fontScaleFactor = 1.0f;
         private const float MinFontSize = 6f;
         private const float MaxFontSize = 24f;
-        private const int BaseFontSize = 8; // »ù´¡×ÖÌå´óĞ¡
-        private const int BaseWidth = 400; // »ù´¡¿í¶È
-        private const int BaseHeight = 200; // »ù´¡¸ß¶È
+        private const int BaseFontSize = 8; // åŸºç¡€å­—ä½“å¤§å°
+        private const int BaseWidth = 400; // åŸºç¡€å®½åº¦
+        private const int BaseHeight = 200; // åŸºç¡€é«˜åº¦
 
-        // ÑÕÉ«ÅäÖÃ
+        // é¢œè‰²é…ç½®
         private readonly Color[] _colors = {
-            Color.FromArgb(255, 99, 132),   // ºì
-            Color.FromArgb(54, 162, 235),   // À¶
-            Color.FromArgb(255, 206, 86),   // »Æ
-            Color.FromArgb(75, 192, 192),   // Çà
-            Color.FromArgb(153, 102, 255),  // ×Ï
-            Color.FromArgb(255, 159, 64),   // ³È
-            Color.FromArgb(199, 199, 199),  // »Ò
-            Color.FromArgb(83, 102, 255),   // µåÀ¶
-            Color.FromArgb(255, 99, 255),   // Æ·ºì
-            Color.FromArgb(99, 255, 132),   // ÂÌ
+            Color.FromArgb(255, 99, 132),   // çº¢
+            Color.FromArgb(54, 162, 235),   // è“
+            Color.FromArgb(255, 206, 86),   // é»„
+            Color.FromArgb(75, 192, 192),   // é’
+            Color.FromArgb(153, 102, 255),  // ç´«
+            Color.FromArgb(255, 159, 64),   // æ©™
+            Color.FromArgb(199, 199, 199),  // ç°
+            Color.FromArgb(83, 102, 255),   // é›è“
+            Color.FromArgb(255, 99, 255),   // å“çº¢
+            Color.FromArgb(99, 255, 132),   // ç»¿
         };
 
         public bool IsDarkTheme
@@ -201,7 +201,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         }
 
         /// <summary>
-        /// »ñÈ¡µ±Ç°Ê±¼äËõ·Å
+        /// è·å–å½“å‰æ—¶é—´ç¼©æ”¾
         /// </summary>
         public float GetTimeScale()
         {
@@ -209,7 +209,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         }
 
         /// <summary>
-        /// »ñÈ¡µ±Ç°ÊÓÍ¼Æ«ÒÆ
+        /// è·å–å½“å‰è§†å›¾åç§»
         /// </summary>
         public float GetViewOffset()
         {
@@ -217,7 +217,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         }
 
         /// <summary>
-        /// ¼ì²éÍ¼±íÊÇ·ñÓĞÊı¾İ
+        /// æ£€æŸ¥å›¾è¡¨æ˜¯å¦æœ‰æ•°æ®
         /// </summary>
         public bool HasData()
         {
@@ -225,7 +225,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         }
 
         /// <summary>
-        /// ¼ì²éÓÃ»§ÊÇ·ñÓĞ¹ı½»»¥
+        /// æ£€æŸ¥ç”¨æˆ·æ˜¯å¦æœ‰è¿‡äº¤äº’
         /// </summary>
         public bool HasUserInteracted()
         {
@@ -233,16 +233,16 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         }
 
         /// <summary>
-        /// ÉèÖÃÓÒ²àÄÚ±ß¾à
+        /// è®¾ç½®å³ä¾§å†…è¾¹è·
         /// </summary>
         public void SetPaddingRight(int paddingRight)
         {
-            _paddingRight = Math.Max(10, paddingRight); // ×îĞ¡ÖµÎª10
+            _paddingRight = Math.Max(10, paddingRight); // æœ€å°å€¼ä¸º10
             Invalidate();
         }
 
         /// <summary>
-        /// »ñÈ¡µ±Ç°ÓÒ²àÄÚ±ß¾à
+        /// è·å–å½“å‰å³ä¾§å†…è¾¹è·
         /// </summary>
         public int GetPaddingRight()
         {
@@ -250,16 +250,16 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         }
 
         /// <summary>
-        /// ÉèÖÃ´¹Ö±Íø¸ñÏßÊıÁ¿
+        /// è®¾ç½®å‚ç›´ç½‘æ ¼çº¿æ•°é‡
         /// </summary>
         public void SetVerticalGridLines(int lineCount)
         {
-            _verticalGridLines = Math.Max(3, Math.Min(10, lineCount)); // ĞŞ¸Ä£ºÏŞÖÆ·¶Î§3-10Ö®¼ä£¬´Ó20¸ÄÎª10
+            _verticalGridLines = Math.Max(3, Math.Min(10, lineCount)); // ä¿®æ”¹ï¼šé™åˆ¶èŒƒå›´3-10ä¹‹é—´ï¼Œä»20æ”¹ä¸º10
             Invalidate();
         }
 
         /// <summary>
-        /// »ñÈ¡µ±Ç°´¹Ö±Íø¸ñÏßÊıÁ¿
+        /// è·å–å½“å‰å‚ç›´ç½‘æ ¼çº¿æ•°é‡
         /// </summary>
         public int GetVerticalGridLines()
         {
@@ -268,7 +268,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region ¹¹Ôìº¯Êı
+        #region æ„é€ å‡½æ•°
 
         public FlatLineChart()
         {
@@ -276,7 +276,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                      ControlStyles.DoubleBuffer | ControlStyles.ResizeRedraw |
                      ControlStyles.Selectable | ControlStyles.UserMouse, true);
 
-            // ³õÊ¼»¯¹¤¾ßÌáÊ¾
+            // åˆå§‹åŒ–å·¥å…·æç¤º
             _tooltip = new ToolTip
             {
                 AutoPopDelay = 5000,
@@ -286,7 +286,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                 IsBalloon = true
             };
 
-            // ³õÊ¼»¯ÊµÊ±Ë¢ĞÂ¶¨Ê±Æ÷
+            // åˆå§‹åŒ–å®æ—¶åˆ·æ–°å®šæ—¶å™¨
             _refreshTimer = new System.Windows.Forms.Timer
             {
                 Interval = _refreshInterval,
@@ -296,7 +296,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
             ApplyTheme();
 
-            // ×¢²áÊó±êÊÂ¼ş
+            // æ³¨å†Œé¼ æ ‡äº‹ä»¶
             MouseMove += OnChartMouseMove;
             MouseWheel += OnChartMouseWheel;
             MouseDown += OnChartMouseDown;
@@ -304,16 +304,16 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
             MouseEnter += OnChartMouseEnter;
             KeyDown += OnChartKeyDown;
 
-            // ÔÊĞí¿Ø¼ş½ÓÊÕ½¹µãÒÔ´¦Àí¼üÅÌÊÂ¼ş
+            // å…è®¸æ§ä»¶æ¥æ”¶ç„¦ç‚¹ä»¥å¤„ç†é”®ç›˜äº‹ä»¶
             TabStop = true;
         }
 
         #endregion
 
-        #region ÊµÊ±Ë¢ĞÂ·½·¨
+        #region å®æ—¶åˆ·æ–°æ–¹æ³•
 
         /// <summary>
-        /// ÉèÖÃË¢ĞÂ»Øµ÷º¯Êı
+        /// è®¾ç½®åˆ·æ–°å›è°ƒå‡½æ•°
         /// </summary>
         public void SetRefreshCallback(Action callback)
         {
@@ -321,7 +321,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         }
 
         /// <summary>
-        /// Æô¶¯ÊµÊ±Ë¢ĞÂ
+        /// å¯åŠ¨å®æ—¶åˆ·æ–°
         /// </summary>
         public void StartAutoRefresh(int intervalMs = 1000)
         {
@@ -330,7 +330,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         }
 
         /// <summary>
-        /// Í£Ö¹ÊµÊ±Ë¢ĞÂ
+        /// åœæ­¢å®æ—¶åˆ·æ–°
         /// </summary>
         public void StopAutoRefresh()
         {
@@ -341,123 +341,123 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         {
             try
             {
-                // Èç¹ûÓÃ»§ÕıÔÚÍÏ¶¯£¬Ìø¹ı´Ë´ÎË¢ĞÂÒÔ±ÜÃâÖĞ¶Ï²Ù×÷
+                // å¦‚æœç”¨æˆ·æ­£åœ¨æ‹–åŠ¨ï¼Œè·³è¿‡æ­¤æ¬¡åˆ·æ–°ä»¥é¿å…ä¸­æ–­æ“ä½œ
                 if (_isPanning)
                 {
                     return;
                 }
 
-                // Èç¹ûÍ£Ö¹×¥°üÁË£¬ÍêÈ«±£³ÖÓÃ»§µÄÊÓÍ¼×´Ì¬£¬ÓÀ²»»Øµ¯
+                // å¦‚æœåœæ­¢æŠ“åŒ…äº†ï¼Œå®Œå…¨ä¿æŒç”¨æˆ·çš„è§†å›¾çŠ¶æ€ï¼Œæ°¸ä¸å›å¼¹
                 if (!ChartVisualizationService.IsCapturing)
                 {
-                    // Í£Ö¹×¥°üºó£¬Ö»Ö´ĞĞÊı¾İË¢ĞÂ»Øµ÷£¬µ«ÍêÈ«±£³ÖÊÓÍ¼×´Ì¬
+                    // åœæ­¢æŠ“åŒ…åï¼Œåªæ‰§è¡Œæ•°æ®åˆ·æ–°å›è°ƒï¼Œä½†å®Œå…¨ä¿æŒè§†å›¾çŠ¶æ€
                     _refreshCallback?.Invoke();
                     Invalidate();
                     return;
                 }
 
-                // ±£´æµ±Ç°µÄÊÓÍ¼×´Ì¬ - ÓÀÔ¶±£³ÖÓÃ»§ÉèÖÃµÄÊÓÍ¼
+                // ä¿å­˜å½“å‰çš„è§†å›¾çŠ¶æ€ - æ°¸è¿œä¿æŒç”¨æˆ·è®¾ç½®çš„è§†å›¾
                 var currentTimeScale = _timeScale;
                 var currentViewOffset = _viewOffset;
 
                 _refreshCallback?.Invoke();
 
-                // Èç¹ûÆôÓÃÁËÊÓÍ¼±£³Ö¹¦ÄÜ£¬ÓÀÔ¶»Ö¸´ÓÃ»§µÄÉèÖÃ£¨ÒÆ³ıÊ±¼äÏŞÖÆ£©
+                // å¦‚æœå¯ç”¨äº†è§†å›¾ä¿æŒåŠŸèƒ½ï¼Œæ°¸è¿œæ¢å¤ç”¨æˆ·çš„è®¾ç½®ï¼ˆç§»é™¤æ—¶é—´é™åˆ¶ï¼‰
                 if (_preserveViewOnDataUpdate)
                 {
                     _timeScale = currentTimeScale;
                     _viewOffset = currentViewOffset;
-                    ClampViewOffset(); // ÖØĞÂÔ¼ÊøÆ«ÒÆÁ¿ÒÔÈ·±£ÓĞĞ§ĞÔ
+                    ClampViewOffset(); // é‡æ–°çº¦æŸåç§»é‡ä»¥ç¡®ä¿æœ‰æ•ˆæ€§
                 }
 
                 Invalidate();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Í¼±í×Ô¶¯Ë¢ĞÂÊ±³ö´í: {ex.Message}");
+                Console.WriteLine($"å›¾è¡¨è‡ªåŠ¨åˆ·æ–°æ—¶å‡ºé”™: {ex.Message}");
             }
         }
 
         #endregion
 
-        #region ×ÖÌå×ÔÊÊÓ¦·½·¨
+        #region å­—ä½“è‡ªé€‚åº”æ–¹æ³•
 
         /// <summary>
-        /// ¸ù¾İÍ¼±í´óĞ¡¼ÆËã×ÔÊÊÓ¦×ÖÌå´óĞ¡
+        /// æ ¹æ®å›¾è¡¨å¤§å°è®¡ç®—è‡ªé€‚åº”å­—ä½“å¤§å°
         /// </summary>
         private float CalculateScaledFontSize(float baseFontSize)
         {
             if (!_autoScaleFont) return baseFontSize;
 
-            // »ùÓÚÍ¼±í¿í¶ÈºÍ¸ß¶È¼ÆËãËõ·ÅÒò×Ó
-            var baseWidth = 500f;  // Ìá¸ß»ù×¼¿í¶È´Ó400µ½500
-            var baseHeight = 200f; // ±£³Ö»ù×¼¸ß¶È200
+            // åŸºäºå›¾è¡¨å®½åº¦å’Œé«˜åº¦è®¡ç®—ç¼©æ”¾å› å­
+            var baseWidth = 500f;  // æé«˜åŸºå‡†å®½åº¦ä»400åˆ°500
+            var baseHeight = 200f; // ä¿æŒåŸºå‡†é«˜åº¦200
 
             var widthScale = Width / baseWidth;
             var heightScale = Height / baseHeight;
 
-            // È¡½ÏĞ¡µÄËõ·ÅÒò×Ó£¬±ÜÃâ×ÖÌå¹ı´ó
+            // å–è¾ƒå°çš„ç¼©æ”¾å› å­ï¼Œé¿å…å­—ä½“è¿‡å¤§
             var scale = Math.Min(widthScale, heightScale);
 
-            // ¸ü±£ÊØµÄËõ·Å·¶Î§£¬±ÜÃâÎÄ×Ö¹ı´ó
-            scale = Math.Max(0.7f, Math.Min(1.4f, scale)); // µ÷Õû·¶Î§´Ó0.6-1.8µ½0.7-1.4
+            // æ›´ä¿å®ˆçš„ç¼©æ”¾èŒƒå›´ï¼Œé¿å…æ–‡å­—è¿‡å¤§
+            scale = Math.Max(0.7f, Math.Min(1.4f, scale)); // è°ƒæ•´èŒƒå›´ä»0.6-1.8åˆ°0.7-1.4
 
             return baseFontSize * scale;
         }
 
         /// <summary>
-        /// ¸ù¾İÇøÓò´óĞ¡¼ÆËã×ÖÌå´óĞ¡£¨ÓÃÓÚÖá±êÇ©µÈĞèÒª¸ü¾«Ï¸¿ØÖÆµÄÇøÓò£©
+        /// æ ¹æ®åŒºåŸŸå¤§å°è®¡ç®—å­—ä½“å¤§å°ï¼ˆç”¨äºè½´æ ‡ç­¾ç­‰éœ€è¦æ›´ç²¾ç»†æ§åˆ¶çš„åŒºåŸŸï¼‰
         /// </summary>
         private float CalculateScaledFontSizeForArea(float baseFontSize, float areaWidth, float areaHeight)
         {
             if (!_autoScaleFont) return baseFontSize;
 
-            // ¸ù¾İ¿ÉÓÃÇøÓò¼ÆËãºÏÊÊµÄ×ÖÌå´óĞ¡
-            var baseAreaWidth = 300f;  // Ìá¸ß»ù×¼¿í¶È´Ó200µ½300
-            var baseAreaHeight = 120f; // Ìá¸ß»ù×¼¸ß¶È´Ó100µ½120
+            // æ ¹æ®å¯ç”¨åŒºåŸŸè®¡ç®—åˆé€‚çš„å­—ä½“å¤§å°
+            var baseAreaWidth = 300f;  // æé«˜åŸºå‡†å®½åº¦ä»200åˆ°300
+            var baseAreaHeight = 120f; // æé«˜åŸºå‡†é«˜åº¦ä»100åˆ°120
 
             var widthScale = areaWidth / baseAreaWidth;
             var heightScale = areaHeight / baseAreaHeight;
 
             var scale = Math.Min(widthScale, heightScale);
 
-            // ¸ü±£ÊØµÄËõ·Å·¶Î§£¬±ÜÃâÎÄ×Ö¹ı´ó»ò¹ıĞ¡
-            scale = Math.Max(0.8f, Math.Min(1.2f, scale)); // µ÷Õû·¶Î§´Ó0.7-1.5µ½0.8-1.2
+            // æ›´ä¿å®ˆçš„ç¼©æ”¾èŒƒå›´ï¼Œé¿å…æ–‡å­—è¿‡å¤§æˆ–è¿‡å°
+            scale = Math.Max(0.8f, Math.Min(1.2f, scale)); // è°ƒæ•´èŒƒå›´ä»0.7-1.5åˆ°0.8-1.2
 
             return baseFontSize * scale;
         }
 
         /// <summary>
-        /// ´´½¨×ÔÊÊÓ¦×ÖÌå
+        /// åˆ›å»ºè‡ªé€‚åº”å­—ä½“
         /// </summary>
         private Font CreateScaledFont(string fontFamily, float baseFontSize, FontStyle style = FontStyle.Regular)
         {
             var scaledSize = CalculateScaledFontSize(baseFontSize);
-            // ¸üÑÏ¸ñµÄ×ÖÌå´óĞ¡ÏŞÖÆ£¬±ÜÃâÎÄ×Ö¹ı´ó
-            scaledSize = Math.Max(6f, Math.Min(16f, scaledSize)); // ½«×î´óÖµ´Ó24½µµ½16
+            // æ›´ä¸¥æ ¼çš„å­—ä½“å¤§å°é™åˆ¶ï¼Œé¿å…æ–‡å­—è¿‡å¤§
+            scaledSize = Math.Max(6f, Math.Min(16f, scaledSize)); // å°†æœ€å¤§å€¼ä»24é™åˆ°16
             return new Font(fontFamily, scaledSize, style);
         }
 
         /// <summary>
-        /// ´´½¨ÇøÓò×ÔÊÊÓ¦×ÖÌå
+        /// åˆ›å»ºåŒºåŸŸè‡ªé€‚åº”å­—ä½“
         /// </summary>
         private Font CreateScaledFontForArea(string fontFamily, float baseFontSize, float areaWidth, float areaHeight, FontStyle style = FontStyle.Regular)
         {
             var scaledSize = CalculateScaledFontSizeForArea(baseFontSize, areaWidth, areaHeight);
-            scaledSize = Math.Max(6f, Math.Min(14f, scaledSize)); // ½«×î´óÖµ´Ó20½µµ½14
+            scaledSize = Math.Max(6f, Math.Min(14f, scaledSize)); // å°†æœ€å¤§å€¼ä»20é™åˆ°14
             return new Font(fontFamily, scaledSize, style);
         }
 
         #endregion
 
-        #region Êı¾İ¹ÜÀí
+        #region æ•°æ®ç®¡ç†
 
         public void AddSeries(string name, List<PointF> points)
         {
-            // ±£´æµ±Ç°µÄÊÓÍ¼×´Ì¬
+            // ä¿å­˜å½“å‰çš„è§†å›¾çŠ¶æ€
             var currentTimeScale = _timeScale;
             var currentViewOffset = _viewOffset;
-            // Èç¹ûÍ£Ö¹×¥°üÁË£¬×ÜÊÇ±£³Öµ±Ç°ÊÓÍ¼
+            // å¦‚æœåœæ­¢æŠ“åŒ…äº†ï¼Œæ€»æ˜¯ä¿æŒå½“å‰è§†å›¾
             var shouldPreserveView = _series.Count > 0 || !ChartVisualizationService.IsCapturing;
 
             _persistentData[name] = new List<PointF>(points);
@@ -477,12 +477,12 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                 _currentTimeSeconds = Math.Max(_currentTimeSeconds, points.Max(p => p.X));
             }
 
-            // Èç¹ûÓ¦¸Ã±£³ÖÊÓÍ¼£¬Ôò»Ö¸´Ö®Ç°µÄËõ·ÅºÍÆ«ÒÆ
+            // å¦‚æœåº”è¯¥ä¿æŒè§†å›¾ï¼Œåˆ™æ¢å¤ä¹‹å‰çš„ç¼©æ”¾å’Œåç§»
             if (shouldPreserveView)
             {
                 _timeScale = currentTimeScale;
                 _viewOffset = currentViewOffset;
-                // Í£Ö¹×¥°üÊ±²»ÏŞÖÆÊÓÍ¼Æ«ÒÆ
+                // åœæ­¢æŠ“åŒ…æ—¶ä¸é™åˆ¶è§†å›¾åç§»
                 if (ChartVisualizationService.IsCapturing)
                 {
                     ClampViewOffset();
@@ -495,7 +495,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         public void ClearSeries()
         {
             _series.Clear();
-            // Ö»ÓĞÔÚÃ÷È·Çå¿ÕÊ±²ÅÖØÖÃÊÓÍ¼£¬¶øÇÒÒª¼ì²éÊÇ·ñÓĞÓÃ»§½»»¥
+            // åªæœ‰åœ¨æ˜ç¡®æ¸…ç©ºæ—¶æ‰é‡ç½®è§†å›¾ï¼Œè€Œä¸”è¦æ£€æŸ¥æ˜¯å¦æœ‰ç”¨æˆ·äº¤äº’
             if (!_hasUserInteracted)
             {
                 ResetViewToDefault();
@@ -505,7 +505,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         public void UpdateSeries(string name, List<PointF> points)
         {
-            // ±£´æµ±Ç°µÄÊÓÍ¼×´Ì¬
+            // ä¿å­˜å½“å‰çš„è§†å›¾çŠ¶æ€
             var currentTimeScale = _timeScale;
             var currentViewOffset = _viewOffset;
 
@@ -521,16 +521,16 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                     _currentTimeSeconds = Math.Max(_currentTimeSeconds, points.Max(p => p.X));
                 }
 
-                // Èç¹ûÍ£Ö¹×¥°üÁË£¬ÍêÈ«±£³ÖÓÃ»§µÄÊÓÍ¼×´Ì¬
+                // å¦‚æœåœæ­¢æŠ“åŒ…äº†ï¼Œå®Œå…¨ä¿æŒç”¨æˆ·çš„è§†å›¾çŠ¶æ€
                 if (!ChartVisualizationService.IsCapturing)
                 {
                     _timeScale = currentTimeScale;
                     _viewOffset = currentViewOffset;
-                    // Í£Ö¹×¥°üÊ±²»µ÷ÓÃClampViewOffset
+                    // åœæ­¢æŠ“åŒ…æ—¶ä¸è°ƒç”¨ClampViewOffset
                 }
                 else
                 {
-                    // ÕıÔÚ×¥°üÊ±£¬»Ö¸´ÓÃ»§µÄÊÓÍ¼×´Ì¬£¬±ÜÃâ¸üĞÂÊı¾İÊ±ÖØÖÃÊÓÍ¼
+                    // æ­£åœ¨æŠ“åŒ…æ—¶ï¼Œæ¢å¤ç”¨æˆ·çš„è§†å›¾çŠ¶æ€ï¼Œé¿å…æ›´æ–°æ•°æ®æ—¶é‡ç½®è§†å›¾
                     _timeScale = currentTimeScale;
                     _viewOffset = currentViewOffset;
                     ClampViewOffset();
@@ -563,24 +563,24 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region ÊÓÍ¼¿ØÖÆ
+        #region è§†å›¾æ§åˆ¶
 
         public void SetTimeScale(float scale)
         {
             var oldScale = _timeScale;
             _timeScale = Math.Max(0.1f, Math.Min(10.0f, scale));
 
-            // »ñÈ¡Ëõ·ÅÇ°ºóµÄÊÓÍ¼¿í¶È
+            // è·å–ç¼©æ”¾å‰åçš„è§†å›¾å®½åº¦
             var oldViewWidth = GetViewTimeRange(oldScale);
             var newViewWidth = GetViewTimeRange(_timeScale);
 
-            // ¼ÆËãµ±Ç°ÊÓÍ¼µÄÖĞĞÄµã£¨ÓÃ»§ÕıÔÚ²é¿´µÄÎ»ÖÃ£©
+            // è®¡ç®—å½“å‰è§†å›¾çš„ä¸­å¿ƒç‚¹ï¼ˆç”¨æˆ·æ­£åœ¨æŸ¥çœ‹çš„ä½ç½®ï¼‰
             var currentViewCenter = _viewOffset + oldViewWidth / 2;
 
-            // ÒÔµ±Ç°ÊÓÍ¼ÖĞĞÄÎª»ù×¼µ÷ÕûÆ«ÒÆÁ¿£¬±£³ÖÓÃ»§µ±Ç°²é¿´µÄÎ»ÖÃ
+            // ä»¥å½“å‰è§†å›¾ä¸­å¿ƒä¸ºåŸºå‡†è°ƒæ•´åç§»é‡ï¼Œä¿æŒç”¨æˆ·å½“å‰æŸ¥çœ‹çš„ä½ç½®
             _viewOffset = currentViewCenter - newViewWidth / 2;
 
-            // Ö»ÓĞÔÚ×¥°ü×´Ì¬Ê±²ÅÏŞÖÆÊÓÍ¼Æ«ÒÆ
+            // åªæœ‰åœ¨æŠ“åŒ…çŠ¶æ€æ—¶æ‰é™åˆ¶è§†å›¾åç§»
             if (ChartVisualizationService.IsCapturing)
             {
                 ClampViewOffset();
@@ -592,7 +592,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         public void SetViewOffset(float offset)
         {
             _viewOffset = offset;
-            // Ö»ÓĞÔÚ×¥°ü×´Ì¬Ê±²ÅÏŞÖÆÊÓÍ¼Æ«ÒÆ
+            // åªæœ‰åœ¨æŠ“åŒ…çŠ¶æ€æ—¶æ‰é™åˆ¶è§†å›¾åç§»
             if (ChartVisualizationService.IsCapturing)
             {
                 ClampViewOffset();
@@ -603,7 +603,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         public void ResetViewToDefault()
         {
             _timeScale = 1.0f;
-            // ĞŞ¸ÄÄ¬ÈÏÊÓÍ¼Æ«ÒÆ£¬Ê¹Æä´Ó0Ãë¿ªÊ¼ÏÔÊ¾5Ãë·¶Î§
+            // ä¿®æ”¹é»˜è®¤è§†å›¾åç§»ï¼Œä½¿å…¶ä»0ç§’å¼€å§‹æ˜¾ç¤º5ç§’èŒƒå›´
             _viewOffset = Math.Max(0, _currentTimeSeconds - 5);
             ClampViewOffset();
             Invalidate();
@@ -616,10 +616,10 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         private void ClampViewOffset()
         {
-            // Èç¹ûÍ£Ö¹×¥°üÁË£¬ÍêÈ«½ûÓÃÊÓÍ¼Æ«ÒÆÏŞÖÆ£¬ÓÃ»§¿ÉÒÔ×ÔÓÉÍÏ¶¯µ½ÈÎºÎÎ»ÖÃ
+            // å¦‚æœåœæ­¢æŠ“åŒ…äº†ï¼Œå®Œå…¨ç¦ç”¨è§†å›¾åç§»é™åˆ¶ï¼Œç”¨æˆ·å¯ä»¥è‡ªç”±æ‹–åŠ¨åˆ°ä»»ä½•ä½ç½®
             if (!ChartVisualizationService.IsCapturing)
             {
-                // Í£Ö¹×¥°üºó²»ÏŞÖÆÊÓÍ¼Æ«ÒÆ£¬ÓÃ»§¿ÉÒÔÍÏ¶¯µ½ÈÎºÎÊ±¼äµã
+                // åœæ­¢æŠ“åŒ…åä¸é™åˆ¶è§†å›¾åç§»ï¼Œç”¨æˆ·å¯ä»¥æ‹–åŠ¨åˆ°ä»»ä½•æ—¶é—´ç‚¹
                 return;
             }
 
@@ -632,13 +632,13 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         private float GetViewTimeRange(float scale)
         {
-            // ĞŞ¸ÄÄ¬ÈÏÊ±¼ä·¶Î§´Ó10Ãë¸ÄÎª5Ãë
+            // ä¿®æ”¹é»˜è®¤æ—¶é—´èŒƒå›´ä»10ç§’æ”¹ä¸º5ç§’
             return 30.0f / scale;
         }
 
         #endregion
 
-        #region Ö÷Ìâ¹ÜÀí
+        #region ä¸»é¢˜ç®¡ç†
 
         private void ApplyTheme()
         {
@@ -656,7 +656,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region Êó±êÊÂ¼ş´¦Àí
+        #region é¼ æ ‡äº‹ä»¶å¤„ç†
 
         private void OnChartMouseEnter(object sender, EventArgs e)
         {
@@ -676,8 +676,8 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
             {
                 if (_isPanning && e.Button == MouseButtons.Left)
                 {
-                    _lastUserInteraction = DateTime.Now; // ¼ÇÂ¼ÓÃ»§½»»¥Ê±¼ä
-                    _hasUserInteracted = true; // ±ê¼ÇÓÃ»§ÓĞ½»»¥
+                    _lastUserInteraction = DateTime.Now; // è®°å½•ç”¨æˆ·äº¤äº’æ—¶é—´
+                    _hasUserInteracted = true; // æ ‡è®°ç”¨æˆ·æœ‰äº¤äº’
 
                     var deltaX = e.X - _lastMousePosition.X;
                     var timeRange = GetViewTimeRange(_timeScale);
@@ -712,8 +712,8 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
             if (shouldZoom)
             {
-                _lastUserInteraction = DateTime.Now; // ¼ÇÂ¼ÓÃ»§½»»¥Ê±¼ä
-                _hasUserInteracted = true; // ±ê¼ÇÓÃ»§ÓĞ½»»¥
+                _lastUserInteraction = DateTime.Now; // è®°å½•ç”¨æˆ·äº¤äº’æ—¶é—´
+                _hasUserInteracted = true; // æ ‡è®°ç”¨æˆ·æœ‰äº¤äº’
 
                 var chartRect = new Rectangle(PaddingLeft, PaddingTop,
                                             Width - PaddingLeft - _paddingRight,
@@ -747,8 +747,8 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
                 if (chartRect.Contains(e.Location))
                 {
-                    _lastUserInteraction = DateTime.Now; // ¼ÇÂ¼ÓÃ»§½»»¥Ê±¼ä
-                    _hasUserInteracted = true; // ±ê¼ÇÓÃ»§ÓĞ½»»¥
+                    _lastUserInteraction = DateTime.Now; // è®°å½•ç”¨æˆ·äº¤äº’æ—¶é—´
+                    _hasUserInteracted = true; // æ ‡è®°ç”¨æˆ·æœ‰äº¤äº’
                     _isPanning = true;
                     _lastMousePosition = e.Location;
                     Cursor = Cursors.Hand;
@@ -785,7 +785,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region Êı¾İµã²éÕÒºÍÌáÊ¾
+        #region æ•°æ®ç‚¹æŸ¥æ‰¾å’Œæç¤º
 
         private void FindNearestDataPoint(Point mouseLocation, Rectangle chartRect)
         {
@@ -817,7 +817,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                         minDistance = distance;
                         var timeText = FormatTimeLabel(point.X);
                         var dpsText = Common.FormatWithEnglishUnits(point.Y);
-                        bestTooltip = $"{series.Name}\nÊ±¼ä: {timeText}\nDPS: {dpsText}";
+                        bestTooltip = $"{series.Name}\næ—¶é—´: {timeText}\nDPS: {dpsText}";
                         found = true;
                     }
                 }
@@ -854,7 +854,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region ÖØĞ´·½·¨ÒÔÈ·±£½¹µã´¦Àí
+        #region é‡å†™æ–¹æ³•ä»¥ç¡®ä¿ç„¦ç‚¹å¤„ç†
 
         protected override void OnClick(EventArgs e)
         {
@@ -881,7 +881,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region »æÖÆ·½·¨
+        #region ç»˜åˆ¶æ–¹æ³•
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -937,7 +937,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         private void DrawNoDataMessage(Graphics g)
         {
-            var message = "ÔİÎŞÊı¾İ\n\nÊ¹ÓÃ·½·¨£º\n? Ctrl + Êó±ê¹öÂÖ£ºËõ·ÅÊ±¼äÖá\n? ×ó¼üÍÏ¶¯£ºÆ½ÒÆÊÓÍ¼\n? R¼ü£ºÖØÖÃÊÓÍ¼\n? Êó±êĞüÍ££º²é¿´Êı¾İ";
+            var message = "æš‚æ— æ•°æ®\n\nä½¿ç”¨æ–¹æ³•ï¼š\n? Ctrl + é¼ æ ‡æ»šè½®ï¼šç¼©æ”¾æ—¶é—´è½´\n? å·¦é”®æ‹–åŠ¨ï¼šå¹³ç§»è§†å›¾\n? Ré”®ï¼šé‡ç½®è§†å›¾\n? é¼ æ ‡æ‚¬åœï¼šæŸ¥çœ‹æ•°æ®";
             using var font = CreateScaledFont("Microsoft YaHei", BaseNoDataFontSize, FontStyle.Regular);
             using var brush = new SolidBrush(_isDarkTheme ? Color.Gray : Color.DarkGray);
 
@@ -976,15 +976,15 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
             var gridColor = _isDarkTheme ? Color.FromArgb(64, 64, 64) : Color.FromArgb(230, 230, 230);
             using var gridPen = new Pen(gridColor, 1);
 
-            // ´¹Ö±Íø¸ñÏß - ¸ù¾İ¶¯Ì¬µ÷ÕûµÄ_verticalGridLinesÊıÁ¿»æÖÆ
-            // _verticalGridLines±íÊ¾ÏßÌõÊıÁ¿£¬Êµ¼Ê±êÇ©µãÊıÁ¿ÊÇ_verticalGridLines + 1
+            // å‚ç›´ç½‘æ ¼çº¿ - æ ¹æ®åŠ¨æ€è°ƒæ•´çš„_verticalGridLinesæ•°é‡ç»˜åˆ¶
+            // _verticalGridLinesè¡¨ç¤ºçº¿æ¡æ•°é‡ï¼Œå®é™…æ ‡ç­¾ç‚¹æ•°é‡æ˜¯_verticalGridLines + 1
             for (int i = 0; i <= _verticalGridLines; i++)
             {
                 var x = chartRect.X + (float)chartRect.Width * i / _verticalGridLines;
                 g.DrawLine(gridPen, x, chartRect.Y, x, chartRect.Bottom);
             }
 
-            // Ë®Æ½Íø¸ñÏß - ±£³Ö¹Ì¶¨µÄ6ÌõÏß(0-5)
+            // æ°´å¹³ç½‘æ ¼çº¿ - ä¿æŒå›ºå®šçš„6æ¡çº¿(0-5)
             for (int i = 0; i <= 5; i++)
             {
                 var y = chartRect.Y + (float)chartRect.Height * i / 5;
@@ -998,14 +998,14 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
             using var axisPen = new Pen(axisColor, 1);
             using var textBrush = new SolidBrush(ForeColor);
 
-            // ÎªÖá±êÇ©Ê¹ÓÃ»ùÓÚÍ¼±íÇøÓòµÄ×ÖÌå´óĞ¡
+            // ä¸ºè½´æ ‡ç­¾ä½¿ç”¨åŸºäºå›¾è¡¨åŒºåŸŸçš„å­—ä½“å¤§å°
             using var font = CreateScaledFontForArea("Microsoft YaHei", BaseAxisValueFontSize, chartRect.Width, chartRect.Height);
 
             g.DrawLine(axisPen, chartRect.X, chartRect.Bottom, chartRect.Right, chartRect.Bottom);
             g.DrawLine(axisPen, chartRect.X, chartRect.Y, chartRect.X, chartRect.Bottom);
 
-            // XÖáÊ±¼ä±êÇ© - ¸ù¾İ¶¯Ì¬µ÷ÕûµÄ_verticalGridLinesÊıÁ¿»æÖÆ±êÇ©
-            // _verticalGridLinesÌõÏß¶ÔÓ¦_verticalGridLines + 1¸ö±êÇ©µã
+            // Xè½´æ—¶é—´æ ‡ç­¾ - æ ¹æ®åŠ¨æ€è°ƒæ•´çš„_verticalGridLinesæ•°é‡ç»˜åˆ¶æ ‡ç­¾
+            // _verticalGridLinesæ¡çº¿å¯¹åº”_verticalGridLines + 1ä¸ªæ ‡ç­¾ç‚¹
             for (int i = 0; i <= _verticalGridLines; i++)
             {
                 var x = chartRect.X + (float)chartRect.Width * i / _verticalGridLines;
@@ -1016,11 +1016,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                 g.DrawString(text, font, textBrush, x - size.Width / 2, chartRect.Bottom + 8);
             }
 
-            // YÖáÊıÖµ±êÇ© - µ÷ÕûÎª6¸ö±êÇ©
-            for (int i = 0; i <= 5; i++) // ´Ó4¸ÄÎª5£¬6¸ö±êÇ©(0-5)
+            // Yè½´æ•°å€¼æ ‡ç­¾ - è°ƒæ•´ä¸º6ä¸ªæ ‡ç­¾
+            for (int i = 0; i <= 5; i++) // ä»4æ”¹ä¸º5ï¼Œ6ä¸ªæ ‡ç­¾(0-5)
             {
-                var y = chartRect.Bottom - (float)chartRect.Height * i / 5; // ·ÖÄ¸´Ó4¸ÄÎª5
-                var value = viewRange.Y + viewRange.Height * i / 5; // ·ÖÄ¸´Ó4¸ÄÎª5
+                var y = chartRect.Bottom - (float)chartRect.Height * i / 5; // åˆ†æ¯ä»4æ”¹ä¸º5
+                var value = viewRange.Y + viewRange.Height * i / 5; // åˆ†æ¯ä»4æ”¹ä¸º5
                 var text = Common.FormatWithEnglishUnits(value);
 
                 var size = g.MeasureString(text, font);
@@ -1130,7 +1130,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         private void DrawViewInfo(Graphics g)
         {
-            var info = $"Ëõ·Å: {_timeScale:F1}x | µ±Ç°Ê±¼ä: {FormatTimeLabel(_currentTimeSeconds)}";
+            var info = $"ç¼©æ”¾: {_timeScale:F1}x | å½“å‰æ—¶é—´: {FormatTimeLabel(_currentTimeSeconds)}";
 
             using var font = CreateScaledFont("Microsoft YaHei", BaseAxisValueFontSize);
             using var brush = new SolidBrush(_isDarkTheme ? Color.LightGray : Color.DarkGray);
@@ -1144,7 +1144,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
             using var font = CreateScaledFont("Microsoft YaHei", BaseLegendFontSize);
             using var textBrush = new SolidBrush(ForeColor);
 
-            // ¸ù¾İ×ÖÌå´óĞ¡µ÷ÕûÍ¼ÀıÏîµÄ¼ä¾à
+            // æ ¹æ®å­—ä½“å¤§å°è°ƒæ•´å›¾ä¾‹é¡¹çš„é—´è·
             var scaledItemHeight = (int)(18 * CalculateScaledFontSize(BaseLegendFontSize) / BaseLegendFontSize);
             var legendHeight = _series.Count * scaledItemHeight + 10;
             var maxTextWidth = _series.Max(s => (int)g.MeasureString(s.Name, font).Width);
@@ -1165,7 +1165,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                 var series = _series[i];
                 var y = legendY + i * scaledItemHeight;
 
-                // ¸ù¾İ×ÖÌå´óĞ¡µ÷ÕûÏßÌõ´ÖÏ¸
+                // æ ¹æ®å­—ä½“å¤§å°è°ƒæ•´çº¿æ¡ç²—ç»†
                 var lineWidth = Math.Max(2f, 3f * CalculateScaledFontSize(BaseLegendFontSize) / BaseLegendFontSize);
                 using var colorPen = new Pen(series.Color, lineWidth);
                 g.DrawLine(colorPen, legendX, y + scaledItemHeight / 2, legendX + 20, y + scaledItemHeight / 2);
@@ -1175,7 +1175,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region ×ÊÔ´ÇåÀí
+        #region èµ„æºæ¸…ç†
 
         protected override void Dispose(bool disposing)
         {
@@ -1191,36 +1191,36 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         #endregion
 
         /// <summary>
-        /// ÍêÈ«ÖØÖÃÍ¼±í×´Ì¬£¨ÓÃÓÚÇå¿ÕÊı¾İÊ±£©
+        /// å®Œå…¨é‡ç½®å›¾è¡¨çŠ¶æ€ï¼ˆç”¨äºæ¸…ç©ºæ•°æ®æ—¶ï¼‰
         /// </summary>
         public void FullReset()
         {
-            // Çå¿ÕËùÓĞÊı¾İ
+            // æ¸…ç©ºæ‰€æœ‰æ•°æ®
             _series.Clear();
             _persistentData.Clear();
 
-            // ÖØÖÃËùÓĞ×´Ì¬±äÁ¿
+            // é‡ç½®æ‰€æœ‰çŠ¶æ€å˜é‡
             _timeScale = 1.0f;
             _viewOffset = 0.0f;
             _currentTimeSeconds = 0.0f;
             _hasUserInteracted = false;
             _lastUserInteraction = DateTime.MinValue;
 
-            // Í£Ö¹ËùÓĞ¶¨Ê±Æ÷£¨µ«²»ÖØÖÃ¶¨Ê±Æ÷¶ÔÏó£©
+            // åœæ­¢æ‰€æœ‰å®šæ—¶å™¨ï¼ˆä½†ä¸é‡ç½®å®šæ—¶å™¨å¯¹è±¡ï¼‰
             if (_refreshTimer != null)
             {
                 _refreshTimer.Stop();
-                // ²»ÒªÉèÖÃÎªnull£¬±£³Ö¶¨Ê±Æ÷¶ÔÏó¿ÉÓÃ
+                // ä¸è¦è®¾ç½®ä¸ºnullï¼Œä¿æŒå®šæ—¶å™¨å¯¹è±¡å¯ç”¨
                 AutoRefreshEnabled = false;
             }
 
-            // Ç¿ÖÆÖØ»æ
+            // å¼ºåˆ¶é‡ç»˜
             Invalidate();
         }
     }
 
     /// <summary>
-    /// ÏßĞÔÍ¼Êı¾İÏµÁĞ
+    /// çº¿æ€§å›¾æ•°æ®ç³»åˆ—
     /// </summary>
     public class LineChartSeries
     {

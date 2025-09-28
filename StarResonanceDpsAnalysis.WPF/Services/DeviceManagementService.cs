@@ -1,4 +1,4 @@
-﻿using SharpPcap;
+using SharpPcap;
 
 namespace StarResonanceDpsAnalysis.WPF.Services;
 

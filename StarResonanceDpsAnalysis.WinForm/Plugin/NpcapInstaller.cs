@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.ServiceProcess;
 
 namespace StarResonanceDpsAnalysis.WinForm.Plugin

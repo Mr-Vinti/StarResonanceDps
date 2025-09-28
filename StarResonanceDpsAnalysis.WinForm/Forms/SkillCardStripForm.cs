@@ -7,7 +7,7 @@ using WinFormsPanel = System.Windows.Forms.Panel;
 
 namespace StarResonanceDpsAnalysis.WinForm.Forms
 {
-    // ½öÏÔÊ¾Ò»ĞĞ¼¼ÄÜ¿¨Æ¬µÄ¼ò½à´°¿Ú£¨½öÕ¹Ê¾ AppConfig.Uid µÄÊı¾İ£©
+    // ä»…æ˜¾ç¤ºä¸€è¡ŒæŠ€èƒ½å¡ç‰‡çš„ç®€æ´çª—å£ï¼ˆä»…å±•ç¤º AppConfig.Uid çš„æ•°æ®ï¼‰
     public class SkillCardStripForm : BorderlessForm
     {
         private readonly System.Windows.Forms.Timer _refreshTimer;
@@ -15,12 +15,12 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
         private readonly List<SkillRotationData> _history = new();
         private readonly Dictionary<long, DateTime> _lastUsage = new();
 
-        // Ô­Ê¼¿¨Æ¬³ß´ç
+        // åŸå§‹å¡ç‰‡å°ºå¯¸
         private const int BASE_CARD_WIDTH = 120;
         private const int BASE_CARD_HEIGHT = 80;
-        private const float SCALE = 0.75f; // ËõĞ¡ 25%
+        private const float SCALE = 0.75f; // ç¼©å° 25%
 
-        // ¼ÆËãºó³ß´çÓëÈİÆ÷ÄÚ±ß¾à
+        // è®¡ç®—åå°ºå¯¸ä¸å®¹å™¨å†…è¾¹è·
         private static int CARD_WIDTH => (int)Math.Round(BASE_CARD_WIDTH * SCALE);
         private static int CARD_HEIGHT => (int)Math.Round(BASE_CARD_HEIGHT * SCALE);
         private static int PX(int v) => Math.Max(1, (int)Math.Round(v * SCALE));
@@ -31,21 +31,21 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
 
         public SkillCardStripForm()
         {
-            // ³õÊ¼»¯»ù´¡ UI
+            // åˆå§‹åŒ–åŸºç¡€ UI
             FormGui.SetDefaultGUI(this);
-            Text = "¼¼ÄÜ¿¨Æ¬";
+            Text = "æŠ€èƒ½å¡ç‰‡";
             ShowInTaskbar = true;
             MinimizeBox = false;
             MaximizeBox = false;
 
-            // À©´óÒ»µã´°Ìå¸ß¶È£¬Ô¤ÁôË®Æ½¹ö¶¯Ìõ¸ß¶È£¬±ÜÃâÑ¹×¡¿¨Æ¬
+            // æ‰©å¤§ä¸€ç‚¹çª—ä½“é«˜åº¦ï¼Œé¢„ç•™æ°´å¹³æ»šåŠ¨æ¡é«˜åº¦ï¼Œé¿å…å‹ä½å¡ç‰‡
             int extraH = SystemInformation.HorizontalScrollBarHeight + 4;
             ClientSize = new Size(800, CARD_HEIGHT + PAD_T + PAD_B + 2 + extraH);
 
-            // ÑùÊ½£¨¸úËæÖ÷½çÃæ£©
+            // æ ·å¼ï¼ˆè·Ÿéšä¸»ç•Œé¢ï¼‰
             FormGui.SetColorMode(this, AppConfig.IsLight);
 
-            // ÈİÆ÷£ºÒ»ĞĞÕ¹Ê¾¡¢²»»»ĞĞ£»ÆôÓÃ×Ô¶¯¹ö¶¯£¨½öÏÔÊ¾Ë®Æ½¹ö¶¯Ìõ£©
+            // å®¹å™¨ï¼šä¸€è¡Œå±•ç¤ºã€ä¸æ¢è¡Œï¼›å¯ç”¨è‡ªåŠ¨æ»šåŠ¨ï¼ˆä»…æ˜¾ç¤ºæ°´å¹³æ»šåŠ¨æ¡ï¼‰
             _flow = new FlowLayoutPanel
             {
                 Dock = DockStyle.Fill,
@@ -55,18 +55,18 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
                 Padding = new Padding(PAD_L, PAD_T, PAD_R, PAD_B),
                 BackColor = Color.Transparent
             };
-            // Í¨¹ıÉèÖÃ¸ß¶ÈºÍµ¥ĞĞ²¼¾Ö£¬±ÜÃâ´¹Ö±¹ö¶¯Ìõ³öÏÖ
+            // é€šè¿‡è®¾ç½®é«˜åº¦å’Œå•è¡Œå¸ƒå±€ï¼Œé¿å…å‚ç›´æ»šåŠ¨æ¡å‡ºç°
             _flow.AutoScrollMargin = new Size(0, 0);
 
-            // ÆôÓÃË«»º³å£¬½µµÍÉÁË¸
+            // å¯ç”¨åŒç¼“å†²ï¼Œé™ä½é—ªçƒ
             TryEnableDoubleBuffer(_flow);
 
             Controls.Add(_flow);
 
-            // ÔÊĞíÈÎÒâÇøÓòÍÏ¶¯´°¿Ú
+            // å…è®¸ä»»æ„åŒºåŸŸæ‹–åŠ¨çª—å£
             AttachDragHandlers(this);
 
-            // ¶¨Ê±Ë¢ĞÂ£¨×Ô¶¯¿ªÆô¼à¿Ø£©
+            // å®šæ—¶åˆ·æ–°ï¼ˆè‡ªåŠ¨å¼€å¯ç›‘æ§ï¼‰
             _refreshTimer = new System.Windows.Forms.Timer { Interval = 500, Enabled = false };
             _refreshTimer.Tick += RefreshTimer_Tick;
 
@@ -76,21 +76,21 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
 
         private void SkillCardStripForm_Load(object? sender, EventArgs e)
         {
-            _uid = AppConfig.Uid; // ½öÏÔÊ¾´Ë UID µÄ¼¼ÄÜ
+            _uid = AppConfig.Uid; // ä»…æ˜¾ç¤ºæ­¤ UID çš„æŠ€èƒ½
             ResetStateAndUi();
-            _refreshTimer.Start(); // ×Ô¶¯¿ªÆô¼à¿Ø
+            _refreshTimer.Start(); // è‡ªåŠ¨å¼€å¯ç›‘æ§
         }
 
         private void RefreshTimer_Tick(object? sender, EventArgs e)
         {
-            // ¸úËæ AppConfig.Uid ¶¯Ì¬ÇĞ»»£¨ÀıÈç½øÈë½ÇÉ«ºó²ÅÄÃµ½UID£©
+            // è·Ÿéš AppConfig.Uid åŠ¨æ€åˆ‡æ¢ï¼ˆä¾‹å¦‚è¿›å…¥è§’è‰²åæ‰æ‹¿åˆ°UIDï¼‰
             if (_uid != AppConfig.Uid)
             {
                 _uid = AppConfig.Uid;
                 ResetStateAndUi();
             }
 
-            if (_uid == 0) return; // Î´ÉèÖÃ UID Ôò²»¸üĞÂ
+            if (_uid == 0) return; // æœªè®¾ç½® UID åˆ™ä¸æ›´æ–°
 
             try
             {
@@ -126,7 +126,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
                     }
                 }
 
-                // ¿ØÖÆÀúÊ·³¤¶È£¬±ÜÃâ¹ı¶à¿¨Æ¬
+                // æ§åˆ¶å†å²é•¿åº¦ï¼Œé¿å…è¿‡å¤šå¡ç‰‡
                 const int MAX_HISTORY = 200;
                 while (_history.Count > MAX_HISTORY && _flow.Controls.Count > 0)
                 {
@@ -140,7 +140,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"SkillCardStrip Ë¢ĞÂÒì³£: {ex.Message}");
+                Console.WriteLine($"SkillCardStrip åˆ·æ–°å¼‚å¸¸: {ex.Message}");
             }
         }
 
@@ -186,7 +186,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
             BeginInvoke(new Action(() =>
             {
                 _flow.Controls.Add(card);
-                ScrollToEnd(); // ×ÜÊÇ×Ô¶¯¹öµ½×îĞÂ
+                ScrollToEnd(); // æ€»æ˜¯è‡ªåŠ¨æ»šåˆ°æœ€æ–°
             }));
         }
 
@@ -194,7 +194,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
         {
             try
             {
-                // Í¨¹ıÉèÖÃ AutoScrollPosition »ò HorizontalScroll.Value µ½´ïÄ©Î²
+                // é€šè¿‡è®¾ç½® AutoScrollPosition æˆ– HorizontalScroll.Value åˆ°è¾¾æœ«å°¾
                 var h = _flow.HorizontalScroll;
                 int target = Math.Max(h.Minimum, h.Maximum - h.LargeChange + 1);
                 if (target < h.Minimum) target = h.Minimum;
@@ -268,7 +268,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
                 }
             }
 
-            // ÔÊĞíÔÚ¿¨Æ¬ºÍÆä×Ó¿Ø¼şÉÏÍÏ¶¯´°¿Ú
+            // å…è®¸åœ¨å¡ç‰‡å’Œå…¶å­æ§ä»¶ä¸Šæ‹–åŠ¨çª—å£
             AttachDragHandlers(card);
 
             return card;
@@ -302,7 +302,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
             catch { }
         }
 
-        // ======== ÍÏ¶¯´°¿ÚÖ§³Ö ========
+        // ======== æ‹–åŠ¨çª—å£æ”¯æŒ ========
         private void AttachDragHandlers(WinFormsControl ctrl)
         {
             if (ctrl == null) return;

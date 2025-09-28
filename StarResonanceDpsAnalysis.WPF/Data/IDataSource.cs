@@ -1,4 +1,4 @@
-﻿namespace StarResonanceDpsAnalysis.WPF.Data;
+namespace StarResonanceDpsAnalysis.WPF.Data;
 
 using System.Collections.Generic;
 using System.Threading;

@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;
 namespace StarResonanceDpsAnalysis.WinForm.Control
 {
     /// <summary>
-    /// Í¸Ã÷¶ÈĞıÅ¥¿Ø¼ş
+    /// é€æ˜åº¦æ—‹é’®æ§ä»¶
     /// </summary>
     public partial class TransparencyKnob : UserControl
     {
@@ -13,7 +13,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         private int _maximum = 100;
         private bool _isDragging = false;
         private Point _lastMousePosition;
-        private double _lastValidAngle = 45; // ¼ÇÂ¼ÉÏ´ÎÓĞĞ§½Ç¶È£¬³õÊ¼»¯Îª×î´óÖµ¶ÔÓ¦½Ç¶È
+        private double _lastValidAngle = 45; // è®°å½•ä¸Šæ¬¡æœ‰æ•ˆè§’åº¦ï¼Œåˆå§‹åŒ–ä¸ºæœ€å¤§å€¼å¯¹åº”è§’åº¦
         private Color _knobColor = Color.FromArgb(34, 151, 244);
         private Color _trackColor = Color.FromArgb(220, 220, 220);
         private Color _textColor = Color.FromArgb(160, 160, 160);
@@ -22,8 +22,8 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         private Color _outerIndicatorColor = Color.FromArgb(255, 50, 150, 255);
         private Color _startMarkerColor = Color.FromArgb(180, 180, 180);
         private Color _endMarkerColor = Color.FromArgb(120, 120, 120);
-        private Color _centerColor = Color.FromArgb(200, 200, 200); // ÖĞĞÄ´¿É«
-        private Color _centerBorderColor = Color.FromArgb(160, 160, 160); // ÖĞĞÄ±ß¿òÑÕÉ«
+        private Color _centerColor = Color.FromArgb(200, 200, 200); // ä¸­å¿ƒçº¯è‰²
+        private Color _centerBorderColor = Color.FromArgb(160, 160, 160); // ä¸­å¿ƒè¾¹æ¡†é¢œè‰²
         private float _textSize = 6.3f;
         private int _textOffsetY = 15;
         private bool _isDarkMode = false;
@@ -32,11 +32,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         public event EventHandler<int> ValueChanged;
 
         /// <summary>
-        /// Ö¸Ê¾µãÑÕÉ«
+        /// æŒ‡ç¤ºç‚¹é¢œè‰²
         /// </summary>
         [Browsable(true)]
-        [Category("Íâ¹Û")]
-        [Description("ĞıÅ¥Ö¸Ê¾µãµÄÑÕÉ«")]
+        [Category("å¤–è§‚")]
+        [Description("æ—‹é’®æŒ‡ç¤ºç‚¹çš„é¢œè‰²")]
         [DefaultValue(typeof(Color), "180, 50, 50")]
         public Color IndicatorColor
         {
@@ -52,11 +52,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         }
 
         /// <summary>
-        /// ÍâÈ¦Ö¸Ê¾ÏßÌõÑÕÉ«
+        /// å¤–åœˆæŒ‡ç¤ºçº¿æ¡é¢œè‰²
         /// </summary>
         [Browsable(true)]
-        [Category("Íâ¹Û")]
-        [Description("ÍâÈ¦Î»ÖÃÖ¸Ê¾ÏßÌõµÄÑÕÉ«")]
+        [Category("å¤–è§‚")]
+        [Description("å¤–åœˆä½ç½®æŒ‡ç¤ºçº¿æ¡çš„é¢œè‰²")]
         [DefaultValue(typeof(Color), "50, 150, 255")]
         public Color OuterIndicatorColor
         {
@@ -72,11 +72,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         }
 
         /// <summary>
-        /// ÆğÊ¼µã±êÊ¶ÑÕÉ«
+        /// èµ·å§‹ç‚¹æ ‡è¯†é¢œè‰²
         /// </summary>
         [Browsable(true)]
-        [Category("Íâ¹Û")]
-        [Description("ÆğÊ¼µã±êÊ¶µÄÑÕÉ«")]
+        [Category("å¤–è§‚")]
+        [Description("èµ·å§‹ç‚¹æ ‡è¯†çš„é¢œè‰²")]
         [DefaultValue(typeof(Color), "180, 180, 180")]
         public Color StartMarkerColor
         {
@@ -92,11 +92,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         }
 
         /// <summary>
-        /// ½áÊøµã±êÊ¶ÑÕÉ«
+        /// ç»“æŸç‚¹æ ‡è¯†é¢œè‰²
         /// </summary>
         [Browsable(true)]
-        [Category("Íâ¹Û")]
-        [Description("½áÊøµã±êÊ¶µÄÑÕÉ«")]
+        [Category("å¤–è§‚")]
+        [Description("ç»“æŸç‚¹æ ‡è¯†çš„é¢œè‰²")]
         [DefaultValue(typeof(Color), "120, 120, 120")]
         public Color EndMarkerColor
         {
@@ -112,11 +112,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         }
 
         /// <summary>
-        /// ÖĞĞÄÑÕÉ«
+        /// ä¸­å¿ƒé¢œè‰²
         /// </summary>
         [Browsable(true)]
-        [Category("Íâ¹Û")]
-        [Description("ĞıÅ¥ÖĞĞÄµÄ´¿É«Ìî³äÑÕÉ«")]
+        [Category("å¤–è§‚")]
+        [Description("æ—‹é’®ä¸­å¿ƒçš„çº¯è‰²å¡«å……é¢œè‰²")]
         [DefaultValue(typeof(Color), "200, 200, 200")]
         public Color CenterColor
         {
@@ -132,11 +132,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         }
 
         /// <summary>
-        /// ÖĞĞÄ±ß¿òÑÕÉ«
+        /// ä¸­å¿ƒè¾¹æ¡†é¢œè‰²
         /// </summary>
         [Browsable(true)]
-        [Category("Íâ¹Û")]
-        [Description("ĞıÅ¥ÖĞĞÄ±ß¿òµÄÑÕÉ«")]
+        [Category("å¤–è§‚")]
+        [Description("æ—‹é’®ä¸­å¿ƒè¾¹æ¡†çš„é¢œè‰²")]
         [DefaultValue(typeof(Color), "160, 160, 160")]
         public Color CenterBorderColor
         {
@@ -152,11 +152,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         }
 
         /// <summary>
-        /// ÎÄ×ÖÑÕÉ«
+        /// æ–‡å­—é¢œè‰²
         /// </summary>
         [Browsable(true)]
-        [Category("Íâ¹Û")]
-        [Description("ÏÔÊ¾ÎÄ×ÖµÄÑÕÉ«")]
+        [Category("å¤–è§‚")]
+        [Description("æ˜¾ç¤ºæ–‡å­—çš„é¢œè‰²")]
         [DefaultValue(typeof(Color), "160, 160, 160")]
         public Color TextColor
         {
@@ -172,11 +172,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         }
 
         /// <summary>
-        /// ÎÄ×Ö´óĞ¡
+        /// æ–‡å­—å¤§å°
         /// </summary>
         [Browsable(true)]
-        [Category("Íâ¹Û")]
-        [Description("ÏÔÊ¾ÎÄ×ÖµÄ×ÖÌå´óĞ¡")]
+        [Category("å¤–è§‚")]
+        [Description("æ˜¾ç¤ºæ–‡å­—çš„å­—ä½“å¤§å°")]
         [DefaultValue(6.3f)]
         public float TextSize
         {
@@ -192,11 +192,11 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         }
 
         /// <summary>
-        /// ÎÄ×Ö´¹Ö±Æ«ÒÆ
+        /// æ–‡å­—å‚ç›´åç§»
         /// </summary>
         [Browsable(true)]
-        [Category("Íâ¹Û")]
-        [Description("ÎÄ×ÖÏà¶ÔÓÚĞıÅ¥µÄ´¹Ö±Æ«ÒÆÁ¿")]
+        [Category("å¤–è§‚")]
+        [Description("æ–‡å­—ç›¸å¯¹äºæ—‹é’®çš„å‚ç›´åç§»é‡")]
         [DefaultValue(15)]
         public int TextOffsetY
         {
@@ -297,14 +297,14 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
             var center = new Point(rect.Width / 2, rect.Height / 2 - 10);
             var radius = Math.Min(rect.Width - 40, rect.Height - 40) / 2 - 15;
 
-            // ¼ÆËãµ±Ç°Öµ¶ÔÓ¦µÄ½Ç¶È (´Ó-225¶Èµ½45¶È£¬×Ü¹²270¶È)
+            // è®¡ç®—å½“å‰å€¼å¯¹åº”çš„è§’åº¦ (ä»-225åº¦åˆ°45åº¦ï¼Œæ€»å…±270åº¦)
             var angle = -225 + (270.0 * (_value - _minimum) / (_maximum - _minimum));
             var angleRad = angle * Math.PI / 180;
 
-            // »æÖÆÆğÊ¼ºÍ½áÊøµã±êÊ¶
+            // ç»˜åˆ¶èµ·å§‹å’Œç»“æŸç‚¹æ ‡è¯†
             DrawStartEndMarkers(g, center, radius);
 
-            // »æÖÆÍâÔ²»·ÒõÓ°
+            // ç»˜åˆ¶å¤–åœ†ç¯é˜´å½±
             if (!_isDarkMode)
             {
                 var shadowRect = new Rectangle(center.X - radius - 2, center.Y - radius - 2, (radius + 2) * 2, (radius + 2) * 2);
@@ -314,7 +314,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
                 }
             }
 
-            // »æÖÆÍâÔ²»· (¹ìµÀ) - ´Ó×óÏÂµ½ÓÒÏÂµÄ270¶È»¡
+            // ç»˜åˆ¶å¤–åœ†ç¯ (è½¨é“) - ä»å·¦ä¸‹åˆ°å³ä¸‹çš„270åº¦å¼§
             var trackRect = new Rectangle(center.X - radius, center.Y - radius, radius * 2, radius * 2);
             using (var pen = new Pen(_trackColor, 6))
             {
@@ -323,7 +323,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
                 g.DrawArc(pen, trackRect, -225, 270);
             }
 
-            // »æÖÆÖ÷½ø¶È»¡ - Ê¹ÓÃ¸üÃ÷ÏÔµÄÑÕÉ«
+            // ç»˜åˆ¶ä¸»è¿›åº¦å¼§ - ä½¿ç”¨æ›´æ˜æ˜¾çš„é¢œè‰²
             using (var pen = new Pen(_knobColor, 6))
             {
                 pen.StartCap = LineCap.Round;
@@ -332,17 +332,17 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
                     g.DrawArc(pen, trackRect, -225, (float)(angle + 225));
             }
 
-            // »æÖÆÍâÈ¦Î»ÖÃÖ¸Ê¾ÏßÌõ - µ¥²ãÉè¼Æ
+            // ç»˜åˆ¶å¤–åœˆä½ç½®æŒ‡ç¤ºçº¿æ¡ - å•å±‚è®¾è®¡
             DrawOuterPositionIndicator(g, center, radius, angle);
 
-            // »æÖÆ¼ò½àµÄÖĞĞÄÉè¼Æ
+            // ç»˜åˆ¶ç®€æ´çš„ä¸­å¿ƒè®¾è®¡
             DrawCenterDesign(g, center);
 
-            // »æÖÆĞıÅ¥Ö¸Ê¾µã£¨¸ü¿¿½ü±ßÔµ£¬Ê¹ÓÃ×Ô¶¨ÒåÑÕÉ«£©
+            // ç»˜åˆ¶æ—‹é’®æŒ‡ç¤ºç‚¹ï¼ˆæ›´é è¿‘è¾¹ç¼˜ï¼Œä½¿ç”¨è‡ªå®šä¹‰é¢œè‰²ï¼‰
             DrawKnobIndicator(g, center, radius, angleRad);
 
-            // »æÖÆÎÄ×Ö£¬Ê¹ÓÃÓÃ»§×Ô¶¨ÒåµÄÊôĞÔ
-            var labelText = "Í¸Ã÷¶È";
+            // ç»˜åˆ¶æ–‡å­—ï¼Œä½¿ç”¨ç”¨æˆ·è‡ªå®šä¹‰çš„å±æ€§
+            var labelText = "é€æ˜åº¦";
             var valueText = _value.ToString();
             var combinedText = $"{labelText} {valueText}";
 
@@ -354,7 +354,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
                 g.DrawString(combinedText, font, brush, textRect);
             }
 
-            // »æÖÆ¿Ì¶È±ê¼Ç
+            // ç»˜åˆ¶åˆ»åº¦æ ‡è®°
             DrawScaleMarks(g, center, radius);
         }
 
@@ -363,7 +363,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
             var centerRadius = 25;
             var centerRect = new Rectangle(center.X - centerRadius, center.Y - centerRadius, centerRadius * 2, centerRadius * 2);
 
-            // ÖĞĞÄÔ²ÒõÓ°
+            // ä¸­å¿ƒåœ†é˜´å½±
             if (!_isDarkMode)
             {
                 var shadowCenterRect = new Rectangle(center.X - centerRadius - 2, center.Y - centerRadius - 2, (centerRadius + 2) * 2, (centerRadius + 2) * 2);
@@ -373,44 +373,44 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
                 }
             }
 
-            // »æÖÆ´¿É«±³¾°£¬Ìæ»»Ô­ÓĞµÄ½¥±äĞ§¹û
+            // ç»˜åˆ¶çº¯è‰²èƒŒæ™¯ï¼Œæ›¿æ¢åŸæœ‰çš„æ¸å˜æ•ˆæœ
             using (var centerBrush = new SolidBrush(_centerColor))
             {
                 g.FillEllipse(centerBrush, centerRect);
             }
 
-            // ÖĞĞÄÔ²±ß¿ò - Ê¹ÓÃÓÃ»§×Ô¶¨ÒåÑÕÉ«
+            // ä¸­å¿ƒåœ†è¾¹æ¡† - ä½¿ç”¨ç”¨æˆ·è‡ªå®šä¹‰é¢œè‰²
             using (var pen = new Pen(_centerBorderColor, 2))
             {
                 g.DrawEllipse(pen, centerRect);
             }
 
-            // ÒÆ³ıËùÓĞ½¥±äĞ§¹û¡¢¸ß¹âĞ§¹û¡¢¼¸ºÎÍ¼°¸ºÍ×°ÊÎµã - ±£³Ö´¿¾»µÄÖĞĞÄÉè¼Æ
+            // ç§»é™¤æ‰€æœ‰æ¸å˜æ•ˆæœã€é«˜å…‰æ•ˆæœã€å‡ ä½•å›¾æ¡ˆå’Œè£…é¥°ç‚¹ - ä¿æŒçº¯å‡€çš„ä¸­å¿ƒè®¾è®¡
         }
 
         private void DrawStartEndMarkers(Graphics g, Point center, int radius)
         {
-            // ¼ÆËã×óÏÂ½ÇÆğÊ¼µãºÍÓÒÏÂ½Ç½áÊøµãÎ»ÖÃ
-            var startAngleRad = -225 * Math.PI / 180; // ×óÏÂ½Ç
-            var endAngleRad = 45 * Math.PI / 180;     // ÓÒÏÂ½Ç
+            // è®¡ç®—å·¦ä¸‹è§’èµ·å§‹ç‚¹å’Œå³ä¸‹è§’ç»“æŸç‚¹ä½ç½®
+            var startAngleRad = -225 * Math.PI / 180; // å·¦ä¸‹è§’
+            var endAngleRad = 45 * Math.PI / 180;     // å³ä¸‹è§’
 
             var markerRadius = radius + 20;
 
-            // ÆğÊ¼µãÎ»ÖÃ
+            // èµ·å§‹ç‚¹ä½ç½®
             var startX = center.X + markerRadius * Math.Cos(startAngleRad);
             var startY = center.Y + markerRadius * Math.Sin(startAngleRad);
 
-            // ½áÊøµãÎ»ÖÃ  
+            // ç»“æŸç‚¹ä½ç½®  
             var endX = center.X + markerRadius * Math.Cos(endAngleRad);
             var endY = center.Y + markerRadius * Math.Sin(endAngleRad);
 
-            // »æÖÆÆğÊ¼µã·ûºÅ£¨Ğ¡µã£©- Ê¹ÓÃÓÃ»§×Ô¶¨ÒåÑÕÉ«
+            // ç»˜åˆ¶èµ·å§‹ç‚¹ç¬¦å·ï¼ˆå°ç‚¹ï¼‰- ä½¿ç”¨ç”¨æˆ·è‡ªå®šä¹‰é¢œè‰²
             using (var brush = new SolidBrush(_startMarkerColor))
             {
                 g.FillEllipse(brush, (float)startX - 3, (float)startY - 3, 6, 6);
             }
 
-            // »æÖÆ½áÊøµã·ûºÅ£¨ÉÔ´óµÄµã£©- Ê¹ÓÃÓÃ»§×Ô¶¨ÒåÑÕÉ«
+            // ç»˜åˆ¶ç»“æŸç‚¹ç¬¦å·ï¼ˆç¨å¤§çš„ç‚¹ï¼‰- ä½¿ç”¨ç”¨æˆ·è‡ªå®šä¹‰é¢œè‰²
             using (var brush = new SolidBrush(_endMarkerColor))
             {
                 g.FillEllipse(brush, (float)endX - 4, (float)endY - 4, 8, 8);
@@ -419,12 +419,12 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
 
         private void DrawKnobIndicator(Graphics g, Point center, int radius, double angleRad)
         {
-            // µ÷ÕûÖ¸Ê¾µãÎ»ÖÃ£º´Ó radius + 5 ¸ÄÎª radius + 6
-            var indicatorRadius = radius + 6; // ÉÔÎ¢ÍùÍâÒÆ¶¯Ò»µã
+            // è°ƒæ•´æŒ‡ç¤ºç‚¹ä½ç½®ï¼šä» radius + 5 æ”¹ä¸º radius + 6
+            var indicatorRadius = radius + 6; // ç¨å¾®å¾€å¤–ç§»åŠ¨ä¸€ç‚¹
             var indicatorX = center.X + indicatorRadius * Math.Cos(angleRad);
             var indicatorY = center.Y + indicatorRadius * Math.Sin(angleRad);
 
-            // Ö¸Ê¾µãÒõÓ°
+            // æŒ‡ç¤ºç‚¹é˜´å½±
             if (!_isDarkMode)
             {
                 using (var shadowBrush = new SolidBrush(Color.FromArgb(80, 0, 0, 0)))
@@ -434,15 +434,15 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
                 }
             }
 
-            // Ö±½Ó»æÖÆÖ¸Ê¾µãÖ÷Ìå£¨Ê¹ÓÃÓÃ»§×Ô¶¨ÒåÑÕÉ«£©
+            // ç›´æ¥ç»˜åˆ¶æŒ‡ç¤ºç‚¹ä¸»ä½“ï¼ˆä½¿ç”¨ç”¨æˆ·è‡ªå®šä¹‰é¢œè‰²ï¼‰
             using (var brush = new SolidBrush(_indicatorColor))
             {
                 var indicatorRect = new Rectangle((int)indicatorX - 2, (int)indicatorY - 2, 4, 4);
                 g.FillEllipse(brush, indicatorRect);
             }
 
-            // ÔÚÖ¸Ê¾µãÄÚ²¿Ìí¼ÓÒ»¸öĞ¡µÄ¸ßÁÁµãÒÔÔöÇ¿Á¢Ìå¸Ğ
-            using (var brush = new SolidBrush(Color.FromArgb(200, 255, 255, 255))) // °×É«¸ß¹â
+            // åœ¨æŒ‡ç¤ºç‚¹å†…éƒ¨æ·»åŠ ä¸€ä¸ªå°çš„é«˜äº®ç‚¹ä»¥å¢å¼ºç«‹ä½“æ„Ÿ
+            using (var brush = new SolidBrush(Color.FromArgb(200, 255, 255, 255))) // ç™½è‰²é«˜å…‰
             {
                 var highlightRect = new Rectangle((int)indicatorX, (int)indicatorY, 1, 1);
                 g.FillEllipse(brush, highlightRect);
@@ -453,7 +453,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         {
             using (var pen = new Pen(Color.FromArgb(80, _textColor.R, _textColor.G, _textColor.B), 1.5f))
             {
-                // ÔÚÖ÷ÒªÎ»ÖÃ»æÖÆ¿Ì¶È±ê¼Ç
+                // åœ¨ä¸»è¦ä½ç½®ç»˜åˆ¶åˆ»åº¦æ ‡è®°
                 for (int i = 0; i <= 4; i++)
                 {
                     var angle = -225 + (270.0 * i / 4);
@@ -472,10 +472,10 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
 
         private void DrawOuterPositionIndicator(Graphics g, Point center, int radius, double currentAngle)
         {
-            // Ö»ÓĞµ±Ç°½Ç¶È´óÓÚÆğÊ¼½Ç¶ÈÊ±²Å»æÖÆÍâÈ¦Î»ÖÃÖ¸Ê¾ÏßÌõ
+            // åªæœ‰å½“å‰è§’åº¦å¤§äºèµ·å§‹è§’åº¦æ—¶æ‰ç»˜åˆ¶å¤–åœˆä½ç½®æŒ‡ç¤ºçº¿æ¡
             if (currentAngle <= -225) return;
 
-            var outerRadius = radius + 12; // ÊÊÖĞµÄ¾àÀë
+            var outerRadius = radius + 12; // é€‚ä¸­çš„è·ç¦»
             var startAngle = -225;
             var sweepAngle = currentAngle - startAngle;
 
@@ -483,7 +483,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
             {
                 var outerRect = new Rectangle(center.X - outerRadius, center.Y - outerRadius, outerRadius * 2, outerRadius * 2);
 
-                // ¼òµ¥µ¥²ãÍâÈ¦Ö¸Ê¾ÏßÌõ - ÏßÌõ²»ÒªÌ«¿í
+                // ç®€å•å•å±‚å¤–åœˆæŒ‡ç¤ºçº¿æ¡ - çº¿æ¡ä¸è¦å¤ªå®½
                 using (var pen = new Pen(_outerIndicatorColor, 4))
                 {
                     pen.StartCap = LineCap.Round;
@@ -497,14 +497,14 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
         {
             base.OnMouseEnter(e);
             _isHovering = true;
-            // ÒÆ³ıInvalidate()£¬²»ĞèÒªÖØ»æĞüÍ£Ğ§¹û
+            // ç§»é™¤Invalidate()ï¼Œä¸éœ€è¦é‡ç»˜æ‚¬åœæ•ˆæœ
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
             _isHovering = false;
-            // ÒÆ³ıInvalidate()£¬²»ĞèÒªÖØ»æĞüÍ£Ğ§¹û
+            // ç§»é™¤Invalidate()ï¼Œä¸éœ€è¦é‡ç»˜æ‚¬åœæ•ˆæœ
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -515,12 +515,12 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
                 _isDragging = true;
                 _lastMousePosition = e.Location;
 
-                // ¸ù¾İµ±Ç°Öµ³õÊ¼»¯_lastValidAngle
+                // æ ¹æ®å½“å‰å€¼åˆå§‹åŒ–_lastValidAngle
                 _lastValidAngle = -225 + (270.0 * (_value - _minimum) / (_maximum - _minimum));
 
                 UpdateValueFromMouse(e.Location);
                 Capture = true;
-                Invalidate(); // Ö»ÔÚÍÏ×§Ê±ÖØ»æ
+                Invalidate(); // åªåœ¨æ‹–æ‹½æ—¶é‡ç»˜
             }
         }
 
@@ -540,7 +540,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
             {
                 _isDragging = false;
                 Capture = false;
-                Invalidate(); // Ö»ÔÚÍÏ×§½áÊøÊ±ÖØ»æ
+                Invalidate(); // åªåœ¨æ‹–æ‹½ç»“æŸæ—¶é‡ç»˜
             }
         }
 
@@ -557,66 +557,66 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
             var dx = mousePos.X - center.X;
             var dy = mousePos.Y - center.Y;
 
-            // ±ÜÃâ³ıÁã´íÎóºÍ´¦ÀíÖĞĞÄµã
+            // é¿å…é™¤é›¶é”™è¯¯å’Œå¤„ç†ä¸­å¿ƒç‚¹
             if (Math.Abs(dx) < 1 && Math.Abs(dy) < 1) return;
 
             var angle = Math.Atan2(dy, dx) * 180 / Math.PI;
 
-            // ½«½Ç¶È×ª»»Îª0-360·¶Î§
+            // å°†è§’åº¦è½¬æ¢ä¸º0-360èŒƒå›´
             if (angle < 0) angle += 360;
 
-            // ÍêÈ«ÖØĞÂÉè¼Æ½Ç¶ÈÓ³ÉäÂß¼­ - ĞŞ¸´ÌøÔ¾ÎÊÌâ
+            // å®Œå…¨é‡æ–°è®¾è®¡è§’åº¦æ˜ å°„é€»è¾‘ - ä¿®å¤è·³è·ƒé—®é¢˜
             double normalizedAngle;
 
-            // ĞıÅ¥ÓĞĞ§·¶Î§£º-225¡ã µ½ +45¡ã (¹²270¡ã)
-            // ¶ÔÓ¦Êó±êÎ»ÖÃ£º×óÏÂ½Ç(-225¡ã) µ½ ÓÒÏÂ½Ç(45¡ã)
+            // æ—‹é’®æœ‰æ•ˆèŒƒå›´ï¼š-225Â° åˆ° +45Â° (å…±270Â°)
+            // å¯¹åº”é¼ æ ‡ä½ç½®ï¼šå·¦ä¸‹è§’(-225Â°) åˆ° å³ä¸‹è§’(45Â°)
 
             if (angle >= 0 && angle <= 45)
             {
-                // ÓÒÏÂÇøÓò£º0¡ã-45¡ã -> Ö±½Ó¶ÔÓ¦ĞıÅ¥µÄ0¡ã-45¡ã(¸ßÖµÇøÓò)
+                // å³ä¸‹åŒºåŸŸï¼š0Â°-45Â° -> ç›´æ¥å¯¹åº”æ—‹é’®çš„0Â°-45Â°(é«˜å€¼åŒºåŸŸ)
                 normalizedAngle = angle;
             }
             else if (angle > 45 && angle < 135)
             {
-                // ÓÒ²à½ûÓÃÇøÓò£ºÖÇÄÜÑ¡Ôñ±ß½ç£¬·ÀÖ¹ÌøÔ¾
+                // å³ä¾§ç¦ç”¨åŒºåŸŸï¼šæ™ºèƒ½é€‰æ‹©è¾¹ç•Œï¼Œé˜²æ­¢è·³è·ƒ
                 if (_isDragging)
                 {
-                    // ÍÏ×§Ê±£¬Ñ¡Ôñ¸ü½Ó½üÉÏ´ÎÎ»ÖÃµÄ±ß¼Ê
+                    // æ‹–æ‹½æ—¶ï¼Œé€‰æ‹©æ›´æ¥è¿‘ä¸Šæ¬¡ä½ç½®çš„è¾¹é™…
                     var distTo45 = Math.Min(Math.Abs(angle - 45), Math.Abs(angle - (45 + 360)));
                     var distTo225 = Math.Min(Math.Abs(angle + 225), Math.Abs(angle - (225 - 360)));
                     normalizedAngle = distTo45 < distTo225 ? 45 : -225;
                 }
                 else
                 {
-                    // ·ÇÍÏ×§Ê±±£³Ö×î´óÖµ
+                    // éæ‹–æ‹½æ—¶ä¿æŒæœ€å¤§å€¼
                     normalizedAngle = 45;
                 }
             }
             else if (angle >= 135 && angle <= 225)
             {
-                // ÉÏ·½µ½×ó²àÇøÓò£º¶ÔÓ¦ĞıÅ¥µÄ-225¡ã(×îĞ¡Öµ)
+                // ä¸Šæ–¹åˆ°å·¦ä¾§åŒºåŸŸï¼šå¯¹åº”æ—‹é’®çš„-225Â°(æœ€å°å€¼)
                 normalizedAngle = -225;
             }
             else if (angle > 225 && angle < 315)
             {
-                // ×óÏÂ·½ÇøÓò£º225¡ã-315¡ã -> ÏßĞÔÓ³Éäµ½-225¡ãµ½-45¡ã
-                // Õâ¸öÇøÓò¶ÔÓ¦´Ó×îĞ¡Öµµ½ÖĞµÈÖµµÄ¹ı¶É
+                // å·¦ä¸‹æ–¹åŒºåŸŸï¼š225Â°-315Â° -> çº¿æ€§æ˜ å°„åˆ°-225Â°åˆ°-45Â°
+                // è¿™ä¸ªåŒºåŸŸå¯¹åº”ä»æœ€å°å€¼åˆ°ä¸­ç­‰å€¼çš„è¿‡æ¸¡
                 var mappedRange = (angle - 225) / 90.0; // 0.0 to 1.0
-                normalizedAngle = -225 + mappedRange * 180; // -225¡ã to -45¡ã
+                normalizedAngle = -225 + mappedRange * 180; // -225Â° to -45Â°
             }
             else // angle >= 315 && angle < 360
             {
-                // ÏÂ·½ÇøÓò£º315¡ã-360¡ã -> ÏßĞÔÓ³Éäµ½-45¡ãµ½0¡ã
-                // Õâ¸öÇøÓò¶ÔÓ¦´ÓÖĞµÈÖµµ½¸ßÖµµÄ¹ı¶É
+                // ä¸‹æ–¹åŒºåŸŸï¼š315Â°-360Â° -> çº¿æ€§æ˜ å°„åˆ°-45Â°åˆ°0Â°
+                // è¿™ä¸ªåŒºåŸŸå¯¹åº”ä»ä¸­ç­‰å€¼åˆ°é«˜å€¼çš„è¿‡æ¸¡
                 var mappedRange = (angle - 315) / 45.0; // 0.0 to 1.0  
-                normalizedAngle = -45 + mappedRange * 45; // -45¡ã to 0¡ã
+                normalizedAngle = -45 + mappedRange * 45; // -45Â° to 0Â°
             }
 
-            // ÍÏ×§Ê±µÄÌøÔ¾¼ì²âºÍ±£»¤
+            // æ‹–æ‹½æ—¶çš„è·³è·ƒæ£€æµ‹å’Œä¿æŠ¤
             if (_isDragging)
             {
                 var angleDiff = Math.Abs(normalizedAngle - _lastValidAngle);
-                // Èç¹û½Ç¶È±ä»¯Ì«´ó(³¬¹ı180¶È)£¬¿ÉÄÜÊÇÌøÔ¾£¬Ê¹ÓÃ½¥½øµ÷Õû
+                // å¦‚æœè§’åº¦å˜åŒ–å¤ªå¤§(è¶…è¿‡180åº¦)ï¼Œå¯èƒ½æ˜¯è·³è·ƒï¼Œä½¿ç”¨æ¸è¿›è°ƒæ•´
                 if (angleDiff > 180)
                 {
                     var direction = normalizedAngle > _lastValidAngle ? 1 : -1;
@@ -624,22 +624,22 @@ namespace StarResonanceDpsAnalysis.WinForm.Control
                 }
             }
 
-            // È·±£½Ç¶ÈÔÚÓĞĞ§·¶Î§ÄÚ
+            // ç¡®ä¿è§’åº¦åœ¨æœ‰æ•ˆèŒƒå›´å†…
             normalizedAngle = Math.Max(-225, Math.Min(45, normalizedAngle));
 
-            // ¸üĞÂÉÏ´ÎÓĞĞ§½Ç¶È
+            // æ›´æ–°ä¸Šæ¬¡æœ‰æ•ˆè§’åº¦
             _lastValidAngle = normalizedAngle;
 
-            // ¼ÆËã¶ÔÓ¦µÄÊıÖµ
+            // è®¡ç®—å¯¹åº”çš„æ•°å€¼
             var progress = (normalizedAngle + 225) / 270.0; // 0.0 to 1.0
             var newValue = _minimum + (int)Math.Round(progress * (_maximum - _minimum));
 
-            // È·±£ÊıÖµÔÚÓĞĞ§·¶Î§ÄÚ
+            // ç¡®ä¿æ•°å€¼åœ¨æœ‰æ•ˆèŒƒå›´å†…
             newValue = Math.Max(_minimum, Math.Min(_maximum, newValue));
 
-            // Ìí¼Óµ÷ÊÔÊä³ö£¬°ïÖú·ÖÎöÎÊÌâ
+            // æ·»åŠ è°ƒè¯•è¾“å‡ºï¼Œå¸®åŠ©åˆ†æé—®é¢˜
 #if DEBUG
-            Console.WriteLine($"Mouse: ({mousePos.X}, {mousePos.Y}), Angle: {angle:F1}¡ã, Normalized: {normalizedAngle:F1}¡ã, Progress: {progress:F2}, Value: {newValue}");
+            Console.WriteLine($"Mouse: ({mousePos.X}, {mousePos.Y}), Angle: {angle:F1}Â°, Normalized: {normalizedAngle:F1}Â°, Progress: {progress:F2}, Value: {newValue}");
 #endif
 
             Value = newValue;

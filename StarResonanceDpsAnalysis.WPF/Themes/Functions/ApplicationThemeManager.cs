@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using StarResonanceDpsAnalysis.WPF.Themes.SystemThemes;
 
 namespace StarResonanceDpsAnalysis.WPF.Themes;

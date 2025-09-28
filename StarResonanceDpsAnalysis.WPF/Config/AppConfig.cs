@@ -10,13 +10,13 @@ using KeyBinding = StarResonanceDpsAnalysis.WPF.Models.KeyBinding;
 namespace StarResonanceDpsAnalysis.WPF.Config;
 
 /// <summary>
-/// Ó¦ÓÃÅäÖÃÀà
-/// ¼¯³ÉÁËÅäÖÃ¹ÜÀíÆ÷¹¦ÄÜ£¬Ö§³ÖINIÎÄ¼ş³Ö¾Ã»¯ºÍÊôĞÔ±ä¸üÍ¨Öª
+/// åº”ç”¨é…ç½®ç±»
+/// é›†æˆäº†é…ç½®ç®¡ç†å™¨åŠŸèƒ½ï¼Œæ”¯æŒINIæ–‡ä»¶æŒä¹…åŒ–å’Œå±æ€§å˜æ›´é€šçŸ¥
 /// </summary>
 public partial class AppConfig : ObservableObject
 {
     /// <summary>
-    /// êÇ³Æ
+    /// æ˜µç§°
     /// </summary>
     [ObservableProperty]
     private string _nickname = string.Empty;
@@ -25,73 +25,73 @@ public partial class AppConfig : ObservableObject
     private ModifierKeys _testModifier = ModifierKeys.None;
 
     /// <summary>
-    /// Ö°Òµ
+    /// èŒä¸š
     /// </summary>
     [ObservableProperty]
     private Classes _classes;
 
     /// <summary>
-    /// ÓÃ»§UID
+    /// ç”¨æˆ·UID
     /// </summary>
     [ObservableProperty]
     private long _uid;
 
     /// <summary>
-    /// DPSÉËº¦ÀàĞÍÏÔÊ¾
+    /// DPSä¼¤å®³ç±»å‹æ˜¾ç¤º
     /// </summary>
     [ObservableProperty]
     private NumberDisplayMode _damageDisplayType;
 
     /// <summary>
-    /// Õ½¶·Á¦
+    /// æˆ˜æ–—åŠ›
     /// </summary>
     [ObservableProperty]
     private int _combatPower;
 
     /// <summary>
-    /// Õ½¶·¼ÆÊ±Çå³ıÑÓ³Ù£¨Ãë£©
+    /// æˆ˜æ–—è®¡æ—¶æ¸…é™¤å»¶è¿Ÿï¼ˆç§’ï¼‰
     /// </summary>
     [ObservableProperty]
     private int _combatTimeClearDelay;
 
     /// <summary>
-    /// ÊÇ·ñ¹ıÍ¼Çå¿ÕÈ«³Ì¼ÇÂ¼
+    /// æ˜¯å¦è¿‡å›¾æ¸…ç©ºå…¨ç¨‹è®°å½•
     /// </summary>
     [ObservableProperty]
     private int _clearLogAfterTeleport;
 
     /// <summary>
-    /// ²»Í¸Ã÷¶È£¨0-100£©, Ä¬ÈÏ100, 0ÎªÈ«Í¸Ã÷
+    /// ä¸é€æ˜åº¦ï¼ˆ0-100ï¼‰, é»˜è®¤100, 0ä¸ºå…¨é€æ˜
     /// </summary>
     [ObservableProperty]
     private double _opacity;
 
     /// <summary>
-    /// ÊÇ·ñÊ¹ÓÃÇ³É«Ä£Ê½
+    /// æ˜¯å¦ä½¿ç”¨æµ…è‰²æ¨¡å¼
     /// </summary>
     [ObservableProperty]
     private string _theme = "Light";
 
     /// <summary>
-    /// Æô¶¯Ê±µÄ´°¿Ú×´Ì¬
+    /// å¯åŠ¨æ—¶çš„çª—å£çŠ¶æ€
     /// </summary>
     [ObservableProperty]
     private Rectangle? _startUpState;
 
     /// <summary>
-    /// Ê×Ñ¡ÍøÂçÊÊÅäÆ÷
+    /// é¦–é€‰ç½‘ç»œé€‚é…å™¨
     /// </summary>
     [ObservableProperty]
     private NetworkAdapterInfo? _preferredNetworkAdapter;
 
     /// <summary>
-    /// Êó±ê´©Í¸¿ì½İ¼üÊı¾İ
+    /// é¼ æ ‡ç©¿é€å¿«æ·é”®æ•°æ®
     /// </summary>
     [ObservableProperty]
     private KeyBinding _mouseThroughShortcut = new(Key.F6, ModifierKeys.None);
 
     /// <summary>
-    /// Çå¿ÕÊı¾İ¿ì½İ¼üÊı¾İ
+    /// æ¸…ç©ºæ•°æ®å¿«æ·é”®æ•°æ®
     /// </summary>
     [ObservableProperty]
     private KeyBinding _clearDataShortcut = new(Key.F9, ModifierKeys.None);

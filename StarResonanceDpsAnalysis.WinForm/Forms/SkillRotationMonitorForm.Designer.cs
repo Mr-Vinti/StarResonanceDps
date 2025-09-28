@@ -125,7 +125,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
             select1.SelectionStart = 5;
             select1.Size = new Size(289, 50);
             select1.TabIndex = 33;
-            select1.Text = "Íæ¼ÒÑ¡Ôñ£º";
+            select1.Text = "ç©å®¶é€‰æ‹©ï¼š";
             // 
             // button3
             // 
@@ -133,7 +133,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
             button3.Name = "button3";
             button3.Size = new Size(153, 50);
             button3.TabIndex = 34;
-            button3.Text = "¿ªÊ¼¼ì²âÑ­»·";
+            button3.Text = "å¼€å§‹æ£€æµ‹å¾ªç¯";
             button3.Type = AntdUI.TTypeMini.Primary;
             // 
             // button4
@@ -142,7 +142,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
             button4.Name = "button4";
             button4.Size = new Size(153, 50);
             button4.TabIndex = 35;
-            button4.Text = "Çå¿ÕÀúÊ·";
+            button4.Text = "æ¸…ç©ºå†å²";
             button4.Type = AntdUI.TTypeMini.Primary;
             // 
             // SkillRotationMonitorForm
@@ -161,7 +161,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Forms
             MaximizeBox = false;
             Name = "SkillRotationMonitorForm";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "¼¼ÄÜÊÍ·ÅÑ­»·¼à²â";
+            Text = "æŠ€èƒ½é‡Šæ”¾å¾ªç¯ç›‘æµ‹";
             pageHeader1.ResumeLayout(false);
             panel6.ResumeLayout(false);
             ResumeLayout(false);

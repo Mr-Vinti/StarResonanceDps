@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using StarResonanceDpsAnalysis.WPF.ViewModels;
 
 namespace StarResonanceDpsAnalysis.WPF.Views;

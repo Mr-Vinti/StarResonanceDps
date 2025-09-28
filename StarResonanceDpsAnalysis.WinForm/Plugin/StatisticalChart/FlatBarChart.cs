@@ -3,11 +3,11 @@ using System.Drawing.Drawing2D;
 namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 {
     /// <summary>
-    /// ±âÆ½»¯ÌõĞÎÍ¼¿Ø¼ş
+    /// æ‰å¹³åŒ–æ¡å½¢å›¾æ§ä»¶
     /// </summary>
     public class FlatBarChart : UserControl
     {
-        #region ×Ö¶ÎºÍÊôĞÔ
+        #region å­—æ®µå’Œå±æ€§
 
         private readonly List<BarChartData> _data = new();
         private bool _isDarkTheme = false;
@@ -16,24 +16,24 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         private string _yAxisLabel = "";
         private bool _showLegend = true;
 
-        // ±ß¾àÉèÖÃ - ¼õÉÙ±ß¾àÒÔÔö´óÍ¼±íÕ¼±È
-        private const int PaddingLeft = 35;   // ´Ó60¼õÉÙµ½35
-        private const int PaddingRight = 15;  // ´Ó20¼õÉÙµ½15
-        private const int PaddingTop = 25;    // ´Ó10Ôö¼Óµ½25£¬ÒÔÌá¹©¸ü¶à¿Õ¼ä¸øÌõĞÎÉÏ·½µÄÎÄ±¾±êÇ©
-        private const int PaddingBottom = 50; // ´Ó100¼õÉÙµ½50
+        // è¾¹è·è®¾ç½® - å‡å°‘è¾¹è·ä»¥å¢å¤§å›¾è¡¨å æ¯”
+        private const int PaddingLeft = 35;   // ä»60å‡å°‘åˆ°35
+        private const int PaddingRight = 15;  // ä»20å‡å°‘åˆ°15
+        private const int PaddingTop = 25;    // ä»10å¢åŠ åˆ°25ï¼Œä»¥æä¾›æ›´å¤šç©ºé—´ç»™æ¡å½¢ä¸Šæ–¹çš„æ–‡æœ¬æ ‡ç­¾
+        private const int PaddingBottom = 50; // ä»100å‡å°‘åˆ°50
 
-        // ÏÖ´ú»¯ÅäÉ«
+        // ç°ä»£åŒ–é…è‰²
         private readonly Color[] _colors = {
-            Color.FromArgb(74, 144, 226),   // À¶
-            Color.FromArgb(126, 211, 33),   // ÂÌ
-            Color.FromArgb(245, 166, 35),   // ³È
-            Color.FromArgb(208, 2, 27),     // ºì
-            Color.FromArgb(144, 19, 254),   // ×Ï
-            Color.FromArgb(80, 227, 194),   // Çà
-            Color.FromArgb(184, 233, 134),  // Ç³ÂÌ
-            Color.FromArgb(75, 213, 238),   // ÌìÀ¶
-            Color.FromArgb(248, 231, 28),   // »Æ
-            Color.FromArgb(189, 16, 224)    // Æ·ºì
+            Color.FromArgb(74, 144, 226),   // è“
+            Color.FromArgb(126, 211, 33),   // ç»¿
+            Color.FromArgb(245, 166, 35),   // æ©™
+            Color.FromArgb(208, 2, 27),     // çº¢
+            Color.FromArgb(144, 19, 254),   // ç´«
+            Color.FromArgb(80, 227, 194),   // é’
+            Color.FromArgb(184, 233, 134),  // æµ…ç»¿
+            Color.FromArgb(75, 213, 238),   // å¤©è“
+            Color.FromArgb(248, 231, 28),   // é»„
+            Color.FromArgb(189, 16, 224)    // å“çº¢
         };
 
         public bool IsDarkTheme
@@ -89,7 +89,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region ¹¹Ôìº¯Êı
+        #region æ„é€ å‡½æ•°
 
         public FlatBarChart()
         {
@@ -101,7 +101,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region Êı¾İ¹ÜÀí
+        #region æ•°æ®ç®¡ç†
 
         public void SetData(List<(string Label, double Value)> data)
         {
@@ -128,7 +128,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region Ö÷ÌâÉèÖÃ
+        #region ä¸»é¢˜è®¾ç½®
 
         private void ApplyTheme()
         {
@@ -146,7 +146,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region »æÖÆ·½·¨
+        #region ç»˜åˆ¶æ–¹æ³•
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -156,7 +156,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            // Çå³ı±³¾°
+            // æ¸…é™¤èƒŒæ™¯
             g.Clear(BackColor);
 
             if (_data.Count == 0)
@@ -165,31 +165,31 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                 return;
             }
 
-            // ¼ÆËã×î´óÖµ
+            // è®¡ç®—æœ€å¤§å€¼
             var maxValue = _data.Max(d => d.Value);
             if (maxValue <= 0) return;
 
-            // ¼ÆËãÍ¼±íÇøÓò
+            // è®¡ç®—å›¾è¡¨åŒºåŸŸ
             var chartRect = new Rectangle(PaddingLeft, PaddingTop,
                                         Width - PaddingLeft - PaddingRight,
                                         Height - PaddingTop - PaddingBottom);
 
-            // »æÖÆÍø¸ñ
+            // ç»˜åˆ¶ç½‘æ ¼
             DrawGrid(g, chartRect, maxValue);
 
-            // »æÖÆ×ø±êÖá
+            // ç»˜åˆ¶åæ ‡è½´
             DrawAxes(g, chartRect, maxValue);
 
-            // »æÖÆÖù×´Ìõ
+            // ç»˜åˆ¶æŸ±çŠ¶æ¡
             DrawBars(g, chartRect, maxValue);
 
-            // »æÖÆ±êÌâ£¨Èç¹ûÓĞ£©
+            // ç»˜åˆ¶æ ‡é¢˜ï¼ˆå¦‚æœæœ‰ï¼‰
             DrawTitle(g);
         }
 
         private void DrawNoDataMessage(Graphics g)
         {
-            var message = "ÔİÎŞÊı¾İ";
+            var message = "æš‚æ— æ•°æ®";
             var font = new Font("Microsoft YaHei", 12, FontStyle.Regular);
             var brush = new SolidBrush(_isDarkTheme ? Color.Gray : Color.DarkGray);
 
@@ -208,8 +208,8 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
             var gridColor = _isDarkTheme ? Color.FromArgb(64, 64, 64) : Color.FromArgb(230, 230, 230);
             using var gridPen = new Pen(gridColor, 1);
 
-            // »æÖÆË®Æ½Íø¸ñÏß - ¼õÉÙÍø¸ñÏßÊıÁ¿
-            for (int i = 0; i <= 5; i++) // ´Ó10Ìõ¼õÉÙµ½5Ìõ
+            // ç»˜åˆ¶æ°´å¹³ç½‘æ ¼çº¿ - å‡å°‘ç½‘æ ¼çº¿æ•°é‡
+            for (int i = 0; i <= 5; i++) // ä»10æ¡å‡å°‘åˆ°5æ¡
             {
                 var y = chartRect.Y + (float)chartRect.Height * i / 5;
                 g.DrawLine(gridPen, chartRect.X, y, chartRect.Right, y);
@@ -221,15 +221,15 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
             var axisColor = _isDarkTheme ? Color.FromArgb(128, 128, 128) : Color.FromArgb(180, 180, 180);
             using var axisPen = new Pen(axisColor, 1);
             using var textBrush = new SolidBrush(ForeColor);
-            using var font = new Font("Microsoft YaHei", 7); // ´Ó9¼õÉÙµ½7
+            using var font = new Font("Microsoft YaHei", 7); // ä»9å‡å°‘åˆ°7
 
-            // »æÖÆXÖá
+            // ç»˜åˆ¶Xè½´
             g.DrawLine(axisPen, chartRect.X, chartRect.Bottom, chartRect.Right, chartRect.Bottom);
 
-            // »æÖÆYÖá
+            // ç»˜åˆ¶Yè½´
             g.DrawLine(axisPen, chartRect.X, chartRect.Y, chartRect.X, chartRect.Bottom);
 
-            // XÖá±êÇ©£¨ÀàĞÍ±êÇ©£©
+            // Xè½´æ ‡ç­¾ï¼ˆç±»å‹æ ‡ç­¾ï¼‰
             var barWidth = (float)chartRect.Width / _data.Count;
             for (int i = 0; i < _data.Count; i++)
             {
@@ -238,30 +238,30 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
                 var size = g.MeasureString(text, font);
 
-                // ¼ò»¯±êÇ©ÏÔÊ¾£¬Ö±½ÓË®Æ½ÏÔÊ¾¶ø²»Ğı×ª
+                // ç®€åŒ–æ ‡ç­¾æ˜¾ç¤ºï¼Œç›´æ¥æ°´å¹³æ˜¾ç¤ºè€Œä¸æ—‹è½¬
                 var textX = x - size.Width / 2;
-                var textY = chartRect.Bottom + 5; // ¼õÉÙ¼ä¾à
+                var textY = chartRect.Bottom + 5; // å‡å°‘é—´è·
 
                 g.DrawString(text, font, textBrush, textX, textY);
             }
 
-            // YÖá±êÇ© - ¼ò»¯ÏÔÊ¾
-            for (int i = 0; i <= 5; i++) // ´Ó10¸ö¿Ì¶È¼õÉÙµ½5¸ö
+            // Yè½´æ ‡ç­¾ - ç®€åŒ–æ˜¾ç¤º
+            for (int i = 0; i <= 5; i++) // ä»10ä¸ªåˆ»åº¦å‡å°‘åˆ°5ä¸ª
             {
                 var y = chartRect.Bottom - (float)chartRect.Height * i / 5;
                 var value = maxValue * i / 5;
-                var text = $"{value:F0}%"; // Ö±½ÓÏÔÊ¾°Ù·Ö±È£¬¼ò»¯¸ñÊ½
+                var text = $"{value:F0}%"; // ç›´æ¥æ˜¾ç¤ºç™¾åˆ†æ¯”ï¼Œç®€åŒ–æ ¼å¼
 
                 var size = g.MeasureString(text, font);
                 g.DrawString(text, font, textBrush, chartRect.X - size.Width - 3, y - size.Height / 2);
             }
 
-            // Öá±êÇ©£¨Èç¹ûÓĞ£©- Ê¹ÓÃ¸üĞ¡×ÖÌå
+            // è½´æ ‡ç­¾ï¼ˆå¦‚æœæœ‰ï¼‰- ä½¿ç”¨æ›´å°å­—ä½“
             if (!string.IsNullOrEmpty(_xAxisLabel))
             {
                 var size = g.MeasureString(_xAxisLabel, font);
                 var x = chartRect.X + (chartRect.Width - size.Width) / 2;
-                var y = chartRect.Bottom + 35; // µ÷ÕûÎ»ÖÃ
+                var y = chartRect.Bottom + 35; // è°ƒæ•´ä½ç½®
                 g.DrawString(_xAxisLabel, font, textBrush, x, y);
             }
 
@@ -278,8 +278,8 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         private void DrawBars(Graphics g, Rectangle chartRect, double maxValue)
         {
-            var barWidth = (float)chartRect.Width / _data.Count * 0.85f; // Ôö¼ÓÌõĞÎ¿í¶È´Ó0.8fµ½0.85f
-            var barSpacing = (float)chartRect.Width / _data.Count * 0.075f; // ¼õÉÙ¼ä¾à
+            var barWidth = (float)chartRect.Width / _data.Count * 0.85f; // å¢åŠ æ¡å½¢å®½åº¦ä»0.8fåˆ°0.85f
+            var barSpacing = (float)chartRect.Width / _data.Count * 0.075f; // å‡å°‘é—´è·
 
             for (int i = 0; i < _data.Count; i++)
             {
@@ -291,35 +291,35 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
                 var barRect = new RectangleF(x, y, barWidth, barHeight);
 
-                // »æÖÆÌõĞÎ - ±âÆ½»¯ÎŞ±ß¿òÉè¼Æ
+                // ç»˜åˆ¶æ¡å½¢ - æ‰å¹³åŒ–æ— è¾¹æ¡†è®¾è®¡
                 using var brush = new SolidBrush(data.Color);
                 g.FillRectangle(brush, barRect);
 
-                // »æÖÆÊıÖµ±êÇ© - ÖÇÄÜµ÷Õû±êÇ©Î»ÖÃ
-                if (barHeight > 15) // Ö»ÓĞ×ã¹»¸ßµÄÌõĞÎ²ÅÏÔÊ¾±êÇ©
+                // ç»˜åˆ¶æ•°å€¼æ ‡ç­¾ - æ™ºèƒ½è°ƒæ•´æ ‡ç­¾ä½ç½®
+                if (barHeight > 15) // åªæœ‰è¶³å¤Ÿé«˜çš„æ¡å½¢æ‰æ˜¾ç¤ºæ ‡ç­¾
                 {
-                    var valueText = $"{data.Value:F1}%"; // ¼ò»¯ÊıÖµ¸ñÊ½ÏÔÊ¾
-                    using var font = new Font("Microsoft YaHei", 6, FontStyle.Regular); // ´Ó8¼õÉÙµ½6
+                    var valueText = $"{data.Value:F1}%"; // ç®€åŒ–æ•°å€¼æ ¼å¼æ˜¾ç¤º
+                    using var font = new Font("Microsoft YaHei", 6, FontStyle.Regular); // ä»8å‡å°‘åˆ°6
                     using var textBrush = new SolidBrush(ForeColor);
 
                     var textSize = g.MeasureString(valueText, font);
                     var textX = x + (barWidth - textSize.Width) / 2;
 
-                    // ÖÇÄÜÑ¡Ôñ±êÇ©Î»ÖÃ£ºÓÅÏÈ·ÅÔÚÌõĞÎÉÏ·½£¬·ñÔò·ÅÔÚÌõĞÎÄÚ²¿
-                    var textAboveY = y - textSize.Height - 2; // ÌõĞÎÉÏ·½Î»ÖÃ
-                    var textInsideY = y + 2; // ÌõĞÎÄÚ²¿ÉÏ¶ËÎ»ÖÃ
+                    // æ™ºèƒ½é€‰æ‹©æ ‡ç­¾ä½ç½®ï¼šä¼˜å…ˆæ”¾åœ¨æ¡å½¢ä¸Šæ–¹ï¼Œå¦åˆ™æ”¾åœ¨æ¡å½¢å†…éƒ¨
+                    var textAboveY = y - textSize.Height - 2; // æ¡å½¢ä¸Šæ–¹ä½ç½®
+                    var textInsideY = y + 2; // æ¡å½¢å†…éƒ¨ä¸Šç«¯ä½ç½®
 
-                    // ¼ì²éÉÏ·½Î»ÖÃÊÇ·ñÓĞ×ã¹»¿Õ¼ä
+                    // æ£€æŸ¥ä¸Šæ–¹ä½ç½®æ˜¯å¦æœ‰è¶³å¤Ÿç©ºé—´
                     var textY = (textAboveY >= chartRect.Y) ? textAboveY : textInsideY;
 
-                    // È·±£±êÇ©ÔÚÍ¼±íÇøÓòÄÚ
+                    // ç¡®ä¿æ ‡ç­¾åœ¨å›¾è¡¨åŒºåŸŸå†…
                     if (textY + textSize.Height <= chartRect.Bottom && textY >= chartRect.Y)
                     {
-                        // ¸ù¾İ±êÇ©Î»ÖÃÑ¡ÔñºÏÊÊµÄÎÄ±¾ÑÕÉ«
+                        // æ ¹æ®æ ‡ç­¾ä½ç½®é€‰æ‹©åˆé€‚çš„æ–‡æœ¬é¢œè‰²
                         Color textColor = ForeColor;
-                        if (textY == textInsideY) // Èç¹û±êÇ©ÔÚÌõĞÎÄÚ²¿
+                        if (textY == textInsideY) // å¦‚æœæ ‡ç­¾åœ¨æ¡å½¢å†…éƒ¨
                         {
-                            // Ê¹ÓÃÓë±³¾°¶Ô±ÈµÄÑÕÉ«
+                            // ä½¿ç”¨ä¸èƒŒæ™¯å¯¹æ¯”çš„é¢œè‰²
                             textColor = GetContrastColor(data.Color);
                         }
 
@@ -331,14 +331,14 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         }
 
         /// <summary>
-        /// ¸ù¾İ±³¾°É«»ñÈ¡¶Ô±ÈÉ«£¨ºÚÉ«»ò°×É«£©
+        /// æ ¹æ®èƒŒæ™¯è‰²è·å–å¯¹æ¯”è‰²ï¼ˆé»‘è‰²æˆ–ç™½è‰²ï¼‰
         /// </summary>
         private Color GetContrastColor(Color backgroundColor)
         {
-            // ¼ÆËãRGBÁÁ¶ÈÖµ
+            // è®¡ç®—RGBäº®åº¦å€¼
             var brightness = (backgroundColor.R * 0.299 + backgroundColor.G * 0.587 + backgroundColor.B * 0.114);
 
-            // ¸ù¾İÁÁ¶ÈÑ¡ÔñºÚÉ«»ò°×É«×÷Îª¶Ô±ÈÉ«
+            // æ ¹æ®äº®åº¦é€‰æ‹©é»‘è‰²æˆ–ç™½è‰²ä½œä¸ºå¯¹æ¯”è‰²
             return brightness > 128 ? Color.Black : Color.White;
         }
 
@@ -360,7 +360,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
     }
 
     /// <summary>
-    /// ÌõĞÎÍ¼Êı¾İÏî
+    /// æ¡å½¢å›¾æ•°æ®é¡¹
     /// </summary>
     public class BarChartData
     {

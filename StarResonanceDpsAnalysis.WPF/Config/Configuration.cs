@@ -1,4 +1,4 @@
-﻿using StarResonanceDpsAnalysis.Core.Models;
+using StarResonanceDpsAnalysis.Core.Models;
 using StarResonanceDpsAnalysis.WPF.Converters;
 
 namespace StarResonanceDpsAnalysis.WPF.Config;

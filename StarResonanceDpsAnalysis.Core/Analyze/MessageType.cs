@@ -1,4 +1,4 @@
-﻿namespace StarResonanceDpsAnalysis.Core.Analyze;
+namespace StarResonanceDpsAnalysis.Core.Analyze;
 
 public enum MessageType
 {

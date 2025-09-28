@@ -1,4 +1,4 @@
-﻿namespace StarResonanceDpsAnalysis.WinForm.Forms.AuxiliaryForms
+namespace StarResonanceDpsAnalysis.WinForm.Forms.AuxiliaryForms
 {
     partial class SkillReferenceForm
     {

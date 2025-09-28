@@ -1,4 +1,4 @@
-﻿namespace StarResonanceDpsAnalysis.WPF.Models;
+namespace StarResonanceDpsAnalysis.WPF.Models;
 
 /// <summary>
 /// 数值类型

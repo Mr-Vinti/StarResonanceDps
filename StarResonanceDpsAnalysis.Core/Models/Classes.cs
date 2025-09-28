@@ -1,4 +1,4 @@
-﻿namespace StarResonanceDpsAnalysis.Core.Models;
+namespace StarResonanceDpsAnalysis.Core.Models;
 
 /// <summary>
 /// 职业

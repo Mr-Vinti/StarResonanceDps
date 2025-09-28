@@ -3,11 +3,11 @@ using System.Drawing.Drawing2D;
 namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 {
     /// <summary>
-    /// ±âÆ½»¯±ıÍ¼¿Ø¼ş
+    /// æ‰å¹³åŒ–é¥¼å›¾æ§ä»¶
     /// </summary>
     public class FlatPieChart : UserControl
     {
-        #region ×Ö¶ÎºÍÊôĞÔ
+        #region å­—æ®µå’Œå±æ€§
 
         private readonly List<PieChartData> _data = new();
         private bool _isDarkTheme = false;
@@ -15,18 +15,18 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
         private bool _showLabels = true;
         private bool _showPercentages = true;
 
-        // ÏÖ´ú»¯±âÆ½ÅäÉ«
+        // ç°ä»£åŒ–æ‰å¹³é…è‰²
         private readonly Color[] _colors = {
-            Color.FromArgb(255, 107, 107),  // ºì
-            Color.FromArgb(78, 205, 196),   // Çà
-            Color.FromArgb(69, 183, 209),   // À¶
-            Color.FromArgb(150, 206, 180),  // ÂÌ
-            Color.FromArgb(255, 234, 167),  // »Æ
-            Color.FromArgb(221, 160, 221),  // ×Ï
-            Color.FromArgb(152, 216, 200),  // ±¡ºÉ
-            Color.FromArgb(247, 220, 111),  // ½ğ
-            Color.FromArgb(187, 143, 206),  // µ­×Ï
-            Color.FromArgb(133, 193, 233)   // ÌìÀ¶
+            Color.FromArgb(255, 107, 107),  // çº¢
+            Color.FromArgb(78, 205, 196),   // é’
+            Color.FromArgb(69, 183, 209),   // è“
+            Color.FromArgb(150, 206, 180),  // ç»¿
+            Color.FromArgb(255, 234, 167),  // é»„
+            Color.FromArgb(221, 160, 221),  // ç´«
+            Color.FromArgb(152, 216, 200),  // è–„è·
+            Color.FromArgb(247, 220, 111),  // é‡‘
+            Color.FromArgb(187, 143, 206),  // æ·¡ç´«
+            Color.FromArgb(133, 193, 233)   // å¤©è“
         };
 
         public bool IsDarkTheme
@@ -72,7 +72,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region ¹¹Ôìº¯Êı
+        #region æ„é€ å‡½æ•°
 
         public FlatPieChart()
         {
@@ -84,7 +84,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region Êı¾İ¹ÜÀí
+        #region æ•°æ®ç®¡ç†
 
         public void SetData(List<(string Label, double Value)> data)
         {
@@ -116,7 +116,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region Ö÷ÌâÉèÖÃ
+        #region ä¸»é¢˜è®¾ç½®
 
         private void ApplyTheme()
         {
@@ -134,7 +134,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         #endregion
 
-        #region »æÖÆ·½·¨
+        #region ç»˜åˆ¶æ–¹æ³•
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -144,7 +144,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            // Çå³ı±³¾°
+            // æ¸…é™¤èƒŒæ™¯
             g.Clear(BackColor);
 
             if (_data.Count == 0)
@@ -153,12 +153,12 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                 return;
             }
 
-            // »æÖÆ±êÌâ£¨Èç¹ûÓĞ£©
+            // ç»˜åˆ¶æ ‡é¢˜ï¼ˆå¦‚æœæœ‰ï¼‰
             DrawTitle(g);
 
-            // ¼ÆËã±ıÍ¼ÇøÓò - È¥µô±êÌâ¸ß¶È£¬Ôö´ó±ıÍ¼Õ¼±È
-            var titleHeight = string.IsNullOrEmpty(_titleText) ? 0 : 30; // ¼õÉÙ±êÌâ¸ß¶È
-            var margin = 10; // ¼õÉÙ±ß¾à
+            // è®¡ç®—é¥¼å›¾åŒºåŸŸ - å»æ‰æ ‡é¢˜é«˜åº¦ï¼Œå¢å¤§é¥¼å›¾å æ¯”
+            var titleHeight = string.IsNullOrEmpty(_titleText) ? 0 : 30; // å‡å°‘æ ‡é¢˜é«˜åº¦
+            var margin = 10; // å‡å°‘è¾¹è·
             var pieSize = Math.Min(Width - margin * 2, Height - titleHeight - margin * 2);
             var pieRect = new Rectangle(
                 (Width - pieSize) / 2,
@@ -167,10 +167,10 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                 pieSize
             );
 
-            // »æÖÆ±ıÍ¼
+            // ç»˜åˆ¶é¥¼å›¾
             DrawPieSlices(g, pieRect);
 
-            // »æÖÆ±êÇ©
+            // ç»˜åˆ¶æ ‡ç­¾
             if (_showLabels)
             {
                 DrawLabels(g, pieRect);
@@ -179,7 +179,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         private void DrawNoDataMessage(Graphics g)
         {
-            var message = "ÔİÎŞÊı¾İ";
+            var message = "æš‚æ— æ•°æ®";
             var font = new Font("Microsoft YaHei", 12, FontStyle.Regular);
             var brush = new SolidBrush(_isDarkTheme ? Color.Gray : Color.DarkGray);
 
@@ -215,7 +215,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
             {
                 var sweepAngle = (float)(data.Percentage * 360 / 100);
 
-                // »æÖÆ±ıÆ¬ - ±âÆ½»¯Éè¼Æ£¨ÎŞ±ß¿ò£©
+                // ç»˜åˆ¶é¥¼ç‰‡ - æ‰å¹³åŒ–è®¾è®¡ï¼ˆæ— è¾¹æ¡†ï¼‰
                 using var brush = new SolidBrush(data.Color);
                 g.FillPie(brush, pieRect, startAngle, sweepAngle);
 
@@ -225,8 +225,8 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
 
         private void DrawLabels(Graphics g, Rectangle pieRect)
         {
-            // Ê¹ÓÃ¸üĞ¡µÄ×ÖÌåÊÊÓ¦½ô´Õ²¼¾Ö
-            using var font = new Font("Microsoft YaHei", 7, FontStyle.Regular); // ´Ó9¼õÉÙµ½7
+            // ä½¿ç”¨æ›´å°çš„å­—ä½“é€‚åº”ç´§å‡‘å¸ƒå±€
+            using var font = new Font("Microsoft YaHei", 7, FontStyle.Regular); // ä»9å‡å°‘åˆ°7
             using var brush = new SolidBrush(ForeColor);
 
             float startAngle = 0;
@@ -239,20 +239,20 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                 var sweepAngle = (float)(data.Percentage * 360 / 100);
                 var labelAngle = startAngle + sweepAngle / 2;
 
-                // µ÷Õû±êÇ©Î»ÖÃ£¬¸ü¿¿½ü±ıÍ¼ÖĞĞÄ
-                var labelRadius = radius * 0.75f; // ´Ó0.7fÔö¼Óµ½0.75f£¬ÉÔÎ¢ÍâÒÆ
+                // è°ƒæ•´æ ‡ç­¾ä½ç½®ï¼Œæ›´é è¿‘é¥¼å›¾ä¸­å¿ƒ
+                var labelRadius = radius * 0.75f; // ä»0.7få¢åŠ åˆ°0.75fï¼Œç¨å¾®å¤–ç§»
                 var labelX = centerX + labelRadius * (float)Math.Cos(labelAngle * Math.PI / 180);
                 var labelY = centerY + labelRadius * (float)Math.Sin(labelAngle * Math.PI / 180);
 
-                // Éú³É±êÇ©ÎÄ±¾ - ¼ò»¯ÎÄ±¾ÒÔ¼õÉÙÓµ¼·
+                // ç”Ÿæˆæ ‡ç­¾æ–‡æœ¬ - ç®€åŒ–æ–‡æœ¬ä»¥å‡å°‘æ‹¥æŒ¤
                 var labelText = "";
-                if (_showLabels && _showPercentages && data.Percentage >= 5.0) // Ö»ÏÔÊ¾Õ¼±È´óÓÚ5%µÄ±êÇ©
+                if (_showLabels && _showPercentages && data.Percentage >= 5.0) // åªæ˜¾ç¤ºå æ¯”å¤§äº5%çš„æ ‡ç­¾
                 {
-                    // ¼ò»¯±êÇ©¸ñÊ½£¬¼¼ÄÜÃûÌ«³¤Ê±½Ø¶Ï
+                    // ç®€åŒ–æ ‡ç­¾æ ¼å¼ï¼ŒæŠ€èƒ½åå¤ªé•¿æ—¶æˆªæ–­
                     var skillName = data.Label.Length > 6 ? data.Label.Substring(0, 6) + ".." : data.Label;
                     labelText = $"{skillName}\n{data.Percentage:F1}%";
                 }
-                else if (_showPercentages && data.Percentage >= 3.0) // Ğ¡Õ¼±ÈÖ»ÏÔÊ¾°Ù·Ö±È
+                else if (_showPercentages && data.Percentage >= 3.0) // å°å æ¯”åªæ˜¾ç¤ºç™¾åˆ†æ¯”
                 {
                     labelText = $"{data.Percentage:F1}%";
                 }
@@ -263,12 +263,12 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
                     var textX = labelX - textSize.Width / 2;
                     var textY = labelY - textSize.Height / 2;
 
-                    // µ÷Õû°ëÍ¸Ã÷±³¾°£¬Ê¹Æä¸üÇáÁ¿
+                    // è°ƒæ•´åŠé€æ˜èƒŒæ™¯ï¼Œä½¿å…¶æ›´è½»é‡
                     var bgColor = _isDarkTheme ? Color.FromArgb(150, 0, 0, 0) : Color.FromArgb(150, 255, 255, 255);
                     using var bgBrush = new SolidBrush(bgColor);
                     g.FillRectangle(bgBrush, textX - 1, textY - 1, textSize.Width + 2, textSize.Height + 2);
 
-                    // »æÖÆÎÄ±¾
+                    // ç»˜åˆ¶æ–‡æœ¬
                     g.DrawString(labelText, font, brush, textX, textY);
                 }
 
@@ -280,7 +280,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin.Charts
     }
 
     /// <summary>
-    /// ±ıÍ¼Êı¾İÏî
+    /// é¥¼å›¾æ•°æ®é¡¹
     /// </summary>
     public class PieChartData
     {

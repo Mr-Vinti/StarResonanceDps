@@ -1,4 +1,4 @@
-﻿namespace StarResonanceDpsAnalysis.WinForm.Control
+namespace StarResonanceDpsAnalysis.WinForm.Control
 {
     partial class DataDisplaySettings
     {

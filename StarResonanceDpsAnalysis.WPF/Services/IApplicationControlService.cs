@@ -1,4 +1,4 @@
-﻿namespace StarResonanceDpsAnalysis.WPF.Services;
+namespace StarResonanceDpsAnalysis.WPF.Services;
 
 public interface IApplicationControlService
 {

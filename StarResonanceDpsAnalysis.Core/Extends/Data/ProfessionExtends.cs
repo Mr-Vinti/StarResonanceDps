@@ -1,4 +1,4 @@
-﻿using StarResonanceDpsAnalysis.Core.Models;
+using StarResonanceDpsAnalysis.Core.Models;
 
 namespace StarResonanceDpsAnalysis.Core.Extends.Data;
 

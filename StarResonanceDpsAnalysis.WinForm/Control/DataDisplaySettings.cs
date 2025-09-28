@@ -1,4 +1,4 @@
-﻿using AntdUI;
+using AntdUI;
 using StarResonanceDpsAnalysis.WinForm.Plugin;
 
 namespace StarResonanceDpsAnalysis.WinForm.Control

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Data;
 using StarResonanceDpsAnalysis.WPF.Models;

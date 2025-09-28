@@ -1,4 +1,4 @@
-﻿using AntdUI;
+using AntdUI;
 using StarResonanceDpsAnalysis.Assets;
 using StarResonanceDpsAnalysis.WinForm.Forms;
 using StarResonanceDpsAnalysis.WinForm.Plugin;

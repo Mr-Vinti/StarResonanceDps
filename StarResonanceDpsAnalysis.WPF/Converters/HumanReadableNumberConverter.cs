@@ -7,7 +7,7 @@ namespace StarResonanceDpsAnalysis.WPF.Converters;
 ///     Converts numeric values to compact human-readable strings.
 ///     Supports runtime-changeable mode when used as a MultiBinding (number + mode).
 ///     - KMB mode: "K", "M", "B"
-///     - Wan mode: "Íò", "ÒÚ"
+///     - Wan mode: "ä¸‡", "äº¿"
 ///     Usage (single value, explicit parameter string "Wan" or "KMB"):
 ///     Text="{Binding SomeNumber, Converter={StaticResource HumanReadableNumberConverter}, ConverterParameter=Wan}"
 ///     Recommended for runtime updates: pass current mode as second binding:
@@ -75,7 +75,7 @@ public class HumanReadableNumberConverter : IValueConverter, IMultiValueConverte
                 return nm;
             case string s:
                 if (string.Equals(s, "Wan", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(s, "Íò", StringComparison.OrdinalIgnoreCase))
+                    string.Equals(s, "ä¸‡", StringComparison.OrdinalIgnoreCase))
                     return NumberDisplayMode.Wan;
                 return NumberDisplayMode.KMB;
             default:
@@ -83,7 +83,7 @@ public class HumanReadableNumberConverter : IValueConverter, IMultiValueConverte
                 {
                     var txt = o.ToString();
                     if (string.Equals(txt, "Wan", StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(txt, "Íò", StringComparison.OrdinalIgnoreCase))
+                        string.Equals(txt, "ä¸‡", StringComparison.OrdinalIgnoreCase))
                         return NumberDisplayMode.Wan;
                 }
                 catch
@@ -101,8 +101,8 @@ public class HumanReadableNumberConverter : IValueConverter, IMultiValueConverte
 
         if (mode == NumberDisplayMode.Wan)
         {
-            if (d >= 100_000_000) return sign + (d / 100_000_000d).ToString("0.##", culture) + "ÒÚ";
-            if (d >= 10_000) return sign + (d / 10_000d).ToString("0.##", culture) + "Íò";
+            if (d >= 100_000_000) return sign + (d / 100_000_000d).ToString("0.##", culture) + "äº¿";
+            if (d >= 10_000) return sign + (d / 10_000d).ToString("0.##", culture) + "ä¸‡";
             return sign + d.ToString("0.##", culture);
         }
 

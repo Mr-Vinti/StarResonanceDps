@@ -1,84 +1,84 @@
 namespace StarResonanceDpsAnalysis.Core.Models;
 
 /// <summary>
-/// Ö°ÒµÁ÷ÅÉ Class spec
+/// èŒä¸šæµæ´¾ Class spec
 /// </summary>
 public enum ClassSpec
 {
     /// <summary>
-    /// Î´Öª
+    /// æœªçŸ¥
     /// </summary>
     Unknown = 0,
 
     /// <summary>
-    /// Éñ¶ÜÆïÊ¿_·À»¤»Ø¸´Á÷
+    /// ç¥ç›¾éª‘å£«_é˜²æŠ¤å›å¤æµ
     /// </summary>
     ShieldKnightRecovery,
     /// <summary>
-    /// Éñ¶ÜÆïÊ¿_¹â¶Ü
+    /// ç¥ç›¾éª‘å£«_å…‰ç›¾
     /// </summary>
     ShieldKnightShield,
 
     /// <summary>
-    /// ¾ŞÈĞÊØÎÀÕß_ÑÒ¶Ü
+    /// å·¨åˆƒå®ˆå«è€…_å²©ç›¾
     /// </summary>
     HeavyGuardianEarthfort,
     /// <summary>
-    /// ¾ŞÈĞÊØÎÀÕß_¸ñµ²
+    /// å·¨åˆƒå®ˆå«è€…_æ ¼æŒ¡
     /// </summary>
     HeavyGuardianBlock,
 
     /// <summary>
-    /// À×Ó°½£Ê¿_¾ÓºÏ
+    /// é›·å½±å‰‘å£«_å±…åˆ
     /// </summary>
     StormbladeIaidoSlash,
     /// <summary>
-    /// À×Ó°½£Ê¿_ÔÂÈĞ
+    /// é›·å½±å‰‘å£«_æœˆåˆƒ
     /// </summary>
     StormbladeMoonStrike,
 
     /// <summary>
-    /// Çàá°ÆïÊ¿_ÖØ×°
+    /// é’å²šéª‘å£«_é‡è£…
     /// </summary>
     WindKnightVanGuard,
     /// <summary>
-    /// Çàá°ÆïÊ¿_¿ÕÇ¹
+    /// é’å²šéª‘å£«_ç©ºæª
     /// </summary>
     WindKnightSkyward,
 
     /// <summary>
-    /// ±ùÄ§µ¼Ê¦_±ùÃ¬
+    /// å†°é­”å¯¼å¸ˆ_å†°çŸ›
     /// </summary>
     FrostMageIcicle,
     /// <summary>
-    /// ±ùÄ§µ¼Ê¦_ÉäÏß
+    /// å†°é­”å¯¼å¸ˆ_å°„çº¿
     /// </summary>
     FrostMageFrostBeam,
 
     /// <summary>
-    /// ÉñÉäÊÖ_ÀÇ¹­
+    /// ç¥å°„æ‰‹_ç‹¼å¼“
     /// </summary>
     MarksmanWildpack,
     /// <summary>
-    /// ÉñÉäÊÖ_Ó¥¹­
+    /// ç¥å°„æ‰‹_é¹°å¼“
     /// </summary>
     MarksmanFalconry,
 
     /// <summary>
-    /// É­ÓïÕß_³Í»÷
+    /// æ£®è¯­è€…_æƒ©å‡»
     /// </summary>
     VerdantOracleSmite,
     /// <summary>
-    /// É­ÓïÕß_ÓúºÏ
+    /// æ£®è¯­è€…_æ„ˆåˆ
     /// </summary>
     VerdantOracleLifeBind,
 
     /// <summary>
-    /// Áé»êÀÖÊÖ_¿ñÒô
+    /// çµé­‚ä¹æ‰‹_ç‹‚éŸ³
     /// </summary>
     SoulMusicianDissonance,
     /// <summary>
-    /// Áé»êÀÖÊÖ_Ğ­×à
+    /// çµé­‚ä¹æ‰‹_åå¥
     /// </summary>
     SoulMusicianConcerto,
 

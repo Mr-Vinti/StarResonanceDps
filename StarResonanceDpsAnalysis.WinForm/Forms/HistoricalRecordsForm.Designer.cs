@@ -1,4 +1,4 @@
-﻿namespace StarResonanceDpsAnalysis.WinForm.Forms
+namespace StarResonanceDpsAnalysis.WinForm.Forms
 {
     partial class HistoricalRecordsForm
     {

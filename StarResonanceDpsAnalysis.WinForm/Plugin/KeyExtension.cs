@@ -1,4 +1,4 @@
-﻿namespace StarResonanceDpsAnalysis.WinForm.Plugin;
+namespace StarResonanceDpsAnalysis.WinForm.Plugin;
 
 public static class KeyExtension
 {

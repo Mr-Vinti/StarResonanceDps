@@ -1,4 +1,4 @@
-﻿namespace StarResonanceDpsAnalysis.WPF.Themes;
+namespace StarResonanceDpsAnalysis.WPF.Themes;
 
 public enum ApplicationTheme
 {
