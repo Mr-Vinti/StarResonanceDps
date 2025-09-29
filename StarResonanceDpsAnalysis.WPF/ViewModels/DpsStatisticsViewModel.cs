@@ -36,7 +36,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private readonly IApplicationControlService _appControlService;
     private readonly Stopwatch _battleTimer = new();
     private readonly IConfigManager _configManager;
-    private readonly IDataSource _dataSource;
     private readonly Dispatcher _dispatcher;
 
     private readonly Stopwatch _fullBattleTimer = new();
@@ -44,8 +43,9 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private readonly Random _rd = new();
     private readonly Dictionary<long, StatisticDataViewModel> _slotsDictionary = new();
     private readonly IDataStorage _storage;
-    private readonly long[] _totals = new long[6]; // 6位玩家示例
     private readonly IWindowManagementService _windowManagement;
+    private DispatcherTimer? _durationTimer;
+    private bool _isInitialized;
 
     [ObservableProperty] private DateTime _battleDuration;
     [ObservableProperty] private NumberDisplayMode _numberDisplayMode = NumberDisplayMode.Wan;
@@ -56,10 +56,10 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     [ObservableProperty] private SortDirectionEnum _sortDirection = SortDirectionEnum.Descending;
     [ObservableProperty] private string _sortMemberPath = "Value";
     [ObservableProperty] private StatisticType _statisticIndex;
+    [ObservableProperty] private StatisticDataViewModel? _currentPlayerSlot;
 
     /// <inheritdoc/>
     public DpsStatisticsViewModel(IApplicationControlService appControlService,
-        IDataSource dataSource,
         IDataStorage storage,
         ILogger<DpsStatisticsViewModel> logger,
         IConfigManager configManager,
@@ -71,7 +71,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         _appControlService = appControlService;
         _storage = storage;
         _logger = logger;
-        _dataSource = dataSource;
         _configManager = configManager;
         _windowManagement = windowManagement;
         _dispatcher = dispatcher;
@@ -79,6 +78,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
         // Subscribe to DebugFunctions events to handle sample data requests
         DebugFunctions.SampleDataRequested += OnSampleDataRequested;
+        _storage.PlayerInfoUpdated += StorageOnPlayerInfoUpdated;
 
         return;
 
@@ -93,6 +93,13 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                 case NotifyCollectionChangedAction.Remove:
                     Debug.Assert(e.OldItems != null, "e.OldItems != null");
                     LocalIterate(e.OldItems, itm => _slotsDictionary.Remove(itm.Player.Uid));
+                    LocalIterate(e.OldItems, itm =>
+                    {
+                        if (ReferenceEquals(CurrentPlayerSlot, itm))
+                        {
+                            CurrentPlayerSlot = null;
+                        }
+                    });
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     Debug.Assert(e.OldItems != null, "e.OldItems != null");
@@ -100,6 +107,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     _slotsDictionary.Clear();
+                    CurrentPlayerSlot = null;
                     break;
                 case NotifyCollectionChangedAction.Move:
                     // just ignore
@@ -128,12 +136,20 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     public void Dispose()
     {
         // Unsubscribe from DebugFunctions events
-        if (DebugFunctions != null)
+        DebugFunctions.SampleDataRequested -= OnSampleDataRequested;
+
+        if (_durationTimer != null)
         {
-            DebugFunctions.SampleDataRequested -= OnSampleDataRequested;
+            _durationTimer.Stop();
+            _durationTimer.Tick -= DurationTimerOnTick;
         }
 
-        _storage?.Dispose();
+        _storage.DpsDataUpdated -= DataStorage_DpsDataUpdated;
+        _storage.NewSectionCreated -= StorageOnNewSectionCreated;
+        _storage.PlayerInfoUpdated -= StorageOnPlayerInfoUpdated;
+        _storage.Dispose();
+
+        _isInitialized = false;
     }
 
     private void OnSampleDataRequested(object? sender, EventArgs e)
@@ -165,9 +181,18 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     [RelayCommand]
     private void OnLoaded()
     {
+        if (_isInitialized) return;
+        _isInitialized = true;
+
         _logger.LogDebug("VM Loaded");
+        LoadPlayerCache();
+
+        EnsureDurationTimerStarted();
+        UpdateBattleDuration();
+
         // 开始监听DPS更新事件
         _storage.DpsDataUpdated += DataStorage_DpsDataUpdated;
+        _storage.NewSectionCreated += StorageOnNewSectionCreated;
     }
 
 
@@ -205,8 +230,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                 slot = new StatisticDataViewModel(DebugFunctions)
                 {
                     Index = 999,
-                    Value = (ulong)value, // TODO: 将 long 转为 ulong
-                    Duration = (ulong)(dpsData.LastLoggedTick - (dpsData.StartLoggedTick ?? 0)),
+                    Value = ConvertToUnsigned(value),
+                    Duration = ConvertToUnsigned(dpsData.LastLoggedTick - (dpsData.StartLoggedTick ?? 0)),
                     Player = new PlayerInfoViewModel
                     {
                         Uid = dpsData.UID,
@@ -236,13 +261,16 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                         return [];
                     }
                 };
-                _dispatcher.Invoke(() => { Slots.Add(slot); });
+                _dispatcher.Invoke(() =>
+                {
+                    Slots.Add(slot);
+                });
             }
 
             // Simplified update of existing slot (replaces the selected block)
-            var unsignedValue = value < 0 ? 0UL : (ulong)value;
+            var unsignedValue = ConvertToUnsigned(value);
             var durationTicks = dpsData.LastLoggedTick - (dpsData.StartLoggedTick ?? 0);
-            var duration = durationTicks < 0 ? 0UL : (ulong)durationTicks;
+            var duration = ConvertToUnsigned(durationTicks);
 
             // use the out variable `slot` from TryGetValue above for in-place update
             slot.Value = unsignedValue;
@@ -253,16 +281,27 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                 slot.Player.Name = playerInfo.Name ?? $"UID: {dpsData.UID}";
                 slot.Player.Class = playerInfo.ProfessionID?.GetClassNameById() ?? Classes.Unknown;
                 slot.Player.Spec = playerInfo.Spec;
+                slot.Player.Uid = playerInfo.UID;
             }
             else
             {
                 slot.Player.Name = $"UID: {dpsData.UID}";
                 slot.Player.Class = Classes.Unknown;
                 slot.Player.Spec = ClassSpec.Unknown;
+                slot.Player.Uid = dpsData.UID;
+            }
+
+            // Keep the user's own slot selected for quick reference
+            if (_storage.CurrentPlayerInfo.UID != 0 && dpsData.UID == _storage.CurrentPlayerInfo.UID)
+            {
+                SelectedSlot = slot;
+                CurrentPlayerSlot = slot;
             }
         }
 
         // Calculate percentage of max
+        double totalValue = 0;
+
         if (Slots.Count > 0)
         {
             var maxValue = Slots.Max(d => d.Value);
@@ -271,8 +310,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                 slot.PercentOfMax = maxValue > 0 ? slot.Value / (double)maxValue * 100 : 0;
             }
 
-            // Calculate percentage of total
-            var totalValue = Slots.Sum(d => Convert.ToDouble(d.Value));
+            totalValue = Slots.Sum(d => Convert.ToDouble(d.Value));
             foreach (var slot in Slots)
             {
                 slot.Percent = totalValue > 0 ? slot.Value / totalValue : 0;
@@ -281,6 +319,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
         // Sort data in place 
         SortSlotsInPlace();
+
+        UpdateBattleDuration();
 
         _logger.LogDebug("Exit updatedata");
 
@@ -592,8 +632,93 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     }
 
     #endregion
+
+    private void EnsureDurationTimerStarted()
+    {
+        if (_durationTimer != null) return;
+
+        _durationTimer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromSeconds(1)
+        };
+        _durationTimer.Tick += DurationTimerOnTick;
+        _durationTimer.Start();
+    }
+
+    private void DurationTimerOnTick(object? sender, EventArgs e)
+    {
+        UpdateBattleDuration();
+    }
+
+    private void UpdateBattleDuration()
+    {
+        if (!_dispatcher.CheckAccess())
+        {
+            _dispatcher.BeginInvoke(UpdateBattleDuration);
+            return;
+        }
+
+        var elapsed = InUsingTimer.Elapsed;
+        var displayTime = DateTime.Today.Add(elapsed);
+
+        if (BattleDuration != displayTime)
+        {
+            BattleDuration = displayTime;
+        }
+    }
+
+    private void StorageOnNewSectionCreated()
+    {
+        _dispatcher.BeginInvoke(() =>
+        {
+            _battleTimer.Reset();
+            UpdateBattleDuration();
+        });
+    }
+
+    private void StorageOnPlayerInfoUpdated(PlayerInfo info)
+    {
+        if (info == null)
+        {
+            return;
+        }
+
+        if (!_slotsDictionary.TryGetValue(info.UID, out var slot))
+        {
+            return;
+        }
+
+        _dispatcher.BeginInvoke(() =>
+        {
+            slot.Player.Name = info.Name ?? slot.Player.Name;
+            slot.Player.Class = info.ProfessionID?.GetClassNameById() ?? slot.Player.Class;
+            slot.Player.Spec = info.Spec;
+            slot.Player.Uid = info.UID;
+
+            if (_storage.CurrentPlayerInfo.UID == info.UID)
+            {
+                CurrentPlayerSlot = slot;
+            }
+        });
+    }
+
+    partial void OnScopeTimeChanged(ScopeTime value)
+    {
+        UpdateBattleDuration();
+        UpdateData();
+    }
+
+    partial void OnStatisticIndexChanged(StatisticType value)
+    {
+        UpdateData();
+    }
+
+    private static ulong ConvertToUnsigned(long value)
+    {
+        return value <= 0 ? 0UL : (ulong)value;
+    }
 }
 
 public sealed class DpsStatisticsDesignTimeViewModel()
-    : DpsStatisticsViewModel(null!, null!, new InstantizedDataStorage(), null!, null!, null!,
+    : DpsStatisticsViewModel(null!, new InstantizedDataStorage(), null!, null!, null!,
         new DebugFunctions(null!, null!, null!, null!), null!);

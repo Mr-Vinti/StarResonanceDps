@@ -164,8 +164,7 @@
                     <TextBlock.Text>
                         <MultiBinding Converter="{StaticResource HumanReadableNumberConverter}">
                             <Binding Path="Value" />
-                            <Binding Path="DataContext.NumberDisplayMode"
-                                     RelativeSource="{RelativeSource AncestorType=Window}" />
+                            <Binding Path="DataContext.NumberDisplayMode" RelativeSource="{RelativeSource AncestorType=Window}" />
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
@@ -301,8 +300,7 @@
                     <TextBlock Grid.Column="1" Style="{StaticResource StatisticTypeText}">
                         <TextBlock.Text>
                             <MultiBinding Mode="OneWay" StringFormat="{}{0} ({1})">
-                                <Binding Converter="{StaticResource StatisticTypeToStringConverter}"
-                                         Path="StatisticIndex" />
+                                <Binding Converter="{StaticResource StatisticTypeToStringConverter}" Path="StatisticIndex" />
                                 <Binding Converter="{StaticResource ScopeTimeToStringConverter}" Path="ScopeTime" />
                             </MultiBinding>
                         </TextBlock.Text>
@@ -479,7 +477,7 @@
                         Grid.Column="0"
                         HorizontalAlignment="Left"
                         Style="{StaticResource FooterTextContent}"
-                        Text="[1]" />
+                        Text="{Binding CurrentPlayerSlot.Index, StringFormat=[{0}], TargetNullValue=[--], FallbackValue=[--]}" />
                     <TextBlock
                         Grid.Column="1"
                         Margin="6,0,0,0"
@@ -491,8 +489,17 @@
                         Margin="0,0,4,0"
                         HorizontalAlignment="Right"
                         Style="{StaticResource FooterTextContent}"
-                        Text="2.24万 DPS"
-                        TextAlignment="Right" />
+                        TextAlignment="Right">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource HumanReadableNumberConverter}">
+                                <Binding
+                                    FallbackValue="--"
+                                    Path="CurrentPlayerSlot.Value"
+                                    TargetNullValue="--" />
+                                <Binding Path="DataContext.NumberDisplayMode" RelativeSource="{RelativeSource AncestorType=Window}" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </Grid>
             </Border>
 
