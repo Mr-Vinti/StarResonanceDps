@@ -718,7 +718,3 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         return value <= 0 ? 0UL : (ulong)value;
     }
 }
-
-public sealed class DpsStatisticsDesignTimeViewModel()
-    : DpsStatisticsViewModel(null!, new InstantizedDataStorage(), null!, null!, null!,
-        new DebugFunctions(null!, null!, null!, null!), null!);
