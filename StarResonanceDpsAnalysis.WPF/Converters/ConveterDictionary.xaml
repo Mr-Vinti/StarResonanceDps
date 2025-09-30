@@ -11,6 +11,7 @@
     <converters:LessThanToBoolConverter x:Key="LessThanToBoolConverter" />
     <converters:PercentOfMaxConverter x:Key="PercentOfMaxConverter" />
     <converters:PercentToOpacityConverter x:Key="PercentToOpacityConverter" />
+    <converters:PercentToColorConverter x:Key="PercentToColorConverter" />
     <converters:BrushWithOpacityConverter x:Key="BrushWithOpacityConverter" />
     <converters:StatisticTypeToStringConverter x:Key="StatisticTypeToStringConverter" />
     <converters:ScopeTimeToStringConverter x:Key="ScopeTimeToStringConverter" />

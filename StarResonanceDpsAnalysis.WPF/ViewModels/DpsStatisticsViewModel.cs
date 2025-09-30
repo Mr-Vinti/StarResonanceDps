@@ -747,7 +747,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         });
     }
 
-    private void StorageOnPlayerInfoUpdated(PlayerInfo info)
+    private void StorageOnPlayerInfoUpdated(PlayerInfo? info)
     {
         if (info == null)
         {

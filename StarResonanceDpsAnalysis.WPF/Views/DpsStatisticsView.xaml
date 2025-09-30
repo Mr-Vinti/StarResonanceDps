@@ -44,7 +44,7 @@
             TargetType="Border">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Opacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}" Color="#191919" />
+                    <SolidColorBrush Color="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToColorConverter}, ConverterParameter='#191919'}" />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -52,7 +52,7 @@
         <Style x:Key="TitleBar" TargetType="Border">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Opacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}" Color="#BABABA" />
+                    <SolidColorBrush Color="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToColorConverter}, ConverterParameter='#BABABA'}" />
                 </Setter.Value>
             </Setter>
             <Setter Property="VerticalAlignment" Value="Top" />
@@ -86,7 +86,7 @@
         <Style x:Key="FooterContentBorder" TargetType="Border">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Opacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}" Color="#BABABA" />
+                    <SolidColorBrush Color="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToColorConverter}, ConverterParameter='#BABABA'}" />
                 </Setter.Value>
             </Setter>
             <Setter Property="VerticalAlignment" Value="Bottom" />
@@ -258,16 +258,10 @@
                     <!--  simple ControlTemplate so ContentPresenter stretches to available size  -->
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Padding="{TemplateBinding Padding}" BorderThickness="{TemplateBinding BorderThickness}">
-                                <Border.Background>
-                                    <MultiBinding Converter="{StaticResource BrushWithOpacityConverter}">
-                                        <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}" />
-                                        <Binding
-                                            Converter="{StaticResource PercentToOpacityConverter}"
-                                            Path="DataContext.AppConfig.Opacity"
-                                            RelativeSource="{RelativeSource AncestorType=Window}" />
-                                    </MultiBinding>
-                                </Border.Background>
+                            <Border
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
                                 <ContentPresenter
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
@@ -312,7 +306,7 @@
 
     <!--  半透明/圆角交给内部 Border  -->
     <Border Style="{StaticResource WindowBackground}">
-        <Grid>
+        <Grid CacheMode="BitmapCache">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25" />
                 <RowDefinition Height="*" />
