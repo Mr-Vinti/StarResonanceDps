@@ -52,19 +52,19 @@ public partial class AppConfig : ObservableObject
     /// 战斗计时清除延迟（秒）
     /// </summary>
     [ObservableProperty]
-    private int _combatTimeClearDelay;
+    private int _combatTimeClearDelay = 5;
 
     /// <summary>
     /// 是否过图清空全程记录
     /// </summary>
     [ObservableProperty]
-    private int _clearLogAfterTeleport;
+    private bool _clearLogAfterTeleport;
 
     /// <summary>
     /// 不透明度（0-100）, 默认100, 0为全透明
     /// </summary>
     [ObservableProperty]
-    private double _opacity;
+    private double _opacity = 100;
 
     /// <summary>
     /// 是否使用浅色模式

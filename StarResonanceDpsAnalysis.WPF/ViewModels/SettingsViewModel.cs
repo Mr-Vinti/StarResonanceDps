@@ -129,15 +129,15 @@ public partial class SettingsViewModel(IConfigManager configManger, IDeviceManag
         }
     }
 
-    public void ApplySettings()
+    public Task ApplySettingsAsync()
     {
-        configManger.SaveAsync(AppConfig);
+        return configManger.SaveAsync(AppConfig);
     }
 
     [RelayCommand]
-    private void Confirm()
+    private async Task Confirm()
     {
-        ApplySettings();
+        await ApplySettingsAsync();
         RequestClose?.Invoke();
     }
 
