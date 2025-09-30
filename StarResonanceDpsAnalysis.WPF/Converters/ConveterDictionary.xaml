@@ -18,5 +18,5 @@
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <converters:DivisionMultiValueConverter x:Key="DivisionMultiValueConverter" />
     <converters:DpsConverter x:Key="DpsConverter" />
-    <!-- <converters:StatisticTypeNScopeTimeToStringMultiConverter x:Key="StatisticTypeNScopeTimeToStringMultiConverter" /> -->
+    <converters:ClassSpecToStringConverter x:Key="ClassSpecToStringConverter" />
 </ResourceDictionary>

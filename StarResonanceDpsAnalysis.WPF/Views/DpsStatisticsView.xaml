@@ -173,8 +173,11 @@
                     Grid.Column="2"
                     VerticalAlignment="Center"
                     FontFamily="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC"
-                    Foreground="White"
-                    Text="{Binding Player.Name}" />
+                    Foreground="White">
+                    <Run Text="{Binding Player.Name}" />
+                    <Run Text="-" />
+                    <Run Text="{Binding Player.Spec, Converter={StaticResource ClassSpecToStringConverter}}" />
+                </TextBlock>
 
                 <!--  数值  -->
                 <TextBlock
