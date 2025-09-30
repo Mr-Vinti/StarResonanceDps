@@ -47,7 +47,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private DispatcherTimer? _durationTimer;
     private bool _isInitialized;
 
-    [ObservableProperty] private DateTime _battleDuration;
+    [ObservableProperty] private TimeSpan _battleDuration;
     [ObservableProperty] private NumberDisplayMode _numberDisplayMode = NumberDisplayMode.Wan;
     [ObservableProperty] private ScopeTime _scopeTime = ScopeTime.Current;
     [ObservableProperty] private StatisticDataViewModel? _selectedSlot;
@@ -677,12 +677,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         }
 
         var elapsed = InUsingTimer.Elapsed;
-        var displayTime = DateTime.Today.Add(elapsed);
-
-        if (BattleDuration != displayTime)
-        {
-            BattleDuration = displayTime;
-        }
+        BattleDuration = elapsed;
     }
 
     private void StorageOnNewSectionCreated()

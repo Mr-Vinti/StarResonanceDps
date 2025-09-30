@@ -180,12 +180,23 @@
                     FontFamily="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC"
                     FontWeight="Bold"
                     Foreground="White">
-                    <TextBlock.Text>
-                        <MultiBinding Converter="{StaticResource HumanReadableNumberConverter}">
-                            <Binding Path="Value" />
-                            <Binding Path="DataContext.NumberDisplayMode" RelativeSource="{RelativeSource AncestorType=Window}" />
-                        </MultiBinding>
-                    </TextBlock.Text>
+                    <Run>
+                        <Run.Text>
+                            <MultiBinding Converter="{StaticResource HumanReadableNumberConverter}">
+                                <Binding Path="Value" />
+                                <Binding Path="DataContext.NumberDisplayMode" RelativeSource="{RelativeSource AncestorType=Window}" />
+                            </MultiBinding>
+                        </Run.Text>
+                    </Run>
+                    <Run>
+                        <Run.Text>
+                            <MultiBinding Converter="{StaticResource DpsConverter}" StringFormat="{}[{0}]">
+                                <Binding Path="Value" />
+                                <Binding Path="DataContext.BattleDuration" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                <Binding Path="DataContext.NumberDisplayMode" RelativeSource="{RelativeSource AncestorType=Window}" />
+                            </MultiBinding>
+                        </Run.Text>
+                    </Run>
                 </TextBlock>
                 <TextBlock
                     Grid.Column="4"
