@@ -516,20 +516,24 @@ namespace StarResonanceDpsAnalysis.Core.Data
             fullData.StartLoggedTick ??= log.TimeTicks;
             fullData.LastLoggedTick = log.TimeTicks;
 
-            var fullSkillDic = fullData.GetOrCreateSkillData(log.SkillID);
-            fullSkillDic.TotalValue += log.Value;
-            fullSkillDic.UseTimes += 1;
-            fullSkillDic.CritTimes += log.IsCritical ? 1 : 0;
-            fullSkillDic.LuckyTimes += log.IsLucky ? 1 : 0;
+            fullData.UpdateSkillData(log.SkillID, skillData =>
+            {
+                skillData.TotalValue += log.Value;
+                skillData.UseTimes += 1;
+                skillData.CritTimes += log.IsCritical ? 1 : 0;
+                skillData.LuckyTimes += log.IsLucky ? 1 : 0;
+            });
 
             sectionedData.StartLoggedTick ??= log.TimeTicks;
             sectionedData.LastLoggedTick = log.TimeTicks;
 
-            var sectionedSkillDic = sectionedData.GetOrCreateSkillData(log.SkillID);
-            sectionedSkillDic.TotalValue += log.Value;
-            sectionedSkillDic.UseTimes += 1;
-            sectionedSkillDic.CritTimes += log.IsCritical ? 1 : 0;
-            sectionedSkillDic.LuckyTimes += log.IsLucky ? 1 : 0;
+            sectionedData.UpdateSkillData(log.SkillID, skillData =>
+            {
+                skillData.TotalValue += log.Value;
+                skillData.UseTimes += 1;
+                skillData.CritTimes += log.IsCritical ? 1 : 0;
+                skillData.LuckyTimes += log.IsLucky ? 1 : 0;
+            });
 
             return (fullData, sectionedData);
         }

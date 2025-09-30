@@ -49,32 +49,72 @@ namespace StarResonanceDpsAnalysis.Core.Data.Models
         /// 技能统计数据字典
         /// </summary>
         internal Dictionary<long, SkillData> SkillDic { get; } = [];
+        private readonly object _skillLock = new();
+
         /// <summary>
         /// 只读技能统计数据字典
         /// </summary>
-        public ReadOnlyDictionary<long, SkillData> ReadOnlySkillDatas { get => SkillDic.AsReadOnly(); }
+        public ReadOnlyDictionary<long, SkillData> ReadOnlySkillDatas
+        {
+            get
+            {
+                lock (_skillLock)
+                {
+                    var copy = SkillDic.ToDictionary(static pair => pair.Key,
+                        static pair => CloneSkillData(pair.Value));
+                    return new ReadOnlyDictionary<long, SkillData>(copy);
+                }
+            }
+        }
+
         /// <summary>
         /// 只读技能统计数据列表
         /// </summary>
-        public IReadOnlyList<SkillData> ReadOnlySkillDataList { get => SkillDic.Values.ToList().AsReadOnly(); }
+        public IReadOnlyList<SkillData> ReadOnlySkillDataList
+        {
+            get
+            {
+                lock (_skillLock)
+                {
+                    return SkillDic.Values.Select(CloneSkillData).ToList();
+                }
+            }
+        }
         /// <summary>
         /// 获取或创建技能统计数据
         /// </summary>
         /// <param name="skillId">技能UID</param>
         /// <returns></returns>
 
-        public SkillData GetOrCreateSkillData(long skillId)
+        public void UpdateSkillData(long skillId, Action<SkillData> updater)
         {
-            if (!SkillDic.TryGetValue(skillId, out var skillData))
-            {
-                skillData = new SkillData()
-                {
-                    SkillId = skillId,
-                };
-                SkillDic[skillId] = skillData;
-            }
+            if (updater is null) throw new ArgumentNullException(nameof(updater));
 
-            return skillData;
+            lock (_skillLock)
+            {
+                if (!SkillDic.TryGetValue(skillId, out var skillData))
+                {
+                    skillData = new SkillData
+                    {
+                        SkillId = skillId
+                    };
+                    SkillDic[skillId] = skillData;
+                }
+
+                updater(skillData);
+            }
+        }
+
+        private static SkillData CloneSkillData(SkillData source)
+        {
+            return new SkillData
+            {
+                SkillId = source.SkillId,
+                TotalValue = source.TotalValue,
+                UseTimes = source.UseTimes,
+                CritTimes = source.CritTimes,
+                LuckyTimes = source.LuckyTimes
+            };
         }
     }
 }

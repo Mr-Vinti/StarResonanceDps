@@ -12,11 +12,9 @@ public partial class StatisticDataViewModel(DebugFunctions debug) : BaseViewMode
     [ObservableProperty] private double _percentOfMax;
     [ObservableProperty] private PlayerInfoViewModel _player = new();
 
-    [ObservableProperty] private ulong _value;
+    [ObservableProperty] private IReadOnlyList<SkillItemViewModel> _skillList = [];
 
-    // [ObservableProperty] private ObservableCollection<SkillItemViewModel> _skillList = new();
-    public Func<PlayerInfoViewModel, List<SkillItemViewModel>>? GetSkillList { get; set; }
-    public List<SkillItemViewModel> SkillList => GetSkillList?.Invoke(Player) ?? new List<SkillItemViewModel>();
+    [ObservableProperty] private ulong _value;
     public DebugFunctions Debug { get; } = debug;
 
     public int CompareTo(StatisticDataViewModel? other)

@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
+using StarResonanceDpsAnalysis.Core;
 using StarResonanceDpsAnalysis.Core.Analyze.Exceptions;
 using StarResonanceDpsAnalysis.Core.Data;
 using StarResonanceDpsAnalysis.Core.Data.Models;
@@ -44,19 +45,20 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private readonly Dictionary<long, StatisticDataViewModel> _slotsDictionary = new();
     private readonly IDataStorage _storage;
     private readonly IWindowManagementService _windowManagement;
-    private DispatcherTimer? _durationTimer;
-    private bool _isInitialized;
 
     [ObservableProperty] private TimeSpan _battleDuration;
+    [ObservableProperty] private StatisticDataViewModel? _currentPlayerSlot;
+    private DispatcherTimer? _durationTimer;
+    private bool _isInitialized;
     [ObservableProperty] private NumberDisplayMode _numberDisplayMode = NumberDisplayMode.Wan;
     [ObservableProperty] private ScopeTime _scopeTime = ScopeTime.Current;
     [ObservableProperty] private StatisticDataViewModel? _selectedSlot;
     [ObservableProperty] private bool _showContextMenu;
+    [ObservableProperty] private int _skillDisplayLimit = 8;
     [ObservableProperty] private BulkObservableCollection<StatisticDataViewModel> _slots = new();
     [ObservableProperty] private SortDirectionEnum _sortDirection = SortDirectionEnum.Descending;
     [ObservableProperty] private string _sortMemberPath = "Value";
     [ObservableProperty] private StatisticType _statisticIndex;
-    [ObservableProperty] private StatisticDataViewModel? _currentPlayerSlot;
 
     [ObservableProperty] private AppConfig _appConfig = null!;
 
@@ -170,6 +172,18 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         }
     }
 
+    partial void OnSkillDisplayLimitChanged(int value)
+    {
+        if (value < 0)
+        {
+            SkillDisplayLimit = 0;
+            return;
+        }
+
+        if (!_isInitialized) return;
+        RefreshSkillSnapshots();
+    }
+
     private void OnSampleDataRequested(object? sender, EventArgs e)
     {
         // Handle the event from DebugFunctions
@@ -258,31 +272,9 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                         Name = ret ? playerInfo?.Name ?? $"UID: {dpsData.UID}" : $"UID: {dpsData.UID}",
                         Spec = playerInfo?.Spec ?? ClassSpec.Unknown
                     },
-                    GetSkillList = player =>
-                    {
-                        // Try to get real data first, fallback to test data
-                        if (_storage.ReadOnlyFullDpsDatas.TryGetValue(player.Uid, out var fullDpsData))
-                        {
-                            return fullDpsData.ReadOnlySkillDataList.Select(item =>
-                            {
-                                return new SkillItemViewModel
-                                {
-                                    SkillName = item.SkillId.ToString(),
-                                    AvgDamage = 1000,
-                                    CritCount = item.CritTimes,
-                                    HitCount = item.UseTimes,
-                                    TotalDamage = item.TotalValue
-                                };
-                            }).ToList();
-                        }
-
-                        return [];
-                    }
+                    SkillList = BuildSkillListSnapshot(dpsData)
                 };
-                _dispatcher.Invoke(() =>
-                {
-                    Slots.Add(slot);
-                });
+                _dispatcher.Invoke(() => { Slots.Add(slot); });
             }
 
             // Simplified update of existing slot (replaces the selected block)
@@ -293,6 +285,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             // use the out variable `slot` from TryGetValue above for in-place update
             slot.Value = unsignedValue;
             slot.Duration = duration;
+            slot.SkillList = BuildSkillListSnapshot(dpsData);
 
             if (_storage.ReadOnlyPlayerInfoDatas.TryGetValue(dpsData.UID, out playerInfo))
             {
@@ -363,6 +356,62 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         }
     }
 
+    private IReadOnlyList<SkillItemViewModel> BuildSkillListSnapshot(DpsData dpsData)
+    {
+        var skills = dpsData.ReadOnlySkillDataList;
+        if (skills.Count == 0)
+        {
+            return [];
+        }
+
+        var orderedSkills = skills
+            .OrderByDescending(static s => s.TotalValue);
+
+        var projected = orderedSkills.Select(skill =>
+        {
+            var average = skill.UseTimes > 0
+                ? Math.Round(skill.TotalValue / (double)skill.UseTimes)
+                : 0d;
+
+            var avgDamage = average > int.MaxValue
+                ? int.MaxValue
+                : (int)average;
+
+            var skillIdText = skill.SkillId.ToString();
+            var skillName = EmbeddedSkillConfig.TryGet(skillIdText, out var definition)
+                ? definition.Name
+                : skillIdText;
+
+            return new SkillItemViewModel
+            {
+                SkillName = skillName,
+                TotalDamage = skill.TotalValue,
+                HitCount = skill.UseTimes,
+                CritCount = skill.CritTimes,
+                AvgDamage = avgDamage
+            };
+        });
+
+        return ApplySkillDisplayLimit(projected);
+    }
+
+    private IReadOnlyList<SkillItemViewModel> ApplySkillDisplayLimit(IEnumerable<SkillItemViewModel> skills)
+    {
+        var limit = SkillDisplayLimit;
+        return limit > 0
+            ? skills.Take(limit).ToList()
+            : skills.ToList();
+    }
+
+    private void RefreshSkillSnapshots()
+    {
+        var dpsList = ScopeTime == ScopeTime.Total
+            ? DataStorage.ReadOnlyFullDpsDataList
+            : DataStorage.ReadOnlySectionedDpsDataList;
+
+        UpdateData(dpsList);
+    }
+
     /// <summary>
     /// 获取每个统计类别的默认筛选器
     /// </summary>
@@ -431,19 +480,21 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                 Name = $"Test Player {Slots.Count + 1}",
                 Spec = ClassSpec.Unknown
             },
-            // Add test skill data
-            GetSkillList = player => new List<SkillItemViewModel>
+            SkillList = ApplySkillDisplayLimit(new[]
             {
-                new()
+                new SkillItemViewModel
                 {
                     SkillName = "Test Skill A", TotalDamage = 15000, HitCount = 25, CritCount = 8, AvgDamage = 600
                 },
-                new() { SkillName = "Test Skill B", TotalDamage = 8500, HitCount = 15, CritCount = 4, AvgDamage = 567 },
-                new()
+                new SkillItemViewModel
+                {
+                    SkillName = "Test Skill B", TotalDamage = 8500, HitCount = 15, CritCount = 4, AvgDamage = 567
+                },
+                new SkillItemViewModel
                 {
                     SkillName = "Test Skill C", TotalDamage = 12300, HitCount = 30, CritCount = 12, AvgDamage = 410
                 }
-            }
+            })
         };
 
         // Calculate percentages
@@ -471,6 +522,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
         Slots.Add(newItem);
         SortSlotsInPlace();
+    }
+
+    [RelayCommand]
+    private void SetSkillDisplayLimit(int limit)
+    {
+        SkillDisplayLimit = Math.Max(0, limit);
     }
 
     [RelayCommand]
@@ -543,6 +600,86 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private void Shutdown()
     {
         _appControlService.Shutdown();
+    }
+
+    private void EnsureDurationTimerStarted()
+    {
+        if (_durationTimer != null) return;
+
+        _durationTimer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromSeconds(1)
+        };
+        _durationTimer.Tick += DurationTimerOnTick;
+        _durationTimer.Start();
+    }
+
+    private void DurationTimerOnTick(object? sender, EventArgs e)
+    {
+        UpdateBattleDuration();
+    }
+
+    private void UpdateBattleDuration()
+    {
+        if (!_dispatcher.CheckAccess())
+        {
+            _dispatcher.BeginInvoke(UpdateBattleDuration);
+            return;
+        }
+
+        var elapsed = InUsingTimer.Elapsed;
+        BattleDuration = elapsed;
+    }
+
+    private void StorageOnNewSectionCreated()
+    {
+        _dispatcher.BeginInvoke(() =>
+        {
+            _battleTimer.Reset();
+            UpdateBattleDuration();
+        });
+    }
+
+    private void StorageOnPlayerInfoUpdated(PlayerInfo info)
+    {
+        if (info == null)
+        {
+            return;
+        }
+
+        if (!_slotsDictionary.TryGetValue(info.UID, out var slot))
+        {
+            return;
+        }
+
+        _dispatcher.BeginInvoke(() =>
+        {
+            slot.Player.Name = info.Name ?? slot.Player.Name;
+            slot.Player.Class = info.ProfessionID?.GetClassNameById() ?? slot.Player.Class;
+            slot.Player.Spec = info.Spec;
+            slot.Player.Uid = info.UID;
+
+            if (_storage.CurrentPlayerInfo.UID == info.UID)
+            {
+                CurrentPlayerSlot = slot;
+            }
+        });
+    }
+
+    partial void OnScopeTimeChanged(ScopeTime value)
+    {
+        UpdateBattleDuration();
+        UpdateData();
+    }
+
+    partial void OnStatisticIndexChanged(StatisticType value)
+    {
+        UpdateData();
+    }
+
+    private static ulong ConvertToUnsigned(long value)
+    {
+        return value <= 0 ? 0UL : (ulong)value;
     }
 
     #region Sort
@@ -734,3 +871,4 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
 
 
+}
