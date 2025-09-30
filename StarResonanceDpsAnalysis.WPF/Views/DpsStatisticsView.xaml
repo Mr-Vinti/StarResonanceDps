@@ -37,20 +37,21 @@
 
     <Window.Resources>
 
-        <Style x:Key="WindowBackground" TargetType="Border" BasedOn="{StaticResource ShadowWindowBorder}">
+        <Style
+            x:Key="WindowBackground"
+            BasedOn="{StaticResource ShadowWindowBorder}"
+            TargetType="Border">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="#191919"
-                                     Opacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}" />
+                    <SolidColorBrush Opacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}" Color="#191919" />
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="TitleBar" TargetType="Border">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="#BABABA"
-                                     Opacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}" />
+                    <SolidColorBrush Opacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}" Color="#BABABA" />
                 </Setter.Value>
             </Setter>
             <Setter Property="VerticalAlignment" Value="Top" />
@@ -84,8 +85,7 @@
         <Style x:Key="FooterContentBorder" TargetType="Border">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="#BABABA"
-                                     Opacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}" />
+                    <SolidColorBrush Opacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}" Color="#BABABA" />
                 </Setter.Value>
             </Setter>
             <Setter Property="VerticalAlignment" Value="Bottom" />
@@ -254,13 +254,14 @@
                     <!--  simple ControlTemplate so ContentPresenter stretches to available size  -->
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border
-                                Padding="{TemplateBinding Padding}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <Border Padding="{TemplateBinding Padding}" BorderThickness="{TemplateBinding BorderThickness}">
                                 <Border.Background>
                                     <MultiBinding Converter="{StaticResource BrushWithOpacityConverter}">
-                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Background" />
-                                        <Binding RelativeSource="{RelativeSource AncestorType=Window}" Path="DataContext.AppConfig.Opacity" Converter="{StaticResource PercentToOpacityConverter}" />
+                                        <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding
+                                            Converter="{StaticResource PercentToOpacityConverter}"
+                                            Path="DataContext.AppConfig.Opacity"
+                                            RelativeSource="{RelativeSource AncestorType=Window}" />
                                     </MultiBinding>
                                 </Border.Background>
                                 <ContentPresenter
@@ -288,7 +289,8 @@
                             OverlayTemplate="{StaticResource PercentageDataTemplate}"
                             Percentage="{Binding PercentOfMax}"
                             PopupContent="{Binding}"
-                            PopupTemplate="{StaticResource PopupTemplate}">
+                            PopupTemplate="{StaticResource PopupTemplate}"
+                            TrackOpacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}">
                             <!--  PopupContent="{StaticResource PopupTemplate}"  -->
                             <!-- <ctrl:DpsIndicatorControl.Percentage> -->
                             <!--  <MultiBinding Converter="{StaticResource PercentOfMaxConverter}"  -->
@@ -453,7 +455,7 @@
                                                 <system:Int32>5</system:Int32>
                                             </MenuItem.CommandParameter>
                                             <MenuItem.IsChecked>
-                                                <MultiBinding Mode="OneWay" Converter="{StaticResource EqualsConverter}">
+                                                <MultiBinding Converter="{StaticResource EqualsConverter}" Mode="OneWay">
                                                     <Binding Path="PlacementTarget.DataContext.SkillDisplayLimit" RelativeSource="{RelativeSource AncestorType=ContextMenu}" />
                                                     <Binding Path="CommandParameter" RelativeSource="{RelativeSource Self}" />
                                                 </MultiBinding>
@@ -464,7 +466,7 @@
                                                 <system:Int32>8</system:Int32>
                                             </MenuItem.CommandParameter>
                                             <MenuItem.IsChecked>
-                                                <MultiBinding Mode="OneWay" Converter="{StaticResource EqualsConverter}">
+                                                <MultiBinding Converter="{StaticResource EqualsConverter}" Mode="OneWay">
                                                     <Binding Path="PlacementTarget.DataContext.SkillDisplayLimit" RelativeSource="{RelativeSource AncestorType=ContextMenu}" />
                                                     <Binding Path="CommandParameter" RelativeSource="{RelativeSource Self}" />
                                                 </MultiBinding>
@@ -475,7 +477,7 @@
                                                 <system:Int32>10</system:Int32>
                                             </MenuItem.CommandParameter>
                                             <MenuItem.IsChecked>
-                                                <MultiBinding Mode="OneWay" Converter="{StaticResource EqualsConverter}">
+                                                <MultiBinding Converter="{StaticResource EqualsConverter}" Mode="OneWay">
                                                     <Binding Path="PlacementTarget.DataContext.SkillDisplayLimit" RelativeSource="{RelativeSource AncestorType=ContextMenu}" />
                                                     <Binding Path="CommandParameter" RelativeSource="{RelativeSource Self}" />
                                                 </MultiBinding>
@@ -486,7 +488,7 @@
                                                 <system:Int32>15</system:Int32>
                                             </MenuItem.CommandParameter>
                                             <MenuItem.IsChecked>
-                                                <MultiBinding Mode="OneWay" Converter="{StaticResource EqualsConverter}">
+                                                <MultiBinding Converter="{StaticResource EqualsConverter}" Mode="OneWay">
                                                     <Binding Path="PlacementTarget.DataContext.SkillDisplayLimit" RelativeSource="{RelativeSource AncestorType=ContextMenu}" />
                                                     <Binding Path="CommandParameter" RelativeSource="{RelativeSource Self}" />
                                                 </MultiBinding>
@@ -497,7 +499,7 @@
                                                 <system:Int32>0</system:Int32>
                                             </MenuItem.CommandParameter>
                                             <MenuItem.IsChecked>
-                                                <MultiBinding Mode="OneWay" Converter="{StaticResource EqualsConverter}">
+                                                <MultiBinding Converter="{StaticResource EqualsConverter}" Mode="OneWay">
                                                     <Binding Path="PlacementTarget.DataContext.SkillDisplayLimit" RelativeSource="{RelativeSource AncestorType=ContextMenu}" />
                                                     <Binding Path="CommandParameter" RelativeSource="{RelativeSource Self}" />
                                                 </MultiBinding>

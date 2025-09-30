@@ -17,6 +17,7 @@
                             Height="{Binding Height, RelativeSource={RelativeSource TemplatedParent}}"
                             Background="{Binding IndicatorBackground, RelativeSource={RelativeSource TemplatedParent}}"
                             CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}}"
+                            Opacity="{TemplateBinding TrackOpacity}"
                             Visibility="Hidden" />
 
                         <!--  indicator, width calculated by converter  -->
@@ -25,6 +26,7 @@
                             Height="{Binding Height, RelativeSource={RelativeSource TemplatedParent}}"
                             HorizontalAlignment="Left"
                             Fill="{Binding IndicatorForeground, RelativeSource={RelativeSource TemplatedParent}}"
+                            Opacity="{TemplateBinding TrackOpacity}"
                             RadiusX="{Binding CornerRadius.TopLeft, RelativeSource={RelativeSource TemplatedParent}}"
                             RadiusY="{Binding CornerRadius.TopLeft, RelativeSource={RelativeSource TemplatedParent}}">
                             <Rectangle.Width>

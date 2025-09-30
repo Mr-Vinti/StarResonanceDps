@@ -56,6 +56,9 @@ public class DpsIndicatorControl : Control
         nameof(PopupContent), typeof(object), typeof(DpsIndicatorControl),
         new PropertyMetadata(default, OnPopupContentChanged));
 
+    public static readonly DependencyProperty TrackOpacityProperty = DependencyProperty.Register(
+        nameof(TrackOpacity), typeof(double), typeof(DpsIndicatorControl), new PropertyMetadata(default(double)));
+
     static DpsIndicatorControl()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(DpsIndicatorControl),
@@ -69,6 +72,12 @@ public class DpsIndicatorControl : Control
             Debug.WriteLine(
                 $"[DpsIndicatorControl] MouseEnter - PopupContent: {PopupContent?.GetType().Name ?? "null"}");
         MouseLeave += (s, e) => Debug.WriteLine("[DpsIndicatorControl] MouseLeave");
+    }
+
+    public double TrackOpacity
+    {
+        get => (double)GetValue(TrackOpacityProperty);
+        set => SetValue(TrackOpacityProperty, value);
     }
 
     public double Percentage
