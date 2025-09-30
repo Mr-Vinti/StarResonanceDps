@@ -446,6 +446,64 @@
                                             </MenuItem.CommandParameter>
                                         </MenuItem>
                                     </MenuItem>
+                                    <!--  技能显示设置  -->
+                                    <MenuItem Header="技能显示" ItemContainerStyle="{StaticResource CheckableMenuItem}">
+                                        <MenuItem Command="{Binding PlacementTarget.DataContext.SetSkillDisplayLimitCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" Header="前 5 条">
+                                            <MenuItem.CommandParameter>
+                                                <system:Int32>5</system:Int32>
+                                            </MenuItem.CommandParameter>
+                                            <MenuItem.IsChecked>
+                                                <MultiBinding Mode="OneWay" Converter="{StaticResource EqualsConverter}">
+                                                    <Binding Path="PlacementTarget.DataContext.SkillDisplayLimit" RelativeSource="{RelativeSource AncestorType=ContextMenu}" />
+                                                    <Binding Path="CommandParameter" RelativeSource="{RelativeSource Self}" />
+                                                </MultiBinding>
+                                            </MenuItem.IsChecked>
+                                        </MenuItem>
+                                        <MenuItem Command="{Binding PlacementTarget.DataContext.SetSkillDisplayLimitCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" Header="前 8 条">
+                                            <MenuItem.CommandParameter>
+                                                <system:Int32>8</system:Int32>
+                                            </MenuItem.CommandParameter>
+                                            <MenuItem.IsChecked>
+                                                <MultiBinding Mode="OneWay" Converter="{StaticResource EqualsConverter}">
+                                                    <Binding Path="PlacementTarget.DataContext.SkillDisplayLimit" RelativeSource="{RelativeSource AncestorType=ContextMenu}" />
+                                                    <Binding Path="CommandParameter" RelativeSource="{RelativeSource Self}" />
+                                                </MultiBinding>
+                                            </MenuItem.IsChecked>
+                                        </MenuItem>
+                                        <MenuItem Command="{Binding PlacementTarget.DataContext.SetSkillDisplayLimitCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" Header="前 10 条">
+                                            <MenuItem.CommandParameter>
+                                                <system:Int32>10</system:Int32>
+                                            </MenuItem.CommandParameter>
+                                            <MenuItem.IsChecked>
+                                                <MultiBinding Mode="OneWay" Converter="{StaticResource EqualsConverter}">
+                                                    <Binding Path="PlacementTarget.DataContext.SkillDisplayLimit" RelativeSource="{RelativeSource AncestorType=ContextMenu}" />
+                                                    <Binding Path="CommandParameter" RelativeSource="{RelativeSource Self}" />
+                                                </MultiBinding>
+                                            </MenuItem.IsChecked>
+                                        </MenuItem>
+                                        <MenuItem Command="{Binding PlacementTarget.DataContext.SetSkillDisplayLimitCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" Header="前 15 条">
+                                            <MenuItem.CommandParameter>
+                                                <system:Int32>15</system:Int32>
+                                            </MenuItem.CommandParameter>
+                                            <MenuItem.IsChecked>
+                                                <MultiBinding Mode="OneWay" Converter="{StaticResource EqualsConverter}">
+                                                    <Binding Path="PlacementTarget.DataContext.SkillDisplayLimit" RelativeSource="{RelativeSource AncestorType=ContextMenu}" />
+                                                    <Binding Path="CommandParameter" RelativeSource="{RelativeSource Self}" />
+                                                </MultiBinding>
+                                            </MenuItem.IsChecked>
+                                        </MenuItem>
+                                        <MenuItem Command="{Binding PlacementTarget.DataContext.SetSkillDisplayLimitCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" Header="显示全部">
+                                            <MenuItem.CommandParameter>
+                                                <system:Int32>0</system:Int32>
+                                            </MenuItem.CommandParameter>
+                                            <MenuItem.IsChecked>
+                                                <MultiBinding Mode="OneWay" Converter="{StaticResource EqualsConverter}">
+                                                    <Binding Path="PlacementTarget.DataContext.SkillDisplayLimit" RelativeSource="{RelativeSource AncestorType=ContextMenu}" />
+                                                    <Binding Path="CommandParameter" RelativeSource="{RelativeSource Self}" />
+                                                </MultiBinding>
+                                            </MenuItem.IsChecked>
+                                        </MenuItem>
+                                    </MenuItem>
                                     <!--  历史记录  -->
                                     <MenuItem Header="历史记录" ItemContainerStyle="{StaticResource CheckableMenuItem}" />
                                     <!--  打桩模式  -->
@@ -518,7 +576,7 @@
                         Margin="6,0,0,0"
                         HorizontalAlignment="Left"
                         Style="{StaticResource FooterTextContent}"
-                        Text="{Binding Path=BattleDuration, StringFormat=mm:ss}" />
+                        Text="{Binding Path=BattleDuration, StringFormat={}{0:mm\\:ss}}" />
                     <TextBlock
                         Grid.Column="2"
                         Margin="0,0,4,0"
@@ -543,9 +601,3 @@
 
 
 </Window>
-
-
-
-
-
-

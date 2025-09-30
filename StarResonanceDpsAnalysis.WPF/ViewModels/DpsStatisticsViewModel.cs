@@ -602,85 +602,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         _appControlService.Shutdown();
     }
 
-    private void EnsureDurationTimerStarted()
-    {
-        if (_durationTimer != null) return;
-
-        _durationTimer = new DispatcherTimer
-        {
-            Interval = TimeSpan.FromSeconds(1)
-        };
-        _durationTimer.Tick += DurationTimerOnTick;
-        _durationTimer.Start();
-    }
-
-    private void DurationTimerOnTick(object? sender, EventArgs e)
-    {
-        UpdateBattleDuration();
-    }
-
-    private void UpdateBattleDuration()
-    {
-        if (!_dispatcher.CheckAccess())
-        {
-            _dispatcher.BeginInvoke(UpdateBattleDuration);
-            return;
-        }
-
-        var elapsed = InUsingTimer.Elapsed;
-        BattleDuration = elapsed;
-    }
-
-    private void StorageOnNewSectionCreated()
-    {
-        _dispatcher.BeginInvoke(() =>
-        {
-            _battleTimer.Reset();
-            UpdateBattleDuration();
-        });
-    }
-
-    private void StorageOnPlayerInfoUpdated(PlayerInfo info)
-    {
-        if (info == null)
-        {
-            return;
-        }
-
-        if (!_slotsDictionary.TryGetValue(info.UID, out var slot))
-        {
-            return;
-        }
-
-        _dispatcher.BeginInvoke(() =>
-        {
-            slot.Player.Name = info.Name ?? slot.Player.Name;
-            slot.Player.Class = info.ProfessionID?.GetClassNameById() ?? slot.Player.Class;
-            slot.Player.Spec = info.Spec;
-            slot.Player.Uid = info.UID;
-
-            if (_storage.CurrentPlayerInfo.UID == info.UID)
-            {
-                CurrentPlayerSlot = slot;
-            }
-        });
-    }
-
-    partial void OnScopeTimeChanged(ScopeTime value)
-    {
-        UpdateBattleDuration();
-        UpdateData();
-    }
-
-    partial void OnStatisticIndexChanged(StatisticType value)
-    {
-        UpdateData();
-    }
-
-    private static ulong ConvertToUnsigned(long value)
-    {
-        return value <= 0 ? 0UL : (ulong)value;
-    }
 
     #region Sort
 
@@ -867,8 +788,4 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     {
         return value <= 0 ? 0UL : (ulong)value;
     }
-}
-
-
-
 }
