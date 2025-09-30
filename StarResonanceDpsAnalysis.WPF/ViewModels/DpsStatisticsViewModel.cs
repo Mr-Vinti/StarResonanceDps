@@ -58,6 +58,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     [ObservableProperty] private StatisticType _statisticIndex;
     [ObservableProperty] private StatisticDataViewModel? _currentPlayerSlot;
 
+    [ObservableProperty] private AppConfig _appConfig = null!;
+
     /// <inheritdoc/>
     public DpsStatisticsViewModel(IApplicationControlService appControlService,
         IDataStorage storage,
@@ -79,6 +81,9 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         // Subscribe to DebugFunctions events to handle sample data requests
         DebugFunctions.SampleDataRequested += OnSampleDataRequested;
         _storage.PlayerInfoUpdated += StorageOnPlayerInfoUpdated;
+
+        AppConfig = _configManager.CurrentConfig;
+        _configManager.ConfigurationUpdated += ConfigManagerOnConfigurationUpdated;
 
         return;
 
@@ -137,6 +142,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     {
         // Unsubscribe from DebugFunctions events
         DebugFunctions.SampleDataRequested -= OnSampleDataRequested;
+        _configManager.ConfigurationUpdated -= ConfigManagerOnConfigurationUpdated;
 
         if (_durationTimer != null)
         {
@@ -150,6 +156,18 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         _storage.Dispose();
 
         _isInitialized = false;
+    }
+
+    private void ConfigManagerOnConfigurationUpdated(object? sender, AppConfig newConfig)
+    {
+        if (_dispatcher.CheckAccess())
+        {
+            AppConfig = newConfig;
+        }
+        else
+        {
+            _dispatcher.Invoke(() => AppConfig = newConfig);
+        }
     }
 
     private void OnSampleDataRequested(object? sender, EventArgs e)
@@ -718,3 +736,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         return value <= 0 ? 0UL : (ulong)value;
     }
 }
+
+
+

@@ -1,4 +1,4 @@
-<Window
+﻿<Window
     x:Class="StarResonanceDpsAnalysis.WPF.Views.SettingsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -57,7 +57,12 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="2" />
         </Style>
+
         <Style BasedOn="{StaticResource TableTextBlock}" TargetType="TextBlock" />
+
+        <Style x:Key="FieldLine" TargetType="Grid">
+            <Setter Property="Margin" Value="0,0,0,20" />
+        </Style>
 
     </Window.Resources>
     <Border Background="#EFEFEF" Style="{StaticResource ShadowWindowBorder}">
@@ -118,8 +123,7 @@
                                     Grid.Column="1"
                                     DisplayMemberPath="Description"
                                     ItemsSource="{Binding AvailableNetworkAdapters, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedIndex="0"
-                                    SelectedItem="{Binding AppConfig.PreferredNetworkAdapter}"
+                                    SelectedItem="{Binding AppConfig.PreferredNetworkAdapter, Mode=TwoWay}"
                                     SelectedValuePath="Description"
                                     Style="{StaticResource AntComboBoxStyle}" />
                             </Grid>
@@ -207,59 +211,94 @@
                                     <Style BasedOn="{StaticResource TableTextBlock}" TargetType="TextBlock" />
                                 </Grid.Resources>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="30" />
-                                    <RowDefinition Height="30" />
-                                    <RowDefinition Height="30" />
-                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="140" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+
                                 <!--  临时占位  -->
-                                <Grid Grid.ColumnSpan="2">
+                                <Grid Style="{StaticResource FieldLine}"
+                                      Grid.Row="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="140" />
-                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="135"/>
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
+
                                     <TextBlock>脱战后清除当前统计</TextBlock>
                                     <TextBox
-                                        Grid.Column="1"
+                                        Grid.Column="2"
                                         Margin="2"
-                                        HorizontalContentAlignment="Center"
+                                        HorizontalContentAlignment="Right"
                                         VerticalContentAlignment="Center"
-                                        Style="{StaticResource AntTextBoxStyle}" />
-                                    <TextBlock Grid.Column="2">秒</TextBlock>
+                                        Style="{StaticResource AntTextBoxStyle}"
+                                        Text="{Binding AppConfig.CombatTimeClearDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Grid.Column="3">秒</TextBlock>
                                 </Grid>
-                                <TextBlock Grid.Row="1" Grid.Column="0">
-                                    换地图时清空全程统计
-                                </TextBlock>
-                                <ctrl:SwitchControl
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    OffContent="Off"
-                                    OnContent="On" />
-                                <TextBlock Grid.Row="2" Grid.Column="0">
-                                    计数显示类型
-                                </TextBlock>
 
-                                <ComboBox
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Margin="2"
-                                    ItemsSource="{Binding AvailableNumberDisplayModes}"
-                                    SelectedIndex="0"
-                                    SelectedItem="{Binding AppConfig.DamageDisplayType}"
-                                    Style="{StaticResource AntComboBoxStyle}" />
-                                <TextBlock Grid.Row="3" Grid.Column="0">
-                                    窗体透明度
-                                </TextBlock>
-                                <Slider
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource AntSliderStyle}" />
+                                <Grid Style="{StaticResource FieldLine}"
+                                      Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="140" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock>换地图时清空全程统计</TextBlock>
+                                    <ctrl:SwitchControl
+                                        Grid.Column="2"
+                                        OffContent="Off"
+                                        OnContent="On"
+                                        IsChecked="{Binding AppConfig.ClearLogAfterTeleport, Mode=TwoWay}" />
+
+                                </Grid>
+
+                                <Grid Style="{StaticResource FieldLine}"
+                                      Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="140" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock>
+                                        计数显示类型
+                                    </TextBlock>
+                                    <ComboBox
+                                        Grid.Column="2"
+                                        Margin="2"
+                                        ItemsSource="{Binding AvailableNumberDisplayModes}"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Value"
+                                        SelectedValue="{Binding AppConfig.DamageDisplayType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Style="{StaticResource AntComboBoxStyle}" />
+                                </Grid>
+
+                                <Grid Grid.Row="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="140" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="30" />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock>窗体透明度</TextBlock>
+                                    <Slider
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Maximum="100"
+                                        Minimum="0"
+                                        Style="{StaticResource AntSliderStyle}"
+                                        TickFrequency="1"
+                                        IsSnapToTickEnabled="True"
+                                        Value="{Binding AppConfig.Opacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock 
+                                        Grid.Column="3"
+                                        HorizontalAlignment="Center"
+                                        Text="{Binding AppConfig.Opacity, Mode=OneWay}"/>
+                                </Grid>
                             </Grid>
                         </ctrl:CardControl.Content>
                     </ctrl:CardControl>
