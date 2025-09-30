@@ -118,8 +118,7 @@
                                     Grid.Column="1"
                                     DisplayMemberPath="Description"
                                     ItemsSource="{Binding AvailableNetworkAdapters, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedIndex="0"
-                                    SelectedItem="{Binding AppConfig.PreferredNetworkAdapter}"
+                                    SelectedItem="{Binding AppConfig.PreferredNetworkAdapter, Mode=TwoWay}"
                                     SelectedValuePath="Description"
                                     Style="{StaticResource AntComboBoxStyle}" />
                             </Grid>
@@ -229,7 +228,8 @@
                                         Margin="2"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
-                                        Style="{StaticResource AntTextBoxStyle}" />
+                                        Style="{StaticResource AntTextBoxStyle}"
+                                        Text="{Binding AppConfig.CombatTimeClearDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBlock Grid.Column="2">秒</TextBlock>
                                 </Grid>
                                 <TextBlock Grid.Row="1" Grid.Column="0">
@@ -239,7 +239,8 @@
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     OffContent="Off"
-                                    OnContent="On" />
+                                    OnContent="On"
+                                    IsChecked="{Binding AppConfig.ClearLogAfterTeleport, Mode=TwoWay}" />
                                 <TextBlock Grid.Row="2" Grid.Column="0">
                                     计数显示类型
                                 </TextBlock>
@@ -249,8 +250,7 @@
                                     Grid.Column="1"
                                     Margin="2"
                                     ItemsSource="{Binding AvailableNumberDisplayModes}"
-                                    SelectedIndex="0"
-                                    SelectedItem="{Binding AppConfig.DamageDisplayType}"
+                                    SelectedItem="{Binding AppConfig.DamageDisplayType, Mode=TwoWay}"
                                     Style="{StaticResource AntComboBoxStyle}" />
                                 <TextBlock Grid.Row="3" Grid.Column="0">
                                     窗体透明度
@@ -259,7 +259,12 @@
                                     Grid.Row="3"
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
-                                    Style="{StaticResource AntSliderStyle}" />
+                                    Maximum="100"
+                                    Minimum="0"
+                                    Style="{StaticResource AntSliderStyle}"
+                                    TickFrequency="1"
+                                    IsSnapToTickEnabled="True"
+                                    Value="{Binding AppConfig.Opacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
                         </ctrl:CardControl.Content>
                     </ctrl:CardControl>
