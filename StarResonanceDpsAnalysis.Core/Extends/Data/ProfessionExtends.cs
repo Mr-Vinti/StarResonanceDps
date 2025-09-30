@@ -73,7 +73,7 @@ public static class ClassExtensions
     /// <summary>
     /// 职业ID映射为职业名称 
     /// </summary>
-    public static Classes GetClassNameById(this int classId)
+    public static Classes GetClassNameById(this int? classId)
     {
         // 1 => "雷影剑士",
         // 2 => "冰魔导师",
@@ -101,6 +101,40 @@ public static class ClassExtensions
             // 10 => Classes.Unknown,
             _ => Classes.Unknown
         };
+    }
+
+    public static Classes GetClasses(this ClassSpec spec)
+    {
+        return spec switch
+        {
+            ClassSpec.Unknown => Classes.Unknown,
+            ClassSpec.ShieldKnightRecovery => Classes.ShieldKnight,
+            ClassSpec.ShieldKnightShield => Classes.ShieldKnight,
+            ClassSpec.HeavyGuardianEarthfort => Classes.HeavyGuardian,
+            ClassSpec.HeavyGuardianBlock => Classes.HeavyGuardian,
+            ClassSpec.StormbladeIaidoSlash => Classes.Stormblade,
+            ClassSpec.StormbladeMoonStrike => Classes.Stormblade,
+            ClassSpec.WindKnightVanGuard => Classes.WindKnight,
+            ClassSpec.WindKnightSkyward => Classes.WindKnight,
+            ClassSpec.FrostMageIcicle => Classes.FrostMage,
+            ClassSpec.FrostMageFrostBeam => Classes.FrostMage,
+            ClassSpec.MarksmanWildpack => Classes.Marksman,
+            ClassSpec.MarksmanFalconry => Classes.Marksman,
+            ClassSpec.VerdantOracleSmite => Classes.VerdantOracle,
+            ClassSpec.VerdantOracleLifeBind => Classes.VerdantOracle,
+            ClassSpec.SoulMusicianDissonance => Classes.SoulMusician,
+            ClassSpec.SoulMusicianConcerto => Classes.SoulMusician,
+            _ => throw new ArgumentOutOfRangeException(nameof(spec), spec, null)
+        };
+    }
+
+    public static int? GetProfessionID(this Classes @class)
+    {
+        if (@class == Classes.Unknown)
+        {
+            return null;
+        }
+        return (int)@class;
     }
 
     /// <summary>

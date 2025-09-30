@@ -551,6 +551,7 @@ namespace StarResonanceDpsAnalysis.Core.Data
             {
                 playerInfo.SubProfessionName = subProfessionName;
                 playerInfo.Spec = spec;
+                TriggerPlayerInfoUpdated(uid);
             }
         }
 

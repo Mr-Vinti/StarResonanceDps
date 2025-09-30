@@ -84,7 +84,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         DebugFunctions.SampleDataRequested += OnSampleDataRequested;
         _storage.PlayerInfoUpdated += StorageOnPlayerInfoUpdated;
 
-        AppConfig = _configManager.CurrentConfig;
+        // set config
+        _appConfig = _configManager.CurrentConfig;
         _configManager.ConfigurationUpdated += ConfigManagerOnConfigurationUpdated;
 
         return;
@@ -258,7 +259,13 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             if (!_slotsDictionary.TryGetValue(dpsData.UID, out var slot))
             {
                 var ret = _storage.ReadOnlyPlayerInfoDatas.TryGetValue(dpsData.UID, out playerInfo);
-                var @class = ret ? playerInfo!.ProfessionID?.GetClassNameById() ?? Classes.Unknown : Classes.Unknown;
+                // Debug.Assert(playerInfo != null, nameof(playerInfo) + " != null");
+                Classes @class = Classes.Unknown;
+                if (ret)
+                {
+                    Debug.Assert(playerInfo != null, nameof(playerInfo) + " != null");
+                    @class = playerInfo.Class;
+                }
                 slot = new StatisticDataViewModel(DebugFunctions)
                 {
                     Index = 999,
@@ -290,7 +297,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             if (_storage.ReadOnlyPlayerInfoDatas.TryGetValue(dpsData.UID, out playerInfo))
             {
                 slot.Player.Name = playerInfo.Name ?? $"UID: {dpsData.UID}";
-                slot.Player.Class = playerInfo.ProfessionID?.GetClassNameById() ?? Classes.Unknown;
+                slot.Player.Class = playerInfo.ProfessionID.GetClassNameById();
                 slot.Player.Spec = playerInfo.Spec;
                 slot.Player.Uid = playerInfo.UID;
             }
@@ -762,7 +769,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         _dispatcher.BeginInvoke(() =>
         {
             slot.Player.Name = info.Name ?? slot.Player.Name;
-            slot.Player.Class = info.ProfessionID?.GetClassNameById() ?? slot.Player.Class;
+            slot.Player.Class = info.ProfessionID.GetClassNameById();
             slot.Player.Spec = info.Spec;
             slot.Player.Uid = info.UID;
 
