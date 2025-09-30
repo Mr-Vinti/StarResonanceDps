@@ -170,7 +170,7 @@
     <!--  ===== MenuItem：左勾选 / 右箭头 / 圆角悬浮 / 可选左 Icon =====  -->
     <Style x:Key="ModernMenuItem" TargetType="MenuItem">
         <Setter Property="Foreground" Value="{DynamicResource MenuFg}" />
-        <Setter Property="FontFamily" Value="HarmonyOS Sans SC" />
+        <Setter Property="FontFamily" Value="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="Padding" Value="12,8" />
         <Setter Property="Cursor" Value="Hand" />

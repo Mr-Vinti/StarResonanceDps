@@ -17,8 +17,13 @@ public partial class SettingsViewModel(IConfigManager configManger, IDeviceManag
     [ObservableProperty] private AppConfig _appConfig = null!;
     [ObservableProperty] private List<NetworkAdapterInfo> _availableNetworkAdapters = [];
 
-    public List<NumberDisplayMode> AvailableNumberDisplayModes { get; } =
-        [NumberDisplayMode.Wan, NumberDisplayMode.KMB];
+    public record Option<T>(T Value, string Display);
+    public List<Option<NumberDisplayMode>> AvailableNumberDisplayModes { get; } = new()
+    {
+        { new Option<NumberDisplayMode>(NumberDisplayMode.Wan, "四位计数法 (万亿兆)") },
+        { new Option<NumberDisplayMode>(NumberDisplayMode.KMB, "三位计数法 (KMBT)") }
+
+    };
 
     public event Action? RequestClose;
 
