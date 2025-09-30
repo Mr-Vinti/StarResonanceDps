@@ -15,6 +15,7 @@
     Height="359"
     MinWidth="300"
     MinHeight="31"
+    behaviors:WindowSnapBehavior.PreventSnapMaximize="True"
     d:DataContext="{d:DesignInstance Type=viewModels:DpsStatisticsDesignTimeViewModel,
                                      IsDesignTimeCreatable=True}"
     ResizeMode="CanResize"
@@ -153,7 +154,10 @@
                     FontFamily="pack://application:,,,/Assets/Fonts/#SAO Welcome TT"
                     Foreground="White">
                     <TextBlock.Text>
-                        <Binding Path="Index" UpdateSourceTrigger="PropertyChanged" />
+                        <Binding
+                            Path="Index"
+                            StringFormat="{}00"
+                            UpdateSourceTrigger="PropertyChanged" />
                     </TextBlock.Text>
                 </TextBlock>
 
