@@ -13,16 +13,18 @@ namespace StarResonanceDpsAnalysis.WPF.Converters;
 /// </summary>
 public sealed class DpsConverter : IMultiValueConverter
 {
-    public object Convert(object?[]? values, Type targetType, object? parameter, CultureInfo culture)
+    public object? Convert(object?[]? values, Type targetType, object? parameter, CultureInfo culture)
     {
+        const string notAvailable = "N/A";
+
         if (values == null || values.Length < 2)
         {
-            return string.Empty;
+            return notAvailable;
         }
 
         if (!ConverterNumberHelper.TryToDouble(values[0], out var total))
         {
-            return string.Empty;
+            return notAvailable;
         }
 
         double seconds;
@@ -32,12 +34,12 @@ public sealed class DpsConverter : IMultiValueConverter
         }
         else if (!ConverterNumberHelper.TryToDouble(values[1], out seconds))
         {
-            return string.Empty;
+            return notAvailable;
         }
 
         if (seconds <= 0.0 || double.IsNaN(seconds) || double.IsInfinity(seconds))
         {
-            return string.Empty;
+            return notAvailable;
         }
 
         var mode = NumberDisplayMode.KMB;
@@ -51,7 +53,8 @@ public sealed class DpsConverter : IMultiValueConverter
         }
 
         var dps = total / seconds;
-        return ConverterNumberHelper.FormatHumanReadable(dps, mode, culture);
+        var formatted = ConverterNumberHelper.FormatHumanReadable(dps, mode, culture);
+        return formatted;
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
