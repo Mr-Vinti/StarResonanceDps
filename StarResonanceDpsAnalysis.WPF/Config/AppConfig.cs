@@ -3,7 +3,6 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Newtonsoft.Json;
 using StarResonanceDpsAnalysis.Core.Models;
-using StarResonanceDpsAnalysis.WPF.Converters;
 using StarResonanceDpsAnalysis.WPF.Models;
 using KeyBinding = StarResonanceDpsAnalysis.WPF.Models.KeyBinding;
 
@@ -71,6 +70,12 @@ public partial class AppConfig : ObservableObject
     /// </summary>
     [ObservableProperty]
     private string _theme = "Light";
+
+    /// <summary>
+    /// 当前界面语言（如 zh-CN、en-US、auto）
+    /// </summary>
+    [ObservableProperty]
+    private Language _language = Language.Auto;
 
     /// <summary>
     /// 启动时的窗口状态

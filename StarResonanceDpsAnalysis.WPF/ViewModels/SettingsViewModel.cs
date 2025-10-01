@@ -1,9 +1,12 @@
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StarResonanceDpsAnalysis.Core.Extends.System;
 using StarResonanceDpsAnalysis.WPF.Config;
-using StarResonanceDpsAnalysis.WPF.Converters;
+using StarResonanceDpsAnalysis.WPF.Localization;
 using StarResonanceDpsAnalysis.WPF.Models;
 using StarResonanceDpsAnalysis.WPF.Services;
 using AppConfig = StarResonanceDpsAnalysis.WPF.Config.AppConfig;
@@ -11,26 +14,84 @@ using KeyBinding = StarResonanceDpsAnalysis.WPF.Models.KeyBinding;
 
 namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
-public partial class SettingsViewModel(IConfigManager configManger, IDeviceManagementService deviceManagementService)
+public partial class SettingsViewModel(
+    IConfigManager configManger,
+    IDeviceManagementService deviceManagementService)
     : BaseViewModel
 {
     [ObservableProperty] private AppConfig _appConfig = null!;
-    [ObservableProperty] private List<NetworkAdapterInfo> _availableNetworkAdapters = [];
+    [ObservableProperty]
+    private List<Option<Language>> _availableLanguages = [
+            new(Language.Auto, Language.Auto.GetLocalizedDescription()),
+            new(Language.ZhCn, Language.ZhCn.GetLocalizedDescription()),
+            new(Language.EnUs, Language.EnUs.GetLocalizedDescription())
+    ];
+    [ObservableProperty]
+    private List<NetworkAdapterInfo> _availableNetworkAdapters = [];
+    [ObservableProperty]
+    private List<Option<NumberDisplayMode>> _availableNumberDisplayModes = [
+            new(NumberDisplayMode.Wan, NumberDisplayMode.Wan.GetLocalizedDescription()),
+            new(NumberDisplayMode.KMB, NumberDisplayMode.KMB.GetLocalizedDescription())
+    ];
 
-    public record Option<T>(T Value, string Display);
-    public List<Option<NumberDisplayMode>> AvailableNumberDisplayModes { get; } = new()
-    {
-        { new Option<NumberDisplayMode>(NumberDisplayMode.Wan, "四位计数法 (万亿兆)") },
-        { new Option<NumberDisplayMode>(NumberDisplayMode.KMB, "三位计数法 (KMBT)") }
+    private bool _cultureHandlerSubscribed;
 
-    };
+    // [ObservableProperty] private Option<Language> _selectedLanguage;
+    [ObservableProperty] private Option<Language>? _selectedLanguage;
+    [ObservableProperty] private Option<NumberDisplayMode>? _selectedNumberDisplayMode;
 
     public event Action? RequestClose;
+
+    partial void OnAppConfigChanging(AppConfig value)
+    {
+        if (value is null)
+        {
+            return;
+        }
+
+        value.PropertyChanged -= OnAppConfigPropertyChanged;
+    }
+
+    partial void OnAppConfigChanged(AppConfig value)
+    {
+        if (value is null)
+        {
+            return;
+        }
+
+        value.PropertyChanged += OnAppConfigPropertyChanged;
+
+        LocalizationManager.ApplyLanguage(value.Language);
+        UpdateLanguageDependentCollections();
+        SyncOptions();
+    }
+
+    partial void OnSelectedNumberDisplayModeChanged(Option<NumberDisplayMode>? value)
+    {
+        if (value == null) return;
+        AppConfig.DamageDisplayType = value.Value;
+    }
+
+    partial void OnSelectedLanguageChanged(Option<Language>? value)
+    {
+        if (value == null) return;
+        AppConfig.Language = value.Value;
+        LocalizationManager.ApplyLanguage(value.Value);
+    }
 
     [RelayCommand(AllowConcurrentExecutions = false)]
     private async Task LoadedAsync()
     {
         AppConfig = configManger.CurrentConfig.Clone();
+        if (!_cultureHandlerSubscribed)
+        {
+            LocalizationManager.CultureChanged += OnCultureChanged;
+            _cultureHandlerSubscribed = true;
+        }
+
+        UpdateLanguageDependentCollections();
+        // SyncSelectedLanguage();
+        LocalizationManager.ApplyLanguage(AppConfig.Language);
         await LoadNetworkAdaptersAsync();
     }
 
@@ -64,6 +125,20 @@ public partial class SettingsViewModel(IConfigManager configManger, IDeviceManag
         if (parameter is KeyEventArgs e)
         {
             HandleShortcutInput(e, ShortcutType.ClearData);
+        }
+    }
+
+    private void OnAppConfigPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (sender is not AppConfig config)
+        {
+            return;
+        }
+
+        if (e.PropertyName == nameof(AppConfig.Language))
+        {
+            LocalizationManager.ApplyLanguage(config.Language);
+            UpdateLanguageDependentCollections();
         }
     }
 
@@ -143,13 +218,90 @@ public partial class SettingsViewModel(IConfigManager configManger, IDeviceManag
     private async Task Confirm()
     {
         await ApplySettingsAsync();
+        DetachCultureHandler();
         RequestClose?.Invoke();
     }
 
     [RelayCommand]
     private void Cancel()
     {
+        DetachCultureHandler();
         RequestClose?.Invoke();
+    }
+
+    private void OnCultureChanged(object? sender, CultureInfo culture)
+    {
+        UpdateLanguageDependentCollections();
+    }
+
+    private void DetachCultureHandler()
+    {
+        if (!_cultureHandlerSubscribed) return;
+        LocalizationManager.CultureChanged -= OnCultureChanged;
+        _cultureHandlerSubscribed = false;
+    }
+}
+
+public partial class SettingsViewModel
+{
+    private static void UpdateEnumList<T>(IEnumerable<Option<T>> list) where T : Enum
+    {
+        foreach (var itm in list)
+        {
+            itm.Display = itm.Value.GetLocalizedDescription();
+        }
+    }
+
+    private void UpdateLanguageDependentCollections()
+    {
+        UpdateEnumList(AvailableNumberDisplayModes);
+        UpdateEnumList(AvailableLanguages);
+    }
+
+    private void SyncLanguageOption()
+    {
+        var (ret, opt) = SyncOption(SelectedLanguage, AvailableLanguages, AppConfig.Language);
+        if (ret) SelectedLanguage = opt!;
+    }
+
+    private void SyncNumberDisplayModeOption()
+    {
+        var (ret, opt) = SyncOption(SelectedNumberDisplayMode, AvailableNumberDisplayModes,
+            AppConfig.DamageDisplayType);
+        if (ret) SelectedNumberDisplayMode = opt!;
+    }
+
+    private void SyncOptions()
+    {
+        SyncLanguageOption();
+        SyncNumberDisplayModeOption();
+    }
+
+    private static (bool result, Option<T>? opt) SyncOption<T>(Option<T>? option, List<Option<T>> availableList,
+    T origin)
+    {
+        if (Equal(option, origin)) return (false, null);
+
+        var match = availableList.FirstOrDefault(l => Equal(l, origin));
+        Debug.Assert(match != null);
+        return (true, match);
+
+        bool Equal(Option<T>? o1, T o2)
+        {
+            return o1?.Value?.Equals(o2) ?? false;
+        }
+    }
+}
+
+public partial class Option<T>(T value, string display) : BaseViewModel
+{
+    [ObservableProperty] private T _value = value;
+    [ObservableProperty] private string _display = display;
+
+    public void Deconstruct(out T value, out string display)
+    {
+        value = Value;
+        display = Display;
     }
 }
 
@@ -174,5 +326,14 @@ public sealed class SettingsDesignTimeViewModel : SettingsViewModel
         ];
         AppConfig.MouseThroughShortcut = new KeyBinding(Key.F6, ModifierKeys.Control);
         AppConfig.ClearDataShortcut = new KeyBinding(Key.F9, ModifierKeys.None);
+        AvailableLanguages =
+        [
+            new Option<Language>(Language.Auto, "Follow System")
+        ];
+        AvailableNumberDisplayModes =
+        [
+            new Option<NumberDisplayMode>(NumberDisplayMode.Wan, "四位计数法 (万亿兆)"),
+            new Option<NumberDisplayMode>(NumberDisplayMode.KMB, "三位计数法 (KMBT)")
+        ];
     }
 }

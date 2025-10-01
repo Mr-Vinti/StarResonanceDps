@@ -41,7 +41,7 @@ public sealed class PercentToColorConverter : IValueConverter
         return Colors.Transparent;
     }
 
-    private static double GetOpacityFactor(object value)
+    private static double GetOpacityFactor(object? value)
     {
         return value switch
         {

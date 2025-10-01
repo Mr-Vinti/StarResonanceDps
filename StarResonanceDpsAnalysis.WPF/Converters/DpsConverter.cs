@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Windows.Data;
+using StarResonanceDpsAnalysis.WPF.Models;
 
 namespace StarResonanceDpsAnalysis.WPF.Converters;
 
@@ -13,7 +14,7 @@ namespace StarResonanceDpsAnalysis.WPF.Converters;
 /// </summary>
 public sealed class DpsConverter : IMultiValueConverter
 {
-    public object? Convert(object?[]? values, Type targetType, object? parameter, CultureInfo culture)
+    public object Convert(object?[]? values, Type targetType, object? parameter, CultureInfo culture)
     {
         const string notAvailable = "N/A";
 

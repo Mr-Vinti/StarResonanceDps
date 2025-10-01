@@ -4,14 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ctrl="clr-namespace:StarResonanceDpsAnalysis.WPF.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+    xmlns:loc="clr-namespace:StarResonanceDpsAnalysis.WPF.Properties"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
-    Title="别查我DPS"
+    Title="{lex:Loc Key={x:Static loc:LocalizationKeys.App_Name}}"
     Width="675"
     Height="520"
     MinWidth="675"
     MinHeight="360"
     d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+    lex:ResxLocalizationProvider.DefaultAssembly="StarResonanceDpsAnalysis.WPF"
+    lex:ResxLocalizationProvider.DefaultDictionary="Resources"
     Style="{StaticResource TransparentWindow}"
     mc:Ignorable="d">
 
@@ -108,10 +112,10 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <ctrl:Header Title="别查我 D P S" Grid.Row="0" />
+            <ctrl:Header Title="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Header_Title}}" Grid.Row="0" />
 
             <Grid Grid.Row="1" Style="{StaticResource TitleGrid}">
-                <TextBlock Style="{StaticResource TitleText}" Text="插件列表" />
+                <TextBlock Style="{StaticResource TitleText}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_PluginList_Title}}" />
             </Grid>
 
             <ScrollViewer Grid.Row="2" Style="{StaticResource PluginWarpPanelScrollViewer}">
@@ -119,100 +123,100 @@
 
                     <Border Style="{StaticResource PluginGroupBox}">
                         <Grid>
-                            <TextBlock Style="{StaticResource PluginTitle}" Text="DPS工具" />
+                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_DpsTool_Title}}" />
 
                             <TextBlock Style="{StaticResource PluginIntro}">
-                                <Run Text="简介：" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Intro}}" />
                                 <LineBreak />
-                                <Run Text="提供DPS统计、技能分解等功能" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_DpsTool_Description}}" />
                                 <LineBreak />
                                 <LineBreak />
-                                <Run Text="作者：" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Author}}" />
                                 <LineBreak />
-                                <Run Text="[官方] 别查我DPS 开发团队" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
                             </TextBlock>
 
-                            <CheckBox Content="自启动" Style="{StaticResource PluginAutoRunCheckBox}" />
+                            <CheckBox Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
 
                             <Button
                                 Command="{Binding CallDpsStatisticsViewCommand}"
-                                Content="开启"
+                                Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Common_Action_Open}}"
                                 Style="{StaticResource PluginRunButton}" />
                         </Grid>
                     </Border>
 
                     <Border Style="{StaticResource PluginGroupBox}">
                         <Grid>
-                            <TextBlock Style="{StaticResource PluginTitle}" Text="模组求解器" />
+                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_ModuleSolver_Title}}" />
 
                             <TextBlock Style="{StaticResource PluginIntro}">
-                                <Run Text="简介：" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Intro}}" />
                                 <LineBreak />
-                                <Run Text="提供模组快速计算最优解功能" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_ModuleSolver_Description}}" />
                                 <LineBreak />
                                 <LineBreak />
-                                <Run Text="作者：" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Author}}" />
                                 <LineBreak />
-                                <Run Text="[官方] 别查我DPS 开发团队" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
                             </TextBlock>
 
-                            <CheckBox Content="自启动" Style="{StaticResource PluginAutoRunCheckBox}" />
+                            <CheckBox Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
 
                             <Button
                                 Command="{Binding CallModuleSolveViewCommandCommand}"
-                                Content="开启"
+                                Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Common_Action_Open}}"
                                 Style="{StaticResource PluginRunButton}" />
                         </Grid>
                     </Border>
 
                     <Border Style="{StaticResource PluginGroupBox}">
                         <Grid>
-                            <TextBlock Style="{StaticResource PluginTitle}" Text="野外BOSS状态查看器" />
+                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_WorldBoss_Title}}" />
 
                             <TextBlock Style="{StaticResource PluginIntro}">
-                                <Run Text="简介：" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Intro}}" />
                                 <LineBreak />
-                                <Run Text="通过大量的玩家在线数据互助，提供各线路的野外BOSS存活状态等信息" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_WorldBoss_Description}}" />
                                 <LineBreak />
                                 <LineBreak />
-                                <Run Text="作者：" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Author}}" />
                                 <LineBreak />
-                                <Run Text="[官方] 别查我DPS 开发团队" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
                             </TextBlock>
 
-                            <CheckBox Content="自启动" Style="{StaticResource PluginAutoRunCheckBox}" />
+                            <CheckBox Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
 
                             <Button
                                 Click="UnderConstructionButton_Click"
-                                Content="开启"
+                                Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Common_Action_Open}}"
                                 Style="{StaticResource PluginRunButton}" />
                         </Grid>
                     </Border>
 
                     <Border Style="{StaticResource PluginGroupBox}">
                         <Grid>
-                            <TextBlock Style="{StaticResource PluginTitle}" Text="小猪娜宝状态查看器" />
+                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_PigTracker_Title}}" />
 
                             <TextBlock Style="{StaticResource PluginIntro}">
-                                <Run Text="简介：" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Intro}}" />
                                 <LineBreak />
-                                <Run Text="通过大量的玩家在线数据互助，提供小猪娜宝的线路与位置信息" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_PigTracker_Description}}" />
                                 <LineBreak />
                                 <LineBreak />
-                                <Run Text="作者：" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Author}}" />
                                 <LineBreak />
-                                <Run Text="[官方] 别查我DPS 开发团队" />
+                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
                             </TextBlock>
 
-                            <CheckBox Content="自启动" Style="{StaticResource PluginAutoRunCheckBox}" />
+                            <CheckBox Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
 
                             <Button
                                 Click="UnderConstructionButton_Click"
-                                Content="开启"
+                                Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Common_Action_Open}}"
                                 Style="{StaticResource PluginRunButton}" />
                         </Grid>
                     </Border>
-                    <GroupBox Header="Debug functions" Visibility="{Binding Debug.Enabled, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <GroupBox Header="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Group_Title}}" Visibility="{Binding Debug.Enabled, Converter={StaticResource BoolToVisibilityConverter}}">
                         <GroupBox.Style>
                             <Style TargetType="GroupBox">
                                 <Setter Property="HorizontalAlignment" Value="Left" />
@@ -231,24 +235,12 @@
                                     SelectedItem="{Binding Theme}" />
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock Style="{StaticResource TestTextBlockStyle}">
-                                    Theme Switch Test Text
-                                </TextBlock>
-                                <Button Command="{Binding Debug.CallDebugWindowCommand}">
-                                    Pcap Test
-                                </Button>
-                                <Button Command="{Binding CallSkillBreakdownViewCommand}">
-                                    Skill Breakdown View
-                                </Button>
-                                <Button Command="{Binding CallDamageReferenceViewCommand}">
-                                    Damage Reference View
-                                </Button>
-                                <Button Command="{Binding CallSettingsViewCommand}">
-                                    Settings View
-                                </Button>
-                                <Button Command="{Binding CallAboutViewCommand}">
-                                    About View
-                                </Button>
+                                <TextBlock Style="{StaticResource TestTextBlockStyle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_ThemeTest}}" />
+                                <Button Command="{Binding Debug.CallDebugWindowCommand}" Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Button_PcapTest}}" />
+                                <Button Command="{Binding CallSkillBreakdownViewCommand}" Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Button_SkillBreakdown}}" />
+                                <Button Command="{Binding CallDamageReferenceViewCommand}" Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Button_DamageReference}}" />
+                                <Button Command="{Binding CallSettingsViewCommand}" Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Button_Settings}}" />
+                                <Button Command="{Binding CallAboutViewCommand}" Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Button_About}}" />
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>

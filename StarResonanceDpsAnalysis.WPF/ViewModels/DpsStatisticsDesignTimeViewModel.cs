@@ -91,6 +91,7 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
         public TimeSpan SectionTimeout { get; set; } = TimeSpan.FromSeconds(5);
         public bool IsServerConnected => false;
 
+#pragma warning disable CS0067
         public event DataStorage.ServerConnectionStateChangedEventHandler? ServerConnectionStateChanged;
         public event DataStorage.PlayerInfoUpdatedEventHandler? PlayerInfoUpdated;
         public event DataStorage.NewSectionCreatedEventHandler? NewSectionCreated;
@@ -98,6 +99,7 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
         public event DataStorage.DpsDataUpdatedEventHandler? DpsDataUpdated;
         public event DataStorage.DataUpdatedEventHandler? DataUpdated;
         public event DataStorage.ServerChangedEventHandler? ServerChanged;
+#pragma warning restore
 
         public void LoadPlayerInfoFromFile()
         {

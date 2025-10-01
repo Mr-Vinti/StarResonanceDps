@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Windows;
+using StarResonanceDpsAnalysis.WPF.Models;
 
 namespace StarResonanceDpsAnalysis.WPF.Converters;
 
@@ -47,13 +48,15 @@ internal static class ConverterNumberHelper
                 }
                 catch
                 {
+                    // ignored
                 }
+
                 break;
         }
 
         try
         {
-            value = System.Convert.ToDouble(input, CultureInfo.InvariantCulture);
+            value = Convert.ToDouble(input, CultureInfo.InvariantCulture);
             return !double.IsNaN(value);
         }
         catch

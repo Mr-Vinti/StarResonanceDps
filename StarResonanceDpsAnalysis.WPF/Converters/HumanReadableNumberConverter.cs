@@ -1,5 +1,7 @@
 using System.Globalization;
 using System.Windows.Data;
+using StarResonanceDpsAnalysis.Core.Models;
+using StarResonanceDpsAnalysis.WPF.Models;
 
 namespace StarResonanceDpsAnalysis.WPF.Converters;
 

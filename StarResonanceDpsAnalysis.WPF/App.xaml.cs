@@ -4,15 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;
 using SharpPcap;
-using StarResonanceDpsAnalysis.Core.Data;
 using StarResonanceDpsAnalysis.WPF.Config;
 using StarResonanceDpsAnalysis.WPF.Data;
 using StarResonanceDpsAnalysis.WPF.Extensions;
-using StarResonanceDpsAnalysis.WPF.Models;
+using StarResonanceDpsAnalysis.WPF.Localization;
 using StarResonanceDpsAnalysis.WPF.Services;
 using StarResonanceDpsAnalysis.WPF.Themes;
 using StarResonanceDpsAnalysis.WPF.ViewModels;
@@ -24,16 +22,17 @@ namespace StarResonanceDpsAnalysis.WPF;
 public partial class App : Application
 {
     private static ILogger<App>? _logger;
-    private static IHost? _host;
     private static IObservable<LogEvent>? _logStream; // exposed for UI subscription
+
+    public static IHost? Host { get; private set; }
 
     [STAThread]
     private static void Main(string[] args)
     {
         var configRoot = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
+            .AddJsonFile("appsettings.json", false, true)
+            .AddJsonFile("appsettings.Development.json", true, true)
             .Build();
 
         IObservable<LogEvent>? streamRef = null;
@@ -46,14 +45,16 @@ public partial class App : Application
             .CreateLogger();
         _logStream = streamRef;
 
-        _host = CreateHostBuilder(args, configRoot).Build();
-        _logger = _host.Services.GetRequiredService<ILogger<App>>();
+        Host = CreateHostBuilder(args, configRoot).Build();
+        _logger = Host.Services.GetRequiredService<ILogger<App>>();
 
         _logger.LogInformation("Application starting");
 
         App app = new();
         app.InitializeComponent();
-        app.MainWindow = _host.Services.GetRequiredService<MainWindow>();
+        var appOptions = Host.Services.GetRequiredService<IOptions<AppConfig>>();
+        LocalizationManager.Initialize(appOptions.Value.Language);
+        app.MainWindow = Host.Services.GetRequiredService<MainWindow>();
         app.MainWindow.Visibility = Visibility.Visible;
         app.Run();
 
@@ -61,15 +62,10 @@ public partial class App : Application
         Log.CloseAndFlush();
     }
 
-    public static IHost? Host => _host;
-
     private static IHostBuilder CreateHostBuilder(string[] args, IConfiguration configRoot)
     {
         return Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration(builder =>
-            {
-                builder.AddConfiguration(configRoot);
-            })
+            .ConfigureAppConfiguration(builder => { builder.AddConfiguration(configRoot); })
             .UseSerilog()
             .ConfigureServices((context, services) =>
             {
