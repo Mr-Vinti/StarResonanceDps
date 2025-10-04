@@ -20,4 +20,5 @@
     <converters:DpsConverter x:Key="DpsConverter" />
     <converters:ClassSpecToStringConverter x:Key="ClassSpecToStringConverter" />
     <converters:EnumToLocalizedStringConverter x:Key="EnumToLocalizedStringConverter" />
+    <converters:ClassesColorConverter x:Key="ClassesColorConverter" />
 </ResourceDictionary>

@@ -4,13 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:behaviors="clr-namespace:StarResonanceDpsAnalysis.WPF.Behaviors"
+    xmlns:converters="clr-namespace:StarResonanceDpsAnalysis.WPF.Converters"
     xmlns:ctrl="clr-namespace:StarResonanceDpsAnalysis.WPF.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:lex="http://wpflocalizeextension.codeplex.com"
     xmlns:loc="clr-namespace:StarResonanceDpsAnalysis.WPF.Properties"
     xmlns:local="clr-namespace:StarResonanceDpsAnalysis.WPF.Views"
-    xmlns:converters="clr-namespace:StarResonanceDpsAnalysis.WPF.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:StarResonanceDpsAnalysis.Core.Models;assembly=StarResonanceDpsAnalysis.Core"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
     Title="{lex:Loc Key={x:Static loc:LocalizationKeys.Window_DpsStatistics_Title}}"
@@ -90,7 +91,7 @@
         </Style>
 
         <Style x:Key="LoadingGrid" TargetType="Border">
-            <!-- TODO: 当 DataStorage 触发 ServerConnectionStateChanged 时, 隐藏该 Grid -->
+            <!--  TODO: 当 DataStorage 触发 ServerConnectionStateChanged 时, 隐藏该 Grid  -->
             <Setter Property="Height" Value="5" />
             <Setter Property="Background">
                 <Setter.Value>
@@ -190,9 +191,10 @@
                 <!--  职业图标  -->
                 <Image
                     Grid.Column="1"
-                    Margin="4"
+                    Width="{Binding ActualHeight, ElementName=Name}"
+                    Height="{Binding ActualHeight, ElementName=Name}"
+                    Margin="2"
                     Source="{Binding Player.Class, Converter={StaticResource ClassesToIconConverter}, FallbackValue={StaticResource ClassesUnknownIcon}}" />
-
                 <!--  昵称  -->
                 <TextBlock
                     x:Name="Name"
@@ -265,7 +267,7 @@
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="ProgressBarDataTemplate" DataType="{x:Type viewModels:StatisticDataViewModel}">
-            <Grid Height="30" Margin="0">
+            <Grid Height="36" Margin="0">
                 <Button
                     Margin="1"
                     Padding="0"
@@ -312,20 +314,13 @@
                             Margin="1"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
+                            IndicatorForeground="{Binding Player.Class, Converter={StaticResource ClassesColorConverter}}"
                             OverlayContent="{Binding}"
                             OverlayTemplate="{StaticResource PercentageDataTemplate}"
                             Percentage="{Binding PercentOfMax}"
                             PopupContent="{Binding}"
                             PopupTemplate="{StaticResource PopupTemplate}"
                             TrackOpacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}">
-                            <!--  PopupContent="{StaticResource PopupTemplate}"  -->
-                            <!-- <ctrl:DpsIndicatorControl.Percentage> -->
-                            <!--  <MultiBinding Converter="{StaticResource PercentOfMaxConverter}"  -->
-                            <!--  Mode="OneWay">  -->
-                            <!--         <Binding Path="Value" UpdateSourceTrigger="PropertyChanged"/> -->
-                            <!--         <Binding Path="DataContext.Slots.Values" RelativeSource="{RelativeSource AncestorType=Window}" UpdateSourceTrigger="PropertyChanged"/> -->
-                            <!--     </MultiBinding> -->
-                            <!-- </ctrl:DpsIndicatorControl.Percentage> -->
                         </ctrl:DpsIndicatorControl>
                     </Grid>
                 </Button>
@@ -580,8 +575,7 @@
                 </Grid>
             </Border>
 
-            <Border Style="{StaticResource SortedDpsBorder}"
-                    Grid.Row="1">
+            <Border Grid.Row="1" Style="{StaticResource SortedDpsBorder}">
                 <ctrl:SortedDpsControl
                     ItemTemplate="{StaticResource ProgressBarDataTemplate}"
                     ItemsSource="{Binding Slots}"
@@ -590,23 +584,26 @@
 
             <Border
                 x:Name="LoadingGridHost"
-                Style="{StaticResource LoadingGrid}"
                 Grid.Row="2"
-                ClipToBounds="True">
-                
+                ClipToBounds="True"
+                Style="{StaticResource LoadingGrid}">
+
                 <Rectangle x:Name="LoadingStripe" Style="{StaticResource LoadingBlockRectangle}">
                     <Rectangle.Triggers>
                         <EventTrigger RoutedEvent="Loaded">
                             <BeginStoryboard>
                                 <Storyboard RepeatBehavior="Forever">
                                     <DoubleAnimation
-                                        Storyboard.TargetName="LoadingStripe"
-                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
                                         AccelerationRatio="0.2"
                                         DecelerationRatio="0.2"
+                                        Storyboard.TargetName="LoadingStripe"
+                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
                                         Duration="0:0:1.6">
                                         <DoubleAnimation.From>
-                                            <Binding ElementName="LoadingStripe" Path="ActualWidth" Converter="{StaticResource DoubleNegateConverter}" />
+                                            <Binding
+                                                Converter="{StaticResource DoubleNegateConverter}"
+                                                ElementName="LoadingStripe"
+                                                Path="ActualWidth" />
                                         </DoubleAnimation.From>
                                         <DoubleAnimation.To>
                                             <MultiBinding Converter="{StaticResource DoubleSumConverter}">
@@ -621,10 +618,10 @@
                     </Rectangle.Triggers>
                     <Rectangle.Fill>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1, 0">
-                            <GradientStop Color="#00569CD6" Offset="0" />
-                            <GradientStop Color="#FF569CD6" Offset="0.4" />
-                            <GradientStop Color="#FF569CD6" Offset="0.6" />
-                            <GradientStop Color="#00569CD6" Offset="1" />
+                            <GradientStop Offset="0" Color="#00569CD6" />
+                            <GradientStop Offset="0.4" Color="#FF569CD6" />
+                            <GradientStop Offset="0.6" Color="#FF569CD6" />
+                            <GradientStop Offset="1" Color="#00569CD6" />
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
