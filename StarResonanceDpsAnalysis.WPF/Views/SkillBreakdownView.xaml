@@ -16,6 +16,7 @@
     d:DataContext="{d:DesignInstance viewModels:SkillBreakdownViewModel}"
     lex:ResxLocalizationProvider.DefaultAssembly="StarResonanceDpsAnalysis.WPF"
     lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+    PreviewKeyDown="Window_PreviewKeyDown"
     Style="{StaticResource TransparentWindow}"
     mc:Ignorable="d">
 
@@ -525,6 +526,7 @@
                     Style="{StaticResource InfoText}"
                     Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Info_Badge}}" />
 
+
                 <Border
                     Grid.Column="6"
                     Margin="10"
@@ -573,17 +575,17 @@
                     </Style>
                 </TabControl.Resources>
 
-                <TabItem Header="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Summary}}">
+                <TabItem x:Name="TabItem_Summary" Header="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Summary}}">
                     <ScrollViewer>
                         <ContentPresenter ContentTemplate="{StaticResource Template1}" />
                     </ScrollViewer>
                 </TabItem>
-                <TabItem Header="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Details}}">
+                <TabItem x:Name="TabItem_Details" Header="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Details}}">
                     <Grid Background="IndianRed">
                         <TextBlock Style="{StaticResource TextBlockExampleStyle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Placeholder_Details}}" />
                     </Grid>
                 </TabItem>
-                <TabItem Header="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Graph}}">
+                <TabItem x:Name="TabItem_Graph" Header="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Graph}}">
                     <Grid Background="DarkOliveGreen">
                         <TextBlock Style="{StaticResource TextBlockExampleStyle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Placeholder_Graph}}" />
                     </Grid>

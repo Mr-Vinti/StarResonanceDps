@@ -320,8 +320,7 @@
                             Percentage="{Binding PercentOfMax}"
                             PopupContent="{Binding}"
                             PopupTemplate="{StaticResource PopupTemplate}"
-                            TrackOpacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}">
-                        </ctrl:DpsIndicatorControl>
+                            TrackOpacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}" />
                     </Grid>
                 </Button>
             </Grid>

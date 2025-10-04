@@ -22,6 +22,7 @@
     lex:LocalizeDictionary.DesignCulture="en-US"
     lex:ResxLocalizationProvider.DefaultAssembly="StarResonanceDpsAnalysis.WPF"
     lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+    PreviewKeyDown="Window_PreviewKeyDown"
     Style="{StaticResource TransparentWindow}"
     mc:Ignorable="d">
 
@@ -133,7 +134,7 @@
                             </Grid>
                         </ctrl:CardControl.Content>
                     </ctrl:CardControl>
-                    
+
                     <ctrl:CardControl>
                         <ctrl:CardControl.Header>
                             <Grid Style="{StaticResource CardHeaderGridStyle}">
