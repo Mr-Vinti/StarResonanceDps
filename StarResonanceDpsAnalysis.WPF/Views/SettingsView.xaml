@@ -11,10 +11,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
     Title="{lex:Loc Key={x:Static loc:LocalizationKeys.Window_Settings_Title}}"
-    Width="455"
+    Width="460"
     Height="630"
     MinWidth="450"
-    MinHeight="630"
+    MinHeight="280"
     Padding="5"
     d:DataContext="{d:DesignInstance Type=viewModels:SettingsDesignTimeViewModel,
                                      IsDesignTimeCreatable=True}"
@@ -96,6 +96,44 @@
 
             <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
                 <VirtualizingStackPanel IsVirtualizing="True">
+
+                    <ctrl:CardControl>
+                        <ctrl:CardControl.Header>
+                            <Grid Style="{StaticResource CardHeaderGridStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Style="{StaticResource CardHeaderMainTitleStyle}"
+                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Language_Title}}" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Style="{StaticResource CardHeaderSubTitleStyle}"
+                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Language_Description}}" />
+                            </Grid>
+                        </ctrl:CardControl.Header>
+                        <ctrl:CardControl.Content>
+                            <Grid Height="32">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Language_Title}}" />
+                                <ComboBox
+                                    Grid.Column="2"
+                                    Margin="2"
+                                    ItemTemplate="{StaticResource LocalizedEnumTextBlockDataTemplate}"
+                                    ItemsSource="{Binding AvailableLanguages}"
+                                    SelectedIndex="0"
+                                    SelectedItem="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Style="{StaticResource AntComboBoxStyle}" />
+                            </Grid>
+                        </ctrl:CardControl.Content>
+                    </ctrl:CardControl>
+                    
                     <ctrl:CardControl>
                         <ctrl:CardControl.Header>
                             <Grid Style="{StaticResource CardHeaderGridStyle}">
@@ -117,11 +155,12 @@
                             <Grid Height="30">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock VerticalAlignment="Center" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_NetworkAdapter_Label}}" />
                                 <ComboBox
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     DisplayMemberPath="Description"
                                     ItemsSource="{Binding AvailableNetworkAdapters, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedIndex="0"
@@ -149,16 +188,18 @@
                             <Grid Height="32">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="20" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="1*" />
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Shortcut_MouseThrough}}" />
                                 <TextBox
                                     x:Name="MouseThroughTextBox"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Margin="2"
                                     IsReadOnly="True"
                                     Style="{StaticResource AntTextBoxStyle}"
@@ -168,10 +209,10 @@
                                         <behaviors:KeyDownCommandBehavior Command="{Binding HandleMouseThroughShortcutCommand}" />
                                     </b:Interaction.Behaviors>
                                 </TextBox>
-                                <TextBlock Grid.Column="3" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Shortcut_ClearData}}" />
+                                <TextBlock Grid.Column="4" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Shortcut_ClearData}}" />
                                 <TextBox
                                     x:Name="ClearDataTextBox"
-                                    Grid.Column="4"
+                                    Grid.Column="6"
                                     Margin="2"
                                     IsReadOnly="True"
                                     Style="{StaticResource AntTextBoxStyle}"
@@ -218,7 +259,7 @@
                                         <ColumnDefinition Width="140" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="135" />
-                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="35" />
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Combat_ClearAfterBattle}}" />
@@ -236,7 +277,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="140" />
                                         <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="170" />
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Combat_ClearAfterTeleport}}" />
@@ -252,7 +293,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="140" />
                                         <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="170" />
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="{lex:Loc Key=Settings_Display_NumberMode}" />
@@ -289,42 +330,6 @@
                                         HorizontalAlignment="Center"
                                         Text="{Binding AppConfig.Opacity, Mode=OneWay}" />
                                 </Grid>
-                            </Grid>
-                        </ctrl:CardControl.Content>
-                    </ctrl:CardControl>
-
-                    <ctrl:CardControl>
-                        <ctrl:CardControl.Header>
-                            <Grid Style="{StaticResource CardHeaderGridStyle}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                     <TextBlock
-                     Grid.Column="0"
-                     Style="{StaticResource CardHeaderMainTitleStyle}"
-                     Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Language_Title}}" />
-                     <TextBlock
-                     Grid.Column="1"
-                     Style="{StaticResource CardHeaderSubTitleStyle}"
-                     Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Language_Description}}" />
-                            </Grid>
-                        </ctrl:CardControl.Header>
-                        <ctrl:CardControl.Content>
-                            <Grid Height="32">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="140" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock VerticalAlignment="Center" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Language_Title}}" />
-                     <ComboBox
-                     Grid.Column="1"
-                     Margin="2"
-                     ItemTemplate="{StaticResource LocalizedEnumTextBlockDataTemplate}"
-                     ItemsSource="{Binding AvailableLanguages}"
-                     SelectedIndex="0"
-                     SelectedItem="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource AntComboBoxStyle}" />
                             </Grid>
                         </ctrl:CardControl.Content>
                     </ctrl:CardControl>

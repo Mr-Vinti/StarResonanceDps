@@ -3,11 +3,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+    
     <!--  引入 System.Double 类型（用于定义数值资源）  -->
     <sys:Double x:Key="MainCornerRadiusDouble">6</sys:Double>
 
     <!--  以 CornerRadius 资源形式定义圆角（四个角相同）  -->
     <CornerRadius x:Key="MainCornerRadius">6,6,6,6</CornerRadius>
+
+    <sys:Double x:Key="CardHeaderHeight">25</sys:Double>
+
+    <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</sys:Double>
+    
+    <sys:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">10</sys:Double>
+
 
     <!--  Window 风格：透明窗口（没有系统边框/标题栏），背景透明  -->
     <Style x:Key="TransparentWindow" TargetType="Window">
@@ -92,8 +100,48 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    <sys:Double x:Key="CardHeaderHeight">26</sys:Double>
 
     <!--  设置默认字体  -->
-    <Style BasedOn="{StaticResource NormalTextBlockBaseStyle}" TargetType="TextBlock" />
+    <Style TargetType="TextBlock" BasedOn="{StaticResource NormalTextBlockBaseStyle}" />
+
+    <!--  设置默认滚动条样式  -->
+    <Style TargetType="ScrollBar">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollBar">
+                    <Grid Background="Transparent" Width="8">
+                        <!-- 轨道 -->
+                        <Track Name="PART_Track" IsDirectionReversed="true">
+                            <Track.Resources>
+                                <Style TargetType="RepeatButton">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                    <Setter Property="BorderThickness" Value="0" />
+                                </Style>
+                            </Track.Resources>
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton Command="ScrollBar.LineUpCommand"/>
+                            </Track.DecreaseRepeatButton>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton Command="ScrollBar.LineDownCommand"/>
+                            </Track.IncreaseRepeatButton>
+                            <!-- 滑块 -->
+                            <Track.Thumb>
+                                <Thumb Background="#888">
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="Thumb">
+                                            <Border Background="{TemplateBinding Background}" CornerRadius="4" />
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 </ResourceDictionary>

@@ -205,7 +205,7 @@
     <value>Shortcuts</value>
   </data>
   <data name="Settings_Section_Shortcut_Sub" xml:space="preserve">
-    <value>Press Delete to clear the selected shortcut</value>
+    <value>Press [Delete] to clear the selected shortcut</value>
   </data>
   <data name="Settings_Shortcut_MouseThrough" xml:space="preserve">
     <value>Mouse Through</value>
@@ -226,19 +226,19 @@
     <value>Combat Settings</value>
   </data>
   <data name="Settings_Section_Combat_Sub" xml:space="preserve">
-    <value>Clear encounter stats when leaving combat</value>
+    <value>[Clear data after combat] resets only the current data, not the total.</value>
   </data>
   <data name="Settings_NetworkAdapter_Label" xml:space="preserve">
     <value>Capture Adapter</value>
   </data>
   <data name="Settings_Combat_ClearAfterBattle" xml:space="preserve">
-    <value>Clear encounter after combat</value>
+    <value>Clear data after combat</value>
   </data>
   <data name="Settings_Common_Seconds" xml:space="preserve">
     <value>sec</value>
   </data>
   <data name="Settings_Combat_ClearAfterTeleport" xml:space="preserve">
-    <value>Reset session when changing zones</value>
+    <value>Reset on map change</value>
   </data>
   <data name="Settings_Switch_On" xml:space="preserve">
     <value>On</value>
@@ -262,16 +262,16 @@
     <value>Follow system</value>
   </data>
   <data name="Settings_Language_Chinese" xml:space="preserve">
-    <value>Simplified Chinese</value>
+    <value>简体中文</value>
   </data>
   <data name="Settings_Language_English" xml:space="preserve">
     <value>English</value>
   </data>
   <data name="NumberDisplay_Wan" xml:space="preserve">
-    <value>East Asian grouping (Wan)</value>
+    <value>Wan (East Asian)</value>
   </data>
   <data name="NumberDisplay_KMB" xml:space="preserve">
-    <value>Western grouping (K / M / B / T)</value>
+    <value>KMBT (Western)</value>
   </data>
   <data name="Window_About_Title" xml:space="preserve">
     <value>About</value>
@@ -289,16 +289,16 @@
     <value>Contributors for this release (in no particular order):</value>
   </data>
   <data name="About_Developer_Lead" xml:space="preserve">
-    <value>Jingqi Maomaohe (anying1073: project founder)</value>
+    <value>惊奇猫猫盒 (anying1073: project founder)</value>
   </data>
   <data name="About_Developer_RocyJune" xml:space="preserve">
-    <value>Rocy-June</value>
+    <value>露詩（Rocy-June）</value>
   </data>
   <data name="About_Developer_QingLan" xml:space="preserve">
     <value>青岚宗王腾</value>
   </data>
   <data name="About_Developer_Ihonliu" xml:space="preserve">
-    <value>Ihonliu</value>
+    <value>尻鸭（ihonliu）</value>
   </data>
   <data name="About_OpenSource_Prefix" xml:space="preserve">
     <value>This project is open source at</value>
@@ -307,13 +307,13 @@
     <value>https://github.com/anying1073/StarResonanceDps</value>
   </data>
   <data name="About_OpenSource_Suffix" xml:space="preserve">
-    <value>If you encounter any issues, please open an issue there.</value>
+    <value>, If you encounter any issues, please open an issue there.</value>
   </data>
   <data name="About_Contribution" xml:space="preserve">
     <value>To contribute, please fork the repository and submit a pull request.</value>
   </data>
   <data name="About_Community_Invite" xml:space="preserve">
-    <value>If you cannot access GitHub or want to find teammates, join the groups:</value>
+    <value>If you cannot access GitHub or want to find teammates, join the Tencent QQ groups:</value>
   </data>
   <data name="About_Community_GroupOne" xml:space="preserve">
     <value>678150498 (Group 1)</value>
@@ -460,7 +460,7 @@
     <value>Debug utilities</value>
   </data>
   <data name="MainWindow_Header_Title" xml:space="preserve">
-    <value>Don't Check My DPS</value>
+    <value>SR DPS Analyzer</value>
   </data>
   <data name="MainWindow_PluginList_Title" xml:space="preserve">
     <value>Plugin List</value>
@@ -478,7 +478,7 @@
     <value>Author:</value>
   </data>
   <data name="MainWindow_Plugin_Author_OfficialTeam" xml:space="preserve">
-    <value>[Official] Don't Check My DPS Team</value>
+    <value>[Official] SR DPS Analyzer Team</value>
   </data>
   <data name="MainWindow_Plugin_AutoStart" xml:space="preserve">
     <value>Auto start</value>
@@ -737,5 +737,23 @@
   </data>
   <data name="SkillBreakdown_Section_DamageDistribution" xml:space="preserve">
     <value>Damage distribution</value>
+  </data>
+  <data name="StatisticType_Damage" xml:space="preserve">
+    <value>Damage</value>
+  </data>
+  <data name="StatisticType_Healing" xml:space="preserve">
+    <value>Healing</value>
+  </data>
+  <data name="StatisticType_TakenDamage" xml:space="preserve">
+    <value>Dmg In</value>
+  </data>
+  <data name="StatisticType_NpcTakenDamage" xml:space="preserve">
+    <value>NPC Dmg In</value>
+  </data>
+  <data name="ScopeTime_Current" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="ScopeTime_Total" xml:space="preserve">
+    <value>Total</value>
   </data>
 </root>

@@ -48,8 +48,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
     [ObservableProperty] private TimeSpan _battleDuration;
     [ObservableProperty] private StatisticDataViewModel? _currentPlayerSlot;
-    private DispatcherTimer? _durationTimer;
-    private bool _isInitialized;
     [ObservableProperty] private NumberDisplayMode _numberDisplayMode = NumberDisplayMode.Wan;
     [ObservableProperty] private ScopeTime _scopeTime = ScopeTime.Current;
     [ObservableProperty] private StatisticDataViewModel? _selectedSlot;
@@ -59,8 +57,10 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     [ObservableProperty] private SortDirectionEnum _sortDirection = SortDirectionEnum.Descending;
     [ObservableProperty] private string _sortMemberPath = "Value";
     [ObservableProperty] private StatisticType _statisticIndex;
-
     [ObservableProperty] private AppConfig _appConfig = null!;
+
+    private DispatcherTimer? _durationTimer;
+    private bool _isInitialized;
 
     /// <inheritdoc/>
     public DpsStatisticsViewModel(IApplicationControlService appControlService,
@@ -226,6 +226,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         // 开始监听DPS更新事件
         _storage.DpsDataUpdated += DataStorage_DpsDataUpdated;
         _storage.NewSectionCreated += StorageOnNewSectionCreated;
+    }
+
+    [RelayCommand]
+    private void OnResize() 
+    {
+        _logger.LogDebug("Window Resized");
     }
 
 

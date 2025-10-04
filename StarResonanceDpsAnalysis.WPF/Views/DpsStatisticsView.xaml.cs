@@ -45,8 +45,20 @@ public partial class DpsStatisticsView : Window
 
         if (Minimize)
         {
-            _beforePilingHeight = ActualHeight;
+            // 防止用户手动缩小窗体到一定大小后, 折叠功能看似失效的问题
+            if (ActualHeight < 60)
+            {
+                Minimize = false;
+                _beforePilingHeight = 360;
+            }
+            else
+            {
+                _beforePilingHeight = ActualHeight;
+            }
         }
+
+        // BaseStyle.CardHeaderHeight(25) + BaseStyle.ShadowWindowBorder.Margin((Top)5 + (Bottom)5)
+        var baseHeight = 25 + 5 + 5;
 
         var sb = new Storyboard { FillBehavior = FillBehavior.HoldEnd };
         var duration = new Duration(TimeSpan.FromMilliseconds(300));
@@ -54,7 +66,7 @@ public partial class DpsStatisticsView : Window
         var animationHeight = new DoubleAnimation
         {
             From = ActualHeight,
-            To = Minimize ? 25 : _beforePilingHeight,
+            To = Minimize ? baseHeight : _beforePilingHeight,
             Duration = duration,
             EasingFunction = easingFunction
         };
@@ -102,7 +114,7 @@ public partial class DpsStatisticsView : Window
     }
 
     /// <summary>
-    ///     测伤模式
+    /// 测伤模式
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>

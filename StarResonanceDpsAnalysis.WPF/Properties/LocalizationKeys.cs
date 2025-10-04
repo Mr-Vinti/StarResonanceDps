@@ -796,6 +796,30 @@ public static class LocalizationKeys
     /// </summary>
     public const string SkillBreakdown_Value_LuckRate = nameof(SkillBreakdown_Value_LuckRate);
     /// <summary>
+    /// ScopeTime_Current
+    /// </summary>
+    public const string ScopeTime_Current = nameof(ScopeTime_Current);
+    /// <summary>
+    /// ScopeTime_Total
+    /// </summary>
+    public const string ScopeTime_Total = nameof(ScopeTime_Total);
+    /// <summary>
+    /// StatisticType_Damage
+    /// </summary>
+    public const string StatisticType_Damage = nameof(StatisticType_Damage);
+    /// <summary>
+    /// StatisticType_Healing
+    /// </summary>
+    public const string StatisticType_Healing = nameof(StatisticType_Healing);
+    /// <summary>
+    /// StatisticType_NpcTakenDamage
+    /// </summary>
+    public const string StatisticType_NpcTakenDamage = nameof(StatisticType_NpcTakenDamage);
+    /// <summary>
+    /// StatisticType_TakenDamage
+    /// </summary>
+    public const string StatisticType_TakenDamage = nameof(StatisticType_TakenDamage);
+    /// <summary>
     /// SkillBreakdown_Value_NormalDamage
     /// </summary>
     public const string SkillBreakdown_Value_NormalDamage = nameof(SkillBreakdown_Value_NormalDamage);

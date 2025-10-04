@@ -226,7 +226,7 @@
     <value>战斗设置</value>
   </data>
   <data name="Settings_Section_Combat_Sub" xml:space="preserve">
-    <value>脱战清空为当前统计，非全程统计</value>
+    <value>脱战清空只重置当前战斗数据，而非全程统计</value>
   </data>
   <data name="Settings_NetworkAdapter_Label" xml:space="preserve">
     <value>监听网卡</value>
@@ -313,7 +313,7 @@
     <value>如果你想为本项目贡献代码，欢迎 Fork 之后提交 Pull Request。</value>
   </data>
   <data name="About_Community_Invite" xml:space="preserve">
-    <value>无法访问 GitHub 或者想要寻求游戏伙伴也可以加群：</value>
+    <value>无法访问 GitHub 或者想要寻求游戏伙伴也可以加QQ群：</value>
   </data>
   <data name="About_Community_GroupOne" xml:space="preserve">
     <value>678150498（1群）</value>
@@ -442,7 +442,7 @@
     <value>主题切换测试文本</value>
   </data>
   <data name="Debug_Button_PcapTest" xml:space="preserve">
-    <value>PCAP 测试</value>
+    <value>Pcap 测试</value>
   </data>
   <data name="Debug_Button_SkillBreakdown" xml:space="preserve">
     <value>技能详情窗口</value>
@@ -511,7 +511,7 @@
     <value>主题切换测试文本</value>
   </data>
   <data name="MainWindow_Debug_Button_PcapTest" xml:space="preserve">
-    <value>PCAP 测试</value>
+    <value>Pcap 测试</value>
   </data>
   <data name="MainWindow_Debug_Button_SkillBreakdown" xml:space="preserve">
     <value>技能详情窗口</value>
@@ -737,5 +737,23 @@
   </data>
   <data name="SkillBreakdown_Section_DamageDistribution" xml:space="preserve">
     <value>伤害分布</value>
+  </data>
+  <data name="StatisticType_Damage" xml:space="preserve">
+    <value>伤害</value>
+  </data>
+  <data name="StatisticType_Healing" xml:space="preserve">
+    <value>治疗</value>
+  </data>
+  <data name="StatisticType_TakenDamage" xml:space="preserve">
+    <value>承伤</value>
+  </data>
+  <data name="StatisticType_NpcTakenDamage" xml:space="preserve">
+    <value>NPC承伤</value>
+  </data>
+  <data name="ScopeTime_Current" xml:space="preserve">
+    <value>当前</value>
+  </data>
+  <data name="ScopeTime_Total" xml:space="preserve">
+    <value>全程</value>
   </data>
 </root>

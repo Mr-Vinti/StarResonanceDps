@@ -9,14 +9,15 @@
     xmlns:lex="http://wpflocalizeextension.codeplex.com"
     xmlns:loc="clr-namespace:StarResonanceDpsAnalysis.WPF.Properties"
     xmlns:local="clr-namespace:StarResonanceDpsAnalysis.WPF.Views"
+    xmlns:converters="clr-namespace:StarResonanceDpsAnalysis.WPF.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
     Title="{lex:Loc Key={x:Static loc:LocalizationKeys.Window_DpsStatistics_Title}}"
     Width="320"
-    Height="359"
+    Height="360"
     MinWidth="300"
-    MinHeight="31"
+    MinHeight="35"
     behaviors:WindowSnapBehavior.PreventSnapMaximize="True"
     d:DataContext="{d:DesignInstance Type=viewModels:DpsStatisticsDesignTimeViewModel,
                                      IsDesignTimeCreatable=True}"
@@ -25,11 +26,6 @@
     ResizeMode="CanResize"
     Style="{StaticResource TransparentWindow}"
     mc:Ignorable="d">
-    <b:Interaction.Triggers>
-        <b:EventTrigger EventName="Loaded">
-            <b:InvokeCommandAction Command="{Binding LoadedCommand}" />
-        </b:EventTrigger>
-    </b:Interaction.Triggers>
 
     <!--  WindowChrome: 开启可拉伸边界  -->
     <WindowChrome.WindowChrome>
@@ -40,18 +36,15 @@
             UseAeroCaptionButtons="False" />
     </WindowChrome.WindowChrome>
 
-    <Window.Resources>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
 
-        <Style
-            x:Key="WindowBackground"
-            BasedOn="{StaticResource ShadowWindowBorder}"
-            TargetType="Border">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Color="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToColorConverter}, ConverterParameter='#191919'}" />
-                </Setter.Value>
-            </Setter>
-        </Style>
+    <Window.Resources>
+        <converters:DoubleNegateConverter x:Key="DoubleNegateConverter" />
+        <converters:DoubleSumConverter x:Key="DoubleSumConverter" />
 
         <Style x:Key="TitleBar" TargetType="Border">
             <Setter Property="Background">
@@ -81,10 +74,39 @@
             <Setter Property="FontFamily" Value="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC" />
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
+
         <Style BasedOn="{StaticResource IconButtonStyle}" TargetType="Button">
             <Setter Property="FontFamily" Value="pack://application:,,,/Assets/Fonts/#iconfont" />
             <Setter Property="Background" Value="{x:Null}" />
             <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style x:Key="SortedDpsBorder" TargetType="Border">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToColorConverter}, ConverterParameter='#191919'}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LoadingGrid" TargetType="Border">
+            <!-- TODO: 当 DataStorage 触发 ServerConnectionStateChanged 时, 隐藏该 Grid -->
+            <Setter Property="Height" Value="5" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToColorConverter}, ConverterParameter='#191919'}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LoadingBlockRectangle" TargetType="Rectangle">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Width" Value="150" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform />
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="FooterContentBorder" TargetType="Border">
@@ -113,7 +135,7 @@
                     <DataTrigger.Binding>
                         <Binding
                             Converter="{StaticResource LessThanToBoolConverter}"
-                            ConverterParameter="56"
+                            ConverterParameter="60"
                             Path="ActualHeight"
                             RelativeSource="{RelativeSource AncestorType=local:DpsStatisticsView}" />
                     </DataTrigger.Binding>
@@ -312,11 +334,12 @@
     </Window.Resources>
 
     <!--  半透明/圆角交给内部 Border  -->
-    <Border Style="{StaticResource WindowBackground}">
+    <Border Style="{StaticResource ShadowWindowBorder}">
         <Grid CacheMode="BitmapCache">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="25" />
             </Grid.RowDefinitions>
             <Border Style="{StaticResource TitleBar}">
@@ -325,7 +348,7 @@
                     <!--  统计类型标注  -->
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -339,6 +362,7 @@
                         Command="{Binding PreviousMetricTypeCommand}"
                         Content=""
                         FontSize="15" />
+                    <!--  当前统计状态文字  -->
                     <TextBlock Grid.Column="1" Style="{StaticResource StatisticTypeText}">
                         <TextBlock.Text>
                             <MultiBinding Mode="OneWay" StringFormat="{}{0} ({1})">
@@ -556,16 +580,59 @@
                 </Grid>
             </Border>
 
+            <Border Style="{StaticResource SortedDpsBorder}"
+                    Grid.Row="1">
+                <ctrl:SortedDpsControl
+                    ItemTemplate="{StaticResource ProgressBarDataTemplate}"
+                    ItemsSource="{Binding Slots}"
+                    SelectedItem="{Binding SelectedSlot}" />
+            </Border>
 
-            <ctrl:SortedDpsControl
-                Grid.Row="1"
-                ItemTemplate="{StaticResource ProgressBarDataTemplate}"
-                ItemsSource="{Binding Slots}"
-                SelectedItem="{Binding SelectedSlot}" />
+            <Border
+                x:Name="LoadingGridHost"
+                Style="{StaticResource LoadingGrid}"
+                Grid.Row="2"
+                ClipToBounds="True">
+                
+                <Rectangle x:Name="LoadingStripe" Style="{StaticResource LoadingBlockRectangle}">
+                    <Rectangle.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="LoadingStripe"
+                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                        AccelerationRatio="0.2"
+                                        DecelerationRatio="0.2"
+                                        Duration="0:0:1.6">
+                                        <DoubleAnimation.From>
+                                            <Binding ElementName="LoadingStripe" Path="ActualWidth" Converter="{StaticResource DoubleNegateConverter}" />
+                                        </DoubleAnimation.From>
+                                        <DoubleAnimation.To>
+                                            <MultiBinding Converter="{StaticResource DoubleSumConverter}">
+                                                <Binding ElementName="LoadingGridHost" Path="ActualWidth" />
+                                                <Binding ElementName="LoadingStripe" Path="ActualWidth" />
+                                            </MultiBinding>
+                                        </DoubleAnimation.To>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Rectangle.Triggers>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1, 0">
+                            <GradientStop Color="#00569CD6" Offset="0" />
+                            <GradientStop Color="#FF569CD6" Offset="0.4" />
+                            <GradientStop Color="#FF569CD6" Offset="0.6" />
+                            <GradientStop Color="#00569CD6" Offset="1" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Border>
 
             <Border
                 x:Name="ContentBorder"
-                Grid.Row="2"
+                Grid.Row="3"
                 Style="{StaticResource FooterContentBorder}">
                 <Grid Margin="6">
                     <Grid.ColumnDefinitions>
