@@ -15,7 +15,6 @@
     Height="630"
     MinWidth="450"
     MinHeight="280"
-    Padding="5"
     d:DataContext="{d:DesignInstance Type=viewModels:SettingsDesignTimeViewModel,
                                      IsDesignTimeCreatable=True}"
     d:DesignHeight="1000"

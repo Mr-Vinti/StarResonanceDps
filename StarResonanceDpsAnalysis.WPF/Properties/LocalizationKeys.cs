@@ -836,6 +836,10 @@ public static class LocalizationKeys
     /// </summary>
     public const string Window_About_Title = nameof(Window_About_Title);
     /// <summary>
+    /// Window_BossTracker_Title
+    /// </summary>
+    public const string Window_BossTracker_Title = nameof(Window_BossTracker_Title);
+    /// <summary>
     /// Window_DamageReference_Title
     /// </summary>
     public const string Window_DamageReference_Title = nameof(Window_DamageReference_Title);

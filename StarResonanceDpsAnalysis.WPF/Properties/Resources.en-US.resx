@@ -709,7 +709,7 @@
     <value>Healing</value>
   </data>
   <data name="SkillBreakdown_Tab_Tanking" xml:space="preserve">
-    <value>Damage Taken</value>
+    <value>Dmg In</value>
   </data>
   <data name="SkillBreakdown_Tab_Summary" xml:space="preserve">
     <value>Summary</value>
@@ -755,5 +755,8 @@
   </data>
   <data name="ScopeTime_Total" xml:space="preserve">
     <value>Total</value>
+  </data>
+  <data name="Window_BossTracker_Title" xml:space="preserve">
+    <value>Boss Status Tracker</value>
   </data>
 </root>

@@ -14,6 +14,7 @@
     MinWidth="675"
     MinHeight="360"
     d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+    lex:LocalizeDictionary.DesignCulture="en-US"
     lex:ResxLocalizationProvider.DefaultAssembly="StarResonanceDpsAnalysis.WPF"
     lex:ResxLocalizationProvider.DefaultDictionary="Resources"
     Style="{StaticResource TransparentWindow}"
@@ -246,10 +247,12 @@
                     </GroupBox>
                 </WrapPanel>
             </ScrollViewer>
+            
             <ctrl:Footer
                 Grid.Row="3"
                 Height="50"
                 CancelCommand="{Binding ShutdownCommand}" />
+            
         </Grid>
     </Border>
 </Window>

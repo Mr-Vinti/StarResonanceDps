@@ -1924,6 +1924,15 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
+        ///   查找类似 野外Boss状态查看器 的本地化字符串。
+        /// </summary>
+        public static string Window_BossTracker_Title {
+            get {
+                return ResourceManager.GetString("Window_BossTracker_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 伤害参考 的本地化字符串。
         /// </summary>
         public static string Window_DamageReference_Title {
