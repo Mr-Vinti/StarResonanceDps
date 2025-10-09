@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Input;
 
 namespace StarResonanceDpsAnalysis.WPF.Views;
 
@@ -20,5 +21,14 @@ public partial class ModuleSolveView : Window
     private void Footer_CancelClick(object sender, RoutedEventArgs e)
     {
         Close();
+    }
+
+    private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Escape)
+        {
+            e.Handled = true;
+            Close();
+        }
     }
 }

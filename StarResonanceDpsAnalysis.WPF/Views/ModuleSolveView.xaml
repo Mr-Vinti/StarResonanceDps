@@ -14,6 +14,7 @@
     MinHeight="775"
     lex:ResxLocalizationProvider.DefaultAssembly="StarResonanceDpsAnalysis.WPF"
     lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+    PreviewKeyDown="Window_PreviewKeyDown"
     Style="{StaticResource TransparentWindow}"
     mc:Ignorable="d">
 
