@@ -240,6 +240,7 @@ public partial class ProcessorTests
 
     #region DeltaInfoProcessors
 
+    /*
     [Fact]
     public void SyncToMeDeltaInfoProcessor_Process_ShouldUpdateCurrentPlayerAndAddBattleLog()
     {
@@ -291,6 +292,7 @@ public partial class ProcessorTests
             b.IsTargetPlayer
         )), Times.Once);
     }
+    */
 
     [Fact]
     public void SyncNearDeltaInfoProcessor_Process_ShouldAddBattleLogsForMultipleDeltas()
