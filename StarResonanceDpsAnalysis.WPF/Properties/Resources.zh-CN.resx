@@ -267,6 +267,9 @@
   <data name="Settings_Language_English" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="Settings_Language_Portuguese" xml:space="preserve">
+    <value>Português (Brasil)</value>
+  </data>
   <data name="NumberDisplay_Wan" xml:space="preserve">
     <value>四位计数法 (万亿兆)</value>
   </data>

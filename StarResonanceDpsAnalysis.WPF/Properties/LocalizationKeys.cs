@@ -552,6 +552,10 @@ public static class LocalizationKeys
     /// </summary>
     public const string Settings_Language_English = nameof(Settings_Language_English);
     /// <summary>
+    /// Settings_Language_Portuguese
+    /// </summary>
+    public const string Settings_Language_Portuguese = nameof(Settings_Language_Portuguese);
+    /// <summary>
     /// Settings_NetworkAdapter_Label
     /// </summary>
     public const string Settings_NetworkAdapter_Label = nameof(Settings_NetworkAdapter_Label);
