@@ -41,7 +41,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private readonly IWindowManagementService _windowManagement;
     private DispatcherTimer? _durationTimer;
     private bool _isInitialized;
-    [ObservableProperty] private NumberDisplayMode _numberDisplayMode = NumberDisplayMode.Wan;
     [ObservableProperty] private ScopeTime _scopeTime = ScopeTime.Current;
     [ObservableProperty] private bool _showContextMenu;
     [ObservableProperty] private SortDirectionEnum _sortDirection = SortDirectionEnum.Descending;

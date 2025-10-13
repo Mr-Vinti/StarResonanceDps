@@ -222,7 +222,7 @@
                         <Run.Text>
                             <MultiBinding Converter="{StaticResource HumanReadableNumberConverter}">
                                 <Binding Path="Value" />
-                                <Binding Path="DataContext.NumberDisplayMode" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                <Binding Path="DataContext.AppConfig.DamageDisplayType" RelativeSource="{RelativeSource AncestorType=Window}" />
                             </MultiBinding>
                         </Run.Text>
                     </Run>
@@ -231,7 +231,7 @@
                             <MultiBinding Converter="{StaticResource DpsConverter}" StringFormat="{}[{0}]">
                                 <Binding Path="Value" />
                                 <Binding Path="DataContext.BattleDuration" RelativeSource="{RelativeSource AncestorType=Window}" />
-                                <Binding Path="DataContext.NumberDisplayMode" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                <Binding Path="DataContext.AppConfig.DamageDisplayType" RelativeSource="{RelativeSource AncestorType=Window}" />
                             </MultiBinding>
                         </Run.Text>
                     </Run>

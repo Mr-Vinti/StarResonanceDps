@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.Windows.Data;
-using StarResonanceDpsAnalysis.Core.Models;
 using StarResonanceDpsAnalysis.WPF.Models;
 
 namespace StarResonanceDpsAnalysis.WPF.Converters;
@@ -10,9 +9,9 @@ namespace StarResonanceDpsAnalysis.WPF.Converters;
 /// </summary>
 public class HumanReadableNumberConverter : IValueConverter, IMultiValueConverter
 {
-    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object?[] values, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (values == null || values.Length == 0)
+        if (values.Length == 0)
         {
             return string.Empty;
         }
@@ -42,7 +41,7 @@ public class HumanReadableNumberConverter : IValueConverter, IMultiValueConverte
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        var mode = ConverterNumberHelper.ParseDisplayMode(parameter, NumberDisplayMode.KMB);
+        var mode = ConverterNumberHelper.ParseDisplayMode(parameter);
         if (!ConverterNumberHelper.TryToDouble(value, out var number))
         {
             return string.Empty;
