@@ -68,7 +68,7 @@ public class DeviceManagementService(
         });
 
         // Start with no traffic until ports are known
-        TrySetDeviceFilter("false");
+        TrySetDeviceFilter("");
 
         device.OnPacketArrival += OnPacketArrival;
         device.StartCapture();
@@ -135,7 +135,7 @@ public class DeviceManagementService(
         }
 
         if (parts.Count == 0)
-            return "false"; // match nothing until we know ports
+            return ""; // match nothing until we know ports
 
         return $"(ip or ip6) and ({string.Join(" or ", parts)})";
     }
