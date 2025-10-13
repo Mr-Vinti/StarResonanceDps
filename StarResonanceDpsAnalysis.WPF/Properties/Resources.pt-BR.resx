@@ -121,7 +121,7 @@
     <value>Total</value>
   </data>
   <data name="Settings_Language_Auto" xml:space="preserve">
-    <value>Seguir sistema</value>
+    <value>Do Sistema</value>
   </data>
   <data name="Settings_Language_Chinese" xml:space="preserve">
     <value>简体中文</value>
@@ -355,28 +355,28 @@
     <value>Todas as Classes</value>
   </data>
   <data name="Profession_Stormblade" xml:space="preserve">
-    <value>Lâmina da Tempestade</value>
+    <value>Stormblade</value>
   </data>
   <data name="Profession_FrostMage" xml:space="preserve">
-    <value>Mago do Gelo</value>
+    <value>Frost Mage</value>
   </data>
   <data name="Profession_WindKnight" xml:space="preserve">
-    <value>Cavaleiro do Vento</value>
+    <value>Wind Knight</value>
   </data>
   <data name="Profession_VerdantOracle" xml:space="preserve">
-    <value>Oráculo Verdejante</value>
+    <value>Verdant Oracle</value>
   </data>
   <data name="Profession_HeavyGuardian" xml:space="preserve">
-    <value>Guardião Pesado</value>
+    <value>Heavy Guardian</value>
   </data>
   <data name="Profession_Marksman" xml:space="preserve">
-    <value>Atirador</value>
+    <value>Marksman</value>
   </data>
   <data name="Profession_ShieldKnight" xml:space="preserve">
-    <value>Cavaleiro do Escudo</value>
+    <value>Shield Knight</value>
   </data>
   <data name="Profession_SoulMusician" xml:space="preserve">
-    <value>Músico da Alma</value>
+    <value>Beat Performer</value>
   </data>
   <data name="DamageReference_Table_Title" xml:space="preserve">
     <value>Referência de Dano</value>
@@ -484,7 +484,7 @@
     <value>Autor:</value>
   </data>
   <data name="MainWindow_Plugin_Author_OfficialTeam" xml:space="preserve">
-    <value>[Oficial] Equipe Analisador DPS SR</value>
+    <value>[Oficial] SR DPS Analyzer Team</value>
   </data>
   <data name="MainWindow_Plugin_AutoStart" xml:space="preserve">
     <value>Início automático</value>
@@ -505,10 +505,10 @@
     <value>Dados ao vivo colaborativos para o status do boss mundial de cada canal</value>
   </data>
   <data name="MainWindow_Plugin_PigTracker_Title" xml:space="preserve">
-    <value>Rastreador de Status do Porco Nabo</value>
+    <value>Rastreador de Status do Pig Nabo</value>
   </data>
   <data name="MainWindow_Plugin_PigTracker_Description" xml:space="preserve">
-    <value>Rastreador comunitário para rotas e localizações do Porco Nabo</value>
+    <value>Rastreador comunitário para rotas e localizações do Pig Nabo</value>
   </data>
   <data name="MainWindow_Debug_Group_Title" xml:space="preserve">
     <value>Utilitários de debug</value>
