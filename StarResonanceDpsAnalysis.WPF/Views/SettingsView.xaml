@@ -164,7 +164,6 @@
                                     Grid.Column="2"
                                     DisplayMemberPath="Description"
                                     ItemsSource="{Binding AvailableNetworkAdapters, UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedIndex="0"
                                     SelectedItem="{Binding AppConfig.PreferredNetworkAdapter, Mode=TwoWay}"
                                     SelectedValuePath="Description"
                                     Style="{StaticResource AntComboBoxStyle}" />

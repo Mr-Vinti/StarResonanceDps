@@ -76,6 +76,11 @@ public partial class SettingsViewModel(
         LocalizationManager.ApplyLanguage(value.Value);
     }
 
+    partial void OnAvailableNetworkAdaptersChanged(List<NetworkAdapterInfo> value)
+    {
+        AppConfig.PreferredNetworkAdapter ??= value.FirstOrDefault();
+    }
+
     [RelayCommand(AllowConcurrentExecutions = false)]
     private async Task LoadedAsync()
     {
