@@ -61,7 +61,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 678150498（1群）.
+        ///   Looks up a localized string similar to 678150498 (Group 1).
         /// </summary>
         public static string About_Community_GroupOne {
             get {
@@ -70,7 +70,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1022797551（2群）.
+        ///   Looks up a localized string similar to 1022797551 (Group 2).
         /// </summary>
         public static string About_Community_GroupTwo {
             get {
@@ -79,7 +79,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 无法访问 GitHub 或者想要寻求游戏伙伴也可以加QQ群：.
+        ///   Looks up a localized string similar to If you cannot access GitHub or want to find teammates, join the Tencent QQ groups:.
         /// </summary>
         public static string About_Community_Invite {
             get {
@@ -88,7 +88,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 如果你想为本项目贡献代码，欢迎 Fork 之后提交 Pull Request。.
+        ///   Looks up a localized string similar to To contribute, please fork the repository and submit a pull request..
         /// </summary>
         public static string About_Contribution {
             get {
@@ -115,7 +115,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 惊奇猫猫盒（anying1073：项目发起者）.
+        ///   Looks up a localized string similar to 惊奇猫猫盒 (anying1073: project founder).
         /// </summary>
         public static string About_Developer_Lead {
             get {
@@ -142,7 +142,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 当前版本的开发者们（排名不分先后）:.
+        ///   Looks up a localized string similar to Contributors for this release (in no particular order):.
         /// </summary>
         public static string About_Developers_Label {
             get {
@@ -151,7 +151,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 该工具无需修改游戏客户端，不违反游戏服务条款。该工具旨在帮助玩家更好地理解战斗数据，减少不必要的精力消耗，提升游戏体验。使用该工具前，请确保不会将数据结果用于战力歧视等破坏游戏社区环境的行为。.
+        ///   Looks up a localized string similar to This tool requires no client modifications and stays within the game&apos;s terms of service. It helps players understand combat data, reduce unnecessary effort, and improve the gameplay experience. Please do not use the results for power discrimination or any behaviour that harms the community..
         /// </summary>
         public static string About_Intro_Details {
             get {
@@ -160,7 +160,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 一款专为《星痕共鸣》玩家打造的战斗数据统计工具。.
+        ///   Looks up a localized string similar to A combat data analytics tool built for Star Resonance players..
         /// </summary>
         public static string About_Intro_Primary {
             get {
@@ -169,7 +169,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 本项目于.
+        ///   Looks up a localized string similar to This project is open source at.
         /// </summary>
         public static string About_OpenSource_Prefix {
             get {
@@ -187,7 +187,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 中开源，如在使用中遇到问题可以直接提出 Issue。.
+        ///   Looks up a localized string similar to , If you encounter any issues, please open an issue there..
         /// </summary>
         public static string About_OpenSource_Suffix {
             get {
@@ -205,7 +205,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 在此感谢.
+        ///   Looks up a localized string similar to Special thanks to.
         /// </summary>
         public static string About_Thanks_Prefix {
             get {
@@ -223,7 +223,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 项目对于本项目的帮助于支持.
+        ///   Looks up a localized string similar to for supporting and inspiring this project..
         /// </summary>
         public static string About_Thanks_Suffix {
             get {
@@ -232,7 +232,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 当前版本号：.
+        ///   Looks up a localized string similar to Current version:.
         /// </summary>
         public static string About_Version_Label {
             get {
@@ -241,7 +241,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 别查我DPS.
+        ///   Looks up a localized string similar to SR DPS Analyzer.
         /// </summary>
         public static string App_Name {
             get {
@@ -250,7 +250,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 开启.
+        ///   Looks up a localized string similar to Launch.
         /// </summary>
         public static string Common_Action_Open {
             get {
@@ -268,7 +268,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 以上数据仅供娱乐与参考，严禁用于战力歧视等破坏游戏社区环境的行为；一经发现，永久取消该功能的使用资格。.
+        ///   Looks up a localized string similar to Data is for entertainment and reference only. Do not use it for power discrimination or any behaviour that harms the community; violations will result in permanent revocation..
         /// </summary>
         public static string DamageReference_Disclaimer {
             get {
@@ -286,7 +286,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 暂无数据.
+        ///   Looks up a localized string similar to No data yet.
         /// </summary>
         public static string DamageReference_NoData {
             get {
@@ -295,7 +295,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 全职业.
+        ///   Looks up a localized string similar to All Classes.
         /// </summary>
         public static string DamageReference_Profession_All {
             get {
@@ -304,7 +304,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 伤害参考.
+        ///   Looks up a localized string similar to Damage Reference.
         /// </summary>
         public static string DamageReference_Ribbon_Title {
             get {
@@ -313,7 +313,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 伤害参考.
+        ///   Looks up a localized string similar to Damage Reference.
         /// </summary>
         public static string DamageReference_Table_Title {
             get {
@@ -349,7 +349,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 关于窗口.
+        ///   Looks up a localized string similar to About View.
         /// </summary>
         public static string Debug_Button_About {
             get {
@@ -358,7 +358,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 伤害参考窗口.
+        ///   Looks up a localized string similar to Damage Reference View.
         /// </summary>
         public static string Debug_Button_DamageReference {
             get {
@@ -367,7 +367,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pcap 测试.
+        ///   Looks up a localized string similar to Pcap Test.
         /// </summary>
         public static string Debug_Button_PcapTest {
             get {
@@ -376,7 +376,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 设置窗口.
+        ///   Looks up a localized string similar to Settings View.
         /// </summary>
         public static string Debug_Button_Settings {
             get {
@@ -385,7 +385,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 技能详情窗口.
+        ///   Looks up a localized string similar to Skill Breakdown View.
         /// </summary>
         public static string Debug_Button_SkillBreakdown {
             get {
@@ -430,7 +430,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 调试功能.
+        ///   Looks up a localized string similar to Debug utilities.
         /// </summary>
         public static string Debug_Group_Title {
             get {
@@ -493,7 +493,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 过滤：.
+        ///   Looks up a localized string similar to Filtered: .
         /// </summary>
         public static string Debug_Status_FilteredPrefix {
             get {
@@ -502,7 +502,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  条日志.
+        ///   Looks up a localized string similar to  logs.
         /// </summary>
         public static string Debug_Status_FilteredSuffix {
             get {
@@ -511,7 +511,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 最新：.
+        ///   Looks up a localized string similar to Last: .
         /// </summary>
         public static string Debug_Status_LastPrefix {
             get {
@@ -520,7 +520,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 总计：.
+        ///   Looks up a localized string similar to Total: .
         /// </summary>
         public static string Debug_Status_TotalPrefix {
             get {
@@ -529,7 +529,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  条日志.
+        ///   Looks up a localized string similar to  logs.
         /// </summary>
         public static string Debug_Status_TotalSuffix {
             get {
@@ -538,7 +538,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 主题切换测试文本.
+        ///   Looks up a localized string similar to Theme switch test text.
         /// </summary>
         public static string Debug_ThemeTestText {
             get {
@@ -547,7 +547,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 鼠标穿透已启用.
+        ///   Looks up a localized string similar to Mouse click-through enabled.
         /// </summary>
         public static string DpsStatistics_Indicator_ClickThrough_Tooltip {
             get {
@@ -565,7 +565,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 添加测试数据.
+        ///   Looks up a localized string similar to Add Test Item.
         /// </summary>
         public static string DpsStatistics_TestButton_Tooltip {
             get {
@@ -574,7 +574,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 关于窗口.
+        ///   Looks up a localized string similar to About View.
         /// </summary>
         public static string MainWindow_Debug_Button_About {
             get {
@@ -583,7 +583,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 伤害参考窗口.
+        ///   Looks up a localized string similar to Damage Reference View.
         /// </summary>
         public static string MainWindow_Debug_Button_DamageReference {
             get {
@@ -592,7 +592,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pcap 测试.
+        ///   Looks up a localized string similar to Pcap Test.
         /// </summary>
         public static string MainWindow_Debug_Button_PcapTest {
             get {
@@ -601,7 +601,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 设置窗口.
+        ///   Looks up a localized string similar to Settings View.
         /// </summary>
         public static string MainWindow_Debug_Button_Settings {
             get {
@@ -610,7 +610,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 技能详情窗口.
+        ///   Looks up a localized string similar to Skill Breakdown View.
         /// </summary>
         public static string MainWindow_Debug_Button_SkillBreakdown {
             get {
@@ -619,7 +619,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 调试功能.
+        ///   Looks up a localized string similar to Debug utilities.
         /// </summary>
         public static string MainWindow_Debug_Group_Title {
             get {
@@ -628,7 +628,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 主题切换测试文本.
+        ///   Looks up a localized string similar to Theme switch test text.
         /// </summary>
         public static string MainWindow_Debug_ThemeTest {
             get {
@@ -637,7 +637,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 别查我 D P S.
+        ///   Looks up a localized string similar to SR DPS Analyzer.
         /// </summary>
         public static string MainWindow_Header_Title {
             get {
@@ -646,7 +646,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [官方] 别查我DPS 开发团队.
+        ///   Looks up a localized string similar to [Official] SR DPS Analyzer Team.
         /// </summary>
         public static string MainWindow_Plugin_Author_OfficialTeam {
             get {
@@ -655,7 +655,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 自启动.
+        ///   Looks up a localized string similar to Auto start.
         /// </summary>
         public static string MainWindow_Plugin_AutoStart {
             get {
@@ -664,7 +664,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 提供DPS统计、技能分解等功能.
+        ///   Looks up a localized string similar to Provides DPS statistics and skill breakdown tools.
         /// </summary>
         public static string MainWindow_Plugin_DpsTool_Description {
             get {
@@ -673,7 +673,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DPS工具.
+        ///   Looks up a localized string similar to DPS Toolkit.
         /// </summary>
         public static string MainWindow_Plugin_DpsTool_Title {
             get {
@@ -682,7 +682,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 作者：.
+        ///   Looks up a localized string similar to Author:.
         /// </summary>
         public static string MainWindow_Plugin_Label_Author {
             get {
@@ -691,7 +691,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 简介：.
+        ///   Looks up a localized string similar to Intro:.
         /// </summary>
         public static string MainWindow_Plugin_Label_Intro {
             get {
@@ -700,7 +700,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 提供模组快速计算最优解功能.
+        ///   Looks up a localized string similar to Quickly calculates optimal module combinations.
         /// </summary>
         public static string MainWindow_Plugin_ModuleSolver_Description {
             get {
@@ -709,7 +709,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 模组求解器.
+        ///   Looks up a localized string similar to Module Solver.
         /// </summary>
         public static string MainWindow_Plugin_ModuleSolver_Title {
             get {
@@ -718,7 +718,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 通过大量的玩家在线数据互助，提供小猪娜宝的线路与位置信息.
+        ///   Looks up a localized string similar to Community-driven tracker for Pig Nabo routes and locations.
         /// </summary>
         public static string MainWindow_Plugin_PigTracker_Description {
             get {
@@ -727,7 +727,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 小猪娜宝状态查看器.
+        ///   Looks up a localized string similar to Pig Nabo Status Tracker.
         /// </summary>
         public static string MainWindow_Plugin_PigTracker_Title {
             get {
@@ -736,7 +736,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 通过大量的玩家在线数据互助，提供各线路的野外BOSS存活状态等信息.
+        ///   Looks up a localized string similar to Crowdsourced live data for each channel&apos;s world boss status.
         /// </summary>
         public static string MainWindow_Plugin_WorldBoss_Description {
             get {
@@ -745,7 +745,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 野外BOSS状态查看器.
+        ///   Looks up a localized string similar to World Boss Status Tracker.
         /// </summary>
         public static string MainWindow_Plugin_WorldBoss_Title {
             get {
@@ -754,7 +754,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 插件列表.
+        ///   Looks up a localized string similar to Plugin List.
         /// </summary>
         public static string MainWindow_PluginList_Title {
             get {
@@ -763,7 +763,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 退出.
+        ///   Looks up a localized string similar to Exit.
         /// </summary>
         public static string Menu_Exit {
             get {
@@ -772,7 +772,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 历史记录.
+        ///   Looks up a localized string similar to History.
         /// </summary>
         public static string Menu_History {
             get {
@@ -781,7 +781,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 个人模式.
+        ///   Looks up a localized string similar to Solo Mode.
         /// </summary>
         public static string Menu_PersonalMode {
             get {
@@ -790,7 +790,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 记录每一次.
+        ///   Looks up a localized string similar to Record Every Fight.
         /// </summary>
         public static string Menu_Record_Always {
             get {
@@ -799,7 +799,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 不记录1分钟以下.
+        ///   Looks up a localized string similar to Ignore fights &lt; 1 min.
         /// </summary>
         public static string Menu_Record_Skip1Min {
             get {
@@ -808,7 +808,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 不记录2分钟以下.
+        ///   Looks up a localized string similar to Ignore fights &lt; 2 min.
         /// </summary>
         public static string Menu_Record_Skip2Min {
             get {
@@ -817,7 +817,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 记录设置.
+        ///   Looks up a localized string similar to Record Options.
         /// </summary>
         public static string Menu_RecordSettings {
             get {
@@ -826,7 +826,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 设置.
+        ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Menu_Settings {
             get {
@@ -835,7 +835,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 显示总伤.
+        ///   Looks up a localized string similar to Show Total Damage.
         /// </summary>
         public static string Menu_ShowTotal {
             get {
@@ -844,7 +844,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 技能日记.
+        ///   Looks up a localized string similar to Skill Diary.
         /// </summary>
         public static string Menu_SkillDiary {
             get {
@@ -853,7 +853,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 技能显示.
+        ///   Looks up a localized string similar to Skill Display.
         /// </summary>
         public static string Menu_SkillDisplay {
             get {
@@ -862,7 +862,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 显示全部.
+        ///   Looks up a localized string similar to Show All.
         /// </summary>
         public static string Menu_SkillDisplay_All {
             get {
@@ -871,7 +871,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 前 10 条.
+        ///   Looks up a localized string similar to Top 10.
         /// </summary>
         public static string Menu_SkillDisplay_Top10 {
             get {
@@ -880,7 +880,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 前 15 条.
+        ///   Looks up a localized string similar to Top 15.
         /// </summary>
         public static string Menu_SkillDisplay_Top15 {
             get {
@@ -889,7 +889,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 前 5 条.
+        ///   Looks up a localized string similar to Top 5.
         /// </summary>
         public static string Menu_SkillDisplay_Top5 {
             get {
@@ -898,7 +898,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 前 8 条.
+        ///   Looks up a localized string similar to Top 8.
         /// </summary>
         public static string Menu_SkillDisplay_Top8 {
             get {
@@ -907,7 +907,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 统计BOSS.
+        ///   Looks up a localized string similar to Track Boss Only.
         /// </summary>
         public static string Menu_StatisticBoss {
             get {
@@ -916,7 +916,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 打桩模式.
+        ///   Looks up a localized string similar to Training Mode.
         /// </summary>
         public static string Menu_Training {
             get {
@@ -925,7 +925,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 极限打桩.
+        ///   Looks up a localized string similar to Extreme Training.
         /// </summary>
         public static string Menu_Training_Extreme {
             get {
@@ -934,7 +934,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 协会打桩.
+        ///   Looks up a localized string similar to Faction Training.
         /// </summary>
         public static string Menu_Training_Faction {
             get {
@@ -943,7 +943,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 个人打桩.
+        ///   Looks up a localized string similar to Solo Training.
         /// </summary>
         public static string Menu_Training_Personal {
             get {
@@ -952,7 +952,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 分析模组.
+        ///   Looks up a localized string similar to Analyze modules.
         /// </summary>
         public static string ModuleSolve_Analyze_Button {
             get {
@@ -961,7 +961,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 排除词条（与目标词条冲突）[可输入文字索引].
+        ///   Looks up a localized string similar to Exclude stats (conflicts with targets) [type to search].
         /// </summary>
         public static string ModuleSolve_ExcludeProperties_Title {
             get {
@@ -970,7 +970,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 期望等级：.
+        ///   Looks up a localized string similar to Desired level:.
         /// </summary>
         public static string ModuleSolve_ExpectedLevel_Label {
             get {
@@ -979,7 +979,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 模组求解器.
+        ///   Looks up a localized string similar to Module Solver.
         /// </summary>
         public static string ModuleSolve_Header_Title {
             get {
@@ -988,7 +988,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 全部.
+        ///   Looks up a localized string similar to All.
         /// </summary>
         public static string ModuleSolve_ModuleType_All {
             get {
@@ -997,7 +997,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 防御模组.
+        ///   Looks up a localized string similar to Defense.
         /// </summary>
         public static string ModuleSolve_ModuleType_Defense {
             get {
@@ -1006,7 +1006,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 模组类型：.
+        ///   Looks up a localized string similar to Module type:.
         /// </summary>
         public static string ModuleSolve_ModuleType_Label {
             get {
@@ -1015,7 +1015,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 攻击模组.
+        ///   Looks up a localized string similar to Offense.
         /// </summary>
         public static string ModuleSolve_ModuleType_Offense {
             get {
@@ -1024,7 +1024,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 辅助模组.
+        ///   Looks up a localized string similar to Support.
         /// </summary>
         public static string ModuleSolve_ModuleType_Support {
             get {
@@ -1033,7 +1033,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 属性1：.
+        ///   Looks up a localized string similar to Stat 1:.
         /// </summary>
         public static string ModuleSolve_Property1_Label {
             get {
@@ -1042,7 +1042,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 属性2：.
+        ///   Looks up a localized string similar to Stat 2:.
         /// </summary>
         public static string ModuleSolve_Property2_Label {
             get {
@@ -1051,7 +1051,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 属性3：.
+        ///   Looks up a localized string similar to Stat 3:.
         /// </summary>
         public static string ModuleSolve_Property3_Label {
             get {
@@ -1060,7 +1060,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 属性4：.
+        ///   Looks up a localized string similar to Stat 4:.
         /// </summary>
         public static string ModuleSolve_Property4_Label {
             get {
@@ -1069,7 +1069,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 属性5：.
+        ///   Looks up a localized string similar to Stat 5:.
         /// </summary>
         public static string ModuleSolve_Property5_Label {
             get {
@@ -1078,7 +1078,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 属性优先.
+        ///   Looks up a localized string similar to Stat priority.
         /// </summary>
         public static string ModuleSolve_Sort_Attribute {
             get {
@@ -1087,7 +1087,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 排序方式：.
+        ///   Looks up a localized string similar to Sort by:.
         /// </summary>
         public static string ModuleSolve_Sort_Label {
             get {
@@ -1096,7 +1096,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 等级优先.
+        ///   Looks up a localized string similar to Level priority.
         /// </summary>
         public static string ModuleSolve_Sort_Level {
             get {
@@ -1105,7 +1105,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 目标词条和等级（0为默认）[可输入文字索引].
+        ///   Looks up a localized string similar to Target stats and levels (0 = default) [type to search].
         /// </summary>
         public static string ModuleSolve_TargetProperties_Title {
             get {
@@ -1114,7 +1114,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 打开此界面后需要过图或者重新登陆一次才能进行分析【右键属性选项为清空当前选项】.
+        ///   Looks up a localized string similar to After opening this window, change zone or relog before analyzing. Right-click a stat option to clear it..
         /// </summary>
         public static string ModuleSolve_UsingTip {
             get {
@@ -1123,7 +1123,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 三位计数法 (KMBT).
+        ///   Looks up a localized string similar to KMBT (Western).
         /// </summary>
         public static string NumberDisplay_KMB {
             get {
@@ -1132,7 +1132,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 四位计数法 (万亿兆).
+        ///   Looks up a localized string similar to Wan (East Asian).
         /// </summary>
         public static string NumberDisplay_Wan {
             get {
@@ -1141,7 +1141,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 冰魔导师.
+        ///   Looks up a localized string similar to Frost Mage.
         /// </summary>
         public static string Profession_FrostMage {
             get {
@@ -1150,7 +1150,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 巨刃守护者.
+        ///   Looks up a localized string similar to Heavy Guardian.
         /// </summary>
         public static string Profession_HeavyGuardian {
             get {
@@ -1159,7 +1159,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 神射手.
+        ///   Looks up a localized string similar to Marksman.
         /// </summary>
         public static string Profession_Marksman {
             get {
@@ -1168,7 +1168,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 神盾骑士.
+        ///   Looks up a localized string similar to Shield Knight.
         /// </summary>
         public static string Profession_ShieldKnight {
             get {
@@ -1177,7 +1177,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 灵魂乐手.
+        ///   Looks up a localized string similar to Soul Musician.
         /// </summary>
         public static string Profession_SoulMusician {
             get {
@@ -1186,7 +1186,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 雷影剑士.
+        ///   Looks up a localized string similar to Stormblade.
         /// </summary>
         public static string Profession_Stormblade {
             get {
@@ -1195,7 +1195,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 森语者.
+        ///   Looks up a localized string similar to Verdant Oracle.
         /// </summary>
         public static string Profession_VerdantOracle {
             get {
@@ -1204,7 +1204,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 青岚骑士.
+        ///   Looks up a localized string similar to Wind Knight.
         /// </summary>
         public static string Profession_WindKnight {
             get {
@@ -1213,7 +1213,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 当前.
+        ///   Looks up a localized string similar to Current.
         /// </summary>
         public static string ScopeTime_Current {
             get {
@@ -1222,7 +1222,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 全程.
+        ///   Looks up a localized string similar to Total.
         /// </summary>
         public static string ScopeTime_Total {
             get {
@@ -1231,7 +1231,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 脱战后清除当前统计.
+        ///   Looks up a localized string similar to Clear data after combat.
         /// </summary>
         public static string Settings_Combat_ClearAfterBattle {
             get {
@@ -1240,7 +1240,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 换地图时清空全程统计.
+        ///   Looks up a localized string similar to Reset on map change.
         /// </summary>
         public static string Settings_Combat_ClearAfterTeleport {
             get {
@@ -1249,7 +1249,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 秒.
+        ///   Looks up a localized string similar to sec.
         /// </summary>
         public static string Settings_Common_Seconds {
             get {
@@ -1258,7 +1258,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 计数显示类型.
+        ///   Looks up a localized string similar to Number display mode.
         /// </summary>
         public static string Settings_Display_NumberMode {
             get {
@@ -1267,7 +1267,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 窗体透明度.
+        ///   Looks up a localized string similar to Overlay opacity.
         /// </summary>
         public static string Settings_Display_Opacity {
             get {
@@ -1276,7 +1276,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 设置.
+        ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Settings_Heading {
             get {
@@ -1285,7 +1285,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 跟随系统.
+        ///   Looks up a localized string similar to Follow system.
         /// </summary>
         public static string Settings_Language_Auto {
             get {
@@ -1312,7 +1312,16 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 监听网卡.
+        ///   Looks up a localized string similar to Português (Brasil).
+        /// </summary>
+        public static string Settings_Language_Portuguese {
+            get {
+                return ResourceManager.GetString("Settings_Language_Portuguese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capture Adapter.
         /// </summary>
         public static string Settings_NetworkAdapter_Label {
             get {
@@ -1321,7 +1330,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 自动设置错误时可手动设置.
+        ///   Looks up a localized string similar to Adjust manually when auto detection fails.
         /// </summary>
         public static string Settings_Section_Basic_Sub {
             get {
@@ -1330,7 +1339,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 基础设置.
+        ///   Looks up a localized string similar to Basic Settings.
         /// </summary>
         public static string Settings_Section_Basic_Title {
             get {
@@ -1339,7 +1348,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 脱战清空只重置当前战斗数据，而非全程统计.
+        ///   Looks up a localized string similar to [Clear data after combat] resets only the current data, not the total..
         /// </summary>
         public static string Settings_Section_Combat_Sub {
             get {
@@ -1348,7 +1357,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 战斗设置.
+        ///   Looks up a localized string similar to Combat Settings.
         /// </summary>
         public static string Settings_Section_Combat_Title {
             get {
@@ -1357,7 +1366,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 显示设置.
+        ///   Looks up a localized string similar to Display.
         /// </summary>
         public static string Settings_Section_Display_Title {
             get {
@@ -1366,7 +1375,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 选择界面语言.
+        ///   Looks up a localized string similar to Choose the interface language.
         /// </summary>
         public static string Settings_Section_Language_Description {
             get {
@@ -1375,7 +1384,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 语言.
+        ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Settings_Section_Language_Title {
             get {
@@ -1384,7 +1393,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 按下 Delete 删除选择的键位.
+        ///   Looks up a localized string similar to Press [Delete] to clear the selected shortcut.
         /// </summary>
         public static string Settings_Section_Shortcut_Sub {
             get {
@@ -1393,7 +1402,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 按键设置.
+        ///   Looks up a localized string similar to Shortcuts.
         /// </summary>
         public static string Settings_Section_Shortcut_Title {
             get {
@@ -1402,7 +1411,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 清空数据.
+        ///   Looks up a localized string similar to Clear Data.
         /// </summary>
         public static string Settings_Shortcut_ClearData {
             get {
@@ -1411,7 +1420,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 在此聚焦并按下快捷键（例如 F9）。按 Delete 清除。.
+        ///   Looks up a localized string similar to Focus this box and press a shortcut (e.g. F9). Press Delete to clear..
         /// </summary>
         public static string Settings_Shortcut_ClearData_Tooltip {
             get {
@@ -1420,7 +1429,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 鼠标穿透.
+        ///   Looks up a localized string similar to Mouse Through.
         /// </summary>
         public static string Settings_Shortcut_MouseThrough {
             get {
@@ -1429,7 +1438,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 在此聚焦并按下组合键（例如 Ctrl+F6）。按 Delete 清除。.
+        ///   Looks up a localized string similar to Focus this box and press a shortcut (e.g. Ctrl+F6). Press Delete to clear..
         /// </summary>
         public static string Settings_Shortcut_MouseThrough_Tooltip {
             get {
@@ -1438,7 +1447,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 关.
+        ///   Looks up a localized string similar to Off.
         /// </summary>
         public static string Settings_Switch_Off {
             get {
@@ -1447,7 +1456,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 开.
+        ///   Looks up a localized string similar to On.
         /// </summary>
         public static string Settings_Switch_On {
             get {
@@ -1456,7 +1465,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 伤害分布.
+        ///   Looks up a localized string similar to Damage distribution.
         /// </summary>
         public static string SkillBreakdown_Card_DamageDistribution {
             get {
@@ -1465,7 +1474,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DPS/HPS/DTPS实时曲线图.
+        ///   Looks up a localized string similar to Realtime DPS/HPS/DTPS charts.
         /// </summary>
         public static string SkillBreakdown_Card_RealtimeChart {
             get {
@@ -1474,7 +1483,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 技能占比分布图.
+        ///   Looks up a localized string similar to Skill contribution chart.
         /// </summary>
         public static string SkillBreakdown_Card_ShareChart {
             get {
@@ -1483,7 +1492,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 技能详情.
+        ///   Looks up a localized string similar to Skill Breakdown.
         /// </summary>
         public static string SkillBreakdown_Header_Title {
             get {
@@ -1492,7 +1501,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 臂章: 190.
+        ///   Looks up a localized string similar to Badge: 190.
         /// </summary>
         public static string SkillBreakdown_Info_Badge {
             get {
@@ -1501,7 +1510,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 等级: 60.
+        ///   Looks up a localized string similar to Level: 60.
         /// </summary>
         public static string SkillBreakdown_Info_Level {
             get {
@@ -1510,7 +1519,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to --测试名称--.
+        ///   Looks up a localized string similar to --Sample Name--.
         /// </summary>
         public static string SkillBreakdown_Info_Name {
             get {
@@ -1519,7 +1528,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 战力: 25000.
+        ///   Looks up a localized string similar to Power: 25000.
         /// </summary>
         public static string SkillBreakdown_Info_Power {
             get {
@@ -1537,7 +1546,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 平均伤害.
+        ///   Looks up a localized string similar to Average hit.
         /// </summary>
         public static string SkillBreakdown_Label_AverageDamage {
             get {
@@ -1546,7 +1555,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 暴击次数.
+        ///   Looks up a localized string similar to Critical hits.
         /// </summary>
         public static string SkillBreakdown_Label_CritCount {
             get {
@@ -1555,7 +1564,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 暴击伤害.
+        ///   Looks up a localized string similar to Critical damage.
         /// </summary>
         public static string SkillBreakdown_Label_CritDamage {
             get {
@@ -1564,7 +1573,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 暴击率.
+        ///   Looks up a localized string similar to Crit rate.
         /// </summary>
         public static string SkillBreakdown_Label_CritRate {
             get {
@@ -1573,7 +1582,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 受击次数.
+        ///   Looks up a localized string similar to Times hit.
         /// </summary>
         public static string SkillBreakdown_Label_DamageTakenCount {
             get {
@@ -1582,7 +1591,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 秒伤.
+        ///   Looks up a localized string similar to DPS.
         /// </summary>
         public static string SkillBreakdown_Label_Dps {
             get {
@@ -1591,7 +1600,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 命中次数.
+        ///   Looks up a localized string similar to Hits.
         /// </summary>
         public static string SkillBreakdown_Label_HitCount {
             get {
@@ -1600,7 +1609,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 幸运次数.
+        ///   Looks up a localized string similar to Lucky hits.
         /// </summary>
         public static string SkillBreakdown_Label_LuckCount {
             get {
@@ -1609,7 +1618,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 幸运伤害.
+        ///   Looks up a localized string similar to Lucky damage.
         /// </summary>
         public static string SkillBreakdown_Label_LuckDamage {
             get {
@@ -1618,7 +1627,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 幸运率.
+        ///   Looks up a localized string similar to Luck rate.
         /// </summary>
         public static string SkillBreakdown_Label_LuckRate {
             get {
@@ -1627,7 +1636,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 普通伤害.
+        ///   Looks up a localized string similar to Normal damage.
         /// </summary>
         public static string SkillBreakdown_Label_NormalDamage {
             get {
@@ -1636,7 +1645,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 总伤害.
+        ///   Looks up a localized string similar to Total damage.
         /// </summary>
         public static string SkillBreakdown_Label_TotalDamage {
             get {
@@ -1645,7 +1654,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 假装这里有个条形图.
+        ///   Looks up a localized string similar to Imagine a bar chart here.
         /// </summary>
         public static string SkillBreakdown_Placeholder_BarChart {
             get {
@@ -1654,7 +1663,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 详情占位.
+        ///   Looks up a localized string similar to Details placeholder.
         /// </summary>
         public static string SkillBreakdown_Placeholder_Details {
             get {
@@ -1663,7 +1672,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 假装这里有个表单.
+        ///   Looks up a localized string similar to Imagine a data table here.
         /// </summary>
         public static string SkillBreakdown_Placeholder_Form {
             get {
@@ -1672,7 +1681,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 图表占位.
+        ///   Looks up a localized string similar to Graph placeholder.
         /// </summary>
         public static string SkillBreakdown_Placeholder_Graph {
             get {
@@ -1681,7 +1690,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 假装这里有个折线图.
+        ///   Looks up a localized string similar to Imagine a line chart here.
         /// </summary>
         public static string SkillBreakdown_Placeholder_LineChart {
             get {
@@ -1690,7 +1699,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 假装这里有个饼图.
+        ///   Looks up a localized string similar to Imagine a pie chart here.
         /// </summary>
         public static string SkillBreakdown_Placeholder_PieChart {
             get {
@@ -1699,7 +1708,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 伤害分布.
+        ///   Looks up a localized string similar to Damage distribution.
         /// </summary>
         public static string SkillBreakdown_Section_DamageDistribution {
             get {
@@ -1708,7 +1717,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 伤害信息.
+        ///   Looks up a localized string similar to Damage info.
         /// </summary>
         public static string SkillBreakdown_Section_DamageInfo {
             get {
@@ -1735,7 +1744,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 治疗.
+        ///   Looks up a localized string similar to Healing.
         /// </summary>
         public static string SkillBreakdown_Tab_Healing {
             get {
@@ -1744,7 +1753,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 输出.
+        ///   Looks up a localized string similar to DPS.
         /// </summary>
         public static string SkillBreakdown_Tab_Output {
             get {
@@ -1762,7 +1771,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 承伤.
+        ///   Looks up a localized string similar to Damage Taken.
         /// </summary>
         public static string SkillBreakdown_Tab_Tanking {
             get {
@@ -1879,7 +1888,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 伤害.
+        ///   Looks up a localized string similar to Damage.
         /// </summary>
         public static string StatisticType_Damage {
             get {
@@ -1888,7 +1897,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 治疗.
+        ///   Looks up a localized string similar to Healing.
         /// </summary>
         public static string StatisticType_Healing {
             get {
@@ -1897,7 +1906,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NPC承伤.
+        ///   Looks up a localized string similar to NPC Dmg In.
         /// </summary>
         public static string StatisticType_NpcTakenDamage {
             get {
@@ -1906,7 +1915,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 承伤.
+        ///   Looks up a localized string similar to Dmg In.
         /// </summary>
         public static string StatisticType_TakenDamage {
             get {
@@ -1915,7 +1924,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 切换为：全程 / 当前.
+        ///   Looks up a localized string similar to Toggle: Full / Current.
         /// </summary>
         public static string Tooltip_ToggleScope {
             get {
@@ -1924,7 +1933,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 关于.
+        ///   Looks up a localized string similar to About.
         /// </summary>
         public static string Window_About_Title {
             get {
@@ -1933,7 +1942,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 伤害参考.
+        ///   Looks up a localized string similar to Damage Reference.
         /// </summary>
         public static string Window_DamageReference_Title {
             get {
@@ -1951,7 +1960,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DpsStatisticsForm.
+        ///   Looks up a localized string similar to DPS Statistics.
         /// </summary>
         public static string Window_DpsStatistics_Title {
             get {
@@ -1960,7 +1969,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 模组求解器.
+        ///   Looks up a localized string similar to Module Solver.
         /// </summary>
         public static string Window_ModuleSolve_Title {
             get {
@@ -1969,7 +1978,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 设置.
+        ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Window_Settings_Title {
             get {
@@ -1978,7 +1987,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 技能详情.
+        ///   Looks up a localized string similar to Skill Details.
         /// </summary>
         public static string Window_SkillBreakdown_Title {
             get {
