@@ -1456,6 +1456,24 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Always on Top.
+        /// </summary>
+        public static string Settings_Shortcut_TopMost {
+            get {
+                return ResourceManager.GetString("Settings_Shortcut_TopMost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Focus this box and press a shortcut (e.g. Ctrl+F9). Press Delete to clear..
+        /// </summary>
+        public static string Settings_Shortcut_TopMost_Tooltip {
+            get {
+                return ResourceManager.GetString("Settings_Shortcut_TopMost_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Off.
         /// </summary>
         public static string Settings_Switch_Off {

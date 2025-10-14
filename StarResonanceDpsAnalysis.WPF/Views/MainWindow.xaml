@@ -8,7 +8,7 @@
     xmlns:loc="clr-namespace:StarResonanceDpsAnalysis.WPF.Properties"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
-    Title="{lex:Loc Key={x:Static loc:LocalizationKeys.App_Name}}"
+    Title="{lex:Loc Key={x:Static loc:ResourcesKeys.App_Name}}"
     Width="675"
     Height="520"
     MinWidth="675"
@@ -112,10 +112,10 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <ctrl:Header Title="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Header_Title}}" Grid.Row="0" />
+            <ctrl:Header Title="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Header_Title}}" Grid.Row="0" />
 
             <Grid Grid.Row="1" Style="{StaticResource TitleGrid}">
-                <TextBlock Style="{StaticResource TitleText}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_PluginList_Title}}" />
+                <TextBlock Style="{StaticResource TitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_PluginList_Title}}" />
             </Grid>
 
             <ScrollViewer Grid.Row="2" Style="{StaticResource PluginWarpPanelScrollViewer}">
@@ -123,100 +123,100 @@
 
                     <Border Style="{StaticResource PluginGroupBox}">
                         <Grid>
-                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_DpsTool_Title}}" />
+                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_DpsTool_Title}}" />
 
                             <TextBlock Style="{StaticResource PluginIntro}">
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Intro}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Intro}}" />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_DpsTool_Description}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_DpsTool_Description}}" />
                                 <LineBreak />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Author}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Author}}" />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
                             </TextBlock>
 
-                            <CheckBox Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
+                            <CheckBox Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
 
                             <Button
                                 Command="{Binding CallDpsStatisticsViewCommand}"
-                                Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Common_Action_Open}}"
+                                Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Common_Action_Open}}"
                                 Style="{StaticResource PluginRunButton}" />
                         </Grid>
                     </Border>
 
                     <Border Style="{StaticResource PluginGroupBox}">
                         <Grid>
-                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_ModuleSolver_Title}}" />
+                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_ModuleSolver_Title}}" />
 
                             <TextBlock Style="{StaticResource PluginIntro}">
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Intro}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Intro}}" />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_ModuleSolver_Description}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_ModuleSolver_Description}}" />
                                 <LineBreak />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Author}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Author}}" />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
                             </TextBlock>
 
-                            <CheckBox Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
+                            <CheckBox Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
 
                             <Button
                                 Command="{Binding CallModuleSolveViewCommandCommand}"
-                                Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Common_Action_Open}}"
+                                Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Common_Action_Open}}"
                                 Style="{StaticResource PluginRunButton}" />
                         </Grid>
                     </Border>
 
                     <Border Style="{StaticResource PluginGroupBox}">
                         <Grid>
-                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_WorldBoss_Title}}" />
+                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_WorldBoss_Title}}" />
 
                             <TextBlock Style="{StaticResource PluginIntro}">
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Intro}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Intro}}" />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_WorldBoss_Description}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_WorldBoss_Description}}" />
                                 <LineBreak />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Author}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Author}}" />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
                             </TextBlock>
 
-                            <CheckBox Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
+                            <CheckBox Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
 
                             <Button
                                 Click="UnderConstructionButton_Click"
-                                Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Common_Action_Open}}"
+                                Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Common_Action_Open}}"
                                 Style="{StaticResource PluginRunButton}" />
                         </Grid>
                     </Border>
 
                     <Border Style="{StaticResource PluginGroupBox}">
                         <Grid>
-                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_PigTracker_Title}}" />
+                            <TextBlock Style="{StaticResource PluginTitle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_PigTracker_Title}}" />
 
                             <TextBlock Style="{StaticResource PluginIntro}">
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Intro}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Intro}}" />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_PigTracker_Description}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_PigTracker_Description}}" />
                                 <LineBreak />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Label_Author}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Author}}" />
                                 <LineBreak />
-                                <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
+                                <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Author_OfficialTeam}}" />
                             </TextBlock>
 
-                            <CheckBox Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
+                            <CheckBox Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_AutoStart}}" Style="{StaticResource PluginAutoRunCheckBox}" />
 
                             <Button
                                 Click="UnderConstructionButton_Click"
-                                Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Common_Action_Open}}"
+                                Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Common_Action_Open}}"
                                 Style="{StaticResource PluginRunButton}" />
                         </Grid>
                     </Border>
-                    <GroupBox Header="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Group_Title}}" Visibility="{Binding Debug.Enabled, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <GroupBox Header="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_Group_Title}}" Visibility="{Binding Debug.Enabled, Converter={StaticResource BoolToVisibilityConverter}}">
                         <GroupBox.Style>
                             <Style TargetType="GroupBox">
                                 <Setter Property="HorizontalAlignment" Value="Left" />
@@ -235,12 +235,12 @@
                                     SelectedItem="{Binding Theme}" />
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock Style="{StaticResource TestTextBlockStyle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_ThemeTest}}" />
-                                <Button Command="{Binding Debug.CallDebugWindowCommand}" Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Button_PcapTest}}" />
-                                <Button Command="{Binding CallSkillBreakdownViewCommand}" Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Button_SkillBreakdown}}" />
-                                <Button Command="{Binding CallDamageReferenceViewCommand}" Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Button_DamageReference}}" />
-                                <Button Command="{Binding CallSettingsViewCommand}" Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Button_Settings}}" />
-                                <Button Command="{Binding CallAboutViewCommand}" Content="{lex:Loc Key={x:Static loc:LocalizationKeys.MainWindow_Debug_Button_About}}" />
+                                <TextBlock Style="{StaticResource TestTextBlockStyle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_ThemeTest}}" />
+                                <Button Command="{Binding Debug.CallDebugWindowCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_Button_PcapTest}}" />
+                                <Button Command="{Binding CallSkillBreakdownViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_Button_SkillBreakdown}}" />
+                                <Button Command="{Binding CallDamageReferenceViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_Button_DamageReference}}" />
+                                <Button Command="{Binding CallSettingsViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_Button_Settings}}" />
+                                <Button Command="{Binding CallAboutViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_Button_About}}" />
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>

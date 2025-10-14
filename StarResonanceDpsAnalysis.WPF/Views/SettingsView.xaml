@@ -10,7 +10,7 @@
     xmlns:loc="clr-namespace:StarResonanceDpsAnalysis.WPF.Properties"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
-    Title="{lex:Loc Key={x:Static loc:LocalizationKeys.Window_Settings_Title}}"
+    Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Window_Settings_Title}}"
     Width="460"
     Height="630"
     MinWidth="450"
@@ -82,7 +82,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <ctrl:Header Title="{lex:Loc Key={x:Static loc:LocalizationKeys.Window_Settings_Title}}" Grid.Row="0" />
+            <ctrl:Header Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Window_Settings_Title}}" Grid.Row="0" />
 
             <Grid Grid.Row="1">
                 <Grid.Style>
@@ -92,7 +92,7 @@
                         <Setter Property="Background" Value="{DynamicResource AccentSolidBrush}" />
                     </Style>
                 </Grid.Style>
-                <TextBlock Style="{StaticResource HeaderText}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Heading}}" />
+                <TextBlock Style="{StaticResource HeaderText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Heading}}" />
             </Grid>
 
             <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
@@ -108,11 +108,11 @@
                                 <TextBlock
                                     Grid.Column="0"
                                     Style="{StaticResource CardHeaderMainTitleStyle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Language_Title}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Language_Title}}" />
                                 <TextBlock
                                     Grid.Column="1"
                                     Style="{StaticResource CardHeaderSubTitleStyle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Language_Description}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Language_Description}}" />
                             </Grid>
                         </ctrl:CardControl.Header>
                         <ctrl:CardControl.Content>
@@ -122,7 +122,7 @@
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock VerticalAlignment="Center" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Language_Title}}" />
+                                <TextBlock VerticalAlignment="Center" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Language_Title}}" />
                                 <ComboBox
                                     Grid.Column="2"
                                     Margin="2"
@@ -145,11 +145,11 @@
                                 <TextBlock
                                     Grid.Column="0"
                                     Style="{StaticResource CardHeaderMainTitleStyle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Basic_Title}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Basic_Title}}" />
                                 <TextBlock
                                     Grid.Column="1"
                                     Style="{StaticResource CardHeaderSubTitleStyle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Basic_Sub}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Basic_Sub}}" />
                             </Grid>
                         </ctrl:CardControl.Header>
                         <ctrl:CardControl.Content>
@@ -159,7 +159,7 @@
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock VerticalAlignment="Center" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_NetworkAdapter_Label}}" />
+                                <TextBlock VerticalAlignment="Center" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_NetworkAdapter_Label}}" />
                                 <ComboBox
                                     Grid.Column="2"
                                     DisplayMemberPath="Description"
@@ -177,11 +177,11 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Style="{StaticResource CardHeaderMainTitleStyle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Shortcut_Title}}" />
+                                <TextBlock Style="{StaticResource CardHeaderMainTitleStyle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Shortcut_Title}}" />
                                 <TextBlock
                                     Grid.Column="1"
                                     Style="{StaticResource CardHeaderSubTitleStyle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Shortcut_Sub}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Shortcut_Sub}}" />
                             </Grid>
                         </ctrl:CardControl.Header>
                         <ctrl:CardControl.Content>
@@ -200,28 +200,33 @@
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Shortcut_MouseThrough}}" />
+                                <TextBlock Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Shortcut_MouseThrough}}" />
                                 <TextBox
                                     x:Name="MouseThroughTextBox"
+                                    Grid.Row="0"
                                     Grid.Column="2"
                                     Margin="2"
                                     IsReadOnly="True"
                                     Style="{StaticResource AntTextBoxStyle}"
                                     Text="{Binding AppConfig.MouseThroughShortcut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource KeyToStringConverter}}"
-                                    ToolTip="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Shortcut_MouseThrough_Tooltip}}">
+                                    ToolTip="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Shortcut_MouseThrough_Tooltip}}">
                                     <b:Interaction.Behaviors>
                                         <behaviors:KeyDownCommandBehavior Command="{Binding HandleMouseThroughShortcutCommand}" />
                                     </b:Interaction.Behaviors>
                                 </TextBox>
-                                <TextBlock Grid.Column="4" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Shortcut_ClearData}}" />
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="4"
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Shortcut_ClearData}}" />
                                 <TextBox
                                     x:Name="ClearDataTextBox"
+                                    Grid.Row="0"
                                     Grid.Column="6"
                                     Margin="2"
                                     IsReadOnly="True"
                                     Style="{StaticResource AntTextBoxStyle}"
                                     Text="{Binding AppConfig.ClearDataShortcut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource KeyToStringConverter}}"
-                                    ToolTip="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Shortcut_ClearData_Tooltip}}">
+                                    ToolTip="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Shortcut_ClearData_Tooltip}}">
                                     <b:Interaction.Behaviors>
                                         <behaviors:KeyDownCommandBehavior Command="{Binding HandleClearDataShortcutCommand}" />
                                     </b:Interaction.Behaviors>
@@ -254,11 +259,11 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Style="{StaticResource CardHeaderMainTitleStyle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Combat_Title}}" />
+                                <TextBlock Style="{StaticResource CardHeaderMainTitleStyle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Combat_Title}}" />
                                 <TextBlock
                                     Grid.Column="1"
                                     Style="{StaticResource CardHeaderSubTitleStyle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Section_Combat_Sub}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Combat_Sub}}" />
                             </Grid>
                         </ctrl:CardControl.Header>
                         <ctrl:CardControl.Content>
@@ -282,7 +287,7 @@
                                         <ColumnDefinition Width="35" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Combat_ClearAfterBattle}}" />
+                                    <TextBlock Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Combat_ClearAfterBattle}}" />
                                     <TextBox
                                         Grid.Column="2"
                                         Margin="2"
@@ -290,7 +295,7 @@
                                         VerticalContentAlignment="Center"
                                         Style="{StaticResource AntTextBoxStyle}"
                                         Text="{Binding AppConfig.CombatTimeClearDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBlock Grid.Column="3" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Common_Seconds}}" />
+                                    <TextBlock Grid.Column="3" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Common_Seconds}}" />
                                 </Grid>
 
                                 <Grid Grid.Row="1" Style="{StaticResource FieldLine}">
@@ -300,12 +305,12 @@
                                         <ColumnDefinition Width="170" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Combat_ClearAfterTeleport}}" />
+                                    <TextBlock Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Combat_ClearAfterTeleport}}" />
                                     <ctrl:SwitchControl
                                         Grid.Column="2"
                                         IsChecked="{Binding AppConfig.ClearLogAfterTeleport, Mode=TwoWay}"
-                                        OffContent="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Switch_Off}}"
-                                        OnContent="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Switch_On}}" />
+                                        OffContent="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Switch_Off}}"
+                                        OnContent="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Switch_On}}" />
 
                                 </Grid>
 
@@ -335,7 +340,7 @@
                                         <ColumnDefinition Width="30" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Settings_Display_Opacity}}" />
+                                    <TextBlock Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Display_Opacity}}" />
                                     <Slider
                                         Grid.Column="1"
                                         VerticalAlignment="Center"

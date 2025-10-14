@@ -79,18 +79,6 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
         public ModuleSolveView ModuleSolveView => throw new NotSupportedException();
     }
 
-    private sealed class DesignConfigManager : IConfigManager
-    {
-        public event EventHandler<AppConfig>? ConfigurationUpdated;
-        public AppConfig CurrentConfig { get; } = new();
-
-        public Task SaveAsync(AppConfig newConfig)
-        {
-            ConfigurationUpdated?.Invoke(this, newConfig);
-            return Task.CompletedTask;
-        }
-    }
-
     private sealed class DesignDataStorage : IDataStorage
     {
         public PlayerInfo CurrentPlayerInfo { get; } = new();
@@ -247,5 +235,6 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
 
     #endregion
 }
+
 #endif
 

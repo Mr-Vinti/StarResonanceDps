@@ -8,7 +8,7 @@
     xmlns:loc="clr-namespace:StarResonanceDpsAnalysis.WPF.Properties"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
-    Title="{lex:Loc Key={x:Static loc:LocalizationKeys.Window_SkillBreakdown_Title}}"
+    Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Window_SkillBreakdown_Title}}"
     Width="800"
     Height="450"
     MinWidth="800"
@@ -180,27 +180,27 @@
                     </Grid.RowDefinitions>
 
                     <ctrl:CollapsibleCard
-                        Title="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Card_RealtimeChart}}"
+                        Title="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Card_RealtimeChart}}"
                         Grid.Row="0"
                         IsExpanded="True"
                         Style="{StaticResource StatisticCard}">
-                        <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Placeholder_LineChart}}" />
+                        <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Placeholder_LineChart}}" />
                     </ctrl:CollapsibleCard>
 
                     <ctrl:CollapsibleCard
-                        Title="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Card_ShareChart}}"
+                        Title="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Card_ShareChart}}"
                         Grid.Row="1"
                         IsExpanded="True"
                         Style="{StaticResource StatisticCard}">
-                        <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Placeholder_PieChart}}" />
+                        <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Placeholder_PieChart}}" />
                     </ctrl:CollapsibleCard>
 
                     <ctrl:CollapsibleCard
-                        Title="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Card_DamageDistribution}}"
+                        Title="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Card_DamageDistribution}}"
                         Grid.Row="2"
                         IsExpanded="True"
                         Style="{StaticResource StatisticCard}">
-                        <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Placeholder_BarChart}}" />
+                        <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Placeholder_BarChart}}" />
                     </ctrl:CollapsibleCard>
                 </Grid>
 
@@ -228,7 +228,7 @@
                                 <TextBlock
                                     Grid.Row="0"
                                     Style="{StaticResource CardTitle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Section_DamageInfo}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Section_DamageInfo}}" />
 
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
@@ -252,11 +252,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_TotalDamage}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_TotalDamage}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_TotalDamage}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_TotalDamage}}" />
                                         </Grid>
                                         <Grid Grid.Row="1" Style="{StaticResource FieldLineMB}">
                                             <Grid.ColumnDefinitions>
@@ -266,11 +266,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_Dps}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_Dps}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_Dps}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_Dps}}" />
                                         </Grid>
                                         <Grid Grid.Row="2">
                                             <Grid.ColumnDefinitions>
@@ -280,11 +280,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_HitCount}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_HitCount}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_HitCount}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_HitCount}}" />
                                         </Grid>
                                     </Grid>
 
@@ -305,11 +305,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_CritRate}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_CritRate}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_CritRate}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_CritRate}}" />
                                         </Grid>
                                         <Grid Grid.Row="1" Style="{StaticResource FieldLineMB}">
                                             <Grid.ColumnDefinitions>
@@ -319,11 +319,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_LuckRate}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_LuckRate}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_LuckRate}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_LuckRate}}" />
                                         </Grid>
                                         <Grid Grid.Row="2">
                                             <Grid.ColumnDefinitions>
@@ -333,11 +333,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_CritCount}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_CritCount}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_CritCount}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_CritCount}}" />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -354,7 +354,7 @@
                                 <TextBlock
                                     Grid.Row="0"
                                     Style="{StaticResource CardTitle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Section_DamageDistribution}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Section_DamageDistribution}}" />
 
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
@@ -378,11 +378,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_NormalDamage}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_NormalDamage}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_NormalDamage}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_NormalDamage}}" />
                                         </Grid>
                                         <Grid Grid.Row="1" Style="{StaticResource FieldLineMB}">
                                             <Grid.ColumnDefinitions>
@@ -392,11 +392,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_CritDamage}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_CritDamage}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_CritDamage}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_CritDamage}}" />
                                         </Grid>
                                         <Grid Grid.Row="2">
                                             <Grid.ColumnDefinitions>
@@ -406,11 +406,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_LuckCount}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_LuckCount}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_LuckCount}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_LuckCount}}" />
                                         </Grid>
                                     </Grid>
 
@@ -431,11 +431,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_LuckDamage}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_LuckDamage}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_LuckDamage}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_LuckDamage}}" />
                                         </Grid>
                                         <Grid Grid.Row="1" Style="{StaticResource FieldLineMB}">
                                             <Grid.ColumnDefinitions>
@@ -445,11 +445,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_AverageDamage}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_AverageDamage}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_AverageDamage}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_AverageDamage}}" />
                                         </Grid>
                                         <Grid Grid.Row="2">
                                             <Grid.ColumnDefinitions>
@@ -459,11 +459,11 @@
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Style="{StaticResource CardInfoTitle}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Label_DamageTakenCount}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Label_DamageTakenCount}}" />
                                             <TextBlock
                                                 Grid.Column="1"
                                                 Style="{StaticResource CardInfoValue}"
-                                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Value_DamageTakenCount}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Value_DamageTakenCount}}" />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -476,7 +476,7 @@
                             Height="120"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Placeholder_Form}}" />
+                            Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Placeholder_Form}}" />
                     </Grid>
                 </Grid>
             </Grid>
@@ -492,7 +492,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <ctrl:Header Title="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Header_Title}}" Grid.Row="0" />
+            <ctrl:Header Title="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Header_Title}}" Grid.Row="0" />
 
             <Grid Grid.Row="1" Style="{StaticResource InfoAndTypeGrid}">
                 <Grid.ColumnDefinitions>
@@ -508,23 +508,23 @@
                 <TextBlock
                     Grid.Column="0"
                     Style="{StaticResource InfoNameText}"
-                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Info_Name}}" />
+                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Info_Name}}" />
                 <TextBlock
                     Grid.Column="1"
                     Style="{StaticResource InfoText}"
-                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Info_Uid}}" />
+                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Info_Uid}}" />
                 <TextBlock
                     Grid.Column="2"
                     Style="{StaticResource InfoText}"
-                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Info_Power}}" />
+                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Info_Power}}" />
                 <TextBlock
                     Grid.Column="3"
                     Style="{StaticResource InfoText}"
-                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Info_Level}}" />
+                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Info_Level}}" />
                 <TextBlock
                     Grid.Column="4"
                     Style="{StaticResource InfoText}"
-                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Info_Badge}}" />
+                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Info_Badge}}" />
 
 
                 <Border
@@ -541,17 +541,17 @@
                         Orientation="Horizontal">
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Output}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Tab_Output}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="0" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Healing}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Tab_Healing}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="1" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Tanking}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Tab_Tanking}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="2" />
                     </StackPanel>
@@ -575,19 +575,19 @@
                     </Style>
                 </TabControl.Resources>
 
-                <TabItem x:Name="TabItem_Summary" Header="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Summary}}">
+                <TabItem x:Name="TabItem_Summary" Header="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Tab_Summary}}">
                     <ScrollViewer>
                         <ContentPresenter ContentTemplate="{StaticResource Template1}" />
                     </ScrollViewer>
                 </TabItem>
-                <TabItem x:Name="TabItem_Details" Header="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Details}}">
+                <TabItem x:Name="TabItem_Details" Header="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Tab_Details}}">
                     <Grid Background="IndianRed">
-                        <TextBlock Style="{StaticResource TextBlockExampleStyle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Placeholder_Details}}" />
+                        <TextBlock Style="{StaticResource TextBlockExampleStyle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Placeholder_Details}}" />
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="TabItem_Graph" Header="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Tab_Graph}}">
+                <TabItem x:Name="TabItem_Graph" Header="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Tab_Graph}}">
                     <Grid Background="DarkOliveGreen">
-                        <TextBlock Style="{StaticResource TextBlockExampleStyle}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.SkillBreakdown_Placeholder_Graph}}" />
+                        <TextBlock Style="{StaticResource TextBlockExampleStyle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.SkillBreakdown_Placeholder_Graph}}" />
                     </Grid>
                 </TabItem>
             </TabControl>

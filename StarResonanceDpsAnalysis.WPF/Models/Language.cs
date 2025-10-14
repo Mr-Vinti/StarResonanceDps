@@ -8,15 +8,15 @@ namespace StarResonanceDpsAnalysis.WPF.Models;
 
 public enum Language
 {
-    [LocalizedDescription(LocalizationKeys.Settings_Language_Auto)]
+    [LocalizedDescription(ResourcesKeys.Settings_Language_Auto)]
     Auto,
-    [LocalizedDescription(LocalizationKeys.Settings_Language_Chinese)]
+    [LocalizedDescription(ResourcesKeys.Settings_Language_Chinese)]
     [CultureAttribute.zh_CN]
     ZhCn,
-    [LocalizedDescription(LocalizationKeys.Settings_Language_English)]
+    [LocalizedDescription(ResourcesKeys.Settings_Language_English)]
     [CultureAttribute.en_US]
     EnUs,
-    [LocalizedDescription(LocalizationKeys.Settings_Language_Portuguese)]
+    [LocalizedDescription(ResourcesKeys.Settings_Language_Portuguese)]
     [CultureAttribute.pt_BR]
     PtBr
 }

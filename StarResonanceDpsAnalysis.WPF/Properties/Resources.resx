@@ -763,8 +763,14 @@
     <value>Mouse click-through enabled</value>
     <comment>鼠标穿透已启用</comment>
   </data>
+  <data name="Settings_Shortcut_TopMost" xml:space="preserve">
+    <value>Always on Top</value>
+  </data>
   <data name="DpsStatistics_Indicator_WindowTopMost_Tooltip" xml:space="preserve">
     <value>Toggle Always on Top</value>
     <comment>切换置顶</comment>
+  </data>
+  <data name="Settings_Shortcut_TopMost_Tooltip" xml:space="preserve">
+    <value>Focus this box and press a shortcut (e.g. Ctrl+F9). Press Delete to clear.</value>
   </data>
 </root>

@@ -673,7 +673,13 @@
   <data name="DpsStatistics_Indicator_ClickThrough_Tooltip" xml:space="preserve">
     <value>Cliques do mouse permitidos</value>
   </data>
+  <data name="Settings_Shortcut_TopMost" xml:space="preserve">
+    <value>Sempre no topo</value>
+  </data>
   <data name="DpsStatistics_Indicator_WindowTopMost_Tooltip" xml:space="preserve">
     <value>Alternar sempre no topo</value>
+  </data>
+  <data name="Settings_Shortcut_TopMost_Tooltip" xml:space="preserve">
+    <value>Foque nesta caixa e pressione um atalho (ex: Ctrl+F9). Pressione Delete para limpar.</value>
   </data>
 </root>

@@ -4,8 +4,8 @@ namespace StarResonanceDpsAnalysis.WPF.Models;
 
 public enum NumberDisplayMode
 {
-    [LocalizedDescription(LocalizationKeys.NumberDisplay_KMB)]
+    [LocalizedDescription(ResourcesKeys.NumberDisplay_KMB)]
     KMB,
-    [LocalizedDescription(LocalizationKeys.NumberDisplay_Wan)]
+    [LocalizedDescription(ResourcesKeys.NumberDisplay_Wan)]
     Wan
 }
