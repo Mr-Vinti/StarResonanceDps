@@ -1,4 +1,3 @@
-#if DEBUG
 using StarResonanceDpsAnalysis.WPF.Config;
 
 namespace StarResonanceDpsAnalysis.WPF.ViewModels;
@@ -14,4 +13,3 @@ internal sealed class DesignConfigManager : IConfigManager
         return Task.CompletedTask;
     }
 }
-#endif
