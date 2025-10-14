@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using StarResonanceDpsAnalysis.Core.Analyze;
 using StarResonanceDpsAnalysis.WPF.Config;
+using StarResonanceDpsAnalysis.WPF.Data;
 using StarResonanceDpsAnalysis.WPF.Localization;
 using StarResonanceDpsAnalysis.WPF.Models;
 
@@ -12,7 +13,8 @@ public sealed class ApplicationStartup(
     IOptions<AppConfig> options,
     IDeviceManagementService deviceManagementService,
     IGlobalHotkeyService hotkeyService,
-    IPacketAnalyzer packetAnalyzer) : IApplicationStartup
+    IPacketAnalyzer packetAnalyzer,
+    IDataStorage dataStorage) : IApplicationStartup
 {
     public async Task InitializeAsync()
     {
@@ -43,6 +45,7 @@ public sealed class ApplicationStartup(
                 deviceManagementService.SetActiveNetworkAdapter(target);
             }
 
+            dataStorage.LoadPlayerInfoFromFile();
             // Start analyzer
             packetAnalyzer.Start();
             hotkeyService.Start();
@@ -61,10 +64,11 @@ public sealed class ApplicationStartup(
             deviceManagementService.StopActiveCapture();
             packetAnalyzer.Stop();
             hotkeyService.Stop();
+            dataStorage.SavePlayerInfoToFile();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            // ignore
+            logger.LogWarning(ex, "Shutdown encountered an issue");
         }
     }
 }
