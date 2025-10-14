@@ -126,7 +126,7 @@ public partial class ProcessorTests
         const long playerUuidRaw = 12345L << 16;
         const long playerUid = 12345L;
         const int curHp = 5000;
-        const int maxHp = 8000;
+        // const int maxHp = 8000;
 
         mockStorage.Setup(s => s.CurrentPlayerUUID).Returns(playerUuidRaw);
         var playerInfo = new PlayerInfo();

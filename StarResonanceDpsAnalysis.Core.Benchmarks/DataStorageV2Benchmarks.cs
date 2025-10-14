@@ -1,4 +1,5 @@
 using BenchmarkDotNet.Attributes;
+using Microsoft.Extensions.Logging.Abstractions;
 using StarResonanceDpsAnalysis.Core.Data;
 using StarResonanceDpsAnalysis.Core.Data.Models;
 
@@ -39,7 +40,7 @@ public class DataStorageV2Benchmarks
     [IterationSetup]
     public void IterationSetup()
     {
-        _dataStorage = new DataStorageV2();
+        _dataStorage = new DataStorageV2(NullLogger<DataStorageV2>.Instance);
         // Pre-populate some players
         for (int i = 0; i < 50; i++)
         {

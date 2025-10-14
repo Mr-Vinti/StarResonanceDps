@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Microsoft.Extensions.Logging;
 using StarResonanceDpsAnalysis.Core.Analyze;
 using StarResonanceDpsAnalysis.Core.Analyze.Models;
 using StarResonanceDpsAnalysis.Core.Data.Models;
@@ -10,7 +11,7 @@ namespace StarResonanceDpsAnalysis.Core.Data;
 /// <summary>
 /// 数据存储
 /// </summary>
-public sealed class DataStorageV2 : IDataStorage
+public sealed class DataStorageV2(ILogger<DataStorageV2> logger) : IDataStorage
 {
     private bool _isServerConnected;
 
@@ -121,7 +122,16 @@ public sealed class DataStorageV2 : IDataStorage
     /// </summary>
     public void LoadPlayerInfoFromFile()
     {
-        var playerInfoCaches = PlayerInfoCacheReader.ReadFile();
+        PlayerInfoCacheFileV3_0_0 playerInfoCaches;
+        try
+        {
+            playerInfoCaches = PlayerInfoCacheReader.ReadFile();
+        }
+        catch (FileNotFoundException e)
+        {
+            logger.LogInformation("Player info cache file not exist, abort load");
+            return;
+        }
 
         foreach (var playerInfoCache in playerInfoCaches.PlayerInfos)
         {

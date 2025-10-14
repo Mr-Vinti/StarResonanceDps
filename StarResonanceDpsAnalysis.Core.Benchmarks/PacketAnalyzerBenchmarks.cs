@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using BlueProto;
 using Google.Protobuf;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace StarResonanceDpsAnalysis.Core.Benchmarks;
 
@@ -35,7 +36,7 @@ public class PacketAnalyzerBenchmarks
     public void Setup()
     {
         _v1 = new PacketAnalyzer();
-        _storage = new DataStorageV2();
+        _storage = new DataStorageV2(NullLogger<DataStorageV2>.Instance);
         _msgV2 = new MessageAnalyzerV2(_storage);
         _v2 = new PacketAnalyzerV2(_storage, _msgV2);
 

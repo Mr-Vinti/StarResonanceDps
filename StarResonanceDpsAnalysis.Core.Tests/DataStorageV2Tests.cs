@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.Extensions.Logging.Abstractions;
 using StarResonanceDpsAnalysis.Core.Data;
 using StarResonanceDpsAnalysis.Core.Data.Models;
 using Xunit;
@@ -12,7 +13,7 @@ public class DataStorageV2Tests
     public void ClearAllDpsData_ClearsDataAndRaisesEvents()
     {
         // Arrange
-        var storage = new DataStorageV2();
+        var storage = new DataStorageV2(NullLogger<DataStorageV2>.Instance);
         storage.GetOrCreateDpsDataByUid(1);
         storage.AddBattleLog(new BattleLog { AttackerUuid = 1, Value = 100 });
 
@@ -35,7 +36,7 @@ public class DataStorageV2Tests
     public void ClearDpsData_ClearsSectionedDataAndRaisesEvents()
     {
         // Arrange
-        var storage = new DataStorageV2();
+        var storage = new DataStorageV2(NullLogger<DataStorageV2>.Instance);
         storage.GetOrCreateDpsDataByUid(1);
         storage.AddBattleLog(new BattleLog { AttackerUuid = 1, Value = 100, TimeTicks = DateTime.Now.Ticks });
 
@@ -59,7 +60,7 @@ public class DataStorageV2Tests
     public void AddBattleLog_CreatesNewSectionOnTimeout()
     {
         // Arrange
-        var storage = new DataStorageV2 { SectionTimeout = TimeSpan.FromMilliseconds(10) };
+        var storage = new DataStorageV2(NullLogger<DataStorageV2>.Instance) { SectionTimeout = TimeSpan.FromMilliseconds(10) };
         var log1 = new BattleLog { AttackerUuid = 1, Value = 100, TimeTicks = DateTime.UtcNow.Ticks };
         storage.AddBattleLog(log1);
 
@@ -82,7 +83,7 @@ public class DataStorageV2Tests
     public void AddBattleLog_Batched_ProcessesAndFiresEventsCorrectly()
     {
         // Arrange
-        var storage = new DataStorageV2();
+        var storage = new DataStorageV2(NullLogger<DataStorageV2>.Instance);
         var log1 = new BattleLog { AttackerUuid = 1, Value = 100, IsAttackerPlayer = true };
         var log2 = new BattleLog { AttackerUuid = 1, Value = 50, IsAttackerPlayer = true };
 
@@ -110,7 +111,7 @@ public class DataStorageV2Tests
     public void SetPlayerInfo_RaisesUpdateEvents()
     {
         // Arrange
-        var storage = new DataStorageV2();
+        var storage = new DataStorageV2(NullLogger<DataStorageV2>.Instance);
         storage.EnsurePlayer(1);
 
         PlayerInfo? updatedInfo = null;
@@ -132,7 +133,7 @@ public class DataStorageV2Tests
     public void EnsurePlayer_CreatesNewPlayerAndRaisesEvent()
     {
         // Arrange
-        var storage = new DataStorageV2();
+        var storage = new DataStorageV2(NullLogger<DataStorageV2>.Instance);
         PlayerInfo? updatedInfo = null;
         storage.PlayerInfoUpdated += (info) => updatedInfo = info;
 
@@ -150,7 +151,7 @@ public class DataStorageV2Tests
     public void NotifyServerChanged_RaisesEvent()
     {
         // Arrange
-        var storage = new DataStorageV2();
+        var storage = new DataStorageV2(NullLogger<DataStorageV2>.Instance);
         string? newServer = null;
         string? oldServer = null;
         storage.ServerChanged += (current, prev) =>

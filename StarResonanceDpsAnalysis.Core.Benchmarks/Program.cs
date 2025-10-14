@@ -10,6 +10,7 @@ using System;
 using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.Extensions.Logging.Abstractions;
 
 BenchmarkSwitcher.FromAssembly(typeof(BenchmarkMarker).Assembly).Run(args);
 
@@ -24,7 +25,7 @@ public class DataStorageBenchmarks
     [GlobalSetup]
     public void Setup()
     {
-        _storageV2 = new DataStorageV2();
+        _storageV2 = new DataStorageV2(NullLogger<DataStorageV2>.Instance);
         PrepareLogs();
     }
 
@@ -104,7 +105,7 @@ public class MessageParsingBenchmarks
     [GlobalSetup]
     public void Setup()
     {
-        _storageV2 = new DataStorageV2();
+        _storageV2 = new DataStorageV2(NullLogger<DataStorageV2>.Instance);
         _analyzerV2 = new MessageAnalyzerV2(_storageV2);
         _notifyEnvelope = BuildNotifyEnvelope(0x00000006U, BuildSyncNearEntitiesPayload(_playerUid, "Benchmark Hero", 55));
     }
