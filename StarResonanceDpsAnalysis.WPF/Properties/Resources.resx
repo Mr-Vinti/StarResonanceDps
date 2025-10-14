@@ -348,31 +348,31 @@
   <data name="DamageReference_Ribbon_Title" xml:space="preserve">
     <value>Damage Reference</value>
   </data>
-  <data name="DamageReference_Profession_All" xml:space="preserve">
+  <data name="DamageReference_Classes_All" xml:space="preserve">
     <value>All Classes</value>
   </data>
-  <data name="Profession_Stormblade" xml:space="preserve">
+  <data name="Classes_Stormblade" xml:space="preserve">
     <value>Stormblade</value>
   </data>
-  <data name="Profession_FrostMage" xml:space="preserve">
+  <data name="Classes_FrostMage" xml:space="preserve">
     <value>Frost Mage</value>
   </data>
-  <data name="Profession_WindKnight" xml:space="preserve">
+  <data name="Classes_WindKnight" xml:space="preserve">
     <value>Wind Knight</value>
   </data>
-  <data name="Profession_VerdantOracle" xml:space="preserve">
+  <data name="Classes_VerdantOracle" xml:space="preserve">
     <value>Verdant Oracle</value>
   </data>
-  <data name="Profession_HeavyGuardian" xml:space="preserve">
+  <data name="Classes_HeavyGuardian" xml:space="preserve">
     <value>Heavy Guardian</value>
   </data>
-  <data name="Profession_Marksman" xml:space="preserve">
+  <data name="Classes_Marksman" xml:space="preserve">
     <value>Marksman</value>
   </data>
-  <data name="Profession_ShieldKnight" xml:space="preserve">
+  <data name="Classes_ShieldKnight" xml:space="preserve">
     <value>Shield Knight</value>
   </data>
-  <data name="Profession_SoulMusician" xml:space="preserve">
+  <data name="Classes_SoulMusician" xml:space="preserve">
     <value>Soul Musician</value>
   </data>
   <data name="DamageReference_Table_Title" xml:space="preserve">
@@ -772,5 +772,73 @@
   </data>
   <data name="Settings_Shortcut_TopMost_Tooltip" xml:space="preserve">
     <value>Focus this box and press a shortcut (e.g. Ctrl+F9). Press Delete to clear.</value>
+  </data>
+  <data name="ClassSpec_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+    <comment>Unknown = 0</comment>
+  </data>
+  <data name="ClassSpec_ShieldKnightRecovery" xml:space="preserve">
+    <value>Recovery</value>
+    <comment>ShieldKnightRecovery</comment>
+  </data>
+  <data name="ClassSpec_ShieldKnightShield" xml:space="preserve">
+    <value>Shield</value>
+    <comment>ShieldKnightShield</comment>
+  </data>
+  <data name="ClassSpec_HeavyGuardianEarthfort" xml:space="preserve">
+    <value>Earthfort</value>
+    <comment>HeavyGuardianEarthfort</comment>
+  </data>
+  <data name="ClassSpec_HeavyGuardianBlock" xml:space="preserve">
+    <value>Block</value>
+    <comment>HeavyGuardianBlock</comment>
+  </data>
+  <data name="ClassSpec_StormbladeIaidoSlash" xml:space="preserve">
+    <value>IaidoSlash</value>
+    <comment>StormbladeIaidoSlash</comment>
+  </data>
+  <data name="ClassSpec_StormbladeMoonStrike" xml:space="preserve">
+    <value>MoonStrike</value>
+    <comment>StormbladeMoonStrike</comment>
+  </data>
+  <data name="ClassSpec_WindKnightVanGuard" xml:space="preserve">
+    <value>VanGuard</value>
+    <comment>WindKnightVanGuard</comment>
+  </data>
+  <data name="ClassSpec_WindKnightSkyward" xml:space="preserve">
+    <value>Skyward</value>
+    <comment>WindKnightSkyward</comment>
+  </data>
+  <data name="ClassSpec_FrostMageIcicle" xml:space="preserve">
+    <value>Icicle</value>
+    <comment>FrostMageIcicle</comment>
+  </data>
+  <data name="ClassSpec_FrostMageFrostBeam" xml:space="preserve">
+    <value>FrostBeam</value>
+    <comment>FrostMageFrostBeam</comment>
+  </data>
+  <data name="ClassSpec_MarksmanWildpack" xml:space="preserve">
+    <value>Wildpack</value>
+    <comment>MarksmanWildpack</comment>
+  </data>
+  <data name="ClassSpec_MarksmanFalconry" xml:space="preserve">
+    <value>Falconry</value>
+    <comment>MarksmanFalconry</comment>
+  </data>
+  <data name="ClassSpec_VerdantOracleSmite" xml:space="preserve">
+    <value>Smite</value>
+    <comment>VerdantOracleSmite</comment>
+  </data>
+  <data name="ClassSpec_VerdantOracleLifeBind" xml:space="preserve">
+    <value>LifeBind</value>
+    <comment>VerdantOracleLifeBind</comment>
+  </data>
+  <data name="ClassSpec_SoulMusicianDissonance" xml:space="preserve">
+    <value>Dissonance</value>
+    <comment>SoulMusicianDissonance</comment>
+  </data>
+  <data name="ClassSpec_SoulMusicianConcerto" xml:space="preserve">
+    <value>Concerto</value>
+    <comment>SoulMusicianConcerto</comment>
   </data>
 </root>

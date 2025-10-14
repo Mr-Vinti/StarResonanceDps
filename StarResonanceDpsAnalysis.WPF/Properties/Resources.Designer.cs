@@ -250,6 +250,231 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Frost Mage.
+        /// </summary>
+        public static string Classes_FrostMage {
+            get {
+                return ResourceManager.GetString("Classes_FrostMage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heavy Guardian.
+        /// </summary>
+        public static string Classes_HeavyGuardian {
+            get {
+                return ResourceManager.GetString("Classes_HeavyGuardian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Marksman.
+        /// </summary>
+        public static string Classes_Marksman {
+            get {
+                return ResourceManager.GetString("Classes_Marksman", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shield Knight.
+        /// </summary>
+        public static string Classes_ShieldKnight {
+            get {
+                return ResourceManager.GetString("Classes_ShieldKnight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soul Musician.
+        /// </summary>
+        public static string Classes_SoulMusician {
+            get {
+                return ResourceManager.GetString("Classes_SoulMusician", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stormblade.
+        /// </summary>
+        public static string Classes_Stormblade {
+            get {
+                return ResourceManager.GetString("Classes_Stormblade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verdant Oracle.
+        /// </summary>
+        public static string Classes_VerdantOracle {
+            get {
+                return ResourceManager.GetString("Classes_VerdantOracle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wind Knight.
+        /// </summary>
+        public static string Classes_WindKnight {
+            get {
+                return ResourceManager.GetString("Classes_WindKnight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FrostBeam.
+        /// </summary>
+        public static string ClassSpec_FrostMageFrostBeam {
+            get {
+                return ResourceManager.GetString("ClassSpec_FrostMageFrostBeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Icicle.
+        /// </summary>
+        public static string ClassSpec_FrostMageIcicle {
+            get {
+                return ResourceManager.GetString("ClassSpec_FrostMageIcicle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Block.
+        /// </summary>
+        public static string ClassSpec_HeavyGuardianBlock {
+            get {
+                return ResourceManager.GetString("ClassSpec_HeavyGuardianBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Earthfort.
+        /// </summary>
+        public static string ClassSpec_HeavyGuardianEarthfort {
+            get {
+                return ResourceManager.GetString("ClassSpec_HeavyGuardianEarthfort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Falconry.
+        /// </summary>
+        public static string ClassSpec_MarksmanFalconry {
+            get {
+                return ResourceManager.GetString("ClassSpec_MarksmanFalconry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wildpack.
+        /// </summary>
+        public static string ClassSpec_MarksmanWildpack {
+            get {
+                return ResourceManager.GetString("ClassSpec_MarksmanWildpack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recovery.
+        /// </summary>
+        public static string ClassSpec_ShieldKnightRecovery {
+            get {
+                return ResourceManager.GetString("ClassSpec_ShieldKnightRecovery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shield.
+        /// </summary>
+        public static string ClassSpec_ShieldKnightShield {
+            get {
+                return ResourceManager.GetString("ClassSpec_ShieldKnightShield", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Concerto.
+        /// </summary>
+        public static string ClassSpec_SoulMusicianConcerto {
+            get {
+                return ResourceManager.GetString("ClassSpec_SoulMusicianConcerto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dissonance.
+        /// </summary>
+        public static string ClassSpec_SoulMusicianDissonance {
+            get {
+                return ResourceManager.GetString("ClassSpec_SoulMusicianDissonance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IaidoSlash.
+        /// </summary>
+        public static string ClassSpec_StormbladeIaidoSlash {
+            get {
+                return ResourceManager.GetString("ClassSpec_StormbladeIaidoSlash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MoonStrike.
+        /// </summary>
+        public static string ClassSpec_StormbladeMoonStrike {
+            get {
+                return ResourceManager.GetString("ClassSpec_StormbladeMoonStrike", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        public static string ClassSpec_Unknown {
+            get {
+                return ResourceManager.GetString("ClassSpec_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LifeBind.
+        /// </summary>
+        public static string ClassSpec_VerdantOracleLifeBind {
+            get {
+                return ResourceManager.GetString("ClassSpec_VerdantOracleLifeBind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smite.
+        /// </summary>
+        public static string ClassSpec_VerdantOracleSmite {
+            get {
+                return ResourceManager.GetString("ClassSpec_VerdantOracleSmite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skyward.
+        /// </summary>
+        public static string ClassSpec_WindKnightSkyward {
+            get {
+                return ResourceManager.GetString("ClassSpec_WindKnightSkyward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VanGuard.
+        /// </summary>
+        public static string ClassSpec_WindKnightVanGuard {
+            get {
+                return ResourceManager.GetString("ClassSpec_WindKnightVanGuard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Launch.
         /// </summary>
         public static string Common_Action_Open {
@@ -264,6 +489,15 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         public static string Common_Dash {
             get {
                 return ResourceManager.GetString("Common_Dash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Classes.
+        /// </summary>
+        public static string DamageReference_Classes_All {
+            get {
+                return ResourceManager.GetString("DamageReference_Classes_All", resourceCulture);
             }
         }
         
@@ -291,15 +525,6 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         public static string DamageReference_NoData {
             get {
                 return ResourceManager.GetString("DamageReference_NoData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to All Classes.
-        /// </summary>
-        public static string DamageReference_Profession_All {
-            get {
-                return ResourceManager.GetString("DamageReference_Profession_All", resourceCulture);
             }
         }
         
@@ -1146,78 +1371,6 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         public static string NumberDisplay_Wan {
             get {
                 return ResourceManager.GetString("NumberDisplay_Wan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Frost Mage.
-        /// </summary>
-        public static string Profession_FrostMage {
-            get {
-                return ResourceManager.GetString("Profession_FrostMage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Heavy Guardian.
-        /// </summary>
-        public static string Profession_HeavyGuardian {
-            get {
-                return ResourceManager.GetString("Profession_HeavyGuardian", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Marksman.
-        /// </summary>
-        public static string Profession_Marksman {
-            get {
-                return ResourceManager.GetString("Profession_Marksman", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Shield Knight.
-        /// </summary>
-        public static string Profession_ShieldKnight {
-            get {
-                return ResourceManager.GetString("Profession_ShieldKnight", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Soul Musician.
-        /// </summary>
-        public static string Profession_SoulMusician {
-            get {
-                return ResourceManager.GetString("Profession_SoulMusician", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Stormblade.
-        /// </summary>
-        public static string Profession_Stormblade {
-            get {
-                return ResourceManager.GetString("Profession_Stormblade", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Verdant Oracle.
-        /// </summary>
-        public static string Profession_VerdantOracle {
-            get {
-                return ResourceManager.GetString("Profession_VerdantOracle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wind Knight.
-        /// </summary>
-        public static string Profession_WindKnight {
-            get {
-                return ResourceManager.GetString("Profession_WindKnight", resourceCulture);
             }
         }
         

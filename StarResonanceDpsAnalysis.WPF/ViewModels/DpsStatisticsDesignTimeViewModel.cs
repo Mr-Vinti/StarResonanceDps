@@ -1,4 +1,3 @@
-#if DEBUG
 using System.Collections.ObjectModel;
 using System.Windows; // for Window in ITopmostService
 using System.Windows.Threading;
@@ -236,5 +235,4 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
     #endregion
 }
 
-#endif
 

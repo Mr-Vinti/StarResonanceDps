@@ -22,6 +22,7 @@
     behaviors:WindowSnapBehavior.PreventSnapMaximize="True"
     d:DataContext="{d:DesignInstance Type=viewModels:DpsStatisticsDesignTimeViewModel,
                                      IsDesignTimeCreatable=True}"
+    d:DesignWidth="1000"
     lex:ResxLocalizationProvider.DefaultAssembly="StarResonanceDpsAnalysis.WPF"
     lex:ResxLocalizationProvider.DefaultDictionary="Resources"
     ResizeMode="CanResize"
@@ -208,7 +209,7 @@
                     Foreground="White">
                     <Run Text="{Binding Player.Name}" />
                     <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Common_Dash}}" />
-                    <Run Text="{Binding Player.Spec, Converter={StaticResource ClassSpecToStringConverter}}" />
+                    <Run Text="{lex:Loc {Binding Player.Spec, StringFormat=ClassSpec_{0}}}" />
                 </TextBlock>
 
                 <!--  数值  -->

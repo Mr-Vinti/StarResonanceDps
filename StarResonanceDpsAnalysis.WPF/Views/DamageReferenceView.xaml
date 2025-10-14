@@ -180,47 +180,47 @@
 
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.DamageReference_Profession_All}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.DamageReference_Classes_All}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="0" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Profession_Stormblade}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_Stormblade}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="1" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Profession_FrostMage}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_FrostMage}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="2" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Profession_WindKnight}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_WindKnight}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="4" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Profession_VerdantOracle}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_VerdantOracle}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="5" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Profession_HeavyGuardian}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_HeavyGuardian}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="9" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Profession_Marksman}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_Marksman}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="11" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Profession_ShieldKnight}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_ShieldKnight}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="12" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Profession_SoulMusician}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_SoulMusician}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="13" />
 
