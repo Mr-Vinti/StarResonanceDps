@@ -39,6 +39,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private readonly ILogger<DpsStatisticsViewModel> _logger;
     private readonly IDataStorage _storage;
     private readonly IWindowManagementService _windowManagement;
+    private readonly ITopmostService _topmostService;
     private DispatcherTimer? _durationTimer;
     private bool _isInitialized;
     [ObservableProperty] private ScopeTime _scopeTime = ScopeTime.Current;
@@ -55,6 +56,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         ILogger<DpsStatisticsViewModel> logger,
         IConfigManager configManager,
         IWindowManagementService windowManagement,
+        ITopmostService topmostService,
         DebugFunctions debugFunctions,
         Dispatcher dispatcher)
     {
@@ -83,6 +85,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         _logger = logger;
         _configManager = configManager;
         _windowManagement = windowManagement;
+        _topmostService = topmostService;
         _dispatcher = dispatcher;
 
         // Subscribe to DebugFunctions events to handle sample data requests
@@ -144,6 +147,17 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     {
         // Handle the event from DebugFunctions
         AddRandomData();
+    }
+
+    /// <summary>
+    /// 切换窗口置顶状态（命令）。
+    /// 通过绑定 Window.Topmost 到 AppConfig.TopmostEnabled 实现。
+    /// </summary>
+    [RelayCommand]
+    private async Task ToggleTopmost()
+    {
+        AppConfig.TopmostEnabled = !AppConfig.TopmostEnabled;
+        try { await _configManager.SaveAsync(AppConfig); } catch { }
     }
 
     /// <summary>

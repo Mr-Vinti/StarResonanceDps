@@ -10,11 +10,13 @@ public sealed class GlobalHotkeyService(
     ILogger<GlobalHotkeyService> logger,
     IWindowManagementService windowManager,
     IConfigManager configManager,
-    IMousePenetrationService mousePenetration)
+    IMousePenetrationService mousePenetration,
+    ITopmostService topmostService)
     : IGlobalHotkeyService
 {
     private const int WM_HOTKEY = 0x0312;
     private const int HOTKEY_ID_MOUSETHROUGH = 0x1001;
+    private const int HOTKEY_ID_TOPMOST = 0x1002;
     private AppConfig _config = configManager.CurrentConfig;
 
     private HwndSource? _source;
@@ -84,6 +86,7 @@ public sealed class GlobalHotkeyService(
         try
         {
             RegisterMouseThroughHotkey();
+            RegisterTopmostHotkey();
         }
         catch (Exception ex)
         {
@@ -99,6 +102,7 @@ public sealed class GlobalHotkeyService(
             if (hWnd != IntPtr.Zero)
             {
                 UnregisterHotKey(hWnd, HOTKEY_ID_MOUSETHROUGH);
+                UnregisterHotKey(hWnd, HOTKEY_ID_TOPMOST);
             }
         }
         catch (Exception ex)
@@ -124,6 +128,23 @@ public sealed class GlobalHotkeyService(
         }
     }
 
+    private void RegisterTopmostHotkey()
+    {
+        var key = _config.TopmostShortcut.Key;
+        var mods = _config.TopmostShortcut.Modifiers;
+        if (key == Key.None) return;
+
+        var (vk, fsMods) = ToNative(key, mods);
+        var hWnd = _source?.Handle ?? IntPtr.Zero;
+        if (hWnd == IntPtr.Zero) return;
+
+        UnregisterHotKey(hWnd, HOTKEY_ID_TOPMOST);
+        if (!RegisterHotKey(hWnd, HOTKEY_ID_TOPMOST, fsMods, vk))
+        {
+            logger.LogWarning("RegisterHotKey failed for Topmost: {Key}+{Mods}", key, mods);
+        }
+    }
+
     private static (uint vk, uint fsMods) ToNative(Key key, ModifierKeys mods)
     {
         var vk = (uint)KeyInterop.VirtualKeyFromKey(key);
@@ -145,6 +166,11 @@ public sealed class GlobalHotkeyService(
                 ToggleMouseThrough();
                 handled = true;
             }
+            else if (id == HOTKEY_ID_TOPMOST)
+            {
+                ToggleTopmost();
+                handled = true;
+            }
         }
 
         return IntPtr.Zero;
@@ -163,6 +189,22 @@ public sealed class GlobalHotkeyService(
         catch (Exception ex)
         {
             logger.LogWarning(ex, "ToggleMouseThrough failed");
+        }
+    }
+
+    private void ToggleTopmost()
+    {
+        try
+        {
+            var window = windowManager.DpsStatisticsView;
+            var newState = !window.Topmost; // source of truth is window state
+            topmostService.SetTopmost(window, newState);
+            _config.TopmostEnabled = newState;
+            _ = configManager.SaveAsync(_config);
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "ToggleTopmost failed");
         }
     }
 

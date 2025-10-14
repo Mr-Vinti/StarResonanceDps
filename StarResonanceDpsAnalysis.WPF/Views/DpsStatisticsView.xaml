@@ -26,6 +26,7 @@
     lex:ResxLocalizationProvider.DefaultDictionary="Resources"
     ResizeMode="CanResize"
     Style="{StaticResource TransparentWindow}"
+    Topmost="{Binding AppConfig.TopmostEnabled, Mode=OneWay}"
     mc:Ignorable="d">
 
     <!--  WindowChrome: 开启可拉伸边界  -->
@@ -413,7 +414,26 @@
                             TextAlignment="Center"
                             ToolTip="{lex:Loc Key={x:Static loc:Resources.DpsStatistics_Indicator_ClickThrough_Tooltip}}"
                             Visibility="{Binding DataContext.AppConfig.MouseThroughEnabled, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BoolToVisibilityConverter}}" />
-                        <!--  设置按钮  -->
+                        <!--  Topmost toggle button (pin / pin-fill)  -->
+                        <Button
+                            x:Name="TopmostButton"
+                            Width="21"
+                            Command="{Binding ToggleTopmostCommand}"
+                            FontFamily="pack://application:,,,/Assets/Fonts/#iconfont"
+                            FontSize="15"
+                            ToolTip="{lex:Loc Key={x:Static loc:Resources.DpsStatistics_Indicator_WindowTopMost_Tooltip}}">
+                            <Button.Style>
+                                <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
+                                    <Setter Property="Content" Value="&#xe864;" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Topmost, RelativeSource={RelativeSource AncestorType=Window}}" Value="True">
+                                            <Setter Property="Content" Value="&#xe863;" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <!--  刷新按钮  -->
                         <Button
                             Width="21"
                             Command="{Binding RefreshCommand}"

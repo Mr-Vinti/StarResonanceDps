@@ -113,6 +113,7 @@ public partial class App : Application
                 services.AddSingleton<IConfigManager, ConfigManger>();
                 services.AddSingleton<IGlobalHotkeyService, GlobalHotkeyService>();
                 services.AddSingleton<IMousePenetrationService, MousePenetrationService>();
+                services.AddSingleton<ITopmostService, TopmostService>();
                 if (_logStream != null) services.AddSingleton<IObservable<LogEvent>>(_logStream);
                 services.AddSingleton(_ => Current.Dispatcher);
             })

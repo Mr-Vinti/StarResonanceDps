@@ -154,6 +154,16 @@ public partial class SettingsViewModel(
         }
     }
 
+    [RelayCommand]
+    private void HandleTopMostShortcut(object parameter)
+    {
+        if (parameter is KeyEventArgs e)
+        {
+            HandleShortcutInput(e, ShortcutType.TopMost);
+        }
+
+    }
+
     private void OnAppConfigPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (sender is not AppConfig config)
@@ -216,6 +226,9 @@ public partial class SettingsViewModel(
                 break;
             case ShortcutType.ClearData:
                 AppConfig.ClearDataShortcut = shortcutData;
+                break;
+            case ShortcutType.TopMost:
+                AppConfig.TopmostShortcut = shortcutData;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(shortcutType), shortcutType, null);
@@ -350,7 +363,8 @@ public partial class Option<T>(T value, string display) : BaseViewModel
 public enum ShortcutType
 {
     MouseThrough,
-    ClearData
+    ClearData,
+    TopMost
 }
 
 public sealed class SettingsDesignTimeViewModel : SettingsViewModel

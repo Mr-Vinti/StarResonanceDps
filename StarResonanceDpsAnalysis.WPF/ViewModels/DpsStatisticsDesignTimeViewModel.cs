@@ -1,5 +1,6 @@
 #if DEBUG
 using System.Collections.ObjectModel;
+using System.Windows; // for Window in ITopmostService
 using System.Windows.Threading;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -22,6 +23,7 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
         NullLogger<DpsStatisticsViewModel>.Instance,
         new DesignConfigManager(),
         new DesignWindowManagementService(),
+        new DesignTopmostService(),
         new DebugFunctions(
             Dispatcher.CurrentDispatcher,
             NullLogger<DebugFunctions>.Instance,
@@ -45,6 +47,20 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
     }
 
     #region Stub Implementations
+
+    private sealed class DesignTopmostService : ITopmostService
+    {
+        public void SetTopmost(Window window, bool enable)
+        {
+            // no-op at design time
+        }
+
+        public bool ToggleTopmost(Window window)
+        {
+            // Return current state or false at design time
+            return window.Topmost = !window.Topmost;
+        }
+    }
 
     private sealed class DesignAppControlService : IApplicationControlService
     {

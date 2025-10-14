@@ -102,10 +102,22 @@ public partial class AppConfig : ObservableObject
     private KeyBinding _mouseThroughShortcut = new(Key.F6, ModifierKeys.None);
 
     /// <summary>
+    /// 置顶切换快捷键
+    /// </summary>
+    [ObservableProperty]
+    private KeyBinding _topmostShortcut = new(Key.F7, ModifierKeys.None);
+
+    /// <summary>
     /// 清空数据快捷键数据
     /// </summary>
     [ObservableProperty]
     private KeyBinding _clearDataShortcut = new(Key.F9, ModifierKeys.None);
+
+    /// <summary>
+    /// 当前窗口是否置顶
+    /// </summary>
+    [ObservableProperty]
+    private bool _topmostEnabled;
 
     [ObservableProperty]
     private bool _debugEnabled = false;

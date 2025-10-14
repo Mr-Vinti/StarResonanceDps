@@ -556,6 +556,15 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Toggle Always on Top.
+        /// </summary>
+        public static string DpsStatistics_Indicator_WindowTopMost_Tooltip {
+            get {
+                return ResourceManager.GetString("DpsStatistics_Indicator_WindowTopMost_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to T.
         /// </summary>
         public static string DpsStatistics_TestButton_Content {
