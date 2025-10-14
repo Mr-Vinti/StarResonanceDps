@@ -127,7 +127,7 @@ public sealed class DataStorageV2(ILogger<DataStorageV2> logger) : IDataStorage
         {
             playerInfoCaches = PlayerInfoCacheReader.ReadFile();
         }
-        catch (FileNotFoundException e)
+        catch (FileNotFoundException)
         {
             logger.LogInformation("Player info cache file not exist, abort load");
             return;

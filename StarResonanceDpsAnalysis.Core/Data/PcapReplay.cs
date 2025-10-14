@@ -72,7 +72,7 @@ public static class PcapReplay
                         continue;
                     if (ipv4Packet.SourceAddress.ToString() == "58.217.182.174")
                     {
-                        analyzer.StartNewAnalyzer(dev, raw);
+                        await analyzer.StartNewAnalyzer(dev, raw);
                         // Optionally sleep to emulate original timing
                         if (realtime && lastTs.HasValue)
                         {
@@ -282,8 +282,7 @@ public static class PcapReplay
                 try
                 {
                     var raw = e.GetPacket();
-                    analyzer.EnlistDataAsync(raw, token);
-
+                    analyzer.EnlistDataAsync(raw, token).Wait();
                 }
                 catch (Exception ex)
                 {
@@ -455,7 +454,7 @@ public static class PcapReplay
                             }
                             else if (_analyzer is PacketAnalyzer v1)
                             {
-                                v1.StartNewAnalyzer(_dev!, raw);
+                                await v1.StartNewAnalyzer(_dev!, raw);
                             }
 
                             if (_realtime && _lastTs.HasValue)
