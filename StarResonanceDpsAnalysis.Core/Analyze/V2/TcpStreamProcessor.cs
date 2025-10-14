@@ -212,9 +212,19 @@ internal sealed class TcpStreamProcessor : IDisposable
                 if (buffer.Length < 4) break;
 
                 // Peek 4-byte big-endian length
-                Span<byte> lenBuf = stackalloc byte[4];
-                buffer.Slice(0, 4).CopyTo(lenBuf);
-                var packetSize = BinaryPrimitives.ReadInt32BigEndian(lenBuf);
+                var head = buffer.Slice(0, 4);
+                int packetSize;
+                if (head.IsSingleSegment)
+                {
+                    packetSize = BinaryPrimitives.ReadInt32BigEndian(head.FirstSpan);
+                }
+                else
+                {
+                    // Multi-segment sequence: allocate a small temporary array
+                    var tmp = head.ToArray();
+                    packetSize = BinaryPrimitives.ReadInt32BigEndian(tmp);
+                }
+
                 if (packetSize <= 4 || packetSize > 0x0FFFFF) break;
 
                 if (buffer.Length < packetSize) break; // not enough data yet
@@ -287,32 +297,40 @@ internal sealed class TcpStreamProcessor : IDisposable
     private bool DetectFromData(ReadOnlySpan<byte> data)
     {
         using var ms = new MemoryStream(data.ToArray());
-        Span<byte> lenBuffer = stackalloc byte[4];
+        var lenBuf = ArrayPool<byte>.Shared.Rent(4);
 
-        while (ms.Position < ms.Length)
+        try
         {
-            if (ms.Read(lenBuffer) != 4) break;
-
-            var len = BinaryPrimitives.ReadInt32BigEndian(lenBuffer);
-            if (len < 4 || len > ms.Length - ms.Position + 4) break;
-
-            var tmp = ArrayPool<byte>.Shared.Rent(len - 4);
-            try
+            while (ms.Position < ms.Length)
             {
-                if (ms.Read(tmp, 0, len - 4) != len - 4) break;
+                if (ms.Read(lenBuf, 0, 4) != 4) break;
 
+                var len = BinaryPrimitives.ReadInt32BigEndian(lenBuf.AsSpan(0, 4));
+                if (len < 4 || len > ms.Length - ms.Position + 4) break;
 
-                if (len - 4 >= 5 + _serverSignature.Length &&
-                    tmp.AsSpan(5, _serverSignature.Length).SequenceEqual(_serverSignature))
+                var tmp = ArrayPool<byte>.Shared.Rent(len - 4);
+                try
                 {
-                    return true;
+                    if (ms.Read(tmp, 0, len - 4) != len - 4) break;
+
+
+                    if (len - 4 >= 5 + _serverSignature.Length &&
+                        tmp.AsSpan(5, _serverSignature.Length).SequenceEqual(_serverSignature))
+                    {
+                        return true;
+                    }
+                }
+                finally
+                {
+                    ArrayPool<byte>.Shared.Return(tmp);
                 }
             }
-            finally
-            {
-                ArrayPool<byte>.Shared.Return(tmp);
-            }
         }
+        finally
+        {
+            ArrayPool<byte>.Shared.Return(lenBuf);
+        }
+
         return false;
     }
 
