@@ -128,7 +128,6 @@
                                     Margin="2"
                                     ItemTemplate="{StaticResource LocalizedEnumTextBlockDataTemplate}"
                                     ItemsSource="{Binding AvailableLanguages}"
-                                    SelectedIndex="0"
                                     SelectedItem="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource AntComboBoxStyle}" />
                             </Grid>
@@ -327,7 +326,6 @@
                                         Margin="2"
                                         ItemTemplate="{StaticResource LocalizedEnumTextBlockDataTemplate}"
                                         ItemsSource="{Binding AvailableNumberDisplayModes}"
-                                        SelectedIndex="0"
                                         SelectedItem="{Binding SelectedNumberDisplayMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Style="{StaticResource AntComboBoxStyle}" />
                                 </Grid>
