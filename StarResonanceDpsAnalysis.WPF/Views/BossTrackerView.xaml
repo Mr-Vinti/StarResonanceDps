@@ -9,7 +9,7 @@
     xmlns:loc="clr-namespace:StarResonanceDpsAnalysis.WPF.Properties"
     xmlns:ctrl="clr-namespace:StarResonanceDpsAnalysis.WPF.Controls"
     mc:Ignorable="d"
-    Title="{lex:Loc Key={x:Static loc:LocalizationKeys.Window_BossTracker_Title}}"
+    Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Window_BossTracker_Title}}"
     Height="450" Width="800"
     lex:LocalizeDictionary.DesignCulture="en-US"
     lex:ResxLocalizationProvider.DefaultAssembly="StarResonanceDpsAnalysis.WPF"
