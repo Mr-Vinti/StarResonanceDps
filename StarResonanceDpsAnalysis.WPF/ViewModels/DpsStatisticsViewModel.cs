@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -395,12 +396,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     }
 
     [RelayCommand]
-    public void AddTestItem()
-    {
-        CurrentStatisticData.AddTestItem();
-    }
-
-    [RelayCommand]
     private void SetSkillDisplayLimit(int limit)
     {
         var clampedLimit = Math.Max(0, limit);
@@ -411,6 +406,17 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
         // Notify that current data's SkillDisplayLimit changed
         OnPropertyChanged(nameof(CurrentStatisticData));
+    }
+
+    protected void AddTestItem()
+    {
+        CurrentStatisticData.AddTestItem();
+    }
+
+    [RelayCommand]
+    private void MinimizeWindow()
+    {
+        _windowManagement.DpsStatisticsView.WindowState = WindowState.Minimized;
     }
 
     [RelayCommand]

@@ -36,7 +36,7 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
         {
             for (var i = 0; i < 3; i++)
             {
-                AddTestItemCommand.Execute(null);
+                AddTestItem();
             }
         }
         catch

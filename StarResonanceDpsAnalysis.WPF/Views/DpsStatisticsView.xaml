@@ -396,12 +396,11 @@
                         HorizontalAlignment="Right"
                         Orientation="Horizontal">
 
-                        <!--  Test button  -->
+                        <!--  Minimize window button  -->
                         <Button
                             Width="21"
-                            Command="{Binding AddTestItemCommand}"
-                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.DpsStatistics_TestButton_Content}}"
-                            ToolTip="{lex:Loc Key={x:Static loc:ResourcesKeys.DpsStatistics_TestButton_Tooltip}}" />
+                            Command="{Binding MinimizeWindowCommand}"
+                            Content="__" />
 
                         <!--  Mouse-through indicator (visible when click-through is enabled)  -->
                         <TextBlock
