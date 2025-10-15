@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,148 +118,148 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="App_Name" xml:space="preserve">
-    <value>别查我DPS</value>
+    <value>SR DPS Analyzer</value>
   </data>
   <data name="Menu_Settings" xml:space="preserve">
-    <value>设置</value>
+    <value>Settings</value>
   </data>
   <data name="Menu_StatisticBoss" xml:space="preserve">
-    <value>统计BOSS</value>
+    <value>Track Boss Only</value>
   </data>
   <data name="Menu_ShowTotal" xml:space="preserve">
-    <value>显示总伤</value>
+    <value>Show Total Damage</value>
   </data>
   <data name="Menu_PersonalMode" xml:space="preserve">
-    <value>个人模式</value>
+    <value>Solo Mode</value>
   </data>
   <data name="Menu_RecordSettings" xml:space="preserve">
-    <value>记录设置</value>
+    <value>Record Options</value>
   </data>
   <data name="Menu_Record_Always" xml:space="preserve">
-    <value>记录每一次</value>
+    <value>Record Every Fight</value>
   </data>
   <data name="Menu_Record_Skip1Min" xml:space="preserve">
-    <value>不记录1分钟以下</value>
+    <value>Ignore fights &lt; 1 min</value>
   </data>
   <data name="Menu_Record_Skip2Min" xml:space="preserve">
-    <value>不记录2分钟以下</value>
+    <value>Ignore fights &lt; 2 min</value>
   </data>
   <data name="Menu_SkillDisplay" xml:space="preserve">
-    <value>技能显示</value>
+    <value>Skill Display</value>
   </data>
   <data name="Menu_SkillDisplay_Top5" xml:space="preserve">
-    <value>前 5 条</value>
+    <value>Top 5</value>
   </data>
   <data name="Menu_SkillDisplay_Top8" xml:space="preserve">
-    <value>前 8 条</value>
+    <value>Top 8</value>
   </data>
   <data name="Menu_SkillDisplay_Top10" xml:space="preserve">
-    <value>前 10 条</value>
+    <value>Top 10</value>
   </data>
   <data name="Menu_SkillDisplay_Top15" xml:space="preserve">
-    <value>前 15 条</value>
+    <value>Top 15</value>
   </data>
   <data name="Menu_SkillDisplay_All" xml:space="preserve">
-    <value>显示全部</value>
+    <value>Show All</value>
   </data>
   <data name="Menu_History" xml:space="preserve">
-    <value>历史记录</value>
+    <value>History</value>
   </data>
   <data name="Menu_Training" xml:space="preserve">
-    <value>打桩模式</value>
+    <value>Training Mode</value>
   </data>
   <data name="Menu_Training_Personal" xml:space="preserve">
-    <value>个人打桩</value>
+    <value>Solo Training</value>
   </data>
   <data name="Menu_Training_Faction" xml:space="preserve">
-    <value>协会打桩</value>
+    <value>Faction Training</value>
   </data>
   <data name="Menu_Training_Extreme" xml:space="preserve">
-    <value>极限打桩</value>
+    <value>Extreme Training</value>
   </data>
   <data name="Menu_SkillDiary" xml:space="preserve">
-    <value>技能日记</value>
+    <value>Skill Diary</value>
   </data>
   <data name="Menu_Exit" xml:space="preserve">
-    <value>退出</value>
+    <value>Exit</value>
   </data>
   <data name="Tooltip_ToggleScope" xml:space="preserve">
-    <value>切换为：全程 / 当前</value>
+    <value>Toggle: Full / Current</value>
   </data>
   <data name="Window_Settings_Title" xml:space="preserve">
-    <value>设置</value>
+    <value>Settings</value>
   </data>
   <data name="Window_DpsStatistics_Title" xml:space="preserve">
-    <value>DpsStatisticsForm</value>
+    <value>DPS Statistics</value>
   </data>
   <data name="Settings_Heading" xml:space="preserve">
-    <value>设置</value>
+    <value>Settings</value>
   </data>
   <data name="Settings_Section_Basic_Title" xml:space="preserve">
-    <value>基础设置</value>
+    <value>Basic Settings</value>
   </data>
   <data name="Settings_Section_Basic_Sub" xml:space="preserve">
-    <value>自动设置错误时可手动设置</value>
+    <value>Adjust manually when auto detection fails</value>
   </data>
   <data name="Settings_Section_Shortcut_Title" xml:space="preserve">
-    <value>按键设置</value>
+    <value>Shortcuts</value>
   </data>
   <data name="Settings_Section_Shortcut_Sub" xml:space="preserve">
-    <value>按下 Delete 删除选择的键位</value>
+    <value>Press [Delete] to clear the selected shortcut</value>
   </data>
   <data name="Settings_Shortcut_MouseThrough" xml:space="preserve">
-    <value>鼠标穿透</value>
+    <value>Mouse Through</value>
   </data>
   <data name="Settings_Shortcut_ClearData" xml:space="preserve">
-    <value>清空数据</value>
+    <value>Clear Data</value>
   </data>
   <data name="Settings_Shortcut_MouseThrough_Tooltip" xml:space="preserve">
-    <value>在此聚焦并按下组合键（例如 Ctrl+F6）。按 Delete 清除。</value>
+    <value>Focus this box and press a shortcut (e.g. Ctrl+F6). Press Delete to clear.</value>
   </data>
   <data name="Settings_Shortcut_ClearData_Tooltip" xml:space="preserve">
-    <value>在此聚焦并按下快捷键（例如 F9）。按 Delete 清除。</value>
+    <value>Focus this box and press a shortcut (e.g. F9). Press Delete to clear.</value>
   </data>
   <data name="Settings_Section_Display_Title" xml:space="preserve">
-    <value>显示设置</value>
+    <value>Display</value>
   </data>
   <data name="Settings_Section_Combat_Title" xml:space="preserve">
-    <value>战斗设置</value>
+    <value>Combat Settings</value>
   </data>
   <data name="Settings_Section_Combat_Sub" xml:space="preserve">
-    <value>脱战清空只重置当前战斗数据，而非全程统计</value>
+    <value>[Clear data after combat] resets only the current data, not the total.</value>
   </data>
   <data name="Settings_NetworkAdapter_Label" xml:space="preserve">
-    <value>监听网卡</value>
+    <value>Capture Adapter</value>
   </data>
   <data name="Settings_Combat_ClearAfterBattle" xml:space="preserve">
-    <value>脱战后清除当前统计</value>
+    <value>Clear data after combat</value>
   </data>
   <data name="Settings_Common_Seconds" xml:space="preserve">
-    <value>秒</value>
+    <value>sec</value>
   </data>
   <data name="Settings_Combat_ClearAfterTeleport" xml:space="preserve">
-    <value>换地图时清空全程统计</value>
+    <value>Reset on map change</value>
   </data>
   <data name="Settings_Switch_On" xml:space="preserve">
-    <value>开</value>
+    <value>On</value>
   </data>
   <data name="Settings_Switch_Off" xml:space="preserve">
-    <value>关</value>
+    <value>Off</value>
   </data>
   <data name="Settings_Display_NumberMode" xml:space="preserve">
-    <value>计数显示类型</value>
+    <value>Number display mode</value>
   </data>
   <data name="Settings_Display_Opacity" xml:space="preserve">
-    <value>窗体透明度</value>
+    <value>Overlay opacity</value>
   </data>
   <data name="Settings_Section_Language_Title" xml:space="preserve">
-    <value>语言</value>
+    <value>Language</value>
   </data>
   <data name="Settings_Section_Language_Description" xml:space="preserve">
-    <value>选择界面语言</value>
+    <value>Choose the interface language</value>
   </data>
   <data name="Settings_Language_Auto" xml:space="preserve">
-    <value>跟随系统</value>
+    <value>Follow system</value>
   </data>
   <data name="Settings_Language_Chinese" xml:space="preserve">
     <value>简体中文</value>
@@ -267,29 +267,32 @@
   <data name="Settings_Language_English" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="Settings_Language_Portuguese" xml:space="preserve">
+    <value>Português (Brasil)</value>
+  </data>
   <data name="NumberDisplay_Wan" xml:space="preserve">
-    <value>四位计数法 (万亿兆)</value>
+    <value>Wan (East Asian)</value>
   </data>
   <data name="NumberDisplay_KMB" xml:space="preserve">
-    <value>三位计数法 (KMBT)</value>
+    <value>KMBT (Western)</value>
   </data>
   <data name="Window_About_Title" xml:space="preserve">
-    <value>关于</value>
+    <value>About</value>
   </data>
   <data name="About_Intro_Primary" xml:space="preserve">
-    <value>一款专为《星痕共鸣》玩家打造的战斗数据统计工具。</value>
+    <value>A combat data analytics tool built for Star Resonance players.</value>
   </data>
   <data name="About_Intro_Details" xml:space="preserve">
-    <value>该工具无需修改游戏客户端，不违反游戏服务条款。该工具旨在帮助玩家更好地理解战斗数据，减少不必要的精力消耗，提升游戏体验。使用该工具前，请确保不会将数据结果用于战力歧视等破坏游戏社区环境的行为。</value>
+    <value>This tool requires no client modifications and stays within the game's terms of service. It helps players understand combat data, reduce unnecessary effort, and improve the gameplay experience. Please do not use the results for power discrimination or any behaviour that harms the community.</value>
   </data>
   <data name="About_Version_Label" xml:space="preserve">
-    <value>当前版本号：</value>
+    <value>Current version:</value>
   </data>
   <data name="About_Developers_Label" xml:space="preserve">
-    <value>当前版本的开发者们（排名不分先后）:</value>
+    <value>Contributors for this release (in no particular order):</value>
   </data>
   <data name="About_Developer_Lead" xml:space="preserve">
-    <value>惊奇猫猫盒（anying1073：项目发起者）</value>
+    <value>惊奇猫猫盒 (anying1073: project founder)</value>
   </data>
   <data name="About_Developer_RocyJune" xml:space="preserve">
     <value>露詩（Rocy-June）</value>
@@ -301,34 +304,34 @@
     <value>尻鸭（ihonliu）</value>
   </data>
   <data name="About_OpenSource_Prefix" xml:space="preserve">
-    <value>本项目于</value>
+    <value>This project is open source at</value>
   </data>
   <data name="About_OpenSource_RepositoryUrl" xml:space="preserve">
     <value>https://github.com/anying1073/StarResonanceDps</value>
   </data>
   <data name="About_OpenSource_Suffix" xml:space="preserve">
-    <value>中开源，如在使用中遇到问题可以直接提出 Issue。</value>
+    <value>, If you encounter any issues, please open an issue there.</value>
   </data>
   <data name="About_Contribution" xml:space="preserve">
-    <value>如果你想为本项目贡献代码，欢迎 Fork 之后提交 Pull Request。</value>
+    <value>To contribute, please fork the repository and submit a pull request.</value>
   </data>
   <data name="About_Community_Invite" xml:space="preserve">
-    <value>无法访问 GitHub 或者想要寻求游戏伙伴也可以加QQ群：</value>
+    <value>If you cannot access GitHub or want to find teammates, join the Tencent QQ groups:</value>
   </data>
   <data name="About_Community_GroupOne" xml:space="preserve">
-    <value>678150498（1群）</value>
+    <value>678150498 (Group 1)</value>
   </data>
   <data name="About_Community_GroupTwo" xml:space="preserve">
-    <value>1022797551（2群）</value>
+    <value>1022797551 (Group 2)</value>
   </data>
   <data name="About_Thanks_Prefix" xml:space="preserve">
-    <value>在此感谢</value>
+    <value>Special thanks to</value>
   </data>
   <data name="About_Thanks_RepositoryUrl" xml:space="preserve">
     <value>https://github.com/dmlgzs/StarResonanceDamageCounter</value>
   </data>
   <data name="About_Thanks_Suffix" xml:space="preserve">
-    <value>项目对于本项目的帮助于支持</value>
+    <value>for supporting and inspiring this project.</value>
   </data>
   <data name="About_Copyright" xml:space="preserve">
     <value>Copyright (C) 2025 anying1073/StarResonanceDps Team.</value>
@@ -337,49 +340,49 @@
     <value>Powered by .NET 8, Licensed under the GNU AGPL v3.</value>
   </data>
   <data name="Window_DamageReference_Title" xml:space="preserve">
-    <value>伤害参考</value>
+    <value>Damage Reference</value>
   </data>
   <data name="DamageReference_Header_Title" xml:space="preserve">
     <value>Skill Breakdown</value>
   </data>
   <data name="DamageReference_Ribbon_Title" xml:space="preserve">
-    <value>伤害参考</value>
+    <value>Damage Reference</value>
   </data>
-  <data name="DamageReference_Profession_All" xml:space="preserve">
-    <value>全职业</value>
+  <data name="DamageReference_Classes_All" xml:space="preserve">
+    <value>All Classes</value>
   </data>
-  <data name="Profession_Stormblade" xml:space="preserve">
-    <value>雷影剑士</value>
+  <data name="Classes_Stormblade" xml:space="preserve">
+    <value>Stormblade</value>
   </data>
-  <data name="Profession_FrostMage" xml:space="preserve">
-    <value>冰魔导师</value>
+  <data name="Classes_FrostMage" xml:space="preserve">
+    <value>Frost Mage</value>
   </data>
-  <data name="Profession_WindKnight" xml:space="preserve">
-    <value>青岚骑士</value>
+  <data name="Classes_WindKnight" xml:space="preserve">
+    <value>Wind Knight</value>
   </data>
-  <data name="Profession_VerdantOracle" xml:space="preserve">
-    <value>森语者</value>
+  <data name="Classes_VerdantOracle" xml:space="preserve">
+    <value>Verdant Oracle</value>
   </data>
-  <data name="Profession_HeavyGuardian" xml:space="preserve">
-    <value>巨刃守护者</value>
+  <data name="Classes_HeavyGuardian" xml:space="preserve">
+    <value>Heavy Guardian</value>
   </data>
-  <data name="Profession_Marksman" xml:space="preserve">
-    <value>神射手</value>
+  <data name="Classes_Marksman" xml:space="preserve">
+    <value>Marksman</value>
   </data>
-  <data name="Profession_ShieldKnight" xml:space="preserve">
-    <value>神盾骑士</value>
+  <data name="Classes_ShieldKnight" xml:space="preserve">
+    <value>Shield Knight</value>
   </data>
-  <data name="Profession_SoulMusician" xml:space="preserve">
-    <value>灵魂乐手</value>
+  <data name="Classes_SoulMusician" xml:space="preserve">
+    <value>Soul Musician</value>
   </data>
   <data name="DamageReference_Table_Title" xml:space="preserve">
-    <value>伤害参考</value>
+    <value>Damage Reference</value>
   </data>
   <data name="DamageReference_NoData" xml:space="preserve">
-    <value>暂无数据</value>
+    <value>No data yet</value>
   </data>
   <data name="DamageReference_Disclaimer" xml:space="preserve">
-    <value>以上数据仅供娱乐与参考，严禁用于战力歧视等破坏游戏社区环境的行为；一经发现，永久取消该功能的使用资格。</value>
+    <value>Data is for entertainment and reference only. Do not use it for power discrimination or any behaviour that harms the community; violations will result in permanent revocation.</value>
   </data>
   <data name="Window_Debug_Title" xml:space="preserve">
     <value>Debug View</value>
@@ -424,292 +427,292 @@
     <value>Message</value>
   </data>
   <data name="Debug_Status_TotalPrefix" xml:space="preserve">
-    <value>总计：</value>
+    <value>Total: </value>
   </data>
   <data name="Debug_Status_TotalSuffix" xml:space="preserve">
-    <value> 条日志</value>
+    <value> logs</value>
   </data>
   <data name="Debug_Status_FilteredPrefix" xml:space="preserve">
-    <value>过滤：</value>
+    <value>Filtered: </value>
   </data>
   <data name="Debug_Status_FilteredSuffix" xml:space="preserve">
-    <value> 条日志</value>
+    <value> logs</value>
   </data>
   <data name="Debug_Status_LastPrefix" xml:space="preserve">
-    <value>最新：</value>
+    <value>Last: </value>
   </data>
   <data name="Debug_ThemeTestText" xml:space="preserve">
-    <value>主题切换测试文本</value>
+    <value>Theme switch test text</value>
   </data>
   <data name="Debug_Button_PcapTest" xml:space="preserve">
-    <value>Pcap 测试</value>
+    <value>Pcap Test</value>
   </data>
   <data name="Debug_Button_SkillBreakdown" xml:space="preserve">
-    <value>技能详情窗口</value>
+    <value>Skill Breakdown View</value>
   </data>
   <data name="Debug_Button_DamageReference" xml:space="preserve">
-    <value>伤害参考窗口</value>
+    <value>Damage Reference View</value>
   </data>
   <data name="Debug_Button_Settings" xml:space="preserve">
-    <value>设置窗口</value>
+    <value>Settings View</value>
   </data>
   <data name="Debug_Button_About" xml:space="preserve">
-    <value>关于窗口</value>
+    <value>About View</value>
   </data>
   <data name="Debug_Group_Title" xml:space="preserve">
-    <value>调试功能</value>
+    <value>Debug utilities</value>
   </data>
   <data name="MainWindow_Header_Title" xml:space="preserve">
-    <value>别查我 D P S</value>
+    <value>SR DPS Analyzer</value>
   </data>
   <data name="MainWindow_PluginList_Title" xml:space="preserve">
-    <value>插件列表</value>
+    <value>Plugin List</value>
   </data>
   <data name="MainWindow_Plugin_Label_Intro" xml:space="preserve">
-    <value>简介：</value>
+    <value>Intro:</value>
   </data>
   <data name="MainWindow_Plugin_DpsTool_Title" xml:space="preserve">
-    <value>DPS工具</value>
+    <value>DPS Toolkit</value>
   </data>
   <data name="MainWindow_Plugin_DpsTool_Description" xml:space="preserve">
-    <value>提供DPS统计、技能分解等功能</value>
+    <value>Provides DPS statistics and skill breakdown tools</value>
   </data>
   <data name="MainWindow_Plugin_Label_Author" xml:space="preserve">
-    <value>作者：</value>
+    <value>Author:</value>
   </data>
   <data name="MainWindow_Plugin_Author_OfficialTeam" xml:space="preserve">
-    <value>[官方] 别查我DPS 开发团队</value>
+    <value>[Official] SR DPS Analyzer Team</value>
   </data>
   <data name="MainWindow_Plugin_AutoStart" xml:space="preserve">
-    <value>自启动</value>
+    <value>Auto start</value>
   </data>
   <data name="Common_Action_Open" xml:space="preserve">
-    <value>开启</value>
+    <value>Launch</value>
   </data>
   <data name="MainWindow_Plugin_ModuleSolver_Title" xml:space="preserve">
-    <value>模组求解器</value>
+    <value>Module Solver</value>
   </data>
   <data name="MainWindow_Plugin_ModuleSolver_Description" xml:space="preserve">
-    <value>提供模组快速计算最优解功能</value>
+    <value>Quickly calculates optimal module combinations</value>
   </data>
   <data name="MainWindow_Plugin_WorldBoss_Title" xml:space="preserve">
-    <value>野外BOSS状态查看器</value>
+    <value>World Boss Status Tracker</value>
   </data>
   <data name="MainWindow_Plugin_WorldBoss_Description" xml:space="preserve">
-    <value>通过大量的玩家在线数据互助，提供各线路的野外BOSS存活状态等信息</value>
+    <value>Crowdsourced live data for each channel's world boss status</value>
   </data>
   <data name="MainWindow_Plugin_PigTracker_Title" xml:space="preserve">
-    <value>小猪娜宝状态查看器</value>
+    <value>Pig Nabo Status Tracker</value>
   </data>
   <data name="MainWindow_Plugin_PigTracker_Description" xml:space="preserve">
-    <value>通过大量的玩家在线数据互助，提供小猪娜宝的线路与位置信息</value>
+    <value>Community-driven tracker for Pig Nabo routes and locations</value>
   </data>
   <data name="MainWindow_Debug_Group_Title" xml:space="preserve">
-    <value>调试功能</value>
+    <value>Debug utilities</value>
   </data>
   <data name="MainWindow_Debug_ThemeTest" xml:space="preserve">
-    <value>主题切换测试文本</value>
+    <value>Theme switch test text</value>
   </data>
   <data name="MainWindow_Debug_Button_PcapTest" xml:space="preserve">
-    <value>Pcap 测试</value>
+    <value>Pcap Test</value>
   </data>
   <data name="MainWindow_Debug_Button_SkillBreakdown" xml:space="preserve">
-    <value>技能详情窗口</value>
+    <value>Skill Breakdown View</value>
   </data>
   <data name="MainWindow_Debug_Button_DamageReference" xml:space="preserve">
-    <value>伤害参考窗口</value>
+    <value>Damage Reference View</value>
   </data>
   <data name="MainWindow_Debug_Button_Settings" xml:space="preserve">
-    <value>设置窗口</value>
+    <value>Settings View</value>
   </data>
   <data name="MainWindow_Debug_Button_About" xml:space="preserve">
-    <value>关于窗口</value>
+    <value>About View</value>
   </data>
   <data name="Window_ModuleSolve_Title" xml:space="preserve">
-    <value>模组求解器</value>
+    <value>Module Solver</value>
   </data>
   <data name="ModuleSolve_Header_Title" xml:space="preserve">
-    <value>模组求解器</value>
+    <value>Module Solver</value>
   </data>
   <data name="ModuleSolve_TargetProperties_Title" xml:space="preserve">
-    <value>目标词条和等级（0为默认）[可输入文字索引]</value>
+    <value>Target stats and levels (0 = default) [type to search]</value>
   </data>
   <data name="ModuleSolve_Property1_Label" xml:space="preserve">
-    <value>属性1：</value>
+    <value>Stat 1:</value>
   </data>
   <data name="ModuleSolve_Property2_Label" xml:space="preserve">
-    <value>属性2：</value>
+    <value>Stat 2:</value>
   </data>
   <data name="ModuleSolve_Property3_Label" xml:space="preserve">
-    <value>属性3：</value>
+    <value>Stat 3:</value>
   </data>
   <data name="ModuleSolve_Property4_Label" xml:space="preserve">
-    <value>属性4：</value>
+    <value>Stat 4:</value>
   </data>
   <data name="ModuleSolve_Property5_Label" xml:space="preserve">
-    <value>属性5：</value>
+    <value>Stat 5:</value>
   </data>
   <data name="ModuleSolve_ExpectedLevel_Label" xml:space="preserve">
-    <value>期望等级：</value>
+    <value>Desired level:</value>
   </data>
   <data name="ModuleSolve_ExcludeProperties_Title" xml:space="preserve">
-    <value>排除词条（与目标词条冲突）[可输入文字索引]</value>
+    <value>Exclude stats (conflicts with targets) [type to search]</value>
   </data>
   <data name="ModuleSolve_ModuleType_Label" xml:space="preserve">
-    <value>模组类型：</value>
+    <value>Module type:</value>
   </data>
   <data name="ModuleSolve_ModuleType_All" xml:space="preserve">
-    <value>全部</value>
+    <value>All</value>
   </data>
   <data name="ModuleSolve_ModuleType_Offense" xml:space="preserve">
-    <value>攻击模组</value>
+    <value>Offense</value>
   </data>
   <data name="ModuleSolve_ModuleType_Defense" xml:space="preserve">
-    <value>防御模组</value>
+    <value>Defense</value>
   </data>
   <data name="ModuleSolve_ModuleType_Support" xml:space="preserve">
-    <value>辅助模组</value>
+    <value>Support</value>
   </data>
   <data name="ModuleSolve_Sort_Label" xml:space="preserve">
-    <value>排序方式：</value>
+    <value>Sort by:</value>
   </data>
   <data name="ModuleSolve_Sort_Attribute" xml:space="preserve">
-    <value>属性优先</value>
+    <value>Stat priority</value>
   </data>
   <data name="ModuleSolve_Sort_Level" xml:space="preserve">
-    <value>等级优先</value>
+    <value>Level priority</value>
   </data>
   <data name="ModuleSolve_Analyze_Button" xml:space="preserve">
-    <value>分析模组</value>
+    <value>Analyze modules</value>
   </data>
   <data name="ModuleSolve_UsingTip" xml:space="preserve">
-    <value>打开此界面后需要过图或者重新登陆一次才能进行分析【右键属性选项为清空当前选项】</value>
+    <value>After opening this window, change zone or relog before analyzing. Right-click a stat option to clear it.</value>
   </data>
   <data name="Window_SkillBreakdown_Title" xml:space="preserve">
-    <value>技能详情</value>
+    <value>Skill Details</value>
   </data>
   <data name="SkillBreakdown_Header_Title" xml:space="preserve">
-    <value>技能详情</value>
+    <value>Skill Breakdown</value>
   </data>
   <data name="SkillBreakdown_Card_RealtimeChart" xml:space="preserve">
-    <value>DPS/HPS/DTPS实时曲线图</value>
+    <value>Realtime DPS/HPS/DTPS charts</value>
   </data>
   <data name="SkillBreakdown_Placeholder_LineChart" xml:space="preserve">
-    <value>假装这里有个折线图</value>
+    <value>Imagine a line chart here</value>
   </data>
   <data name="SkillBreakdown_Card_ShareChart" xml:space="preserve">
-    <value>技能占比分布图</value>
+    <value>Skill contribution chart</value>
   </data>
   <data name="SkillBreakdown_Placeholder_PieChart" xml:space="preserve">
-    <value>假装这里有个饼图</value>
+    <value>Imagine a pie chart here</value>
   </data>
   <data name="SkillBreakdown_Card_DamageDistribution" xml:space="preserve">
-    <value>伤害分布</value>
+    <value>Damage distribution</value>
   </data>
   <data name="SkillBreakdown_Placeholder_BarChart" xml:space="preserve">
-    <value>假装这里有个条形图</value>
+    <value>Imagine a bar chart here</value>
   </data>
   <data name="SkillBreakdown_Section_DamageInfo" xml:space="preserve">
-    <value>伤害信息</value>
+    <value>Damage info</value>
   </data>
   <data name="SkillBreakdown_Label_TotalDamage" xml:space="preserve">
-    <value>总伤害</value>
+    <value>Total damage</value>
   </data>
   <data name="SkillBreakdown_Value_TotalDamage" xml:space="preserve">
     <value>42.64K</value>
   </data>
   <data name="SkillBreakdown_Label_Dps" xml:space="preserve">
-    <value>秒伤</value>
+    <value>DPS</value>
   </data>
   <data name="SkillBreakdown_Value_Dps" xml:space="preserve">
     <value>29.01K</value>
   </data>
   <data name="SkillBreakdown_Label_HitCount" xml:space="preserve">
-    <value>命中次数</value>
+    <value>Hits</value>
   </data>
   <data name="SkillBreakdown_Value_HitCount" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="SkillBreakdown_Label_CritRate" xml:space="preserve">
-    <value>暴击率</value>
+    <value>Crit rate</value>
   </data>
   <data name="SkillBreakdown_Value_CritRate" xml:space="preserve">
     <value>16.67%</value>
   </data>
   <data name="SkillBreakdown_Label_LuckRate" xml:space="preserve">
-    <value>幸运率</value>
+    <value>Luck rate</value>
   </data>
   <data name="SkillBreakdown_Value_LuckRate" xml:space="preserve">
     <value>0%</value>
   </data>
   <data name="SkillBreakdown_Label_CritCount" xml:space="preserve">
-    <value>暴击次数</value>
+    <value>Critical hits</value>
   </data>
   <data name="SkillBreakdown_Value_CritCount" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="SkillBreakdown_Label_NormalDamage" xml:space="preserve">
-    <value>普通伤害</value>
+    <value>Normal damage</value>
   </data>
   <data name="SkillBreakdown_Value_NormalDamage" xml:space="preserve">
     <value>28.71K</value>
   </data>
   <data name="SkillBreakdown_Label_CritDamage" xml:space="preserve">
-    <value>暴击伤害</value>
+    <value>Critical damage</value>
   </data>
   <data name="SkillBreakdown_Value_CritDamage" xml:space="preserve">
     <value>13.92K</value>
   </data>
   <data name="SkillBreakdown_Label_LuckCount" xml:space="preserve">
-    <value>幸运次数</value>
+    <value>Lucky hits</value>
   </data>
   <data name="SkillBreakdown_Value_LuckCount" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="SkillBreakdown_Label_LuckDamage" xml:space="preserve">
-    <value>幸运伤害</value>
+    <value>Lucky damage</value>
   </data>
   <data name="SkillBreakdown_Value_LuckDamage" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="SkillBreakdown_Label_AverageDamage" xml:space="preserve">
-    <value>平均伤害</value>
+    <value>Average hit</value>
   </data>
   <data name="SkillBreakdown_Value_AverageDamage" xml:space="preserve">
     <value>7106</value>
   </data>
   <data name="SkillBreakdown_Label_DamageTakenCount" xml:space="preserve">
-    <value>受击次数</value>
+    <value>Times hit</value>
   </data>
   <data name="SkillBreakdown_Value_DamageTakenCount" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="SkillBreakdown_Placeholder_Form" xml:space="preserve">
-    <value>假装这里有个表单</value>
+    <value>Imagine a data table here</value>
   </data>
   <data name="SkillBreakdown_Info_Name" xml:space="preserve">
-    <value>--测试名称--</value>
+    <value>--Sample Name--</value>
   </data>
   <data name="SkillBreakdown_Info_Uid" xml:space="preserve">
     <value>UID: 123456</value>
   </data>
   <data name="SkillBreakdown_Info_Power" xml:space="preserve">
-    <value>战力: 25000</value>
+    <value>Power: 25000</value>
   </data>
   <data name="SkillBreakdown_Info_Level" xml:space="preserve">
-    <value>等级: 60</value>
+    <value>Level: 60</value>
   </data>
   <data name="SkillBreakdown_Info_Badge" xml:space="preserve">
-    <value>臂章: 190</value>
+    <value>Badge: 190</value>
   </data>
   <data name="SkillBreakdown_Tab_Output" xml:space="preserve">
-    <value>输出</value>
+    <value>DPS</value>
   </data>
   <data name="SkillBreakdown_Tab_Healing" xml:space="preserve">
-    <value>治疗</value>
+    <value>Healing</value>
   </data>
   <data name="SkillBreakdown_Tab_Tanking" xml:space="preserve">
-    <value>承伤</value>
+    <value>Damage Taken</value>
   </data>
   <data name="SkillBreakdown_Tab_Summary" xml:space="preserve">
     <value>Summary</value>
@@ -718,43 +721,131 @@
     <value>Details</value>
   </data>
   <data name="SkillBreakdown_Placeholder_Details" xml:space="preserve">
-    <value>详情占位</value>
+    <value>Details placeholder</value>
   </data>
   <data name="SkillBreakdown_Tab_Graph" xml:space="preserve">
     <value>Graph</value>
   </data>
   <data name="SkillBreakdown_Placeholder_Graph" xml:space="preserve">
-    <value>图表占位</value>
+    <value>Graph placeholder</value>
   </data>
   <data name="DpsStatistics_TestButton_Content" xml:space="preserve">
     <value>T</value>
   </data>
   <data name="DpsStatistics_TestButton_Tooltip" xml:space="preserve">
-    <value>添加测试数据</value>
+    <value>Add Test Item</value>
   </data>
   <data name="Common_Dash" xml:space="preserve">
     <value>-</value>
   </data>
   <data name="SkillBreakdown_Section_DamageDistribution" xml:space="preserve">
-    <value>伤害分布</value>
+    <value>Damage distribution</value>
   </data>
   <data name="StatisticType_Damage" xml:space="preserve">
-    <value>伤害</value>
+    <value>Damage</value>
   </data>
   <data name="StatisticType_Healing" xml:space="preserve">
-    <value>治疗</value>
+    <value>Healing</value>
   </data>
   <data name="StatisticType_TakenDamage" xml:space="preserve">
-    <value>承伤</value>
+    <value>Dmg In</value>
   </data>
   <data name="StatisticType_NpcTakenDamage" xml:space="preserve">
-    <value>NPC承伤</value>
+    <value>NPC Dmg In</value>
   </data>
   <data name="ScopeTime_Current" xml:space="preserve">
-    <value>当前</value>
+    <value>Current</value>
   </data>
   <data name="ScopeTime_Total" xml:space="preserve">
-    <value>全程</value>
+    <value>Total</value>
+  </data>
+  <data name="DpsStatistics_Indicator_ClickThrough_Tooltip" xml:space="preserve">
+    <value>Mouse click-through enabled</value>
+    <comment>鼠标穿透已启用</comment>
+  </data>
+  <data name="Settings_Shortcut_TopMost" xml:space="preserve">
+    <value>Always on Top</value>
+  </data>
+  <data name="DpsStatistics_Indicator_WindowTopMost_Tooltip" xml:space="preserve">
+    <value>Toggle Always on Top</value>
+    <comment>切换置顶</comment>
+  </data>
+  <data name="Settings_Shortcut_TopMost_Tooltip" xml:space="preserve">
+    <value>Focus this box and press a shortcut (e.g. Ctrl+F9). Press Delete to clear.</value>
+  </data>
+  <data name="ClassSpec_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+    <comment>Unknown = 0</comment>
+  </data>
+  <data name="ClassSpec_ShieldKnightRecovery" xml:space="preserve">
+    <value>Recovery</value>
+    <comment>ShieldKnightRecovery</comment>
+  </data>
+  <data name="ClassSpec_ShieldKnightShield" xml:space="preserve">
+    <value>Shield</value>
+    <comment>ShieldKnightShield</comment>
+  </data>
+  <data name="ClassSpec_HeavyGuardianEarthfort" xml:space="preserve">
+    <value>Earthfort</value>
+    <comment>HeavyGuardianEarthfort</comment>
+  </data>
+  <data name="ClassSpec_HeavyGuardianBlock" xml:space="preserve">
+    <value>Block</value>
+    <comment>HeavyGuardianBlock</comment>
+  </data>
+  <data name="ClassSpec_StormbladeIaidoSlash" xml:space="preserve">
+    <value>IaidoSlash</value>
+    <comment>StormbladeIaidoSlash</comment>
+  </data>
+  <data name="ClassSpec_StormbladeMoonStrike" xml:space="preserve">
+    <value>MoonStrike</value>
+    <comment>StormbladeMoonStrike</comment>
+  </data>
+  <data name="ClassSpec_WindKnightVanGuard" xml:space="preserve">
+    <value>VanGuard</value>
+    <comment>WindKnightVanGuard</comment>
+  </data>
+  <data name="ClassSpec_WindKnightSkyward" xml:space="preserve">
+    <value>Skyward</value>
+    <comment>WindKnightSkyward</comment>
+  </data>
+  <data name="ClassSpec_FrostMageIcicle" xml:space="preserve">
+    <value>Icicle</value>
+    <comment>FrostMageIcicle</comment>
+  </data>
+  <data name="ClassSpec_FrostMageFrostBeam" xml:space="preserve">
+    <value>FrostBeam</value>
+    <comment>FrostMageFrostBeam</comment>
+  </data>
+  <data name="ClassSpec_MarksmanWildpack" xml:space="preserve">
+    <value>Wildpack</value>
+    <comment>MarksmanWildpack</comment>
+  </data>
+  <data name="ClassSpec_MarksmanFalconry" xml:space="preserve">
+    <value>Falconry</value>
+    <comment>MarksmanFalconry</comment>
+  </data>
+  <data name="ClassSpec_VerdantOracleSmite" xml:space="preserve">
+    <value>Smite</value>
+    <comment>VerdantOracleSmite</comment>
+  </data>
+  <data name="ClassSpec_VerdantOracleLifeBind" xml:space="preserve">
+    <value>LifeBind</value>
+    <comment>VerdantOracleLifeBind</comment>
+  </data>
+  <data name="ClassSpec_SoulMusicianDissonance" xml:space="preserve">
+    <value>Dissonance</value>
+    <comment>SoulMusicianDissonance</comment>
+  </data>
+  <data name="ClassSpec_SoulMusicianConcerto" xml:space="preserve">
+    <value>Concerto</value>
+    <comment>SoulMusicianConcerto</comment>
+  </data>
+  <data name="Settings_NetworkAdapterAutoSelect_Failed" xml:space="preserve">
+    <value>Network adapter auto select failed, please check you have proper network connections</value>
+  </data>
+  <data name="Settings_NetworkAdapterAutoSelect_Button" xml:space="preserve">
+    <value>Auto</value>
   </data>
   <data name="Window_BossTracker_Title" xml:space="preserve">
     <value>野外Boss状态查看器</value>

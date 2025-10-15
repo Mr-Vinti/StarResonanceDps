@@ -15,10 +15,10 @@ internal class StatisticTypeToStringConverter : IValueConverter
         {
             return type switch
             {
-                StatisticType.Damage => LocalizationManager.GetString(LocalizationKeys.StatisticType_Damage),
-                StatisticType.Healing => LocalizationManager.GetString(LocalizationKeys.StatisticType_Healing),
-                StatisticType.TakenDamage => LocalizationManager.GetString(LocalizationKeys.StatisticType_TakenDamage),
-                StatisticType.NpcTakenDamage => LocalizationManager.GetString(LocalizationKeys.StatisticType_NpcTakenDamage),
+                StatisticType.Damage => LocalizationManager.GetString(ResourcesKeys.StatisticType_Damage),
+                StatisticType.Healing => LocalizationManager.GetString(ResourcesKeys.StatisticType_Healing),
+                StatisticType.TakenDamage => LocalizationManager.GetString(ResourcesKeys.StatisticType_TakenDamage),
+                StatisticType.NpcTakenDamage => LocalizationManager.GetString(ResourcesKeys.StatisticType_NpcTakenDamage),
                 _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unsupported StatisticType")
             };
         }
@@ -40,8 +40,8 @@ internal class ScopeTimeToStringConverter : IValueConverter
         {
             return type switch
             {
-                ScopeTime.Current => LocalizationManager.GetString(LocalizationKeys.ScopeTime_Current),
-                ScopeTime.Total => LocalizationManager.GetString(LocalizationKeys.ScopeTime_Total),
+                ScopeTime.Current => LocalizationManager.GetString(ResourcesKeys.ScopeTime_Current),
+                ScopeTime.Total => LocalizationManager.GetString(ResourcesKeys.ScopeTime_Total),
                 _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unsupported ScopeTime")
             };
         }

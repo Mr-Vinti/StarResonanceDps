@@ -8,7 +8,7 @@
     xmlns:local="clr-namespace:StarResonanceDpsAnalysis.WPF.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
-    Title="{lex:Loc Key={x:Static loc:LocalizationKeys.Window_Debug_Title}}"
+    Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Window_Debug_Title}}"
     Width="1000"
     Height="700"
     d:DataContext="{d:DesignInstance viewModels:DebugFunctions}"
@@ -119,39 +119,39 @@
                     Margin="0,0,5,0"
                     Padding="8,4"
                     Command="{Binding LoadDebugDataSourceCommand}"
-                    Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_LoadPcap}}" />
+                    Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_LoadPcap}}" />
                 <Separator Margin="5,0" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-                <Button Command="{Binding AddSampleDataCommand}" Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_AddSampleData}}" />
+                <Button Command="{Binding AddSampleDataCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_AddSampleData}}" />
                 <Separator Margin="5,0" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
 
                 <Button
                     Margin="5,0"
                     Padding="8,4"
                     Command="{Binding ClearLogsCommand}"
-                    Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_ClearLogs}}" />
+                    Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_ClearLogs}}" />
                 <Button
                     Margin="5,0"
                     Padding="8,4"
                     Command="{Binding AddTestLogCommand}"
-                    Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_AddTestLog}}" />
+                    Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_AddTestLog}}" />
                 <Button
                     Margin="5,0"
                     Padding="8,4"
                     Command="{Binding SaveLogsCommand}"
-                    Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_SaveLogs}}" />
+                    Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_SaveLogs}}" />
                 <Separator Margin="5,0" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
 
                 <CheckBox
                     Margin="5,0"
                     VerticalAlignment="Center"
-                    Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_AutoScroll}}"
+                    Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_AutoScroll}}"
                     IsChecked="{Binding AutoScrollEnabled}" />
                 <Separator Margin="5,0" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
 
                 <TextBlock
                     Margin="5,0"
                     VerticalAlignment="Center"
-                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Filter_Level}}" />
+                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Filter_Level}}" />
                 <ComboBox
                     Width="100"
                     Margin="2,0,5,0"
@@ -161,12 +161,12 @@
                 <TextBlock
                     Margin="5,0"
                     VerticalAlignment="Center"
-                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Filter_Label}}" />
+                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Filter_Label}}" />
                 <TextBox
                     Width="150"
                     Margin="2,0,5,0"
                     Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
-                    ToolTip="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Filter_Tooltip}}" />
+                    ToolTip="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Filter_Tooltip}}" />
             </WrapPanel>
         </Border>
 
@@ -200,22 +200,22 @@
                             Grid.Column="0"
                             FontSize="10"
                             FontWeight="Bold"
-                            Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Header_Time}}" />
+                            Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Header_Time}}" />
                         <TextBlock
                             Grid.Column="1"
                             FontSize="10"
                             FontWeight="Bold"
-                            Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Header_Level}}" />
+                            Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Header_Level}}" />
                         <TextBlock
                             Grid.Column="2"
                             FontSize="10"
                             FontWeight="Bold"
-                            Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Header_Category}}" />
+                            Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Header_Category}}" />
                         <TextBlock
                             Grid.Column="3"
                             FontSize="10"
                             FontWeight="Bold"
-                            Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Header_Message}}" />
+                            Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Header_Message}}" />
                     </Grid>
                 </Border>
 
@@ -245,17 +245,17 @@
             Background="LightGray">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="0,0,15,0">
-                    <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Status_TotalPrefix}}" />
+                    <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Status_TotalPrefix}}" />
                     <Run Text="{Binding LogCount}" />
-                    <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Status_TotalSuffix}}" />
+                    <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Status_TotalSuffix}}" />
                 </TextBlock>
                 <TextBlock Margin="0,0,15,0">
-                    <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Status_FilteredPrefix}}" />
+                    <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Status_FilteredPrefix}}" />
                     <Run Text="{Binding FilteredLogCount}" />
-                    <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Status_FilteredSuffix}}" />
+                    <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Status_FilteredSuffix}}" />
                 </TextBlock>
                 <TextBlock>
-                    <Run Text="{lex:Loc Key={x:Static loc:LocalizationKeys.Debug_Status_LastPrefix}}" />
+                    <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Debug_Status_LastPrefix}}" />
                     <Run Text="{Binding LastLogTime, StringFormat='{}{0:HH:mm:ss}'}" />
                 </TextBlock>
             </StackPanel>

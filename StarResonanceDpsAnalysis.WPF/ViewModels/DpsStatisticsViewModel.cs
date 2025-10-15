@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using StarResonanceDpsAnalysis.Core;
+using StarResonanceDpsAnalysis.Core.Analyze;
 using StarResonanceDpsAnalysis.Core.Analyze.Exceptions;
 using StarResonanceDpsAnalysis.Core.Data.Models;
 using StarResonanceDpsAnalysis.Core.Extends.Data;
@@ -38,9 +39,9 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private readonly ILogger<DpsStatisticsViewModel> _logger;
     private readonly IDataStorage _storage;
     private readonly IWindowManagementService _windowManagement;
+    private readonly ITopmostService _topmostService;
     private DispatcherTimer? _durationTimer;
     private bool _isInitialized;
-    [ObservableProperty] private NumberDisplayMode _numberDisplayMode = NumberDisplayMode.Wan;
     [ObservableProperty] private ScopeTime _scopeTime = ScopeTime.Current;
     [ObservableProperty] private bool _showContextMenu;
     [ObservableProperty] private SortDirectionEnum _sortDirection = SortDirectionEnum.Descending;
@@ -55,6 +56,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         ILogger<DpsStatisticsViewModel> logger,
         IConfigManager configManager,
         IWindowManagementService windowManagement,
+        ITopmostService topmostService,
         DebugFunctions debugFunctions,
         Dispatcher dispatcher)
     {
@@ -83,6 +85,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         _logger = logger;
         _configManager = configManager;
         _windowManagement = windowManagement;
+        _topmostService = topmostService;
         _dispatcher = dispatcher;
 
         // Subscribe to DebugFunctions events to handle sample data requests
@@ -147,6 +150,17 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     }
 
     /// <summary>
+    /// 切换窗口置顶状态（命令）。
+    /// 通过绑定 Window.Topmost 到 AppConfig.TopmostEnabled 实现。
+    /// </summary>
+    [RelayCommand]
+    private async Task ToggleTopmost()
+    {
+        AppConfig.TopmostEnabled = !AppConfig.TopmostEnabled;
+        try { await _configManager.SaveAsync(AppConfig); } catch { }
+    }
+
+    /// <summary>
     /// 读取用户缓存
     /// </summary>
     private void LoadPlayerCache()
@@ -188,11 +202,15 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     }
 
     [RelayCommand]
+    private void OnUnloaded()
+    {
+    }
+
+    [RelayCommand]
     private void OnResize()
     {
         _logger.LogDebug("Window Resized");
     }
-
 
     private void DataStorage_DpsDataUpdated()
     {
@@ -212,10 +230,9 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         UpdateData(dpsList);
     }
 
-
     private void UpdateData(IReadOnlyList<DpsData> data)
     {
-        _logger.LogDebug("Vm entered");
+        _logger.LogInformation("Update data");
 
         var currentPlayerUid = _storage.CurrentPlayerInfo.UID;
 
@@ -233,7 +250,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         }
 
         UpdateBattleDuration();
-        _logger.LogDebug("Vm stopped");
     }
 
     /// <summary>
@@ -313,7 +329,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     }
 
     /// <summary>
-    /// Builds skill list snapshot - extracted to avoid duplication
+    /// Builds skill list snapshot
     /// </summary>
     private List<SkillItemViewModel> BuildSkillListSnapshot(DpsData dpsData)
     {

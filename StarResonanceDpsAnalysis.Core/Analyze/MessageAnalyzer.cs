@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BlueProto;
 using Google.Protobuf;
 using Google.Protobuf.Collections;
+using Microsoft.Extensions.Logging;
 using StarResonanceDpsAnalysis.Core.Analyze.Models;
 using StarResonanceDpsAnalysis.Core.Data;
 using StarResonanceDpsAnalysis.Core.Extends.BlueProto;
@@ -30,20 +31,17 @@ namespace StarResonanceDpsAnalysis.Core.Analyze
         /// Key = 消息类型ID (低15位)
         /// Value = 对应的解析方法
         /// </summary>
-        private static readonly List<Action<ByteReader, bool>?> MessageHandlers =
-        [
-            null, null,
-            ProcessNotifyMsg, // 2: 通知消息
-            null, null, null,
-            ProcessFrameDown  // 6: 帧下行消息
-        ];
+        private static readonly Dictionary<MessageType, Action<ByteReader, bool, ILogger?>> MessageHandlerMap = new()
+        {
+            { MessageType.Notify, ProcessNotifyMsg },
+            { MessageType.FrameDown, ProcessFrameDown }
+        };
 
         /// <summary>
         /// 主入口：处理一批TCP数据包
         /// </summary>
-        public static void Process(byte[] packets)
+        public static void Process(byte[] packets, ILogger? logger = null)
         {
-
             var packetsReader = new ByteReader(packets);
             while (packetsReader.Remaining > 0)
             {
@@ -63,9 +61,9 @@ namespace StarResonanceDpsAnalysis.Core.Analyze
                 var msgTypeId = packetType & 0x7FFF;                // 低15位是真实类型
 
                 // 分发到对应处理方法
-                if (msgTypeId < 0 || msgTypeId >= MessageHandlers.Count) continue;
-                var handler = MessageHandlers[msgTypeId];
-                handler?.Invoke(packetReader, isZstdCompressed);
+                logger?.LogTrace("MessageTypeId:{id}", msgTypeId);
+                if (!MessageHandlerMap.TryGetValue((MessageType)msgTypeId, out var handler)) continue;
+                handler?.Invoke(packetReader, isZstdCompressed, logger);
             }
 
         }
@@ -87,7 +85,7 @@ namespace StarResonanceDpsAnalysis.Core.Analyze
         /// <summary>
         /// 处理 Notify 消息（带 serviceUuid 和 methodId 的 RPC）
         /// </summary>
-        public static void ProcessNotifyMsg(ByteReader packet, bool isZstdCompressed)
+        public static void ProcessNotifyMsg(ByteReader packet, bool isZstdCompressed, ILogger? logger = null)
         {
             var serviceUuid = packet.ReadUInt64BE(); // 服务UUID
             _ = packet.ReadUInt32BE(); // stubId (暂时不用)
@@ -98,6 +96,7 @@ namespace StarResonanceDpsAnalysis.Core.Analyze
             byte[] msgPayload = packet.ReadRemaining();
             if (isZstdCompressed) msgPayload = DecompressZstdIfNeeded(msgPayload);
 
+            logger?.LogTrace("MethodId: {methodId}", methodId);
             if (!ProcessMethods.TryGetValue(methodId, out var processMethod)) return;
             processMethod(msgPayload);
         }
@@ -524,14 +523,14 @@ namespace StarResonanceDpsAnalysis.Core.Analyze
         /// <summary>
         /// 处理 FrameDown 消息（嵌套内部数据包）
         /// </summary>
-        public static void ProcessFrameDown(ByteReader reader, bool isZstdCompressed)
+        public static void ProcessFrameDown(ByteReader reader, bool isZstdCompressed, ILogger? logger = null)
         {
             _ = reader.ReadUInt32BE(); // serverSequenceId
             if (reader.Remaining == 0) return;
 
             var nestedPacket = reader.ReadRemaining();
             if (isZstdCompressed) nestedPacket = DecompressZstdIfNeeded(nestedPacket);
-            Process(nestedPacket); // 递归解析内部消息
+            Process(nestedPacket, logger); // 递归解析内部消息
         }
         /// <summary>
         /// 同步周边实体，玩家数据

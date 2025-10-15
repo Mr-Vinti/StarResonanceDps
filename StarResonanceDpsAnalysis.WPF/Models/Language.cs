@@ -8,14 +8,17 @@ namespace StarResonanceDpsAnalysis.WPF.Models;
 
 public enum Language
 {
-    [LocalizedDescription(LocalizationKeys.Settings_Language_Auto)]
+    [LocalizedDescription(ResourcesKeys.Settings_Language_Auto)]
     Auto,
-    [LocalizedDescription(LocalizationKeys.Settings_Language_Chinese)]
+    [LocalizedDescription(ResourcesKeys.Settings_Language_Chinese)]
     [CultureAttribute.zh_CN]
     ZhCn,
-    [LocalizedDescription(LocalizationKeys.Settings_Language_English)]
+    [LocalizedDescription(ResourcesKeys.Settings_Language_English)]
     [CultureAttribute.en_US]
-    EnUs
+    EnUs,
+    [LocalizedDescription(ResourcesKeys.Settings_Language_Portuguese)]
+    [CultureAttribute.pt_BR]
+    PtBr
 }
 
 public abstract class CultureAttribute(CultureInfo info) : Attribute
@@ -25,6 +28,7 @@ public abstract class CultureAttribute(CultureInfo info) : Attribute
     // ReSharper disable InconsistentNaming
     public sealed class zh_CN() : CultureAttribute(new CultureInfo("zh-CN"));
     public sealed class en_US() : CultureAttribute(new CultureInfo("en-US"));
+    public sealed class pt_BR() : CultureAttribute(new CultureInfo("pt-BR"));
     // ReSharper restore InconsistentNaming
 }
 

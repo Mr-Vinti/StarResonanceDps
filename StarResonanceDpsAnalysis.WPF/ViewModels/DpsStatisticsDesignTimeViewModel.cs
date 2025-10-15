@@ -1,5 +1,5 @@
-#if DEBUG
 using System.Collections.ObjectModel;
+using System.Windows; // for Window in ITopmostService
 using System.Windows.Threading;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -22,11 +22,13 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
         NullLogger<DpsStatisticsViewModel>.Instance,
         new DesignConfigManager(),
         new DesignWindowManagementService(),
+        new DesignTopmostService(),
         new DebugFunctions(
             Dispatcher.CurrentDispatcher,
             NullLogger<DebugFunctions>.Instance,
             new DesignLogObservable(),
-            new DesignOptionsMonitor()),
+            new DesignOptionsMonitor(),
+            null!),
         Dispatcher.CurrentDispatcher)
     {
         // Populate with a few sample entries so designer shows something.
@@ -45,6 +47,20 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
 
     #region Stub Implementations
 
+    private sealed class DesignTopmostService : ITopmostService
+    {
+        public void SetTopmost(Window window, bool enable)
+        {
+            // no-op at design time
+        }
+
+        public bool ToggleTopmost(Window window)
+        {
+            // Return current state or false at design time
+            return window.Topmost = !window.Topmost;
+        }
+    }
+
     private sealed class DesignAppControlService : IApplicationControlService
     {
         public void Shutdown()
@@ -62,18 +78,6 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
         public ModuleSolveView ModuleSolveView => throw new NotSupportedException();
     }
 
-    private sealed class DesignConfigManager : IConfigManager
-    {
-        public event EventHandler<AppConfig>? ConfigurationUpdated;
-        public AppConfig CurrentConfig { get; } = new();
-
-        public Task SaveAsync(AppConfig newConfig)
-        {
-            ConfigurationUpdated?.Invoke(this, newConfig);
-            return Task.CompletedTask;
-        }
-    }
-
     private sealed class DesignDataStorage : IDataStorage
     {
         public PlayerInfo CurrentPlayerInfo { get; } = new();
@@ -89,16 +93,18 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
 
         public IReadOnlyList<DpsData> ReadOnlySectionedDpsDataList { get; } = [];
         public TimeSpan SectionTimeout { get; set; } = TimeSpan.FromSeconds(5);
+        bool IDataStorage.IsServerConnected { get; set; }
+        public long CurrentPlayerUUID { get; set; }
         public bool IsServerConnected => false;
 
 #pragma warning disable CS0067
-        public event DataStorage.ServerConnectionStateChangedEventHandler? ServerConnectionStateChanged;
-        public event DataStorage.PlayerInfoUpdatedEventHandler? PlayerInfoUpdated;
-        public event DataStorage.NewSectionCreatedEventHandler? NewSectionCreated;
-        public event DataStorage.BattleLogCreatedEventHandler? BattleLogCreated;
-        public event DataStorage.DpsDataUpdatedEventHandler? DpsDataUpdated;
-        public event DataStorage.DataUpdatedEventHandler? DataUpdated;
-        public event DataStorage.ServerChangedEventHandler? ServerChanged;
+        public event ServerConnectionStateChangedEventHandler? ServerConnectionStateChanged;
+        public event PlayerInfoUpdatedEventHandler? PlayerInfoUpdated;
+        public event NewSectionCreatedEventHandler? NewSectionCreated;
+        public event BattleLogCreatedEventHandler? BattleLogCreated;
+        public event DpsDataUpdatedEventHandler? DpsDataUpdated;
+        public event DataUpdatedEventHandler? DataUpdated;
+        public event ServerChangedEventHandler? ServerChanged;
 #pragma warning restore
 
         public void LoadPlayerInfoFromFile()
@@ -131,6 +137,55 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
         }
 
         public void ClearAllPlayerInfos()
+        {
+        }
+
+        public void NotifyServerChanged(string currentServerStr, string prevServer)
+        {
+        }
+
+        public void SetPlayerLevel(long playerUid, int tmpLevel)
+        {
+        }
+
+        public bool EnsurePlayer(long playerUid)
+        {
+            return true;
+        }
+
+        public void SetPlayerHP(long playerUid, long hp)
+        {
+        }
+
+        public void SetPlayerMaxHP(long playerUid, long maxHp)
+        {
+        }
+
+        public void SetPlayerName(long playerUid, string playerName)
+        {
+        }
+
+        public void SetPlayerCombatPower(long playerUid, int combatPower)
+        {
+        }
+
+        public void SetPlayerProfessionID(long playerUid, int professionId)
+        {
+        }
+
+        public void AddBattleLog(BattleLog log)
+        {
+        }
+
+        public void SetPlayerRankLevel(long playerUid, int readInt32)
+        {
+        }
+
+        public void SetPlayerCritical(long playerUid, int readInt32)
+        {
+        }
+
+        public void SetPlayerLucky(long playerUid, int readInt32)
         {
         }
 
@@ -179,5 +234,5 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
 
     #endregion
 }
-#endif
+
 

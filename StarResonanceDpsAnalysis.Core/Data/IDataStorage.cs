@@ -21,15 +21,16 @@ public interface IDataStorage : IDisposable
 
     TimeSpan SectionTimeout { get; set; }
 
-    bool IsServerConnected { get; }
+    bool IsServerConnected { get; set; }
+    long CurrentPlayerUUID { get; set; }
 
-    event DataStorage.ServerConnectionStateChangedEventHandler? ServerConnectionStateChanged;
-    event DataStorage.PlayerInfoUpdatedEventHandler? PlayerInfoUpdated;
-    event DataStorage.NewSectionCreatedEventHandler? NewSectionCreated;
-    event DataStorage.BattleLogCreatedEventHandler? BattleLogCreated;
-    event DataStorage.DpsDataUpdatedEventHandler? DpsDataUpdated;
-    event DataStorage.DataUpdatedEventHandler? DataUpdated;
-    event DataStorage.ServerChangedEventHandler? ServerChanged;
+    event ServerConnectionStateChangedEventHandler? ServerConnectionStateChanged;
+    event PlayerInfoUpdatedEventHandler? PlayerInfoUpdated;
+    event NewSectionCreatedEventHandler? NewSectionCreated;
+    event BattleLogCreatedEventHandler? BattleLogCreated;
+    event DpsDataUpdatedEventHandler? DpsDataUpdated;
+    event DataUpdatedEventHandler? DataUpdated;
+    event ServerChangedEventHandler? ServerChanged;
 
     void LoadPlayerInfoFromFile();
     void SavePlayerInfoToFile();
@@ -39,4 +40,31 @@ public interface IDataStorage : IDisposable
     void ClearCurrentPlayerInfo();
     void ClearPlayerInfos();
     void ClearAllPlayerInfos();
+    void NotifyServerChanged(string currentServerStr, string prevServer);
+    void SetPlayerLevel(long playerUid, int tmpLevel);
+    bool EnsurePlayer(long playerUid);
+    void SetPlayerHP(long playerUid, long hp);
+    void SetPlayerMaxHP(long playerUid, long maxHp);
+    void SetPlayerName(long playerUid, string playerName);
+    void SetPlayerCombatPower(long playerUid, int combatPower);
+    void SetPlayerProfessionID(long playerUid, int professionId);
+
+    /// <summary>
+    /// 添加战斗日志 (会自动创建日志分段)
+    /// Public method for backwards compatibility - fires events immediately
+    /// </summary>
+    /// <param name="log">战斗日志</param>
+    void AddBattleLog(BattleLog log);
+
+    void SetPlayerRankLevel(long playerUid, int readInt32);
+    void SetPlayerCritical(long playerUid, int readInt32);
+    void SetPlayerLucky(long playerUid, int readInt32);
 }
+
+public delegate void ServerConnectionStateChangedEventHandler(bool serverConnectionState);
+public delegate void PlayerInfoUpdatedEventHandler(PlayerInfo info);
+public delegate void NewSectionCreatedEventHandler();
+public delegate void BattleLogCreatedEventHandler(BattleLog battleLog);
+public delegate void DpsDataUpdatedEventHandler();
+public delegate void DataUpdatedEventHandler();
+public delegate void ServerChangedEventHandler(string currentServer, string prevServer);

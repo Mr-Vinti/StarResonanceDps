@@ -7,7 +7,7 @@
     xmlns:lex="http://wpflocalizeextension.codeplex.com"
     xmlns:loc="clr-namespace:StarResonanceDpsAnalysis.WPF.Properties"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="{lex:Loc Key={x:Static loc:LocalizationKeys.Window_ModuleSolve_Title}}"
+    Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Window_ModuleSolve_Title}}"
     Width="800"
     Height="775"
     MinWidth="800"
@@ -144,7 +144,7 @@
 
             </Grid.RowDefinitions>
 
-            <ctrl:Header Title="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Header_Title}}" Grid.Row="0" />
+            <ctrl:Header Title="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Header_Title}}" Grid.Row="0" />
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -175,7 +175,7 @@
                             <TextBlock
                                 Grid.Row="0"
                                 Style="{StaticResource GroupBoxTitle}"
-                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_TargetProperties_Title}}" />
+                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_TargetProperties_Title}}" />
 
                             <Grid Grid.Row="1" Style="{StaticResource PropertyFieldLine}">
                                 <Grid.ColumnDefinitions>
@@ -192,7 +192,7 @@
                                     <TextBlock
                                         Grid.Column="0"
                                         Style="{StaticResource FieldTitle}"
-                                        Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Property1_Label}}" />
+                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Property1_Label}}" />
 
                                     <ComboBox
                                         x:Name="Property_1"
@@ -209,7 +209,7 @@
                                     <TextBlock
                                         Grid.Column="0"
                                         Style="{StaticResource FieldTitle}"
-                                        Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_ExpectedLevel_Label}}" />
+                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_ExpectedLevel_Label}}" />
 
                                     <TextBox
                                         x:Name="WishLevel_1"
@@ -233,7 +233,7 @@
                                     <TextBlock
                                         Grid.Column="0"
                                         Style="{StaticResource FieldTitle}"
-                                        Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Property2_Label}}" />
+                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Property2_Label}}" />
 
                                     <ComboBox
                                         x:Name="Property_2"
@@ -250,7 +250,7 @@
                                     <TextBlock
                                         Grid.Column="0"
                                         Style="{StaticResource FieldTitle}"
-                                        Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_ExpectedLevel_Label}}" />
+                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_ExpectedLevel_Label}}" />
 
                                     <TextBox
                                         x:Name="WishLevel_2"
@@ -274,7 +274,7 @@
                                     <TextBlock
                                         Grid.Column="0"
                                         Style="{StaticResource FieldTitle}"
-                                        Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Property3_Label}}" />
+                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Property3_Label}}" />
 
                                     <ComboBox
                                         x:Name="Property_3"
@@ -291,7 +291,7 @@
                                     <TextBlock
                                         Grid.Column="0"
                                         Style="{StaticResource FieldTitle}"
-                                        Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_ExpectedLevel_Label}}" />
+                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_ExpectedLevel_Label}}" />
 
                                     <TextBox
                                         x:Name="WishLevel_3"
@@ -315,7 +315,7 @@
                                     <TextBlock
                                         Grid.Column="0"
                                         Style="{StaticResource FieldTitle}"
-                                        Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Property4_Label}}" />
+                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Property4_Label}}" />
 
                                     <ComboBox
                                         x:Name="Property_4"
@@ -332,7 +332,7 @@
                                     <TextBlock
                                         Grid.Column="0"
                                         Style="{StaticResource FieldTitle}"
-                                        Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_ExpectedLevel_Label}}" />
+                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_ExpectedLevel_Label}}" />
 
                                     <TextBox
                                         x:Name="WishLevel_4"
@@ -356,7 +356,7 @@
                                     <TextBlock
                                         Grid.Column="0"
                                         Style="{StaticResource FieldTitle}"
-                                        Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Property5_Label}}" />
+                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Property5_Label}}" />
 
                                     <ComboBox
                                         x:Name="Property_5"
@@ -373,7 +373,7 @@
                                     <TextBlock
                                         Grid.Column="0"
                                         Style="{StaticResource FieldTitle}"
-                                        Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_ExpectedLevel_Label}}" />
+                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_ExpectedLevel_Label}}" />
 
                                     <TextBox
                                         x:Name="WishLevel_5"
@@ -399,7 +399,7 @@
                             <TextBlock
                                 Grid.Row="0"
                                 Style="{StaticResource GroupBoxTitle}"
-                                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_ExcludeProperties_Title}}" />
+                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_ExcludeProperties_Title}}" />
 
                             <Grid Grid.Row="1" Style="{StaticResource PropertyFieldLine}">
                                 <Grid.ColumnDefinitions>
@@ -410,7 +410,7 @@
                                 <TextBlock
                                     Grid.Column="0"
                                     Style="{StaticResource FieldTitle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Property1_Label}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Property1_Label}}" />
 
                                 <ComboBox
                                     x:Name="ExcludeProperty_1"
@@ -428,7 +428,7 @@
                                 <TextBlock
                                     Grid.Column="0"
                                     Style="{StaticResource FieldTitle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Property2_Label}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Property2_Label}}" />
 
                                 <ComboBox
                                     x:Name="ExcludeProperty_2"
@@ -446,7 +446,7 @@
                                 <TextBlock
                                     Grid.Column="0"
                                     Style="{StaticResource FieldTitle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Property3_Label}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Property3_Label}}" />
 
                                 <ComboBox
                                     x:Name="ExcludeProperty_3"
@@ -464,7 +464,7 @@
                                 <TextBlock
                                     Grid.Column="0"
                                     Style="{StaticResource FieldTitle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Property4_Label}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Property4_Label}}" />
 
                                 <ComboBox
                                     x:Name="ExcludeProperty_4"
@@ -482,7 +482,7 @@
                                 <TextBlock
                                     Grid.Column="0"
                                     Style="{StaticResource FieldTitle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Property5_Label}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Property5_Label}}" />
 
                                 <ComboBox
                                     x:Name="ExcludeProperty_5"
@@ -510,16 +510,16 @@
                                 <TextBlock
                                     Grid.Column="0"
                                     Style="{StaticResource FieldTitle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_ModuleType_Label}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_ModuleType_Label}}" />
 
                                 <ComboBox
                                     x:Name="ModuleType"
                                     Grid.Column="1"
                                     Style="{StaticResource ExcludePropertyComboBox}">
-                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_ModuleType_All}}" IsSelected="True" />
-                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_ModuleType_Offense}}" />
-                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_ModuleType_Defense}}" />
-                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_ModuleType_Support}}" />
+                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_ModuleType_All}}" IsSelected="True" />
+                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_ModuleType_Offense}}" />
+                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_ModuleType_Defense}}" />
+                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_ModuleType_Support}}" />
                                 </ComboBox>
                             </Grid>
 
@@ -532,14 +532,14 @@
                                 <TextBlock
                                     Grid.Column="0"
                                     Style="{StaticResource FieldTitle}"
-                                    Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Sort_Label}}" />
+                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Sort_Label}}" />
 
                                 <ComboBox
                                     x:Name="SortType"
                                     Grid.Column="1"
                                     Style="{StaticResource ExcludePropertyComboBox}">
-                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Sort_Attribute}}" IsSelected="True" />
-                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Sort_Level}}" />
+                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Sort_Attribute}}" IsSelected="True" />
+                                    <ComboBoxItem Content="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Sort_Level}}" />
                                 </ComboBox>
                             </Grid>
                         </Grid>
@@ -549,7 +549,7 @@
 
                         <Button.Content>
                             <Border Style="{StaticResource AnalyzeButtonBorder}">
-                                <TextBlock Style="{StaticResource AnalyzeButtonText}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_Analyze_Button}}" />
+                                <TextBlock Style="{StaticResource AnalyzeButtonText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_Analyze_Button}}" />
                             </Border>
                         </Button.Content>
                     </Button>
@@ -563,7 +563,7 @@
             <TextBlock
                 Grid.Row="2"
                 Style="{StaticResource UsingTip}"
-                Text="{lex:Loc Key={x:Static loc:LocalizationKeys.ModuleSolve_UsingTip}}" />
+                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.ModuleSolve_UsingTip}}" />
 
             <ctrl:Footer
                 Grid.Row="3"

@@ -7,7 +7,7 @@
     xmlns:lex="http://wpflocalizeextension.codeplex.com"
     xmlns:loc="clr-namespace:StarResonanceDpsAnalysis.WPF.Properties"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="{lex:Loc Key={x:Static loc:LocalizationKeys.Window_DamageReference_Title}}"
+    Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Window_DamageReference_Title}}"
     Width="770"
     Height="780"
     MinWidth="770"
@@ -162,7 +162,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <ctrl:Header Title="{lex:Loc Key={x:Static loc:LocalizationKeys.DamageReference_Header_Title}}" Grid.Row="0" />
+            <ctrl:Header Title="{lex:Loc Key={x:Static loc:ResourcesKeys.DamageReference_Header_Title}}" Grid.Row="0" />
 
             <Grid Grid.Row="1" Style="{StaticResource ProfessionSelectGrid}">
                 <Grid.ColumnDefinitions>
@@ -172,7 +172,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Border Grid.Column="0" Style="{StaticResource DamageReferenceRibbon}">
-                    <TextBlock Style="{StaticResource DamageReferenceRibbonText}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.DamageReference_Ribbon_Title}}" />
+                    <TextBlock Style="{StaticResource DamageReferenceRibbonText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.DamageReference_Ribbon_Title}}" />
                 </Border>
 
                 <Border Grid.Column="2" Style="{StaticResource ProfessionSelectBorder}">
@@ -180,47 +180,47 @@
 
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.DamageReference_Profession_All}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.DamageReference_Classes_All}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="0" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Profession_Stormblade}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_Stormblade}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="1" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Profession_FrostMage}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_FrostMage}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="2" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Profession_WindKnight}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_WindKnight}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="4" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Profession_VerdantOracle}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_VerdantOracle}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="5" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Profession_HeavyGuardian}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_HeavyGuardian}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="9" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Profession_Marksman}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_Marksman}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="11" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Profession_ShieldKnight}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_ShieldKnight}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="12" />
                         <ToggleButton
                             Click="TabSelector_Click"
-                            Content="{lex:Loc Key={x:Static loc:LocalizationKeys.Profession_SoulMusician}}"
+                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Classes_SoulMusician}}"
                             Style="{StaticResource TabSelectorToggleStyle}"
                             Tag="13" />
 
@@ -237,20 +237,20 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Style="{StaticResource DataTableTitleGrid}">
-                    <TextBlock Style="{StaticResource DataTableTitleText}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.DamageReference_Table_Title}}" />
+                    <TextBlock Style="{StaticResource DataTableTitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.DamageReference_Table_Title}}" />
                 </Grid>
 
                 <Grid Grid.Row="1" Style="{StaticResource DataTableBox}">
 
                     <Grid Style="{StaticResource DataTableEmptyGrid}">
                         <Image Source="pack://application:,,,/Assets/Images/cancel_normal.png" Style="{StaticResource DataTableEmptyImg}" />
-                        <TextBlock Style="{StaticResource DataTableEmptyText}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.DamageReference_NoData}}" />
+                        <TextBlock Style="{StaticResource DataTableEmptyText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.DamageReference_NoData}}" />
                     </Grid>
 
                 </Grid>
 
                 <Grid Grid.Row="2" Style="{StaticResource FunctionTips}">
-                    <TextBlock Style="{StaticResource FunctionTipsText}" Text="{lex:Loc Key={x:Static loc:LocalizationKeys.DamageReference_Disclaimer}}" />
+                    <TextBlock Style="{StaticResource FunctionTipsText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.DamageReference_Disclaimer}}" />
                 </Grid>
 
             </Grid>
