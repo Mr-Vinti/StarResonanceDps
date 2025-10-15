@@ -363,12 +363,10 @@
                         FontSize="15" />
                     <!--  当前统计状态文字  -->
                     <TextBlock Grid.Column="1" Style="{StaticResource StatisticTypeText}">
-                        <TextBlock.Text>
-                            <MultiBinding Mode="OneWay" StringFormat="{}{0} ({1})">
-                                <Binding Converter="{StaticResource StatisticTypeToStringConverter}" Path="StatisticIndex" />
-                                <Binding Converter="{StaticResource ScopeTimeToStringConverter}" Path="ScopeTime" />
-                            </MultiBinding>
-                        </TextBlock.Text>
+                        <Run Text="{lex:Loc {Binding StatisticIndex, StringFormat=StatisticType_{0}}}" />
+                        <Run Text="(" />
+                        <Run Text="{lex:Loc {Binding ScopeTime, StringFormat=ScopeTime_{0}}}" />
+                        <Run Text=")" />
                     </TextBlock>
                     <!--  右侧按钮  -->
                     <Button
