@@ -41,6 +41,7 @@
     <None Remove="Assets\Images\ApplicationIcon.png" />
     <None Remove="Assets\Images\cancel_hover.png" />
     <None Remove="Assets\Images\cancel_normal.png" />
+    <None Remove="Assets\Images\cb_temp\gold_pig_tmp.png" />
     <None Remove="Assets\Images\ok_hover.png" />
     <None Remove="Assets\Images\ok_normal.png" />
     <Page Include="App.xaml" />
@@ -93,6 +94,7 @@
     <Resource Include="Assets\Images\ApplicationIcon.png" />
     <Resource Include="Assets\Images\cancel_hover.png" />
     <Resource Include="Assets\Images\cancel_normal.png" />
+    <Resource Include="Assets\Images\cb_temp\gold_pig_tmp.png" />
     <Resource Include="Assets\Images\Crown.png" />
     <Resource Include="Assets\Images\Classes_FrostMage.png" />
     <Resource Include="Assets\Images\Classes_HeavyGuardian.png" />
