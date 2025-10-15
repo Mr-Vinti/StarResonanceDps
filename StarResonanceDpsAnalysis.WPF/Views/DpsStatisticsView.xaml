@@ -437,7 +437,7 @@
                         <!--  刷新按钮  -->
                         <Button
                             Width="21"
-                            Command="{Binding RefreshCommand}"
+                            Command="{Binding ResetAllCommand}"
                             Content="&#xE644;" />
                         <!--  设置按钮  -->
                         <Button Width="24" Content="&#xE600;">

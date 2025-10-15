@@ -5,6 +5,7 @@ using StarResonanceDpsAnalysis.Core.Analyze.Models;
 using StarResonanceDpsAnalysis.Core.Data.Models;
 using StarResonanceDpsAnalysis.Core.Extends.Data;
 using StarResonanceDpsAnalysis.WPF.Data;
+using System.Threading;
 
 namespace StarResonanceDpsAnalysis.Core.Data;
 
@@ -23,6 +24,13 @@ public sealed class DataStorageV2(ILogger<DataStorageV2> logger) : IDataStorage
     private bool _hasPendingPlayerInfoEvents;
     private readonly List<BattleLog> _pendingBattleLogs = new(100);
     private readonly HashSet<long> _pendingPlayerUpdates = new();
+
+    // ===== Section timeout monitor =====
+    private Timer? _sectionTimeoutTimer;
+    private readonly object _sectionTimeoutLock = new();
+    private DateTime _lastLogWallClockAtUtc = DateTime.MinValue;
+    private bool _timeoutSectionClearedOnce; // avoid repeated clear/events until next log arrives
+    private bool _disposed;
 
     /// <summary>
     /// 当前玩家UUID
@@ -104,6 +112,9 @@ public sealed class DataStorageV2(ILogger<DataStorageV2> logger) : IDataStorage
             {
                 _isServerConnected = value;
 
+                // ensure background timeout monitor is running when connected
+                if (value) EnsureSectionMonitorStarted();
+
                 try
                 {
                     ServerConnectionStateChanged?.Invoke(value);
@@ -113,6 +124,61 @@ public sealed class DataStorageV2(ILogger<DataStorageV2> logger) : IDataStorage
                     Console.WriteLine(
                         $"An error occurred during trigger event(ServerConnectionStateChanged) => {ex.Message}\r\n{ex.StackTrace}");
                 }
+            }
+        }
+    }
+
+    private void EnsureSectionMonitorStarted()
+    {
+        if (_sectionTimeoutTimer != null) return;
+        try
+        {
+            _sectionTimeoutTimer = new Timer(static s => ((DataStorageV2)s!).SectionTimeoutTick(), this, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+        }
+        catch { }
+    }
+
+    private void SectionTimeoutTick()
+    {
+        CheckSectionTimeout();
+    }
+
+    private void CheckSectionTimeout()
+    {
+        if (_disposed) return;
+        DateTime last;
+        bool alreadyCleared;
+        lock (_sectionTimeoutLock)
+        {
+            last = _lastLogWallClockAtUtc;
+            alreadyCleared = _timeoutSectionClearedOnce;
+        }
+
+        if (alreadyCleared) return;
+        if (last == DateTime.MinValue) return; // no logs yet
+
+        var now = DateTime.UtcNow;
+        if (now - last <= SectionTimeout) return;
+
+        // Timeout reached: clear section and notify
+        try
+        {
+            PrivateClearDpsData(); // raises DpsDataUpdated & DataUpdated
+            try
+            {
+                NewSectionCreated?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(
+                    $"An error occurred during trigger event(NewSectionCreated) => {ex.Message}\r\n{ex.StackTrace}");
+            }
+        }
+        finally
+        {
+            lock (_sectionTimeoutLock)
+            {
+                _timeoutSectionClearedOnce = true;
             }
         }
     }
@@ -596,6 +662,16 @@ public sealed class DataStorageV2(ILogger<DataStorageV2> logger) : IDataStorage
         }
 
         LastBattleLog = log;
+
+        // Update wall clock timestamp and unlock next section timeout clear
+        lock (_sectionTimeoutLock)
+        {
+            _lastLogWallClockAtUtc = DateTime.UtcNow;
+            _timeoutSectionClearedOnce = false;
+        }
+
+        // Ensure monitor is running once we have activity
+        EnsureSectionMonitorStarted();
     }
 
     /// <summary>
@@ -870,6 +946,9 @@ public sealed class DataStorageV2(ILogger<DataStorageV2> logger) : IDataStorage
 
     public void Dispose()
     {
-        // No resources to dispose currently
+        if (_disposed) return;
+        _disposed = true;
+        try { _sectionTimeoutTimer?.Dispose(); } catch { }
+        // No other resources to dispose currently
     }
 }
