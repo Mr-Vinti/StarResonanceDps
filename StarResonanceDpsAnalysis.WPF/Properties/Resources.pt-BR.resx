@@ -484,7 +484,7 @@
     <value>[Oficial] SR DPS Analyzer Team</value>
   </data>
   <data name="MainWindow_Plugin_AutoStart" xml:space="preserve">
-    <value>Início automático</value>
+    <value>Iniciar com o aplicativo</value>
   </data>
   <data name="Common_Action_Open" xml:space="preserve">
     <value>Iniciar</value>

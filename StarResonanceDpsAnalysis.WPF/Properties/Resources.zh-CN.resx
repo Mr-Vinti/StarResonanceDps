@@ -484,10 +484,10 @@
     <value>[官方] 别查我DPS 开发团队</value>
   </data>
   <data name="MainWindow_Plugin_AutoStart" xml:space="preserve">
-    <value>自启动</value>
+    <value>跟随软件本体自启动</value>
   </data>
   <data name="Common_Action_Open" xml:space="preserve">
-    <value>开启</value>
+    <value>启动</value>
   </data>
   <data name="MainWindow_Plugin_ModuleSolver_Title" xml:space="preserve">
     <value>模组求解器</value>

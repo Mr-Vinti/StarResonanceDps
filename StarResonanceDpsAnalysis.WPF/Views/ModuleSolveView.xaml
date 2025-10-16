@@ -134,7 +134,7 @@
         </Style>
     </Window.Resources>
 
-    <Border Background="#EFEFEF" Style="{StaticResource ShadowWindowBorder}">
+    <Border Background="#ECEBE9" Style="{StaticResource ShadowWindowBorder}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

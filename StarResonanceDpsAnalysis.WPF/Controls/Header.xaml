@@ -10,7 +10,7 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="HeaderBorder" TargetType="Border">
-            <Setter Property="Background" Value="#B2B2B2" />
+            <Setter Property="Background" Value="#C3C3C3" />
             <Setter Property="CornerRadius">
                 <Setter.Value>
                     <CornerRadius
