@@ -13,8 +13,6 @@
     <converters:PercentToOpacityConverter x:Key="PercentToOpacityConverter" />
     <converters:PercentToColorConverter x:Key="PercentToColorConverter" />
     <converters:BrushWithOpacityConverter x:Key="BrushWithOpacityConverter" />
-    <converters:StatisticTypeToStringConverter x:Key="StatisticTypeToStringConverter" />
-    <converters:ScopeTimeToStringConverter x:Key="ScopeTimeToStringConverter" />
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <converters:DivisionMultiValueConverter x:Key="DivisionMultiValueConverter" />
     <converters:DpsConverter x:Key="DpsConverter" />

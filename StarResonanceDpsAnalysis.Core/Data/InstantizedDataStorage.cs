@@ -382,7 +382,7 @@ public class InstantizedDataStorage : IDataStorage, IDisposable
         DataStorage.ClearAllPlayerInfos();
     }
 
-    public void NotifyServerChanged(string currentServerStr, string prevServer)
+    public void RaiseServerChanged(string currentServerStr, string prevServer)
     {
         DataStorage.InvokeServerChangedEvent(currentServerStr, prevServer);
     }

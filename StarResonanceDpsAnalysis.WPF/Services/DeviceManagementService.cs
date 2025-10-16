@@ -1,13 +1,11 @@
 using System.Diagnostics;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
-using PacketDotNet;
 using SharpPcap;
 using StarResonanceDpsAnalysis.Core.Analyze;
 using StarResonanceDpsAnalysis.WPF.Models;
-using System.Runtime.InteropServices;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
 
 namespace StarResonanceDpsAnalysis.WPF.Services;
 
@@ -16,9 +14,9 @@ public class DeviceManagementService(
     IPacketAnalyzer packetAnalyzer,
     ILogger<DeviceManagementService> logger) : IDeviceManagementService
 {
+    private readonly object _filterSync = new();
     private ILiveDevice? _activeDevice;
     private ProcessPortsWatcher? _portsWatcher;
-    private readonly object _filterSync = new();
 
     public async Task<List<(string name, string description)>> GetNetworkAdaptersAsync()
     {
@@ -59,7 +57,8 @@ public class DeviceManagementService(
             {
                 var score = 0;
                 if (captureDeviceList[i].Description.Contains(ni.Name, StringComparison.OrdinalIgnoreCase)) score += 2;
-                if (captureDeviceList[i].Description.Contains(ni.Description, StringComparison.OrdinalIgnoreCase)) score += 3;
+                if (captureDeviceList[i].Description
+                    .Contains(ni.Description, StringComparison.OrdinalIgnoreCase)) score += 3;
                 if (score <= bestScore) continue;
                 bestScore = score;
                 bestIndex = i;
@@ -92,12 +91,6 @@ public class DeviceManagementService(
                 _activeDevice.StopCapture();
                 _activeDevice.Close();
             }
-            catch
-            {
-#if DEBUG
-                throw;
-#endif
-            }
             finally
             {
                 _activeDevice = null;
@@ -125,8 +118,8 @@ public class DeviceManagementService(
             BufferSize = 1024 * 1024 * 4
         });
 
-        // Start with no traffic until ports are known
-        TrySetDeviceFilter("");
+        // Start with no traffic until ports are known (use a filter that never matches)
+        TrySetDeviceFilter(BuildFilter(Array.Empty<int>(), Array.Empty<int>()));
 
         device.OnPacketArrival += OnPacketArrival;
         device.StartCapture();
@@ -150,6 +143,7 @@ public class DeviceManagementService(
             _portsWatcher = null;
             return;
         }
+
         try
         {
             _activeDevice.OnPacketArrival -= OnPacketArrival;
@@ -175,7 +169,7 @@ public class DeviceManagementService(
 
     private void ApplyProcessPortsFilter(IReadOnlyCollection<int> tcpPorts, IReadOnlyCollection<int> udpPorts)
     {
-        string filter = BuildFilter(tcpPorts, udpPorts);
+        var filter = BuildFilter(tcpPorts, udpPorts);
         TrySetDeviceFilter(filter);
     }
 
@@ -187,13 +181,18 @@ public class DeviceManagementService(
         {
             parts.Add($"(tcp and (port {string.Join(" or port ", tcpPorts)}))");
         }
+
         if (udpPorts.Count > 0)
         {
             parts.Add($"(udp and (port {string.Join(" or port ", udpPorts)}))");
         }
 
         if (parts.Count == 0)
-            return ""; // match nothing until we know ports
+        {
+            // No known process ports -> match nothing to avoid capturing unrelated traffic
+            // Using "port 0" is a practical way to yield no matches for TCP/UDP
+            return "(ip or ip6) and (port 0)";
+        }
 
         return $"(ip or ip6) and ({string.Join(" or ", parts)})";
     }

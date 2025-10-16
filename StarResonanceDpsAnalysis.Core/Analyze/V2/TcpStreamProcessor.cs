@@ -352,7 +352,7 @@ internal sealed class TcpStreamProcessor : IDisposable
         _logger?.LogInformation("Got Scene Server: {Server}", currentServerStr);
         Console.WriteLine($"Got Scene Server Address: {currentServerStr}");
 
-        _storage.NotifyServerChanged(currentServerStr, prevServer);
+        _storage.RaiseServerChanged(currentServerStr, prevServer);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

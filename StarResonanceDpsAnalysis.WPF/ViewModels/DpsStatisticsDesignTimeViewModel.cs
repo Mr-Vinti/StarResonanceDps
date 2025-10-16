@@ -36,7 +36,7 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
         {
             for (var i = 0; i < 3; i++)
             {
-                AddTestItemCommand.Execute(null);
+                AddTestItem();
             }
         }
         catch
@@ -140,7 +140,7 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
         {
         }
 
-        public void NotifyServerChanged(string currentServerStr, string prevServer)
+        public void RaiseServerChanged(string currentServerStr, string prevServer)
         {
         }
 

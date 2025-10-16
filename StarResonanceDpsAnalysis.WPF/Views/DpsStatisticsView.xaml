@@ -363,12 +363,10 @@
                         FontSize="15" />
                     <!--  当前统计状态文字  -->
                     <TextBlock Grid.Column="1" Style="{StaticResource StatisticTypeText}">
-                        <TextBlock.Text>
-                            <MultiBinding Mode="OneWay" StringFormat="{}{0} ({1})">
-                                <Binding Converter="{StaticResource StatisticTypeToStringConverter}" Path="StatisticIndex" />
-                                <Binding Converter="{StaticResource ScopeTimeToStringConverter}" Path="ScopeTime" />
-                            </MultiBinding>
-                        </TextBlock.Text>
+                        <Run Text="{lex:Loc {Binding StatisticIndex, StringFormat=StatisticType_{0}}}" />
+                        <Run Text="(" />
+                        <Run Text="{lex:Loc {Binding ScopeTime, StringFormat=ScopeTime_{0}}}" />
+                        <Run Text=")" />
                     </TextBlock>
                     <!--  右侧按钮  -->
                     <Button
@@ -396,12 +394,11 @@
                         HorizontalAlignment="Right"
                         Orientation="Horizontal">
 
-                        <!--  Test button  -->
+                        <!--  Minimize window button  -->
                         <Button
                             Width="21"
-                            Command="{Binding AddTestItemCommand}"
-                            Content="{lex:Loc Key={x:Static loc:ResourcesKeys.DpsStatistics_TestButton_Content}}"
-                            ToolTip="{lex:Loc Key={x:Static loc:ResourcesKeys.DpsStatistics_TestButton_Tooltip}}" />
+                            Command="{Binding MinimizeWindowCommand}"
+                            Content="__" />
 
                         <!--  Mouse-through indicator (visible when click-through is enabled)  -->
                         <TextBlock
@@ -437,7 +434,7 @@
                         <!--  刷新按钮  -->
                         <Button
                             Width="21"
-                            Command="{Binding RefreshCommand}"
+                            Command="{Binding ResetAllCommand}"
                             Content="&#xE644;" />
                         <!--  设置按钮  -->
                         <Button Width="24" Content="&#xE600;">

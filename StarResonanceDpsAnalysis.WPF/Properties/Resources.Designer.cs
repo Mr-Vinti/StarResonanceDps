@@ -1375,15 +1375,6 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current.
-        /// </summary>
-        public static string ScopeTime_Current {
-            get {
-                return ResourceManager.GetString("ScopeTime_Current", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Total.
         /// </summary>
         public static string ScopeTime_Total {
@@ -2136,6 +2127,15 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         public static string Window_About_Title {
             get {
                 return ResourceManager.GetString("Window_About_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 野外Boss状态查看器.
+        /// </summary>
+        public static string Window_BossTracker_Title {
+            get {
+                return ResourceManager.GetString("Window_BossTracker_Title", resourceCulture);
             }
         }
         

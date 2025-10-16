@@ -161,7 +161,7 @@ public class DataStorageV2Tests
         };
 
         // Act
-        storage.NotifyServerChanged("new_server", "old_server");
+        storage.RaiseServerChanged("new_server", "old_server");
 
         // Assert
         Assert.Equal("new_server", newServer);

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -32,9 +33,9 @@ public partial class DpsStatisticsOptions : BaseViewModel
 public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 {
     private readonly IApplicationControlService _appControlService;
-    private readonly Stopwatch _battleTimer = new();
     private readonly IConfigManager _configManager;
     private readonly Dispatcher _dispatcher;
+    private readonly Stopwatch _battleTimer = new();
     private readonly Stopwatch _fullBattleTimer = new();
     private readonly ILogger<DpsStatisticsViewModel> _logger;
     private readonly IDataStorage _storage;
@@ -160,6 +161,21 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         try { await _configManager.SaveAsync(AppConfig); } catch { }
     }
 
+    [RelayCommand]
+    private void ResetAll()
+    {
+        _storage.ClearAllDpsData();
+        _battleTimer.Reset();
+        _fullBattleTimer.Reset();
+    }
+
+    [RelayCommand]
+    private void ResetSection()
+    {
+        _storage.ClearDpsData();
+        _battleTimer.Reset();
+    }
+
     /// <summary>
     /// 读取用户缓存
     /// </summary>
@@ -216,12 +232,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     {
         if (!_fullBattleTimer.IsRunning)
         {
-            _fullBattleTimer.Restart();
+            _fullBattleTimer.Start();
         }
 
         if (!_battleTimer.IsRunning)
         {
-            _battleTimer.Restart();
+            _battleTimer.Start();
         }
 
         var dpsList = ScopeTime == ScopeTime.Total
@@ -249,7 +265,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             }
         }
 
-        UpdateBattleDuration();
+        // UpdateBattleDuration();
     }
 
     /// <summary>
@@ -380,12 +396,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     }
 
     [RelayCommand]
-    public void AddTestItem()
-    {
-        CurrentStatisticData.AddTestItem();
-    }
-
-    [RelayCommand]
     private void SetSkillDisplayLimit(int limit)
     {
         var clampedLimit = Math.Max(0, limit);
@@ -396,6 +406,17 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
         // Notify that current data's SkillDisplayLimit changed
         OnPropertyChanged(nameof(CurrentStatisticData));
+    }
+
+    protected void AddTestItem()
+    {
+        CurrentStatisticData.AddTestItem();
+    }
+
+    [RelayCommand]
+    private void MinimizeWindow()
+    {
+        _windowManagement.DpsStatisticsView.WindowState = WindowState.Minimized;
     }
 
     [RelayCommand]
@@ -484,8 +505,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             return;
         }
 
-        var elapsed = InUsingTimer.Elapsed;
-        BattleDuration = elapsed;
+        if (InUsingTimer.IsRunning)
+        {
+            var elapsed = InUsingTimer.Elapsed;
+
+            BattleDuration = elapsed;
+        }
     }
 
     private void StorageOnNewSectionCreated()

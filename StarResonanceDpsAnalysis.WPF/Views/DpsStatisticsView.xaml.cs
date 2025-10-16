@@ -11,9 +11,9 @@ namespace StarResonanceDpsAnalysis.WPF.Views;
 /// </summary>
 public partial class DpsStatisticsView : Window
 {
-    public static readonly DependencyProperty MinimizeProperty =
+    public static readonly DependencyProperty CollapseProperty =
         DependencyProperty.Register(
-            nameof(Minimize),
+            nameof(Collapse),
             typeof(bool),
             typeof(DpsStatisticsView),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
@@ -27,10 +27,10 @@ public partial class DpsStatisticsView : Window
         DataContext = vm;
     }
 
-    public bool Minimize
+    public bool Collapse
     {
-        get => (bool)GetValue(MinimizeProperty);
-        set => SetValue(MinimizeProperty, value);
+        get => (bool)GetValue(CollapseProperty);
+        set => SetValue(CollapseProperty, value);
     }
 
     private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -41,14 +41,14 @@ public partial class DpsStatisticsView : Window
 
     private void PullButton_Click(object sender, RoutedEventArgs e)
     {
-        Minimize = !Minimize;
+        Collapse = !Collapse;
 
-        if (Minimize)
+        if (Collapse)
         {
             // 防止用户手动缩小窗体到一定大小后, 折叠功能看似失效的问题
             if (ActualHeight < 60)
             {
-                Minimize = false;
+                Collapse = false;
                 _beforePilingHeight = 360;
             }
             else
@@ -66,7 +66,7 @@ public partial class DpsStatisticsView : Window
         var animationHeight = new DoubleAnimation
         {
             From = ActualHeight,
-            To = Minimize ? baseHeight : _beforePilingHeight,
+            To = Collapse ? baseHeight : _beforePilingHeight,
             Duration = duration,
             EasingFunction = easingFunction
         };
@@ -76,7 +76,7 @@ public partial class DpsStatisticsView : Window
 
         var pullButtonTransformDA = new DoubleAnimation
         {
-            To = Minimize ? 180 : 0,
+            To = Collapse ? 180 : 0,
             Duration = duration,
             EasingFunction = easingFunction
         };

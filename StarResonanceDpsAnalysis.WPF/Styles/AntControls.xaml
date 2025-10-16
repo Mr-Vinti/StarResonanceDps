@@ -281,7 +281,7 @@
         </Setter>
     </Style>
 
-    <!-- Ant Design Button styles -->
+    <!--  Ant Design Button styles  -->
     <Style x:Key="AntButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource AntBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource AntBorderBrush}" />
@@ -291,16 +291,17 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Bd"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="{StaticResource AntCornerRadius}">
+                    <Border
+                        x:Name="Bd"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{StaticResource AntCornerRadius}">
                         <ContentPresenter
+                            Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Margin="{TemplateBinding Padding}"
-                            RecognizesAccessKey="True"/>
+                            RecognizesAccessKey="True" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -324,7 +325,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="AntPrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource AntButtonStyle}">
+    <Style
+        x:Key="AntPrimaryButtonStyle"
+        BasedOn="{StaticResource AntButtonStyle}"
+        TargetType="Button">
         <Setter Property="Background" Value="{StaticResource AntPrimaryBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource AntPrimaryBrush}" />
         <Setter Property="Foreground" Value="White" />
