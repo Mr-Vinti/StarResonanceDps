@@ -1,4 +1,4 @@
-# 星痕共鸣DPS统计工具
+# 星痕共鸣工具箱
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-brightgreen.svg)](https://www.gnu.org/licenses/agpl-3.0.txt)
 
@@ -16,9 +16,9 @@
 
 ## 📄 许可证
 
-[![AGPLv3](https://www.gnu.org/graphics/agplv3-with-text-162x68.png)](LICENSE)
+[![AGPLv3](https://www.gnu.org/graphics/agplv3-with-text-162x68.png)](LICENSE.txt)
 
-本项目采用 [GNU AFFERO GENERAL PUBLIC LICENSE version 3](LICENSE) 许可证。
+本项目采用 [GNU AFFERO GENERAL PUBLIC LICENSE version 3](LICENSE.txt) 许可证。
 
 使用本项目即表示您同意遵守该许可证的条款。
 
