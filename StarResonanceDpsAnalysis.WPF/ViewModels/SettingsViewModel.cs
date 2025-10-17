@@ -383,48 +383,9 @@ public enum ShortcutType
     TopMost
 }
 
-//public sealed class SettingsDesignTimeViewModel : SettingsViewModel
-//{
-//    public SettingsDesignTimeViewModel() : base(new DesignConfigManager(), null!)
-//    {
-//        AppConfig = new AppConfig
-//        {
-//            // set friendly defaults shown in designer
-//            Opacity = 85,
-//            CombatTimeClearDelay = 5,
-//            ClearLogAfterTeleport = false,
-//            Language = Language.Auto
-//        };
-
-//        AvailableNetworkAdapters = new List<NetworkAdapterInfo>
-//        {
-//            new NetworkAdapterInfo("WAN Adapter", "WAN"),
-//            new NetworkAdapterInfo("WLAN Adapter", "WLAN")
-//        };
-
-//        AppConfig.MouseThroughShortcut = new KeyBinding(Key.F6, ModifierKeys.Control);
-//        AppConfig.ClearDataShortcut = new KeyBinding(Key.F9, ModifierKeys.None);
-
-//        AvailableLanguages = new List<Option<Language>>
-//        {
-//            new Option<Language>(Language.Auto, "Follow System"),
-//            new Option<Language>(Language.ZhCn, "中文 (简体)"),
-//            new Option<Language>(Language.EnUs, "English")
-//        };
-
-//        AvailableNumberDisplayModes = new List<Option<NumberDisplayMode>>
-//        {
-//            new Option<NumberDisplayMode>(NumberDisplayMode.Wan, "四位计数法 (万)"),
-//            new Option<NumberDisplayMode>(NumberDisplayMode.KMB, "三位计数法 (KMB)")
-//        };
-
-//        SelectedLanguage = AvailableLanguages[0];
-//        SelectedNumberDisplayMode = AvailableNumberDisplayModes[0];
-//    }
-//}
-public sealed class SettingsDesignTimeViewModel : BaseViewModel
+public sealed class SettingsDesignTimeViewModel : SettingsViewModel
 {
-    public SettingsDesignTimeViewModel()
+    public SettingsDesignTimeViewModel() : base(new DesignConfigManager(), new DesignTimeDeviceManagementService())
     {
         AppConfig = new AppConfig
         {
@@ -436,40 +397,79 @@ public sealed class SettingsDesignTimeViewModel : BaseViewModel
         };
 
         AvailableNetworkAdapters = new List<NetworkAdapterInfo>
-         {
-             new NetworkAdapterInfo("WAN Adapter", "WAN"),
-             new NetworkAdapterInfo("WLAN Adapter", "WLAN")
-         };
+        {
+            new NetworkAdapterInfo("WAN Adapter", "WAN"),
+            new NetworkAdapterInfo("WLAN Adapter", "WLAN")
+        };
 
         AppConfig.MouseThroughShortcut = new KeyBinding(Key.F6, ModifierKeys.Control);
         AppConfig.ClearDataShortcut = new KeyBinding(Key.F9, ModifierKeys.None);
 
         AvailableLanguages = new List<Option<Language>>
-         {
-             new Option<Language>(Language.Auto, "Follow System"),
-             new Option<Language>(Language.ZhCn, "中文 (简体)"),
-             new Option<Language>(Language.EnUs, "English")
-         };
+        {
+            new Option<Language>(Language.Auto, "Follow System"),
+            new Option<Language>(Language.ZhCn, "中文 (简体)"),
+            new Option<Language>(Language.EnUs, "English")
+        };
 
         AvailableNumberDisplayModes = new List<Option<NumberDisplayMode>>
-         {
-             new Option<NumberDisplayMode>(NumberDisplayMode.Wan, "四位计数法 (万)"),
-             new Option<NumberDisplayMode>(NumberDisplayMode.KMB, "三位计数法 (KMB)")
-         };
+        {
+            new Option<NumberDisplayMode>(NumberDisplayMode.Wan, "四位计数法 (万)"),
+            new Option<NumberDisplayMode>(NumberDisplayMode.KMB, "三位计数法 (KMB)")
+        };
 
         SelectedLanguage = AvailableLanguages[0];
         SelectedNumberDisplayMode = AvailableNumberDisplayModes[0];
     }
-
-    public AppConfig AppConfig { get; set; }
-
-    public List<NetworkAdapterInfo> AvailableNetworkAdapters { get; set; }
-
-    public List<Option<Language>> AvailableLanguages { get; set; }
-
-    public List<Option<NumberDisplayMode>> AvailableNumberDisplayModes { get; set; }
-
-    public Option<Language>? SelectedLanguage { get; set; }
-
-    public Option<NumberDisplayMode>? SelectedNumberDisplayMode { get; set; }
 }
+// public sealed class SettingsDesignTimeViewModel : BaseViewModel
+// {
+//     public SettingsDesignTimeViewModel()
+//     {
+//         AppConfig = new AppConfig
+//         {
+//             // set friendly defaults shown in designer
+//             Opacity = 85,
+//             CombatTimeClearDelay = 5,
+//             ClearLogAfterTeleport = false,
+//             Language = Language.Auto
+//         };
+//
+//         AvailableNetworkAdapters = new List<NetworkAdapterInfo>
+//         {
+//             new NetworkAdapterInfo("WAN Adapter", "WAN"),
+//             new NetworkAdapterInfo("WLAN Adapter", "WLAN")
+//         };
+//
+//         AppConfig.MouseThroughShortcut = new KeyBinding(Key.F6, ModifierKeys.Control);
+//         AppConfig.ClearDataShortcut = new KeyBinding(Key.F9, ModifierKeys.None);
+//
+//         AvailableLanguages = new List<Option<Language>>
+//         {
+//             new Option<Language>(Language.Auto, "Follow System"),
+//             new Option<Language>(Language.ZhCn, "中文 (简体)"),
+//             new Option<Language>(Language.EnUs, "English")
+//         };
+//
+//         AvailableNumberDisplayModes = new List<Option<NumberDisplayMode>>
+//         {
+//             new Option<NumberDisplayMode>(NumberDisplayMode.Wan, "四位计数法 (万)"),
+//             new Option<NumberDisplayMode>(NumberDisplayMode.KMB, "三位计数法 (KMB)")
+//         };
+//
+//         SelectedLanguage = AvailableLanguages[0];
+//         SelectedNumberDisplayMode = AvailableNumberDisplayModes[0];
+//     }
+//
+//     public AppConfig AppConfig { get; set; }
+//
+//     public List<NetworkAdapterInfo> AvailableNetworkAdapters { get; set; }
+//
+//     public List<Option<Language>> AvailableLanguages { get; set; }
+//
+//     public List<Option<NumberDisplayMode>> AvailableNumberDisplayModes { get; set; }
+//
+//     public Option<Language>? SelectedLanguage { get; set; }
+//
+//     public Option<NumberDisplayMode>? SelectedNumberDisplayMode { get; set; }
+// }

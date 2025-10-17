@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="App_Name" xml:space="preserve">
-    <value>别查我DPS</value>
+    <value>星痕工具箱</value>
   </data>
   <data name="Menu_Settings" xml:space="preserve">
     <value>设置</value>
@@ -463,7 +463,7 @@
     <value>调试功能</value>
   </data>
   <data name="MainWindow_Header_Title" xml:space="preserve">
-    <value>星痕工具盒</value>
+    <value>星痕工具箱</value>
   </data>
   <data name="MainWindow_PluginList_Title" xml:space="preserve">
     <value>插件列表</value>
@@ -481,7 +481,7 @@
     <value>作者：</value>
   </data>
   <data name="MainWindow_Plugin_Author_OfficialTeam" xml:space="preserve">
-    <value>[官方] 星痕工具盒 开发团队</value>
+    <value>[官方] 星痕工具箱 开发团队</value>
   </data>
   <data name="MainWindow_Plugin_AutoStart" xml:space="preserve">
     <value>跟随软件本体自启动</value>
