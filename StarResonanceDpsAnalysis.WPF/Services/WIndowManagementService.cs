@@ -11,6 +11,7 @@ public class WindowManagementService(IServiceProvider provider) : IWindowManagem
     private ModuleSolveView? _moduleSolveView;
     private SettingsView? _settingsView;
     private SkillBreakdownView? _skillBreakDownView;
+    private BossTrackerView? _bossTrackerView;
 
     public DpsStatisticsView DpsStatisticsView => _dpsStatisticsView ??= CreateDpsStatisticsView();
     public SettingsView SettingsView => _settingsView ??= CreateSettingsView();
@@ -18,6 +19,7 @@ public class WindowManagementService(IServiceProvider provider) : IWindowManagem
     public AboutView AboutView => _aboutView ??= CreateAboutView();
     public DamageReferenceView DamageReferenceView => _damageReferenceView ??= CreateDamageReferenceView();
     public ModuleSolveView ModuleSolveView => _moduleSolveView ??= CreateModuleSolveView();
+    public BossTrackerView BossTrackerView => _bossTrackerView ??= CreateBossTrackerView();
 
     private DpsStatisticsView CreateDpsStatisticsView()
     {
@@ -76,6 +78,16 @@ public class WindowManagementService(IServiceProvider provider) : IWindowManagem
         view.Closed += (_, _) =>
         {
             if (_moduleSolveView == view) _moduleSolveView = null;
+        };
+        return view;
+    }
+
+    private BossTrackerView CreateBossTrackerView()
+    {
+        var view = provider.GetRequiredService<BossTrackerView>();
+        view.Closed += (_, _) =>
+        {
+            if (_bossTrackerView == view) _bossTrackerView = null;
         };
         return view;
     }

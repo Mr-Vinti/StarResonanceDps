@@ -59,6 +59,12 @@ public partial class MainViewModel(
     }
 
     [RelayCommand]
+    private void CallBossTrackerViewCommand() 
+    {
+        windowManagement.BossTrackerView.Show();
+    }
+
+    [RelayCommand]
     private void Shutdown()
     {
         appControlService.Shutdown();

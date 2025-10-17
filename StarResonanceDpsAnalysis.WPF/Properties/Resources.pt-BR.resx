@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="App_Name" xml:space="preserve">
-    <value>Analisador DPS SR</value>
+    <value />
   </data>
   <data name="Menu_Settings" xml:space="preserve">
     <value>Configurações</value>
@@ -265,7 +265,7 @@
     <value>简体中文</value>
   </data>
   <data name="Settings_Language_English" xml:space="preserve">
-    <value>Inglês</value>
+    <value>English</value>
   </data>
   <data name="Settings_Language_Portuguese" xml:space="preserve">
     <value>Português (Brasil)</value>
@@ -463,10 +463,10 @@
     <value>Utilitários de debug</value>
   </data>
   <data name="MainWindow_Header_Title" xml:space="preserve">
-    <value>Analisador DPS SR</value>
+    <value />
   </data>
   <data name="MainWindow_PluginList_Title" xml:space="preserve">
-    <value>Lista de Plugins</value>
+    <value>Plugins</value>
   </data>
   <data name="MainWindow_Plugin_Label_Intro" xml:space="preserve">
     <value>Introdução:</value>
@@ -481,7 +481,7 @@
     <value>Autor:</value>
   </data>
   <data name="MainWindow_Plugin_Author_OfficialTeam" xml:space="preserve">
-    <value>[Oficial] SR DPS Analyzer Team</value>
+    <value>[Oficial] StarResonanceToolBox Team</value>
   </data>
   <data name="MainWindow_Plugin_AutoStart" xml:space="preserve">
     <value>Iniciar com o aplicativo</value>
@@ -642,10 +642,28 @@
   <data name="SkillBreakdown_Label_LuckRate" xml:space="preserve">
     <value>Taxa de sorte</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SkillBreakdown_Label_CritDamage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="SkillBreakdown_Info_Name" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="SkillBreakdown_Info_Power" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="SkillBreakdown_Info_Level" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="SkillBreakdown_Info_Badge" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="SkillBreakdown_Placeholder_Graph" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="DpsStatistics_TestButton_Content" xml:space="preserve">
     <value>T</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="DpsStatistics_TestButton_Tooltip" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
@@ -738,5 +756,17 @@
   </data>
   <data name="Settings_NetworkAdapterAutoSelect_Button" xml:space="preserve">
     <value>Automático</value>
+  </data>
+  <data name="MainWindow_Plugin_Search_PlaceHolder" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MainWindow_Plugin_State_Inactive" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MainWindow_Plugin_State_Running" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MainWindow_Plugin_Settings" xml:space="preserve">
+    <value />
   </data>
 </root>

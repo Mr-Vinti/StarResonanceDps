@@ -241,7 +241,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   查找类似 SR DPS Analyzer 的本地化字符串。
+        ///   查找类似 StarResonance ToolBox 的本地化字符串。
         /// </summary>
         public static string App_Name {
             get {
@@ -871,7 +871,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   查找类似 SR DPS Analyzer 的本地化字符串。
+        ///   查找类似 StarResonance ToolBox 的本地化字符串。
         /// </summary>
         public static string MainWindow_Header_Title {
             get {
@@ -880,7 +880,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   查找类似 [Official] SR DPS Analyzer Team 的本地化字符串。
+        ///   查找类似 [Official] StarResonanceToolBox Team 的本地化字符串。
         /// </summary>
         public static string MainWindow_Plugin_Author_OfficialTeam {
             get {
@@ -889,7 +889,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Start with the application 的本地化字符串。
+        ///   查找类似 Auto start 的本地化字符串。
         /// </summary>
         public static string MainWindow_Plugin_AutoStart {
             get {
@@ -970,6 +970,42 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Search... 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Plugin_Search_PlaceHolder {
+            get {
+                return ResourceManager.GetString("MainWindow_Plugin_Search_PlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Settings 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Plugin_Settings {
+            get {
+                return ResourceManager.GetString("MainWindow_Plugin_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Inactive 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Plugin_State_Inactive {
+            get {
+                return ResourceManager.GetString("MainWindow_Plugin_State_Inactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Running 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Plugin_State_Running {
+            get {
+                return ResourceManager.GetString("MainWindow_Plugin_State_Running", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Crowdsourced live data for each channel&apos;s world boss status 的本地化字符串。
         /// </summary>
         public static string MainWindow_Plugin_WorldBoss_Description {
@@ -988,7 +1024,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Plugin List 的本地化字符串。
+        ///   查找类似 Plugins 的本地化字符串。
         /// </summary>
         public static string MainWindow_PluginList_Title {
             get {

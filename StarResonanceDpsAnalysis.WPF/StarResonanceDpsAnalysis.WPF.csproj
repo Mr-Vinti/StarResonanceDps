@@ -39,13 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Remove="App.xaml" />
-    <None Remove="Assets\Images\ApplicationIcon.ico" />
-    <None Remove="Assets\Images\ApplicationIcon.png" />
-    <None Remove="Assets\Images\cancel_hover.png" />
-    <None Remove="Assets\Images\cancel_normal.png" />
-    <None Remove="Assets\Images\cb_temp\gold_pig_tmp.png" />
-    <None Remove="Assets\Images\ok_hover.png" />
-    <None Remove="Assets\Images\ok_normal.png" />
     <Page Include="App.xaml" />
   </ItemGroup>
   <ItemGroup>

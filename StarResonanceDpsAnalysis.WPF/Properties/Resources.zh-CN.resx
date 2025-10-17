@@ -463,7 +463,7 @@
     <value>调试功能</value>
   </data>
   <data name="MainWindow_Header_Title" xml:space="preserve">
-    <value>别查我 D P S</value>
+    <value>星痕工具盒</value>
   </data>
   <data name="MainWindow_PluginList_Title" xml:space="preserve">
     <value>插件列表</value>
@@ -472,7 +472,7 @@
     <value>简介：</value>
   </data>
   <data name="MainWindow_Plugin_DpsTool_Title" xml:space="preserve">
-    <value>DPS工具</value>
+    <value>别查我DPS</value>
   </data>
   <data name="MainWindow_Plugin_DpsTool_Description" xml:space="preserve">
     <value>提供DPS统计、技能分解等功能</value>
@@ -481,7 +481,7 @@
     <value>作者：</value>
   </data>
   <data name="MainWindow_Plugin_Author_OfficialTeam" xml:space="preserve">
-    <value>[官方] 别查我DPS 开发团队</value>
+    <value>[官方] 星痕工具盒 开发团队</value>
   </data>
   <data name="MainWindow_Plugin_AutoStart" xml:space="preserve">
     <value>跟随软件本体自启动</value>
@@ -830,5 +830,17 @@
   </data>
   <data name="Window_BossTracker_Title" xml:space="preserve">
     <value>Boss Status Tracker</value>
+  </data>
+  <data name="MainWindow_Plugin_Search_PlaceHolder" xml:space="preserve">
+    <value>搜索...</value>
+  </data>
+  <data name="MainWindow_Plugin_State_Inactive" xml:space="preserve">
+    <value>未启动</value>
+  </data>
+  <data name="MainWindow_Plugin_State_Running" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="MainWindow_Plugin_Settings" xml:space="preserve">
+    <value>设置</value>
   </data>
 </root>

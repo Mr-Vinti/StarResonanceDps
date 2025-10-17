@@ -76,6 +76,7 @@ public sealed class DpsStatisticsDesignTimeViewModel : DpsStatisticsViewModel
         public AboutView AboutView => throw new NotSupportedException();
         public DamageReferenceView DamageReferenceView => throw new NotSupportedException();
         public ModuleSolveView ModuleSolveView => throw new NotSupportedException();
+        public BossTrackerView BossTrackerView => throw new NotSupportedException();
     }
 
     private sealed class DesignDataStorage : IDataStorage

@@ -9,13 +9,13 @@
     xmlns:lex="http://wpflocalizeextension.codeplex.com"
     xmlns:loc="clr-namespace:StarResonanceDpsAnalysis.WPF.Properties"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
+    xmlns:vms="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
     Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Window_Settings_Title}}"
     Width="460"
     Height="630"
     MinWidth="450"
     MinHeight="280"
-    d:DataContext="{d:DesignInstance Type=viewModels:SettingsDesignTimeViewModel,
+    d:DataContext="{d:DesignInstance Type=vms:SettingsDesignTimeViewModel,
                                      IsDesignTimeCreatable=True}"
     d:DesignHeight="1000"
     lex:LocalizeDictionary.DesignCulture="en-US"
@@ -244,7 +244,7 @@
                                 <TextBlock
                                     Grid.Row="1"
                                     Grid.Column="0"
-                                    Text="{lex:Loc {x:Static loc:ResourcesKeys                                     .Settings_Shortcut_TopMost}}" />
+                                    Text="{lex:Loc {x:Static loc:ResourcesKeys.Settings_Shortcut_TopMost}}" />
                                 <TextBox
                                     Grid.Row="1"
                                     Grid.Column="2"
