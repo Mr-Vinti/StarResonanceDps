@@ -5,6 +5,8 @@
 ### TODO
 
 - [ ] SettingsView -> Theme setting needs to be implemented.
+ - [ ] MessageView -> Consider refactoring to MVVM (if needed).
+ - [ ] SettingsView (VM) -> Review the i18n usage in Cancel() for correctness.
 
 ### Issues
 

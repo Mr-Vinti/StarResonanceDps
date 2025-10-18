@@ -9,6 +9,14 @@
     d:DesignHeight="50"
     d:DesignWidth="400"
     mc:Ignorable="d">
+    
+    <UserControl.Template>
+        <ControlTemplate TargetType="UserControl">
+            <!-- Avoid drawing UserControl default Background (square corners) -->
+            <ContentPresenter />
+        </ControlTemplate>
+    </UserControl.Template>
+    
     <UserControl.Resources>
         <Style x:Key="FooterBorder" TargetType="Border">
             <Setter Property="Background" Value="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=local:Footer}}" />

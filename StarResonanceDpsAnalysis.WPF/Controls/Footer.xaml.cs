@@ -15,9 +15,11 @@ public partial class Footer : UserControl
     public static readonly DependencyProperty CancelCommandProperty = DependencyProperty.Register(
         nameof(CancelCommand), typeof(ICommand), typeof(Footer), new PropertyMetadata(default(ICommand)));
 
+
     public Footer()
     {
         InitializeComponent();
+
     }
 
     public ICommand ConfirmCommand
@@ -31,6 +33,8 @@ public partial class Footer : UserControl
         get => (ICommand)GetValue(CancelCommandProperty);
         set => SetValue(CancelCommandProperty, value);
     }
+
+    // Note: Footer uses fixed bottom corner radius via XAML style.
 
     public event RoutedEventHandler? ConfirmClick;
     public event RoutedEventHandler? CancelClick;

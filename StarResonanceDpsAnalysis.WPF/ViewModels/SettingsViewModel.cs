@@ -19,7 +19,8 @@ namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
 public partial class SettingsViewModel(
     IConfigManager configManager,
-    IDeviceManagementService deviceManagementService)
+    IDeviceManagementService deviceManagementService,
+    IMessageDialogService messageDialogService)
     : BaseViewModel
 {
     [ObservableProperty] private AppConfig _appConfig = configManager.CurrentConfig.Clone(); // Initialized here with a cloned config; may be overwritten in LoadedAsync
@@ -48,6 +49,8 @@ public partial class SettingsViewModel(
 
     private bool _cultureHandlerSubscribed;
     private bool _networkHandlerSubscribed;
+    private bool _isLoaded; // becomes true after LoadedAsync completes
+    private bool _hasUnsavedChanges; // tracks whether any property changed after load
 
     [ObservableProperty] private Option<Language>? _selectedLanguage;
     [ObservableProperty] private Option<NumberDisplayMode>? _selectedNumberDisplayMode;
@@ -101,6 +104,8 @@ public partial class SettingsViewModel(
 
         // Take a snapshot after initialization to allow cancel to persist init-only changes.
         _postLoadSnapshot = AppConfig.Clone();
+        _hasUnsavedChanges = false;
+        _isLoaded = true;
     }
 
     private void SubscribeHandlers()
@@ -207,6 +212,11 @@ public partial class SettingsViewModel(
                 deviceManagementService.SetActiveNetworkAdapter(adapter);
             }
         }
+
+        if (_isLoaded)
+        {
+            _hasUnsavedChanges = true;
+        }
     }
 
     /// <summary>
@@ -291,16 +301,34 @@ public partial class SettingsViewModel(
     [RelayCommand]
     private async Task Cancel()
     {
-        // Restore to the post-load snapshot and persist it,
-        // so only initialization-time changes are saved.
-        if (_postLoadSnapshot is not null)
+        if (!_hasUnsavedChanges)
         {
-            AppConfig = _postLoadSnapshot.Clone();
-            await ApplySettingsAsync();
+            UnsubscribeHandlers();
+            RequestClose?.Invoke();
+            return;
         }
 
-        UnsubscribeHandlers();
-        RequestClose?.Invoke();
+        var title = Resources.ResourceManager.GetString("Settings_CancelConfirm_Title") ?? string.Empty;
+        var message = Resources.ResourceManager.GetString("Settings_CancelConfirm_Message") ?? string.Empty;
+
+        var result = messageDialogService.Show(
+            title,
+            message);
+
+        if (result == true)
+        {
+            // Restore to the post-load snapshot and persist it,
+            // so only initialization-time changes are saved.
+            if (_postLoadSnapshot is not null)
+            {
+                AppConfig = _postLoadSnapshot.Clone();
+                await ApplySettingsAsync();
+            }
+
+            _hasUnsavedChanges = false;
+            UnsubscribeHandlers();
+            RequestClose?.Invoke();
+        }
     }
 
     private void OnCultureChanged(object? sender, CultureInfo culture)
@@ -400,7 +428,7 @@ public enum ShortcutType
 
 public sealed class SettingsDesignTimeViewModel : SettingsViewModel
 {
-    public SettingsDesignTimeViewModel() : base(new DesignConfigManager(), new DesignTimeDeviceManagementService())
+    public SettingsDesignTimeViewModel() : base(new DesignConfigManager(), new DesignTimeDeviceManagementService(), new DesignMessageDialogService())
     {
         AppConfig = new AppConfig
         {
@@ -436,6 +464,11 @@ public sealed class SettingsDesignTimeViewModel : SettingsViewModel
         SelectedLanguage = AvailableLanguages[0];
         SelectedNumberDisplayMode = AvailableNumberDisplayModes[0];
     }
+}
+
+internal sealed class DesignMessageDialogService : IMessageDialogService
+{
+    public bool? Show(string title, string content, Window? owner = null) => true;
 }
 // public sealed class SettingsDesignTimeViewModel : BaseViewModel
 // {

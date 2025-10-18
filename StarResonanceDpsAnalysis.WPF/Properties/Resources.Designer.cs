@@ -1429,6 +1429,24 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Discard all changes? Unsaved changes will be lost. 的本地化字符串。
+        /// </summary>
+        public static string Settings_CancelConfirm_Message {
+            get {
+                return ResourceManager.GetString("Settings_CancelConfirm_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Discard Changes 的本地化字符串。
+        /// </summary>
+        public static string Settings_CancelConfirm_Title {
+            get {
+                return ResourceManager.GetString("Settings_CancelConfirm_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Clear data after combat 的本地化字符串。
         /// </summary>
         public static string Settings_Combat_ClearAfterBattle {

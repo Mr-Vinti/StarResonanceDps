@@ -214,6 +214,7 @@
         </DataTemplate>
 
     </Window.Resources>
+    
     <Border Background="#ECEBE9" Style="{StaticResource ShadowWindowBorder}">
         <Grid>
             <Grid.RowDefinitions>
@@ -221,6 +222,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+            
             <ctrl:Header Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Window_Settings_Title}}" Grid.Row="0" />
 
             <Grid Grid.Row="1">
@@ -240,7 +242,7 @@
                                 Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Window_Settings_Title}}" />
                         </Border>
 
-                        <Button Style="{StaticResource SectionTitleButton}">
+                        <Button Style="{StaticResource SectionTitleButton}" Click="Nav_Language_Click">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Border 
@@ -265,7 +267,7 @@
                             </Button.Template>
                         </Button>
 
-                        <Button Style="{StaticResource SectionTitleButton}">
+                        <Button Style="{StaticResource SectionTitleButton}" Click="Nav_Basic_Click">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Border 
@@ -290,7 +292,7 @@
                             </Button.Template>
                         </Button>
 
-                        <Button Style="{StaticResource SectionTitleButton}">
+                        <Button Style="{StaticResource SectionTitleButton}" Click="Nav_Shortcut_Click">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Border 
@@ -315,7 +317,7 @@
                             </Button.Template>
                         </Button>
 
-                        <Button Style="{StaticResource SectionTitleButton}">
+                        <Button Style="{StaticResource SectionTitleButton}" Click="Nav_Combat_Click">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Border 
@@ -340,7 +342,7 @@
                             </Button.Template>
                         </Button>
 
-                        <Button Style="{StaticResource SectionTitleButton}">
+                        <Button Style="{StaticResource SectionTitleButton}" Click="Nav_Theme_Click">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Border 
@@ -371,10 +373,10 @@
                 <Border 
                     Style="{StaticResource SettingDetailListBorder}"
                     Grid.Column="1">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer x:Name="ContentScrollViewer" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
 
-                            <Grid>
+                            <Grid x:Name="SectionLanguage">
                                 <Border Style="{StaticResource TitleStrip}"/>
                                 <TextBlock
                                     Style="{StaticResource SectionTitleText}"
@@ -411,7 +413,7 @@
                                 </StackPanel>
                             </Border>
 
-                            <Grid>
+                            <Grid x:Name="SectionBasic">
                                 <Border Style="{StaticResource TitleStrip}"/>
                                 <TextBlock
                                     Style="{StaticResource SectionTitleText}"
@@ -462,7 +464,7 @@
                                 </StackPanel>
                             </Border>
 
-                            <Grid>
+                            <Grid x:Name="SectionShortcut">
                                 <Border Style="{StaticResource TitleStrip}"/>
                                 <TextBlock
                                     Style="{StaticResource SectionTitleText}"
@@ -556,7 +558,7 @@
                                 </StackPanel>
                             </Border>
 
-                            <Grid>
+                            <Grid x:Name="SectionCombat">
                                 <Border Style="{StaticResource TitleStrip}"/>
                                 <TextBlock
                                     Style="{StaticResource SectionTitleText}"
@@ -682,7 +684,7 @@
                                 </StackPanel>
                             </Border>
 
-                            <Grid>
+                            <Grid x:Name="SectionTheme">
                                 <Border Style="{StaticResource TitleStrip}"/>
                                 <TextBlock
                                     Style="{StaticResource SectionTitleText}"

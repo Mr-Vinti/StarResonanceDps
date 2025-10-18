@@ -101,6 +101,7 @@ public partial class App : Application
                 services.AddTransient<AboutView>();
                 services.AddTransient<DamageReferenceView>();
                 services.AddTransient<ModuleSolveView>();
+                services.AddMessageDialogService();
                 services.AddSingleton<DebugFunctions>();
                 services.AddSingleton<CaptureDeviceList>(CaptureDeviceList.Instance);
                 services.AddThemes();
