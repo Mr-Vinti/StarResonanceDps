@@ -19,4 +19,7 @@
     <converters:ClassSpecToStringConverter x:Key="ClassSpecToStringConverter" />
     <converters:EnumToLocalizedStringConverter x:Key="EnumToLocalizedStringConverter" />
     <converters:ClassesColorConverter x:Key="ClassesColorConverter" />
+    <converters:SwitchTrackWidthConverter x:Key="SwitchTrackWidthConverter" />
+    <converters:HalfHeightToHorizontalMarginConverter x:Key="HalfHeightToHorizontalMarginConverter" />
+    <converters:MinusConverter x:Key="MinusConverter" />
 </ResourceDictionary>
