@@ -1,66 +1,31 @@
-# StarResonanceDpsAnalysis 待做事项列表
+# StarResonanceDpsToolBox TODO List
 
-## 待做事项
+## TODO List
 
-### 问题
+### TODO
 
-- [ ] 玩家自身的职业获取不正确
-- [ ] (WPF) 读取缓存用户信息，获取到用户信息要及时刷新
-- [ ] (WPF) 窗口置顶手动点击有时候无法取消置顶
+- [ ] SettingsView -> Theme setting needs to be implemented.
 
-### 功能
+### Issues
 
-- [ ] 本地信息缓存功能
-- [ ] 尝试用 GPU 渲染控件
-- [ ] 允许用户使用 Shift / Control 启动应用来重置用户设定
+- [ ] Incorrect detection of the player's class
+- [ ] (WPF) Refresh promptly after retrieving cached user information
+- [ ] (WPF) Manual TopMost toggle sometimes fails to clear
 
-### 重构
+### Features
 
-- [ ] 拆分分析部分与数据部分
-- [ ] 设置中切换网卡后，自动开关一次检测
+- [ ] Local data caching feature
+- [ ] (WinForm) Attempt GPU-accelerated control rendering
+- [ ] Allow launching with Shift/Ctrl held to reset user settings
 
-## 已完成
+### Remaining issues to be examined
 
-### 2025-10-16 Fix and new Feature
-- [x] (WPF) 战斗计时没有自动分段
-- [x] (WPF) 仅在star.exe运行时才进行数据捕获
-- [x] (WPF) 伤害统计界面中移除使用Converter来进行i18n显示的逻辑
+- [ ] 将团队总伤显示到DPS统计
+- [ ] DPS统计增加滚动条
+- [ ] 打桩模式增加木桩选择，可选最右侧或者NPC后面的那根，以免有能叠加减防等debuff给木桩或者有其他人在打同一木桩增伤导致自身伤害异常
+- [ ] NPC数据增加
+- [ ] 数据收集加上等级和臂章等级
 
-### 2025-10-14 Fix
-- [x] (WPF) 设置显示数字模式以后无法正确统计数据
-- [x] (WPF) 每次启动设置页面，配置都会被恢复成初始状态
-- [x] (WPF) 鼠标穿透
-- [x] (WPF) 修复多语言被重置的问题
-- [x] (WPF) 页面置顶
+### CheckList
 
-### 2025-08-18 修复问题
-
-- [x] 从资源文件中读取字体显示的问题修复
-- [x] 人多时DPS统计状态下弹窗报错
-
-### 2025-08-18 完成功能
-
-- [x] 建一个应用清单以管理员身份启动程序
-
-### 2025-08-19 完成功能
-
-- [x] 应用关闭前记录位置, 下次启动时默认上次关闭位置启动
-- [x] 设置中切换网卡后，提示用户重启应用
-
-## 2.0.2 版本更新内容
-
-1. [x] 增加更怪物承伤统计，用于查看打死BOSS所需要的团队承伤，或者查看对指定怪物造成的伤害排名 暂时只有ID没有名字 请自行判断
-2. [X] 技能详情页面增加 臂章等级 玩家等级显示
-3. [X] 增加历史技能释放监控 可查看自身循环是否乱
-4. [X] 历史记录增加按伤害排序
-5. [x] 更新技能ID
-
-## 2.0.3 版本更新内容
-
-1. [X] 技能释放记录加上可以监控其他人的技能释放
-2. [ ] 将团队总伤显示到DPS统计
-3. [ ] DPS统计增加滚动条
-4. [ ] 打桩模式增加木桩选择，可选最右侧或者NPC后面的那根，以免有能叠加减防等debuff给木桩或者有其他人在打同一木桩增伤导致自身伤害异常
-5. [X] 伤害参考增加技能详情查看
-6. [ ] NPC数据增加
-7. [ ] 数据收集加上等级和臂章等级
+- [ ] Synchronize window transparency with mouse-through; window should be transparent only when mouse-through is enabled
