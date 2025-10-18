@@ -205,10 +205,14 @@
             </Setter>
         </Style>
 
+        <Style x:Key="ImageSelectButton" TargetType="Button" BasedOn="{StaticResource AntButtonStyle}">
+            <Setter Property="Padding" Value="12,4,12,4" />
+        </Style>
+
         <DataTemplate x:Key="LocalizedEnumTextBlockDataTemplate">
             <TextBlock Text="{Binding Display}" />
         </DataTemplate>
-        
+
     </Window.Resources>
     <Border Background="#ECEBE9" Style="{StaticResource ShadowWindowBorder}">
         <Grid>
@@ -608,11 +612,14 @@
                                                 Style="{StaticResource FieldName}"
                                                 Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Combat_ClearAfterTeleport}}"
                                                 Grid.Column="0"/>
-                                            <ctrl:SwitchControl
-                                                OffContent="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Switch_Off}}"
-                                                OnContent="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Switch_On}}"
-                                                IsChecked="{Binding AppConfig.ClearLogAfterTeleport, Mode=TwoWay}"
-                                                Grid.Column="2" />
+                                            <Border 
+                                                HorizontalAlignment="Right"
+                                                Grid.Column="2">
+                                                <ctrl:SwitchControl
+                                                    OffContent="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Switch_Off}}"
+                                                    OnContent="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Switch_On}}"
+                                                    IsChecked="{Binding AppConfig.ClearLogAfterTeleport, Mode=TwoWay}" />
+                                            </Border>
                                         </Grid>
                                     </Border>
 
@@ -765,11 +772,13 @@
                                                 Style="{StaticResource FieldName}"
                                                 Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Theme_BackgroundImage}}"
                                                 Grid.Column="0"/>
-                                            <Button
-                                                Style="{StaticResource AntButtonStyle}"
-                                                Width="100"
-                                                Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Theme_SelectImage}}"
-                                                Grid.Column="2"/>
+                                            <Border
+                                                HorizontalAlignment="Right"
+                                                Grid.Column="2">
+                                                <Button
+                                                    Style="{StaticResource ImageSelectButton}"
+                                                    Content="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Theme_SelectImage}}"/>
+                                            </Border>
                                         </Grid>
                                     </Border>
 
