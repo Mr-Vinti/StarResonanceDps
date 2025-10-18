@@ -24,6 +24,10 @@ public partial class SettingsViewModel(
 {
     [ObservableProperty] private AppConfig _appConfig = configManager.CurrentConfig.Clone(); // Initialized here with a cloned config; may be overwritten in LoadedAsync
 
+    // Snapshot of the configuration after LoadedAsync completes initialization.
+    // Used to persist initialization side-effects on cancel while discarding subsequent edits.
+    private AppConfig? _postLoadSnapshot;
+
     [ObservableProperty]
     private List<Option<Language>> _availableLanguages =
     [
@@ -94,6 +98,9 @@ public partial class SettingsViewModel(
         UpdateLanguageDependentCollections();
         LocalizationManager.ApplyLanguage(AppConfig.Language);
         await LoadNetworkAdaptersAsync();
+
+        // Take a snapshot after initialization to allow cancel to persist init-only changes.
+        _postLoadSnapshot = AppConfig.Clone();
     }
 
     private void SubscribeHandlers()
@@ -282,8 +289,16 @@ public partial class SettingsViewModel(
     }
 
     [RelayCommand]
-    private void Cancel()
+    private async Task Cancel()
     {
+        // Restore to the post-load snapshot and persist it,
+        // so only initialization-time changes are saved.
+        if (_postLoadSnapshot is not null)
+        {
+            AppConfig = _postLoadSnapshot.Clone();
+            await ApplySettingsAsync();
+        }
+
         UnsubscribeHandlers();
         RequestClose?.Invoke();
     }
