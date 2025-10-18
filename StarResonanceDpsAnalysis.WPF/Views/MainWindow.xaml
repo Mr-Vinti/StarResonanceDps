@@ -12,8 +12,8 @@
     Title="{lex:Loc Key={x:Static loc:ResourcesKeys.App_Name}}"
     Width="1000"
     Height="650"
-    MinWidth="675"
-    MinHeight="360"
+    MinWidth="830"
+    MinHeight="520"
     d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
     lex:LocalizeDictionary.DesignCulture="en-US"
     lex:ResxLocalizationProvider.DefaultAssembly="StarResonanceDpsAnalysis.WPF"
@@ -247,9 +247,10 @@
                                            Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_PluginList_Title}}"/>
                             </Border>
 
-                            <ScrollViewer Grid.Row="2">
-                                <StackPanel
-                                    x:Name="TabControlIndexChanger">
+                            <ScrollViewer 
+                                VerticalScrollBarVisibility="Auto" 
+                                Grid.Row="2">
+                                <StackPanel x:Name="TabControlIndexChanger">
 
                                     <ToggleButton 
                                         Click="TabSelector_Click"

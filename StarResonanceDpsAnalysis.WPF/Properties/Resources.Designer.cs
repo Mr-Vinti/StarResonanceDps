@@ -1627,6 +1627,24 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Customize your own tool box 的本地化字符串。
+        /// </summary>
+        public static string Settings_Section_Theme_Description {
+            get {
+                return ResourceManager.GetString("Settings_Section_Theme_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Theme Settings 的本地化字符串。
+        /// </summary>
+        public static string Settings_Section_Theme_Title {
+            get {
+                return ResourceManager.GetString("Settings_Section_Theme_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Clear Data 的本地化字符串。
         /// </summary>
         public static string Settings_Shortcut_ClearData {
@@ -1695,6 +1713,33 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         public static string Settings_Switch_On {
             get {
                 return ResourceManager.GetString("Settings_Switch_On", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Background Image 的本地化字符串。
+        /// </summary>
+        public static string Settings_Theme_BackgroundImage {
+            get {
+                return ResourceManager.GetString("Settings_Theme_BackgroundImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Select Image... 的本地化字符串。
+        /// </summary>
+        public static string Settings_Theme_SelectImage {
+            get {
+                return ResourceManager.GetString("Settings_Theme_SelectImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Window Color 的本地化字符串。
+        /// </summary>
+        public static string Settings_Theme_WindowColor {
+            get {
+                return ResourceManager.GetString("Settings_Theme_WindowColor", resourceCulture);
             }
         }
         

@@ -769,4 +769,19 @@
   <data name="MainWindow_Plugin_Settings" xml:space="preserve">
     <value />
   </data>
+  <data name="Settings_Section_Theme_Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_Section_Theme_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_Theme_WindowColor" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_Theme_BackgroundImage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Settings_Theme_SelectImage" xml:space="preserve">
+    <value />
+  </data>
 </root>
