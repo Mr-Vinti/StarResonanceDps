@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using Microsoft.Extensions.DependencyInjection;
 using StarResonanceDpsAnalysis.WPF.ViewModels;
 using StarResonanceDpsAnalysis.WPF.Views;
@@ -13,9 +14,13 @@ public class MessageDialogService(IServiceProvider provider) : IMessageDialogSer
         var view = provider.GetRequiredService<MessageView>();
         view.DataContext = new MessageViewModel { Title = title, Content = content };
 
-        var app = Application.Current;
-        var active = app?.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive && w != view);
-        var hostOwner = owner ?? active ?? (app?.MainWindow != view ? app?.MainWindow : null);
+        var hostOwner = owner;
+        if (hostOwner == null)
+        {
+            var app = Application.Current;
+            var active = app?.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive && w != view);
+            hostOwner = active ?? (app?.MainWindow != view ? app?.MainWindow : null);
+        }
 
         if (hostOwner != null)
         {

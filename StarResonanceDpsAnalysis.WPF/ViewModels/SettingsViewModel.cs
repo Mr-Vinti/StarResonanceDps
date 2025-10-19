@@ -26,10 +26,6 @@ public partial class SettingsViewModel(
 {
     [ObservableProperty] private AppConfig _appConfig = configManager.CurrentConfig.Clone(); // Initialized here with a cloned config; may be overwritten in LoadedAsync
 
-    // Snapshot of the configuration after LoadedAsync completes initialization.
-    // Used to persist initialization side-effects on cancel while discarding subsequent edits.
-    private AppConfig? _postLoadSnapshot;
-
     [ObservableProperty]
     private List<Option<Language>> _availableLanguages =
     [
@@ -103,8 +99,6 @@ public partial class SettingsViewModel(
         localization.ApplyLanguage(AppConfig.Language);
         await LoadNetworkAdaptersAsync();
 
-        // Take a snapshot after initialization to allow cancel to persist init-only changes.
-        _postLoadSnapshot = AppConfig.Clone();
         _hasUnsavedChanges = false;
         _isLoaded = true;
     }
@@ -309,8 +303,8 @@ public partial class SettingsViewModel(
             return;
         }
 
-        var title = Resources.ResourceManager.GetString("Settings_CancelConfirm_Title") ?? string.Empty;
-        var message = Resources.ResourceManager.GetString("Settings_CancelConfirm_Message") ?? string.Empty;
+        var title = localization.GetString(ResourcesKeys.Settings_CancelConfirm_Title);
+        var message = localization.GetString(ResourcesKeys.Settings_CancelConfirm_Message);
 
         var result = messageDialogService.Show(
             title,
@@ -320,9 +314,8 @@ public partial class SettingsViewModel(
         {
             // Restore to the post-load snapshot and persist it,
             // so only initialization-time changes are saved.
-            if (_postLoadSnapshot is not null)
+            if (_hasUnsavedChanges)
             {
-                AppConfig = _postLoadSnapshot.Clone();
                 await ApplySettingsAsync();
             }
 
