@@ -17,6 +17,13 @@ public partial class MainWindow : Window
         DataContext = viewModel;
     }
 
+    public bool IsDebugContentVisible { get; } =
+#if DEBUG
+        true;
+#else
+        false;
+#endif
+
     private void UnderConstructionButton_Click(object sender, RoutedEventArgs e)
     {
         MessageBox.Show("This feature is under construction.", "Info", MessageBoxButton.OK,

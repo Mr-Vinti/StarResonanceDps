@@ -883,4 +883,13 @@
   <data name="Settings_CancelConfirm_Message" xml:space="preserve">
     <value>Discard all changes? Unsaved changes will be lost.</value>
   </data>
+  <data name="MainWindow_Plugin_AutoRunState_Enabled" xml:space="preserve">
+    <value>Auto On</value>
+  </data>
+  <data name="MainWindow_Plugin_AutoRunState_Disabled" xml:space="preserve">
+    <value>Auto Off</value>
+  </data>
+  <data name="MainWindow_Plugin_ThirdPartySdkTips" xml:space="preserve">
+    <value>Plugin SDK coming soon!</value>
+  </data>
 </root>

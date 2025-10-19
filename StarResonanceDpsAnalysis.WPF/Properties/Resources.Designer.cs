@@ -889,6 +889,24 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Auto Off 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Plugin_AutoRunState_Disabled {
+            get {
+                return ResourceManager.GetString("MainWindow_Plugin_AutoRunState_Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Auto On 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Plugin_AutoRunState_Enabled {
+            get {
+                return ResourceManager.GetString("MainWindow_Plugin_AutoRunState_Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Auto start 的本地化字符串。
         /// </summary>
         public static string MainWindow_Plugin_AutoStart {
@@ -1002,6 +1020,15 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         public static string MainWindow_Plugin_State_Running {
             get {
                 return ResourceManager.GetString("MainWindow_Plugin_State_Running", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Plugin SDK coming soon! 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Plugin_ThirdPartySdkTips {
+            get {
+                return ResourceManager.GetString("MainWindow_Plugin_ThirdPartySdkTips", resourceCulture);
             }
         }
         
