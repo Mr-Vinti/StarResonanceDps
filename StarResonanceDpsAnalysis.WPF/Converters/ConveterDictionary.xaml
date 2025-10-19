@@ -2,6 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:StarResonanceDpsAnalysis.WPF.Converters">
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
     <converters:ClassesToIconConverter x:Key="ClassesToIconConverter" />
     <converters:EqualsConverter x:Key="EqualsConverter" />
     <converters:HalfValueConverter x:Key="HalfValueConverter" />

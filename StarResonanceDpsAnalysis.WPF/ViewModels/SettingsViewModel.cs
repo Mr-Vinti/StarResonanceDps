@@ -20,14 +20,11 @@ namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 public partial class SettingsViewModel(
     IConfigManager configManager,
     IDeviceManagementService deviceManagementService,
+    LocalizationManager localization,
     IMessageDialogService messageDialogService)
     : BaseViewModel
 {
     [ObservableProperty] private AppConfig _appConfig = configManager.CurrentConfig.Clone(); // Initialized here with a cloned config; may be overwritten in LoadedAsync
-
-    // Snapshot of the configuration after LoadedAsync completes initialization.
-    // Used to persist initialization side-effects on cancel while discarding subsequent edits.
-    private AppConfig? _postLoadSnapshot;
 
     [ObservableProperty]
     private List<Option<Language>> _availableLanguages =
@@ -68,7 +65,7 @@ public partial class SettingsViewModel(
         // Subscribe to the new instance
         value.PropertyChanged += OnAppConfigPropertyChanged;
 
-        LocalizationManager.ApplyLanguage(value.Language);
+        localization.ApplyLanguage(value.Language);
         UpdateLanguageDependentCollections();
         SyncOptions();
     }
@@ -83,7 +80,7 @@ public partial class SettingsViewModel(
     {
         if (value == null) return;
         AppConfig.Language = value.Value;
-        LocalizationManager.ApplyLanguage(value.Value);
+        localization.ApplyLanguage(value.Value);
     }
 
     partial void OnAvailableNetworkAdaptersChanged(List<NetworkAdapterInfo> value)
@@ -99,11 +96,9 @@ public partial class SettingsViewModel(
         SubscribeHandlers();
 
         UpdateLanguageDependentCollections();
-        LocalizationManager.ApplyLanguage(AppConfig.Language);
+        localization.ApplyLanguage(AppConfig.Language);
         await LoadNetworkAdaptersAsync();
 
-        // Take a snapshot after initialization to allow cancel to persist init-only changes.
-        _postLoadSnapshot = AppConfig.Clone();
         _hasUnsavedChanges = false;
         _isLoaded = true;
     }
@@ -112,7 +107,7 @@ public partial class SettingsViewModel(
     {
         if (!_cultureHandlerSubscribed)
         {
-            LocalizationManager.CultureChanged += OnCultureChanged;
+            localization.CultureChanged += OnCultureChanged;
             _cultureHandlerSubscribed = true;
         }
 
@@ -142,7 +137,7 @@ public partial class SettingsViewModel(
             deviceManagementService.SetActiveNetworkAdapter(ret);
             return;
         }
-        MessageBox.Show(LocalizationManager.GetString(ResourcesKeys.Settings_NetworkAdapterAutoSelect_Failed)); // Temporary message dialog
+        MessageBox.Show(localization.GetString(ResourcesKeys.Settings_NetworkAdapterAutoSelect_Failed)); // Temporary message dialog
     }
 
     private async void OnSystemNetworkChanged(object? sender, EventArgs e)
@@ -201,7 +196,7 @@ public partial class SettingsViewModel(
 
         if (e.PropertyName == nameof(AppConfig.Language))
         {
-            LocalizationManager.ApplyLanguage(config.Language);
+            localization.ApplyLanguage(config.Language);
             UpdateLanguageDependentCollections();
         }
         else if (e.PropertyName == nameof(AppConfig.PreferredNetworkAdapter))
@@ -308,8 +303,8 @@ public partial class SettingsViewModel(
             return;
         }
 
-        var title = Resources.ResourceManager.GetString("Settings_CancelConfirm_Title") ?? string.Empty;
-        var message = Resources.ResourceManager.GetString("Settings_CancelConfirm_Message") ?? string.Empty;
+        var title = localization.GetString(ResourcesKeys.Settings_CancelConfirm_Title);
+        var message = localization.GetString(ResourcesKeys.Settings_CancelConfirm_Message);
 
         var result = messageDialogService.Show(
             title,
@@ -319,9 +314,8 @@ public partial class SettingsViewModel(
         {
             // Restore to the post-load snapshot and persist it,
             // so only initialization-time changes are saved.
-            if (_postLoadSnapshot is not null)
+            if (_hasUnsavedChanges)
             {
-                AppConfig = _postLoadSnapshot.Clone();
                 await ApplySettingsAsync();
             }
 
@@ -340,7 +334,7 @@ public partial class SettingsViewModel(
     {
         if (_cultureHandlerSubscribed)
         {
-            LocalizationManager.CultureChanged -= OnCultureChanged;
+            localization.CultureChanged -= OnCultureChanged;
             _cultureHandlerSubscribed = false;
         }
 
@@ -428,7 +422,7 @@ public enum ShortcutType
 
 public sealed class SettingsDesignTimeViewModel : SettingsViewModel
 {
-    public SettingsDesignTimeViewModel() : base(new DesignConfigManager(), new DesignTimeDeviceManagementService(), new DesignMessageDialogService())
+    public SettingsDesignTimeViewModel() : base(new DesignConfigManager(), new DesignTimeDeviceManagementService(), new LocalizationManager(new LocalizationConfiguration()), new DesignMessageDialogService())
     {
         AppConfig = new AppConfig
         {
@@ -470,54 +464,3 @@ internal sealed class DesignMessageDialogService : IMessageDialogService
 {
     public bool? Show(string title, string content, Window? owner = null) => true;
 }
-// public sealed class SettingsDesignTimeViewModel : BaseViewModel
-// {
-//     public SettingsDesignTimeViewModel()
-//     {
-//         AppConfig = new AppConfig
-//         {
-//             // set friendly defaults shown in designer
-//             Opacity = 85,
-//             CombatTimeClearDelay = 5,
-//             ClearLogAfterTeleport = false,
-//             Language = Language.Auto
-//         };
-//
-//         AvailableNetworkAdapters = new List<NetworkAdapterInfo>
-//         {
-//             new NetworkAdapterInfo("WAN Adapter", "WAN"),
-//             new NetworkAdapterInfo("WLAN Adapter", "WLAN")
-//         };
-//
-//         AppConfig.MouseThroughShortcut = new KeyBinding(Key.F6, ModifierKeys.Control);
-//         AppConfig.ClearDataShortcut = new KeyBinding(Key.F9, ModifierKeys.None);
-//
-//         AvailableLanguages = new List<Option<Language>>
-//         {
-//             new Option<Language>(Language.Auto, "Follow System"),
-//             new Option<Language>(Language.ZhCn, "中文 (简体)"),
-//             new Option<Language>(Language.EnUs, "English")
-//         };
-//
-//         AvailableNumberDisplayModes = new List<Option<NumberDisplayMode>>
-//         {
-//             new Option<NumberDisplayMode>(NumberDisplayMode.Wan, "四位计数法 (万)"),
-//             new Option<NumberDisplayMode>(NumberDisplayMode.KMB, "三位计数法 (KMB)")
-//         };
-//
-//         SelectedLanguage = AvailableLanguages[0];
-//         SelectedNumberDisplayMode = AvailableNumberDisplayModes[0];
-//     }
-//
-//     public AppConfig AppConfig { get; set; }
-//
-//     public List<NetworkAdapterInfo> AvailableNetworkAdapters { get; set; }
-//
-//     public List<Option<Language>> AvailableLanguages { get; set; }
-//
-//     public List<Option<NumberDisplayMode>> AvailableNumberDisplayModes { get; set; }
-//
-//     public Option<Language>? SelectedLanguage { get; set; }
-//
-//     public Option<NumberDisplayMode>? SelectedNumberDisplayMode { get; set; }
-// }

@@ -26,6 +26,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Styles/SortedDpsControlStyle.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Styles/DpsIndicatorControlStyle.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Styles/ImageResourceDictionary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Styles/CardHeaderStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
