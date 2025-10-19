@@ -743,189 +743,189 @@ namespace StarResonanceDpsAnalysis.Assets.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 关于窗口.
         /// </summary>
-        internal static string MainWindow_Debug_Button_About {
+        internal static string MainView_Debug_Button_About {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Button_About", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Button_About", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 伤害参考窗口.
         /// </summary>
-        internal static string MainWindow_Debug_Button_DamageReference {
+        internal static string MainView_Debug_Button_DamageReference {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Button_DamageReference", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Button_DamageReference", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to PCAP 测试.
         /// </summary>
-        internal static string MainWindow_Debug_Button_PcapTest {
+        internal static string MainView_Debug_Button_PcapTest {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Button_PcapTest", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Button_PcapTest", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 设置窗口.
         /// </summary>
-        internal static string MainWindow_Debug_Button_Settings {
+        internal static string MainView_Debug_Button_Settings {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Button_Settings", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Button_Settings", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 技能详情窗口.
         /// </summary>
-        internal static string MainWindow_Debug_Button_SkillBreakdown {
+        internal static string MainView_Debug_Button_SkillBreakdown {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Button_SkillBreakdown", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Button_SkillBreakdown", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 调试功能.
         /// </summary>
-        internal static string MainWindow_Debug_Group_Title {
+        internal static string MainView_Debug_Group_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Group_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Group_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 主题切换测试文本.
         /// </summary>
-        internal static string MainWindow_Debug_ThemeTest {
+        internal static string MainView_Debug_ThemeTest {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_ThemeTest", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_ThemeTest", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 别查我 D P S.
         /// </summary>
-        internal static string MainWindow_Header_Title {
+        internal static string MainView_Header_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Header_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Header_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to [官方] 别查我DPS 开发团队.
         /// </summary>
-        internal static string MainWindow_Plugin_Author_OfficialTeam {
+        internal static string MainView_Plugin_Author_OfficialTeam {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_Author_OfficialTeam", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_Author_OfficialTeam", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 自启动.
         /// </summary>
-        internal static string MainWindow_Plugin_AutoStart {
+        internal static string MainView_Plugin_AutoStart {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_AutoStart", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_AutoStart", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 提供DPS统计、技能分解等功能.
         /// </summary>
-        internal static string MainWindow_Plugin_DpsTool_Description {
+        internal static string MainView_Plugin_DpsTool_Description {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_DpsTool_Description", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_DpsTool_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to DPS工具.
         /// </summary>
-        internal static string MainWindow_Plugin_DpsTool_Title {
+        internal static string MainView_Plugin_DpsTool_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_DpsTool_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_DpsTool_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 作者：.
         /// </summary>
-        internal static string MainWindow_Plugin_Label_Author {
+        internal static string MainView_Plugin_Label_Author {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_Label_Author", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_Label_Author", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 简介：.
         /// </summary>
-        internal static string MainWindow_Plugin_Label_Intro {
+        internal static string MainView_Plugin_Label_Intro {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_Label_Intro", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_Label_Intro", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 提供模组快速计算最优解功能.
         /// </summary>
-        internal static string MainWindow_Plugin_ModuleSolver_Description {
+        internal static string MainView_Plugin_ModuleSolver_Description {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_ModuleSolver_Description", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_ModuleSolver_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 模组求解器.
         /// </summary>
-        internal static string MainWindow_Plugin_ModuleSolver_Title {
+        internal static string MainView_Plugin_ModuleSolver_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_ModuleSolver_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_ModuleSolver_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 通过大量的玩家在线数据互助，提供小猪娜宝的线路与位置信息.
         /// </summary>
-        internal static string MainWindow_Plugin_PigTracker_Description {
+        internal static string MainView_Plugin_PigTracker_Description {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_PigTracker_Description", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_PigTracker_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 小猪娜宝状态查看器.
         /// </summary>
-        internal static string MainWindow_Plugin_PigTracker_Title {
+        internal static string MainView_Plugin_PigTracker_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_PigTracker_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_PigTracker_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 通过大量的玩家在线数据互助，提供各线路的野外BOSS存活状态等信息.
         /// </summary>
-        internal static string MainWindow_Plugin_WorldBoss_Description {
+        internal static string MainView_Plugin_WorldBoss_Description {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_WorldBoss_Description", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_WorldBoss_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 野外BOSS状态查看器.
         /// </summary>
-        internal static string MainWindow_Plugin_WorldBoss_Title {
+        internal static string MainView_Plugin_WorldBoss_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_WorldBoss_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_WorldBoss_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 插件列表.
         /// </summary>
-        internal static string MainWindow_PluginList_Title {
+        internal static string MainView_PluginList_Title {
             get {
-                return ResourceManager.GetString("MainWindow_PluginList_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_PluginList_Title", resourceCulture);
             }
         }
         

@@ -462,70 +462,70 @@
   <data name="Debug_Group_Title" xml:space="preserve">
     <value>Debug utilities</value>
   </data>
-  <data name="MainWindow_Header_Title" xml:space="preserve">
+  <data name="MainView_Header_Title" xml:space="preserve">
     <value>StarResonance ToolBox</value>
   </data>
-  <data name="MainWindow_PluginList_Title" xml:space="preserve">
+  <data name="MainView_PluginList_Title" xml:space="preserve">
     <value>Plugins</value>
   </data>
-  <data name="MainWindow_Plugin_Label_Intro" xml:space="preserve">
+  <data name="MainView_Plugin_Label_Intro" xml:space="preserve">
     <value>Intro:</value>
   </data>
-  <data name="MainWindow_Plugin_DpsTool_Title" xml:space="preserve">
+  <data name="MainView_Plugin_DpsTool_Title" xml:space="preserve">
     <value>DPS Toolkit</value>
   </data>
-  <data name="MainWindow_Plugin_DpsTool_Description" xml:space="preserve">
+  <data name="MainView_Plugin_DpsTool_Description" xml:space="preserve">
     <value>Provides DPS statistics and skill breakdown tools</value>
   </data>
-  <data name="MainWindow_Plugin_Label_Author" xml:space="preserve">
+  <data name="MainView_Plugin_Label_Author" xml:space="preserve">
     <value>Author:</value>
   </data>
-  <data name="MainWindow_Plugin_Author_OfficialTeam" xml:space="preserve">
+  <data name="MainView_Plugin_Author_OfficialTeam" xml:space="preserve">
     <value>[Official] StarResonanceToolBox Team</value>
   </data>
-  <data name="MainWindow_Plugin_AutoStart" xml:space="preserve">
+  <data name="MainView_Plugin_AutoStart" xml:space="preserve">
     <value>Auto start</value>
   </data>
   <data name="Common_Action_Open" xml:space="preserve">
     <value>Launch</value>
   </data>
-  <data name="MainWindow_Plugin_ModuleSolver_Title" xml:space="preserve">
+  <data name="MainView_Plugin_ModuleSolver_Title" xml:space="preserve">
     <value>Module Solver</value>
   </data>
-  <data name="MainWindow_Plugin_ModuleSolver_Description" xml:space="preserve">
+  <data name="MainView_Plugin_ModuleSolver_Description" xml:space="preserve">
     <value>Quickly calculates optimal module combinations</value>
   </data>
-  <data name="MainWindow_Plugin_WorldBoss_Title" xml:space="preserve">
+  <data name="MainView_Plugin_WorldBoss_Title" xml:space="preserve">
     <value>World Boss Status Tracker</value>
   </data>
-  <data name="MainWindow_Plugin_WorldBoss_Description" xml:space="preserve">
+  <data name="MainView_Plugin_WorldBoss_Description" xml:space="preserve">
     <value>Crowdsourced live data for each channel's world boss status</value>
   </data>
-  <data name="MainWindow_Plugin_PigTracker_Title" xml:space="preserve">
+  <data name="MainView_Plugin_PigTracker_Title" xml:space="preserve">
     <value>Pig Nabo Status Tracker</value>
   </data>
-  <data name="MainWindow_Plugin_PigTracker_Description" xml:space="preserve">
+  <data name="MainView_Plugin_PigTracker_Description" xml:space="preserve">
     <value>Community-driven tracker for Pig Nabo routes and locations</value>
   </data>
-  <data name="MainWindow_Debug_Group_Title" xml:space="preserve">
+  <data name="MainView_Debug_Group_Title" xml:space="preserve">
     <value>Debug utilities</value>
   </data>
-  <data name="MainWindow_Debug_ThemeTest" xml:space="preserve">
+  <data name="MainView_Debug_ThemeTest" xml:space="preserve">
     <value>Theme switch test text</value>
   </data>
-  <data name="MainWindow_Debug_Button_PcapTest" xml:space="preserve">
+  <data name="MainView_Debug_Button_PcapTest" xml:space="preserve">
     <value>Pcap Test</value>
   </data>
-  <data name="MainWindow_Debug_Button_SkillBreakdown" xml:space="preserve">
+  <data name="MainView_Debug_Button_SkillBreakdown" xml:space="preserve">
     <value>Skill Breakdown View</value>
   </data>
-  <data name="MainWindow_Debug_Button_DamageReference" xml:space="preserve">
+  <data name="MainView_Debug_Button_DamageReference" xml:space="preserve">
     <value>Damage Reference View</value>
   </data>
-  <data name="MainWindow_Debug_Button_Settings" xml:space="preserve">
+  <data name="MainView_Debug_Button_Settings" xml:space="preserve">
     <value>Settings View</value>
   </data>
-  <data name="MainWindow_Debug_Button_About" xml:space="preserve">
+  <data name="MainView_Debug_Button_About" xml:space="preserve">
     <value>About View</value>
   </data>
   <data name="Window_ModuleSolve_Title" xml:space="preserve">
@@ -854,16 +854,16 @@
   <data name="Debug_Localization_Apply" xml:space="preserve"><value>Apply</value></data>
   <data name="Debug_Localization_TestKey" xml:space="preserve"><value>Test Key:</value></data>
   <data name="Debug_Localization_Test" xml:space="preserve"><value>Test</value></data>
-  <data name="MainWindow_Plugin_Search_PlaceHolder" xml:space="preserve">
+  <data name="MainView_Plugin_Search_PlaceHolder" xml:space="preserve">
     <value>Search...</value>
   </data>
-  <data name="MainWindow_Plugin_State_Inactive" xml:space="preserve">
+  <data name="MainView_Plugin_State_Inactive" xml:space="preserve">
     <value>Inactive</value>
   </data>
-  <data name="MainWindow_Plugin_State_Running" xml:space="preserve">
+  <data name="MainView_Plugin_State_Running" xml:space="preserve">
     <value>Running</value>
   </data>
-  <data name="MainWindow_Plugin_Settings" xml:space="preserve">
+  <data name="MainView_Plugin_Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="Settings_Section_Theme_Title" xml:space="preserve">
@@ -887,13 +887,13 @@
   <data name="Settings_CancelConfirm_Message" xml:space="preserve">
     <value>Discard all changes? Unsaved changes will be lost.</value>
   </data>
-  <data name="MainWindow_Plugin_AutoRunState_Enabled" xml:space="preserve">
+  <data name="MainView_Plugin_AutoRunState_Enabled" xml:space="preserve">
     <value>Auto On</value>
   </data>
-  <data name="MainWindow_Plugin_AutoRunState_Disabled" xml:space="preserve">
+  <data name="MainView_Plugin_AutoRunState_Disabled" xml:space="preserve">
     <value>Auto Off</value>
   </data>
-  <data name="MainWindow_Plugin_ThirdPartySdkTips" xml:space="preserve">
+  <data name="MainView_Plugin_ThirdPartySdkTips" xml:space="preserve">
     <value>Plugin SDK coming soon!</value>
   </data>
 </root>

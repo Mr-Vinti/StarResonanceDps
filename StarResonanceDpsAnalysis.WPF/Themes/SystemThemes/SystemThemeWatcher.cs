@@ -17,7 +17,7 @@ namespace StarResonanceDpsAnalysis.WPF.Themes.SystemThemes;
 /// </code>
 /// <code lang="csharp">
 /// SystemThemeWatcher.Watch(
-///     _serviceProvider.GetRequiredService&lt;MainWindow&gt;()
+///     _serviceProvider.GetRequiredService&lt;MainView&gt;()
 /// );
 /// </code>
 /// </example>

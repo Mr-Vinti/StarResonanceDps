@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,7 +47,7 @@ public partial class App : Application
         var appStartup = Host.Services.GetRequiredService<IApplicationStartup>();
         appStartup.InitializeAsync().Wait();
 
-        app.MainWindow = Host.Services.GetRequiredService<MainWindow>();
+        app.MainWindow = Host.Services.GetRequiredService<MainView>();
         app.MainWindow.Visibility = Visibility.Visible;
         app.Run();
 
@@ -91,31 +96,25 @@ public partial class App : Application
             {
                 services.AddJsonConfiguration();
                 services.Configure<AppConfig>(context.Configuration.GetSection("Config"));
-                services.AddTransient<MainViewModel>();
-                services.AddTransient<MainWindow>();
-                services.AddSingleton<DpsStatisticsViewModel>();
-                services.AddSingleton<DpsStatisticsView>();
-                services.AddTransient<SettingsViewModel>();
-                services.AddTransient<SettingsView>();
-                services.AddTransient<SkillBreakdownViewModel>();
-                services.AddTransient<SkillBreakdownView>();
-                services.AddTransient<AboutView>();
-                services.AddTransient<DamageReferenceView>();
-                services.AddTransient<ModuleSolveView>();
+                RegisterViewModels(services);
+                RegisterViews(services);
+
+                services.AddPacketAnalyzer();
+                services.AddThemes();
+                services.AddWindowManagementService();
                 services.AddMessageDialogService();
                 services.AddSingleton<DebugFunctions>();
                 services.AddSingleton<CaptureDeviceList>(CaptureDeviceList.Instance);
-                services.AddThemes();
-                services.AddWindowManagementService();
                 services.AddSingleton<IApplicationControlService, ApplicationControlService>();
                 services.AddSingleton<IDeviceManagementService, DeviceManagementService>();
                 services.AddSingleton<IApplicationStartup, ApplicationStartup>();
-                services.AddPacketAnalyzer();
                 services.AddSingleton<IConfigManager, ConfigManger>();
                 services.AddSingleton<IGlobalHotkeyService, GlobalHotkeyService>();
                 services.AddSingleton<IMousePenetrationService, MousePenetrationService>();
                 services.AddSingleton<ITopmostService, TopmostService>();
+
                 if (_logStream != null) services.AddSingleton<IObservable<LogEvent>>(_logStream);
+
                 services.AddSingleton(_ => Current.Dispatcher);
 
                 // Localization manager singleton
@@ -125,5 +124,44 @@ public partial class App : Application
                 }));
             })
             .ConfigureLogging(lb => lb.ClearProviders());
+    }
+
+    static readonly Dictionary<Type, ServiceLifetime> LifeTimeOverrides = new()
+    {
+        { typeof(DpsStatisticsViewModel), ServiceLifetime.Singleton },
+        { typeof(DpsStatisticsView), ServiceLifetime.Singleton }
+    };
+
+    private static void RegisterViewModels(IServiceCollection services)
+    {
+        RegisterTypes(services, "StarResonanceDpsAnalysis.WPF.ViewModels", "ViewModel");
+    }
+
+    private static void RegisterViews(IServiceCollection services)
+    {
+        RegisterTypes(services, "StarResonanceDpsAnalysis.WPF.Views", "View");
+    }
+
+    private static void RegisterTypes(
+        IServiceCollection services,
+        string @namespace,
+        string suffix)
+    {
+        var types = typeof(App).Assembly
+            .GetTypes()
+            .Where(t =>
+                t is { IsAbstract: false, IsClass: true } &&
+                t.Namespace != null &&
+                t.Namespace.StartsWith(@namespace, StringComparison.Ordinal) &&
+                t.Name.EndsWith(suffix, StringComparison.Ordinal));
+
+        foreach (var type in types)
+        {
+            var lifetime = LifeTimeOverrides.TryGetValue(type, out var overrideLifetime)
+                ? overrideLifetime
+                : ServiceLifetime.Transient;
+
+            services.Add(new ServiceDescriptor(type, type, lifetime));
+        }
     }
 }

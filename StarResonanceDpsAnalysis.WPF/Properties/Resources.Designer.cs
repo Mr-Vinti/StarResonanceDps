@@ -846,252 +846,252 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         /// <summary>
         ///   Looks up a localized string similar to About View.
         /// </summary>
-        public static string MainWindow_Debug_Button_About {
+        public static string MainView_Debug_Button_About {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Button_About", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Button_About", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Damage Reference View.
         /// </summary>
-        public static string MainWindow_Debug_Button_DamageReference {
+        public static string MainView_Debug_Button_DamageReference {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Button_DamageReference", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Button_DamageReference", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Pcap Test.
         /// </summary>
-        public static string MainWindow_Debug_Button_PcapTest {
+        public static string MainView_Debug_Button_PcapTest {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Button_PcapTest", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Button_PcapTest", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Settings View.
         /// </summary>
-        public static string MainWindow_Debug_Button_Settings {
+        public static string MainView_Debug_Button_Settings {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Button_Settings", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Button_Settings", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Skill Breakdown View.
         /// </summary>
-        public static string MainWindow_Debug_Button_SkillBreakdown {
+        public static string MainView_Debug_Button_SkillBreakdown {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Button_SkillBreakdown", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Button_SkillBreakdown", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Debug utilities.
         /// </summary>
-        public static string MainWindow_Debug_Group_Title {
+        public static string MainView_Debug_Group_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_Group_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_Group_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Theme switch test text.
         /// </summary>
-        public static string MainWindow_Debug_ThemeTest {
+        public static string MainView_Debug_ThemeTest {
             get {
-                return ResourceManager.GetString("MainWindow_Debug_ThemeTest", resourceCulture);
+                return ResourceManager.GetString("MainView_Debug_ThemeTest", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to StarResonance ToolBox.
         /// </summary>
-        public static string MainWindow_Header_Title {
+        public static string MainView_Header_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Header_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Header_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to [Official] StarResonanceToolBox Team.
         /// </summary>
-        public static string MainWindow_Plugin_Author_OfficialTeam {
+        public static string MainView_Plugin_Author_OfficialTeam {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_Author_OfficialTeam", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_Author_OfficialTeam", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Auto Off 的本地化字符串。
         /// </summary>
-        public static string MainWindow_Plugin_AutoRunState_Disabled {
+        public static string MainView_Plugin_AutoRunState_Disabled {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_AutoRunState_Disabled", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_AutoRunState_Disabled", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Auto On 的本地化字符串。
         /// </summary>
-        public static string MainWindow_Plugin_AutoRunState_Enabled {
+        public static string MainView_Plugin_AutoRunState_Enabled {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_AutoRunState_Enabled", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_AutoRunState_Enabled", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Auto start 的本地化字符串。
         /// </summary>
-        public static string MainWindow_Plugin_AutoStart {
+        public static string MainView_Plugin_AutoStart {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_AutoStart", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_AutoStart", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Provides DPS statistics and skill breakdown tools.
         /// </summary>
-        public static string MainWindow_Plugin_DpsTool_Description {
+        public static string MainView_Plugin_DpsTool_Description {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_DpsTool_Description", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_DpsTool_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to DPS Toolkit.
         /// </summary>
-        public static string MainWindow_Plugin_DpsTool_Title {
+        public static string MainView_Plugin_DpsTool_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_DpsTool_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_DpsTool_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Author:.
         /// </summary>
-        public static string MainWindow_Plugin_Label_Author {
+        public static string MainView_Plugin_Label_Author {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_Label_Author", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_Label_Author", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Intro:.
         /// </summary>
-        public static string MainWindow_Plugin_Label_Intro {
+        public static string MainView_Plugin_Label_Intro {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_Label_Intro", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_Label_Intro", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Quickly calculates optimal module combinations.
         /// </summary>
-        public static string MainWindow_Plugin_ModuleSolver_Description {
+        public static string MainView_Plugin_ModuleSolver_Description {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_ModuleSolver_Description", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_ModuleSolver_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Module Solver.
         /// </summary>
-        public static string MainWindow_Plugin_ModuleSolver_Title {
+        public static string MainView_Plugin_ModuleSolver_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_ModuleSolver_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_ModuleSolver_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Community-driven tracker for Pig Nabo routes and locations.
         /// </summary>
-        public static string MainWindow_Plugin_PigTracker_Description {
+        public static string MainView_Plugin_PigTracker_Description {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_PigTracker_Description", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_PigTracker_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Pig Nabo Status Tracker.
         /// </summary>
-        public static string MainWindow_Plugin_PigTracker_Title {
+        public static string MainView_Plugin_PigTracker_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_PigTracker_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_PigTracker_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Search....
         /// </summary>
-        public static string MainWindow_Plugin_Search_PlaceHolder {
+        public static string MainView_Plugin_Search_PlaceHolder {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_Search_PlaceHolder", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_Search_PlaceHolder", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        public static string MainWindow_Plugin_Settings {
+        public static string MainView_Plugin_Settings {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_Settings", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_Settings", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Inactive.
         /// </summary>
-        public static string MainWindow_Plugin_State_Inactive {
+        public static string MainView_Plugin_State_Inactive {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_State_Inactive", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_State_Inactive", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Running.
         /// </summary>
-        public static string MainWindow_Plugin_State_Running {
+        public static string MainView_Plugin_State_Running {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_State_Running", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_State_Running", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Plugin SDK coming soon! 的本地化字符串。
         /// </summary>
-        public static string MainWindow_Plugin_ThirdPartySdkTips {
+        public static string MainView_Plugin_ThirdPartySdkTips {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_ThirdPartySdkTips", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_ThirdPartySdkTips", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Crowdsourced live data for each channel&apos;s world boss status 的本地化字符串。
         /// </summary>
-        public static string MainWindow_Plugin_WorldBoss_Description {
+        public static string MainView_Plugin_WorldBoss_Description {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_WorldBoss_Description", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_WorldBoss_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to World Boss Status Tracker.
         /// </summary>
-        public static string MainWindow_Plugin_WorldBoss_Title {
+        public static string MainView_Plugin_WorldBoss_Title {
             get {
-                return ResourceManager.GetString("MainWindow_Plugin_WorldBoss_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_Plugin_WorldBoss_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Plugins.
         /// </summary>
-        public static string MainWindow_PluginList_Title {
+        public static string MainView_PluginList_Title {
             get {
-                return ResourceManager.GetString("MainWindow_PluginList_Title", resourceCulture);
+                return ResourceManager.GetString("MainView_PluginList_Title", resourceCulture);
             }
         }
         

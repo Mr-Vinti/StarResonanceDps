@@ -53,13 +53,13 @@ public partial class MainViewModel(
     }
 
     [RelayCommand]
-    private void CallModuleSolveViewCommand()
+    private void CallModuleSolveView()
     {
         windowManagement.ModuleSolveView.Show();
     }
 
     [RelayCommand]
-    private void CallBossTrackerViewCommand() 
+    private void CallBossTrackerView() 
     {
         windowManagement.BossTrackerView.Show();
     }

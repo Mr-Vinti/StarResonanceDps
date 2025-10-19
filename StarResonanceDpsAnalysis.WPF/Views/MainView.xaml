@@ -1,5 +1,5 @@
 <Window
-    x:Class="StarResonanceDpsAnalysis.WPF.Views.MainWindow"
+    x:Class="StarResonanceDpsAnalysis.WPF.Views.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ctrl="clr-namespace:StarResonanceDpsAnalysis.WPF.Controls"
@@ -242,7 +242,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <ctrl:Header Title="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Header_Title}}" Grid.Row="0" />
+            <ctrl:Header Title="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Header_Title}}" Grid.Row="0" />
 
             <Border Grid.Row="1" Style="{StaticResource MainContentBorder}">
                 <Grid>
@@ -284,14 +284,14 @@
 
                                     <TextBox
                                         x:Name="SearchBox"
-                                        hlp:TextBoxHelper.Placeholder="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Search_PlaceHolder}}"
+                                        hlp:TextBoxHelper.Placeholder="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Search_PlaceHolder}}"
                                         Style="{StaticResource SearchBox}" />
 
                                 </Grid>
                             </Border>
 
                             <Border Grid.Row="1" Style="{StaticResource PluginListTitleBorder}">
-                                <TextBlock Style="{StaticResource PluginListTitle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_PluginList_Title}}" />
+                                <TextBlock Style="{StaticResource PluginListTitle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_PluginList_Title}}" />
                             </Border>
 
                             <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
@@ -309,9 +309,9 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0">
-                                                            <TextBlock Style="{StaticResource PluginListName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_DpsTool_Title}}" />
+                                                            <TextBlock Style="{StaticResource PluginListName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_DpsTool_Title}}" />
 
-                                                            <TextBlock Style="{StaticResource PluginListIntro}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_DpsTool_Description}}" />
+                                                            <TextBlock Style="{StaticResource PluginListIntro}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_DpsTool_Description}}" />
                                                         </Grid>
 
                                                         <Grid Grid.Column="1">
@@ -326,7 +326,7 @@
 
                                                                 <TextBlock 
                                                                     Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_AutoRunState_Disabled}}"/>
+                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoRunState_Disabled}}"/>
                                                             </Border>
 
                                                             <Border 
@@ -335,7 +335,7 @@
 
                                                                 <TextBlock 
                                                                     Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_State_Inactive}}"/>
+                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_State_Inactive}}"/>
                                                             </Border>
                                                         </Grid>
 
@@ -374,9 +374,9 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0">
-                                                            <TextBlock Style="{StaticResource PluginListName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_ModuleSolver_Title}}" />
+                                                            <TextBlock Style="{StaticResource PluginListName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_ModuleSolver_Title}}" />
 
-                                                            <TextBlock Style="{StaticResource PluginListIntro}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_ModuleSolver_Description}}" />
+                                                            <TextBlock Style="{StaticResource PluginListIntro}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_ModuleSolver_Description}}" />
                                                         </Grid>
 
                                                         <Grid Grid.Column="1">
@@ -391,7 +391,7 @@
 
                                                                 <TextBlock 
                                                                     Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_AutoRunState_Disabled}}"/>
+                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoRunState_Disabled}}"/>
                                                             </Border>
 
                                                             <Border 
@@ -400,7 +400,7 @@
 
                                                                 <TextBlock 
                                                                     Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_State_Inactive}}"/>
+                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_State_Inactive}}"/>
                                                             </Border>
                                                         </Grid>
 
@@ -439,9 +439,9 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0">
-                                                            <TextBlock Style="{StaticResource PluginListName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_WorldBoss_Title}}" />
+                                                            <TextBlock Style="{StaticResource PluginListName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_WorldBoss_Title}}" />
 
-                                                            <TextBlock Style="{StaticResource PluginListIntro}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_WorldBoss_Description}}" />
+                                                            <TextBlock Style="{StaticResource PluginListIntro}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_WorldBoss_Description}}" />
                                                         </Grid>
 
                                                         <Grid Grid.Column="1">
@@ -456,7 +456,7 @@
 
                                                                 <TextBlock 
                                                                     Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_AutoRunState_Disabled}}"/>
+                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoRunState_Disabled}}"/>
                                                             </Border>
 
                                                             <Border 
@@ -465,7 +465,7 @@
 
                                                                 <TextBlock 
                                                                     Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_State_Inactive}}"/>
+                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_State_Inactive}}"/>
                                                             </Border>
                                                         </Grid>
 
@@ -545,7 +545,7 @@
                                     <Border Style="{StaticResource PluginBorder}">
                                         <TextBlock 
                                             Style="{StaticResource PluginListTip}"
-                                            Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_ThirdPartySdkTips}}"/>
+                                            Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_ThirdPartySdkTips}}"/>
                                     </Border>
 
                                 </StackPanel>
@@ -579,7 +579,7 @@
 
                                             <Grid Grid.Column="0">
 
-                                                <TextBlock Style="{StaticResource PluginDetailName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_DpsTool_Title}}" />
+                                                <TextBlock Style="{StaticResource PluginDetailName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_DpsTool_Title}}" />
 
                                                 <Grid Style="{StaticResource AutoRunGrid}">
                                                     <Grid.ColumnDefinitions>
@@ -596,7 +596,7 @@
                                                     <TextBlock
                                                         Grid.Column="1"
                                                         Style="{StaticResource AutoRunText}"
-                                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_AutoStart}}" />
+                                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoStart}}" />
                                                 </Grid>
 
                                             </Grid>
@@ -611,7 +611,7 @@
                                                     <Button.Template>
                                                         <ControlTemplate>
                                                             <Border x:Name="bb" Style="{StaticResource PluginSettingButton}">
-                                                                <TextBlock Style="{StaticResource PluginSettingText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Settings}}" />
+                                                                <TextBlock Style="{StaticResource PluginSettingText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Settings}}" />
                                                             </Border>
 
                                                             <ControlTemplate.Triggers>
@@ -658,21 +658,21 @@
                                             <TextBlock
                                                 Grid.Row="0"
                                                 Grid.Column="0"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Author}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Label_Author}}" />
                                             <TextBlock
                                                 Grid.Row="0"
                                                 Grid.Column="2"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Author_OfficialTeam}}"
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Author_OfficialTeam}}"
                                                 TextWrapping="Wrap" />
 
                                             <TextBlock
                                                 Grid.Row="1"
                                                 Grid.Column="0"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Intro}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Label_Intro}}" />
                                             <TextBlock
                                                 Grid.Row="1"
                                                 Grid.Column="2"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_DpsTool_Description}}"
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_DpsTool_Description}}"
                                                 TextWrapping="Wrap" />
                                         </Grid>
                                     </Border>
@@ -696,7 +696,7 @@
 
                                             <Grid Grid.Column="0">
 
-                                                <TextBlock Style="{StaticResource PluginDetailName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_ModuleSolver_Title}}" />
+                                                <TextBlock Style="{StaticResource PluginDetailName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_ModuleSolver_Title}}" />
 
                                                 <Grid Style="{StaticResource AutoRunGrid}">
                                                     <Grid.ColumnDefinitions>
@@ -713,7 +713,7 @@
                                                     <TextBlock
                                                         Grid.Column="1"
                                                         Style="{StaticResource AutoRunText}"
-                                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_AutoStart}}" />
+                                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoStart}}" />
                                                 </Grid>
 
                                             </Grid>
@@ -732,13 +732,13 @@
                                                                 x:Name="bb"
                                                                 Background="#DDD"
                                                                 Style="{StaticResource PluginSettingButton}">
-                                                                <TextBlock Style="{StaticResource PluginSettingText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Settings}}" />
+                                                                <TextBlock Style="{StaticResource PluginSettingText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Settings}}" />
                                                             </Border>
                                                         </ControlTemplate>
                                                     </Button.Template>
                                                 </Button>
 
-                                                <Button Grid.Column="1" Command="{Binding CallModuleSolveViewCommandCommand}">
+                                                <Button Grid.Column="1" Command="{Binding CallModuleSolveViewCommand}">
                                                     <Button.Template>
                                                         <ControlTemplate>
                                                             <Border x:Name="bb" Style="{StaticResource PluginRunButton}">
@@ -773,21 +773,21 @@
                                             <TextBlock
                                                 Grid.Row="0"
                                                 Grid.Column="0"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Author}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Label_Author}}" />
                                             <TextBlock
                                                 Grid.Row="0"
                                                 Grid.Column="2"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Author_OfficialTeam}}"
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Author_OfficialTeam}}"
                                                 TextWrapping="Wrap" />
 
                                             <TextBlock
                                                 Grid.Row="1"
                                                 Grid.Column="0"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Intro}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Label_Intro}}" />
                                             <TextBlock
                                                 Grid.Row="1"
                                                 Grid.Column="2"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_ModuleSolver_Description}}"
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_ModuleSolver_Description}}"
                                                 TextWrapping="Wrap" />
                                         </Grid>
                                     </Border>
@@ -811,7 +811,7 @@
 
                                             <Grid Grid.Column="0">
 
-                                                <TextBlock Style="{StaticResource PluginDetailName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_WorldBoss_Title}}" />
+                                                <TextBlock Style="{StaticResource PluginDetailName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_WorldBoss_Title}}" />
 
                                                 <Grid Style="{StaticResource AutoRunGrid}">
                                                     <Grid.ColumnDefinitions>
@@ -828,7 +828,7 @@
                                                     <TextBlock
                                                         Grid.Column="1"
                                                         Style="{StaticResource AutoRunText}"
-                                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_AutoStart}}" />
+                                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoStart}}" />
                                                 </Grid>
 
                                             </Grid>
@@ -840,14 +840,14 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <!--  TODO: 缺少Command  -->
-                                                <Button Grid.Column="0">
+                                                <Button Grid.Column="0" Command="{Binding CallBossTrackerViewCommand}">
                                                     <Button.Template>
                                                         <ControlTemplate>
                                                             <Border
                                                                 x:Name="bb"
                                                                 Background="#DDD"
                                                                 Style="{StaticResource PluginSettingButton}">
-                                                                <TextBlock Style="{StaticResource PluginSettingText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Settings}}" />
+                                                                <TextBlock Style="{StaticResource PluginSettingText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Settings}}" />
                                                             </Border>
                                                         </ControlTemplate>
                                                     </Button.Template>
@@ -888,21 +888,21 @@
                                             <TextBlock
                                                 Grid.Row="0"
                                                 Grid.Column="0"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Author}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Label_Author}}" />
                                             <TextBlock
                                                 Grid.Row="0"
                                                 Grid.Column="2"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Author_OfficialTeam}}"
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Author_OfficialTeam}}"
                                                 TextWrapping="Wrap" />
 
                                             <TextBlock
                                                 Grid.Row="1"
                                                 Grid.Column="0"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_Label_Intro}}" />
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Label_Intro}}" />
                                             <TextBlock
                                                 Grid.Row="1"
                                                 Grid.Column="2"
-                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Plugin_WorldBoss_Description}}"
+                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_WorldBoss_Description}}"
                                                 TextWrapping="Wrap" />
                                         </Grid>
                                     </Border>
@@ -919,12 +919,12 @@
                                             SelectedItem="{Binding Theme}" />
                                     </StackPanel>
                                     <StackPanel>
-                                        <TextBlock Style="{StaticResource TestTextBlockStyle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_ThemeTest}}" />
-                                        <Button Command="{Binding Debug.CallDebugWindowCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_Button_PcapTest}}" />
-                                        <Button Command="{Binding CallSkillBreakdownViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_Button_SkillBreakdown}}" />
-                                        <Button Command="{Binding CallDamageReferenceViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_Button_DamageReference}}" />
-                                        <Button Command="{Binding CallSettingsViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_Button_Settings}}" />
-                                        <Button Command="{Binding CallAboutViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainWindow_Debug_Button_About}}" />
+                                        <TextBlock Style="{StaticResource TestTextBlockStyle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_ThemeTest}}" />
+                                        <Button Command="{Binding Debug.CallDebugWindowCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_PcapTest}}" />
+                                        <Button Command="{Binding CallSkillBreakdownViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_SkillBreakdown}}" />
+                                        <Button Command="{Binding CallDamageReferenceViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_DamageReference}}" />
+                                        <Button Command="{Binding CallSettingsViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_Settings}}" />
+                                        <Button Command="{Binding CallAboutViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_About}}" />
                                     </StackPanel>
                                 </StackPanel>
                             </TabItem>

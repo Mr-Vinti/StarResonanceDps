@@ -492,70 +492,70 @@
   <data name="Debug_Group_Title" xml:space="preserve">
     <value>调试功能</value>
   </data>
-  <data name="MainWindow_Header_Title" xml:space="preserve">
+  <data name="MainView_Header_Title" xml:space="preserve">
     <value>别查我 D P S</value>
   </data>
-  <data name="MainWindow_PluginList_Title" xml:space="preserve">
+  <data name="MainView_PluginList_Title" xml:space="preserve">
     <value>插件列表</value>
   </data>
-  <data name="MainWindow_Plugin_Label_Intro" xml:space="preserve">
+  <data name="MainView_Plugin_Label_Intro" xml:space="preserve">
     <value>简介：</value>
   </data>
-  <data name="MainWindow_Plugin_DpsTool_Title" xml:space="preserve">
+  <data name="MainView_Plugin_DpsTool_Title" xml:space="preserve">
     <value>DPS工具</value>
   </data>
-  <data name="MainWindow_Plugin_DpsTool_Description" xml:space="preserve">
+  <data name="MainView_Plugin_DpsTool_Description" xml:space="preserve">
     <value>提供DPS统计、技能分解等功能</value>
   </data>
-  <data name="MainWindow_Plugin_Label_Author" xml:space="preserve">
+  <data name="MainView_Plugin_Label_Author" xml:space="preserve">
     <value>作者：</value>
   </data>
-  <data name="MainWindow_Plugin_Author_OfficialTeam" xml:space="preserve">
+  <data name="MainView_Plugin_Author_OfficialTeam" xml:space="preserve">
     <value>[官方] 别查我DPS 开发团队</value>
   </data>
-  <data name="MainWindow_Plugin_AutoStart" xml:space="preserve">
+  <data name="MainView_Plugin_AutoStart" xml:space="preserve">
     <value>自启动</value>
   </data>
   <data name="Common_Action_Open" xml:space="preserve">
     <value>开启</value>
   </data>
-  <data name="MainWindow_Plugin_ModuleSolver_Title" xml:space="preserve">
+  <data name="MainView_Plugin_ModuleSolver_Title" xml:space="preserve">
     <value>模组求解器</value>
   </data>
-  <data name="MainWindow_Plugin_ModuleSolver_Description" xml:space="preserve">
+  <data name="MainView_Plugin_ModuleSolver_Description" xml:space="preserve">
     <value>提供模组快速计算最优解功能</value>
   </data>
-  <data name="MainWindow_Plugin_WorldBoss_Title" xml:space="preserve">
+  <data name="MainView_Plugin_WorldBoss_Title" xml:space="preserve">
     <value>野外BOSS状态查看器</value>
   </data>
-  <data name="MainWindow_Plugin_WorldBoss_Description" xml:space="preserve">
+  <data name="MainView_Plugin_WorldBoss_Description" xml:space="preserve">
     <value>通过大量的玩家在线数据互助，提供各线路的野外BOSS存活状态等信息</value>
   </data>
-  <data name="MainWindow_Plugin_PigTracker_Title" xml:space="preserve">
+  <data name="MainView_Plugin_PigTracker_Title" xml:space="preserve">
     <value>小猪娜宝状态查看器</value>
   </data>
-  <data name="MainWindow_Plugin_PigTracker_Description" xml:space="preserve">
+  <data name="MainView_Plugin_PigTracker_Description" xml:space="preserve">
     <value>通过大量的玩家在线数据互助，提供小猪娜宝的线路与位置信息</value>
   </data>
-  <data name="MainWindow_Debug_Group_Title" xml:space="preserve">
+  <data name="MainView_Debug_Group_Title" xml:space="preserve">
     <value>调试功能</value>
   </data>
-  <data name="MainWindow_Debug_ThemeTest" xml:space="preserve">
+  <data name="MainView_Debug_ThemeTest" xml:space="preserve">
     <value>主题切换测试文本</value>
   </data>
-  <data name="MainWindow_Debug_Button_PcapTest" xml:space="preserve">
+  <data name="MainView_Debug_Button_PcapTest" xml:space="preserve">
     <value>PCAP 测试</value>
   </data>
-  <data name="MainWindow_Debug_Button_SkillBreakdown" xml:space="preserve">
+  <data name="MainView_Debug_Button_SkillBreakdown" xml:space="preserve">
     <value>技能详情窗口</value>
   </data>
-  <data name="MainWindow_Debug_Button_DamageReference" xml:space="preserve">
+  <data name="MainView_Debug_Button_DamageReference" xml:space="preserve">
     <value>伤害参考窗口</value>
   </data>
-  <data name="MainWindow_Debug_Button_Settings" xml:space="preserve">
+  <data name="MainView_Debug_Button_Settings" xml:space="preserve">
     <value>设置窗口</value>
   </data>
-  <data name="MainWindow_Debug_Button_About" xml:space="preserve">
+  <data name="MainView_Debug_Button_About" xml:space="preserve">
     <value>关于窗口</value>
   </data>
   <data name="Window_ModuleSolve_Title" xml:space="preserve">
