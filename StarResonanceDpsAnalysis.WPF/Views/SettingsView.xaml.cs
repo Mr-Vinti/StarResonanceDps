@@ -40,7 +40,7 @@ public partial class SettingsView : Window
         }
     }
 
-    private void ScrollToSection(FrameworkElement target)
+    private void ScrollToSection(FrameworkElement? target)
     {
         if (target == null) return;
 

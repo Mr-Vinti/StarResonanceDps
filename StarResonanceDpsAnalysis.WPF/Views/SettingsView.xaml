@@ -131,6 +131,7 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="0,0,10,6" />
             <Setter Property="Foreground" Value="#2297F4" />
+            <Setter Property="TextWrapping" Value="WrapWithOverflow" />
         </Style>
 
         <Style x:Key="SectionBorder" TargetType="Border">
@@ -139,6 +140,7 @@
             <Setter Property="CornerRadius" Value="10" />
             <Setter Property="Margin" Value="0,0,10,30" />
         </Style>
+
 
         <Style x:Key="SectionStackPanel" TargetType="StackPanel" />
 
@@ -167,10 +169,6 @@
             BasedOn="{StaticResource AntComboBoxStyle}"
             TargetType="ComboBox">
             <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
-
-        <Style x:Key="CardHeaderGridStyle" TargetType="Grid">
-            <Setter Property="Height" Value="{StaticResource CardHeaderHeight}" />
         </Style>
 
         <Style
@@ -374,12 +372,10 @@
                 <Border Grid.Column="1" Style="{StaticResource SettingDetailListBorder}">
                     <ScrollViewer x:Name="ContentScrollViewer" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
-
-                            <Grid x:Name="SectionLanguage">
-                                <Border Style="{StaticResource TitleStrip}" />
-                                <TextBlock Style="{StaticResource SectionTitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Language_Title}}" />
-                                <TextBlock Style="{StaticResource SectionSubTitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Language_Description}}" />
-                            </Grid>
+                            <ctrl:CardHeader
+                                x:Name="SectionLanguage"
+                                Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Language_Title}}"
+                                Subtitle="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Language_Description}}" />
 
                             <Border Style="{StaticResource SectionBorder}">
                                 <StackPanel Style="{StaticResource SectionStackPanel}">
@@ -408,11 +404,10 @@
                                 </StackPanel>
                             </Border>
 
-                            <Grid x:Name="SectionBasic">
-                                <Border Style="{StaticResource TitleStrip}" />
-                                <TextBlock Style="{StaticResource SectionTitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Basic_Title}}" />
-                                <TextBlock Style="{StaticResource SectionSubTitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Basic_Sub}}" />
-                            </Grid>
+                            <ctrl:CardHeader
+                                x:Name="SectionBasic"
+                                Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Basic_Title}}"
+                                Subtitle="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Basic_Sub}}" />
 
                             <Border Style="{StaticResource SectionBorder}">
                                 <StackPanel Style="{StaticResource SectionStackPanel}">
@@ -455,11 +450,10 @@
                                 </StackPanel>
                             </Border>
 
-                            <Grid x:Name="SectionShortcut">
-                                <Border Style="{StaticResource TitleStrip}" />
-                                <TextBlock Style="{StaticResource SectionTitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Shortcut_Title}}" />
-                                <TextBlock Style="{StaticResource SectionSubTitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Shortcut_Sub}}" />
-                            </Grid>
+                            <ctrl:CardHeader
+                                x:Name="SectionShortcut"
+                                Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Shortcut_Title}}"
+                                Subtitle="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Shortcut_Sub}}" />
 
                             <Border Style="{StaticResource SectionBorder}">
                                 <StackPanel Style="{StaticResource SectionStackPanel}">
@@ -545,11 +539,10 @@
                                 </StackPanel>
                             </Border>
 
-                            <Grid x:Name="SectionCombat">
-                                <Border Style="{StaticResource TitleStrip}" />
-                                <TextBlock Style="{StaticResource SectionTitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Combat_Title}}" />
-                                <TextBlock Style="{StaticResource SectionSubTitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Combat_Sub}}" />
-                            </Grid>
+                            <ctrl:CardHeader
+                                x:Name="SectionCombat"
+                                Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Combat_Title}}"
+                                Subtitle="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Combat_Sub}}" />
 
                             <Border Style="{StaticResource SectionBorder}">
                                 <StackPanel Style="{StaticResource SectionStackPanel}">
@@ -665,11 +658,10 @@
                                 </StackPanel>
                             </Border>
 
-                            <Grid x:Name="SectionTheme">
-                                <Border Style="{StaticResource TitleStrip}" />
-                                <TextBlock Style="{StaticResource SectionTitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Theme_Title}}" />
-                                <TextBlock Style="{StaticResource SectionSubTitleText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Theme_Description}}" />
-                            </Grid>
+                            <ctrl:CardHeader
+                                x:Name="SectionTheme"
+                                Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Theme_Title}}"
+                                Subtitle="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Section_Theme_Description}}" />
 
                             <Border Style="{StaticResource SectionBorder}">
                                 <StackPanel Style="{StaticResource SectionStackPanel}">
