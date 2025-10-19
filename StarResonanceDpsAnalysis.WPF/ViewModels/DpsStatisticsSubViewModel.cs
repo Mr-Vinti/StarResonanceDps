@@ -171,9 +171,10 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
                     Class = @class,
                     Guild = "Unknown",
                     Name = ret ? playerInfo?.Name ?? $"UID: {dpsData.UID}" : $"UID: {dpsData.UID}",
-                    Spec = playerInfo?.Spec ?? ClassSpec.Unknown
+                    Spec = playerInfo?.Spec ?? ClassSpec.Unknown,
+                    IsNpc = dpsData.IsNpcData
                 },
-                SkillList = BuildSkillListSnapshot(dpsData)
+                SkillList = BuildSkillListSnapshot(dpsData),
             };
             _dispatcher.Invoke(() => { Data.Add(slot); });
         }

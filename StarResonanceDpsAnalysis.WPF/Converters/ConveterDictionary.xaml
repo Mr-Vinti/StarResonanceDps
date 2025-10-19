@@ -15,7 +15,6 @@
     <converters:PercentToOpacityConverter x:Key="PercentToOpacityConverter" />
     <converters:PercentToColorConverter x:Key="PercentToColorConverter" />
     <converters:BrushWithOpacityConverter x:Key="BrushWithOpacityConverter" />
-    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <converters:DivisionMultiValueConverter x:Key="DivisionMultiValueConverter" />
     <converters:DpsConverter x:Key="DpsConverter" />
     <converters:ClassSpecToStringConverter x:Key="ClassSpecToStringConverter" />
@@ -24,4 +23,6 @@
     <converters:SwitchTrackWidthConverter x:Key="SwitchTrackWidthConverter" />
     <converters:HalfHeightToHorizontalMarginConverter x:Key="HalfHeightToHorizontalMarginConverter" />
     <converters:MinusConverter x:Key="MinusConverter" />
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <converters:BoolToInvertedVisibilityConverter x:Key="BoolToInvertedVisibilityConverter" />
 </ResourceDictionary>

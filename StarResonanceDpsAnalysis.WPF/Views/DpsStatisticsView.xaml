@@ -15,7 +15,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels"
     Title="{lex:Loc Key={x:Static loc:ResourcesKeys.Window_DpsStatistics_Title}}"
-    Width="320"
+    Width="380"
     Height="360"
     MinWidth="300"
     MinHeight="35"
@@ -168,7 +168,7 @@
             </Style.Triggers>
         </Style>
 
-        <DataTemplate x:Key="PercentageDataTemplate" DataType="{x:Type viewModels:StatisticDataViewModel}">
+        <DataTemplate x:Key="StatisticDetailDataTemplate" DataType="{x:Type viewModels:StatisticDataViewModel}">
             <Grid HorizontalAlignment="Stretch">
                 <!--  名次  -->
                 <Grid.ColumnDefinitions>
@@ -195,21 +195,36 @@
                 <!--  职业图标  -->
                 <Image
                     Grid.Column="1"
-                    Width="{Binding ActualHeight, ElementName=Name}"
-                    Height="{Binding ActualHeight, ElementName=Name}"
+                    Width="{Binding ActualHeight, ElementName=PlayerName}"
+                    Height="{Binding ActualHeight, ElementName=PlayerName}"
                     Margin="2"
                     Source="{Binding Player.Class, Converter={StaticResource ClassesToIconConverter}, FallbackValue={StaticResource ClassesUnknownIcon}}" />
                 <!--  昵称  -->
-                <TextBlock
-                    x:Name="Name"
-                    Grid.Column="2"
-                    VerticalAlignment="Center"
-                    FontFamily="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC"
-                    Foreground="White">
-                    <Run Text="{Binding Player.Name}" />
-                    <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Common_Dash}}" />
-                    <Run Text="{lex:Loc {Binding Player.Spec, StringFormat=ClassSpec_{0}}}" />
-                </TextBlock>
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <StackPanel.Resources>
+                        <Style x:Key="PlayerInfoTextStyle" TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="FontFamily" Value="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBlock
+                        x:Name="PlayerName"
+                        Style="{StaticResource PlayerInfoTextStyle}"
+                        Text="{Binding Player.Name}"
+                        Visibility="{Binding Player.IsNpc, Converter={StaticResource BoolToInvertedVisibilityConverter}}" />
+                    <!--  Localized NPC label from Monster dictionary using UID (visible when NPC)  -->
+                    <TextBlock
+                        lex:ResxLocalizationProvider.DefaultDictionary="Monster"
+                        Style="{StaticResource PlayerInfoTextStyle}"
+                        Text="{lex:Loc {Binding Player.Uid}}"
+                        Visibility="{Binding Player.IsNpc, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <TextBlock Style="{StaticResource PlayerInfoTextStyle}" Visibility="{Binding Player.IsNpc, Converter={StaticResource BoolToInvertedVisibilityConverter}}">
+                        <!--  Player name (visible when not NPC)  -->
+                        <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Common_Dash}}" />
+                        <Run Text="{lex:Loc {Binding Player.Spec, StringFormat=ClassSpec_{0}}}" />
+                    </TextBlock>
+                </StackPanel>
 
                 <!--  数值  -->
                 <TextBlock
@@ -320,7 +335,7 @@
                             HorizontalContentAlignment="Stretch"
                             IndicatorForeground="{Binding Player.Class, Converter={StaticResource ClassesColorConverter}}"
                             OverlayContent="{Binding}"
-                            OverlayTemplate="{StaticResource PercentageDataTemplate}"
+                            OverlayTemplate="{StaticResource StatisticDetailDataTemplate}"
                             Percentage="{Binding PercentOfMax}"
                             PopupContent="{Binding}"
                             PopupTemplate="{StaticResource PopupTemplate}"
@@ -397,7 +412,8 @@
                         <Button
                             Width="21"
                             Command="{Binding MinimizeWindowCommand}"
-                            Content="__" />
+                            Content="—"
+                            FontSize="12" />
 
                         <!--  Mouse-through indicator (visible when click-through is enabled)  -->
                         <TextBlock
