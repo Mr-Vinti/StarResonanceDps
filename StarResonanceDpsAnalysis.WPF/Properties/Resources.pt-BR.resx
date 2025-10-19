@@ -767,7 +767,7 @@
     <value />
   </data>
   <data name="MainView_Plugin_Settings" xml:space="preserve">
-    <value />
+    <value>Configurações</value>
   </data>
   <data name="Settings_Section_Theme_Title" xml:space="preserve">
     <value />
@@ -788,7 +788,7 @@
     <value />
   </data>
   <data name="Settings_CancelConfirm_Message" xml:space="preserve">
-    <value />
+    <value>Descartar todas as alterações? As mudanças não salvas serão perdidas.</value>
   </data>
   <data name="MainView_Plugin_AutoRunState_Enabled" xml:space="preserve">
     <value />

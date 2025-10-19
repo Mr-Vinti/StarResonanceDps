@@ -125,7 +125,10 @@
             <Setter Property="Margin" Value="0,25,0,0" />
         </Style>
 
-        <Style x:Key="PluginListTip" TargetType="TextBlock" BasedOn="{StaticResource NormalTextBlockBaseStyle}">
+        <Style
+            x:Key="PluginListTip"
+            BasedOn="{StaticResource NormalTextBlockBaseStyle}"
+            TargetType="TextBlock">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="#AAA" />
         </Style>
@@ -138,15 +141,22 @@
             <Setter Property="Margin" Value="10,0,10,0" />
         </Style>
 
-        <Style x:Key="PluginAutoStartBorder" TargetType="Border" BasedOn="{StaticResource PluginStateBorderBase}">
+        <Style
+            x:Key="PluginAutoStartBorder"
+            BasedOn="{StaticResource PluginStateBorderBase}"
+            TargetType="Border">
             <Setter Property="Margin" Value="10,0,10,10" />
         </Style>
 
-        <Style x:Key="PluginEnableBorder" TargetType="Border" BasedOn="{StaticResource PluginStateBorderBase}">
-            
-        </Style>
+        <Style
+            x:Key="PluginEnableBorder"
+            BasedOn="{StaticResource PluginStateBorderBase}"
+            TargetType="Border" />
 
-        <Style x:Key="PluginStateText" TargetType="TextBlock" BasedOn="{StaticResource NormalTextBlockBaseStyle}">
+        <Style
+            x:Key="PluginStateText"
+            BasedOn="{StaticResource NormalTextBlockBaseStyle}"
+            TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="9" />
             <Setter Property="Foreground" Value="#6C8CD8" />
@@ -182,9 +192,11 @@
         </Style>
 
         <Style x:Key="PluginButtonBase" TargetType="Border">
-            <Setter Property="Width" Value="80" />
+            <!-- <Setter Property="Width" Value="80" /> -->
+            <Setter Property="MinWidth" Value="80" />
             <Setter Property="Height" Value="36" />
             <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="6,0,6,0" />
         </Style>
 
         <Style
@@ -304,8 +316,8 @@
 
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0">
@@ -316,26 +328,18 @@
 
                                                         <Grid Grid.Column="1">
                                                             <Grid.RowDefinitions>
-                                                                <RowDefinition Height="Auto"/>
-                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="Auto" />
                                                             </Grid.RowDefinitions>
 
-                                                            <Border 
-                                                                Style="{StaticResource PluginAutoStartBorder}"
-                                                                Grid.Row="0">
+                                                            <Border Grid.Row="0" Style="{StaticResource PluginAutoStartBorder}">
 
-                                                                <TextBlock 
-                                                                    Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoRunState_Disabled}}"/>
+                                                                <TextBlock Style="{StaticResource PluginStateText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoRunState_Disabled}}" />
                                                             </Border>
 
-                                                            <Border 
-                                                                Style="{StaticResource PluginEnableBorder}"
-                                                                Grid.Row="1">
+                                                            <Border Grid.Row="1" Style="{StaticResource PluginEnableBorder}">
 
-                                                                <TextBlock 
-                                                                    Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_State_Inactive}}"/>
+                                                                <TextBlock Style="{StaticResource PluginStateText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_State_Inactive}}" />
                                                             </Border>
                                                         </Grid>
 
@@ -369,8 +373,8 @@
 
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0">
@@ -381,26 +385,18 @@
 
                                                         <Grid Grid.Column="1">
                                                             <Grid.RowDefinitions>
-                                                                <RowDefinition Height="Auto"/>
-                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="Auto" />
                                                             </Grid.RowDefinitions>
 
-                                                            <Border 
-                                                                Style="{StaticResource PluginAutoStartBorder}"
-                                                                Grid.Row="0">
+                                                            <Border Grid.Row="0" Style="{StaticResource PluginAutoStartBorder}">
 
-                                                                <TextBlock 
-                                                                    Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoRunState_Disabled}}"/>
+                                                                <TextBlock Style="{StaticResource PluginStateText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoRunState_Disabled}}" />
                                                             </Border>
 
-                                                            <Border 
-                                                                Style="{StaticResource PluginEnableBorder}"
-                                                                Grid.Row="1">
+                                                            <Border Grid.Row="1" Style="{StaticResource PluginEnableBorder}">
 
-                                                                <TextBlock 
-                                                                    Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_State_Inactive}}"/>
+                                                                <TextBlock Style="{StaticResource PluginStateText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_State_Inactive}}" />
                                                             </Border>
                                                         </Grid>
 
@@ -434,8 +430,8 @@
 
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0">
@@ -446,26 +442,18 @@
 
                                                         <Grid Grid.Column="1">
                                                             <Grid.RowDefinitions>
-                                                                <RowDefinition Height="Auto"/>
-                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="Auto" />
                                                             </Grid.RowDefinitions>
 
-                                                            <Border 
-                                                                Style="{StaticResource PluginAutoStartBorder}"
-                                                                Grid.Row="0">
+                                                            <Border Grid.Row="0" Style="{StaticResource PluginAutoStartBorder}">
 
-                                                                <TextBlock 
-                                                                    Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoRunState_Disabled}}"/>
+                                                                <TextBlock Style="{StaticResource PluginStateText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoRunState_Disabled}}" />
                                                             </Border>
 
-                                                            <Border 
-                                                                Style="{StaticResource PluginEnableBorder}"
-                                                                Grid.Row="1">
+                                                            <Border Grid.Row="1" Style="{StaticResource PluginEnableBorder}">
 
-                                                                <TextBlock 
-                                                                    Style="{StaticResource PluginStateText}"
-                                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_State_Inactive}}"/>
+                                                                <TextBlock Style="{StaticResource PluginStateText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_State_Inactive}}" />
                                                             </Border>
                                                         </Grid>
 
@@ -491,10 +479,10 @@
                                         </ToggleButton.Template>
                                     </ToggleButton>
 
-                                    <ToggleButton 
+                                    <ToggleButton
                                         Click="TabSelector_Click"
-                                        Visibility="{Binding IsDebugContentVisible, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                        Tag="3">
+                                        Tag="3"
+                                        Visibility="{Binding IsDebugContentVisible, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                         <ToggleButton.Template>
                                             <ControlTemplate TargetType="ToggleButton">
 
@@ -515,9 +503,7 @@
 
                                                         <Border Grid.Column="2" Style="{StaticResource PluginEnableBorder}">
 
-                                                            <TextBlock 
-                                                                Style="{StaticResource PluginStateText}"
-                                                                Text="Debug"/>
+                                                            <TextBlock Style="{StaticResource PluginStateText}" Text="Debug" />
                                                         </Border>
 
                                                     </Grid>
@@ -543,9 +529,7 @@
                                     </ToggleButton>
 
                                     <Border Style="{StaticResource PluginBorder}">
-                                        <TextBlock 
-                                            Style="{StaticResource PluginListTip}"
-                                            Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_ThirdPartySdkTips}}"/>
+                                        <TextBlock Style="{StaticResource PluginListTip}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_ThirdPartySdkTips}}" />
                                     </Border>
 
                                 </StackPanel>
@@ -562,8 +546,7 @@
                             SelectedIndex="0"
                             Style="{StaticResource DetailTabControl}">
 
-                            <TabItem
-                                Visibility="{Binding IsDebugContentVisible, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <TabItem Visibility="{Binding IsDebugContentVisible, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -939,6 +922,7 @@
                 Grid.Row="2"
                 Height="50"
                 Background="Transparent"
+                ConfirmClick="Footer_OnConfirmClick"
                 CancelCommand="{Binding ShutdownCommand}" />
 
         </Grid>

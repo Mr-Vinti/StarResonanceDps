@@ -15,6 +15,7 @@ public partial class MainView : Window
         watcher.Watch(this);
         InitializeComponent();
         DataContext = viewModel;
+        SyncSelectorWithTab();
     }
 
     public bool IsDebugContentVisible { get; } =
@@ -48,4 +49,8 @@ public partial class MainView : Window
         }
     }
 
+    private void Footer_OnConfirmClick(object sender, RoutedEventArgs e)
+    {
+        WindowState = WindowState.Minimized;
+    }
 }
