@@ -112,6 +112,7 @@ public partial class App : Application
                 services.AddSingleton<IGlobalHotkeyService, GlobalHotkeyService>();
                 services.AddSingleton<IMousePenetrationService, MousePenetrationService>();
                 services.AddSingleton<ITopmostService, TopmostService>();
+                services.AddSingleton<ITrayService, TrayService>();
 
                 if (_logStream != null) services.AddSingleton<IObservable<LogEvent>>(_logStream);
 

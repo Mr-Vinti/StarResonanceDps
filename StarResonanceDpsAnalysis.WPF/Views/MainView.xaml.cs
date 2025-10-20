@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using StarResonanceDpsAnalysis.WPF.Themes.SystemThemes;
@@ -16,6 +17,21 @@ public partial class MainView : Window
         InitializeComponent();
         DataContext = viewModel;
         SyncSelectorWithTab();
+
+        Loaded += (_, _) => viewModel.InitializeTrayCommand.Execute(null);
+        StateChanged += (_, _) =>
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                viewModel.MinimizeToTrayCommand.Execute(null);
+            }
+        };
+        Closing += (s, e) =>
+        {
+            // default: hide instead of exit; user can Exit from tray menu
+            e.Cancel = true;
+            viewModel.MinimizeToTrayCommand.Execute(null);
+        };
     }
 
     public bool IsDebugContentVisible { get; } =
@@ -52,5 +68,38 @@ public partial class MainView : Window
     private void Footer_OnConfirmClick(object sender, RoutedEventArgs e)
     {
         WindowState = WindowState.Minimized;
+    }
+
+    protected override void OnStateChanged(EventArgs e)
+    {
+        base.OnStateChanged(e);
+        if (WindowState != WindowState.Minimized)
+        {
+            RestoreOwnedWindows();
+        }
+    }
+
+    protected override void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
+        RestoreOwnedWindows();
+    }
+
+    private void RestoreOwnedWindows()
+    {
+        // Bring all tool windows (owned windows) to front when main becomes active
+        foreach (var owned in this.OwnedWindows.Cast<Window>())
+        {
+            if (owned.Visibility != Visibility.Visible) continue;
+
+            if (owned.WindowState == WindowState.Minimized)
+            {
+                owned.WindowState = WindowState.Normal;
+            }
+
+            // force z-order after main
+            owned.Topmost = true;
+            owned.Topmost = false;
+        }
     }
 }

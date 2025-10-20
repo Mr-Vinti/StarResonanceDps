@@ -10,6 +10,7 @@ public partial class MainViewModel(
     DebugFunctions debugFunctions,
     IWindowManagementService windowManagement,
     IApplicationControlService appControlService) : BaseViewModel
+    ITrayService trayService,
 {
     [ObservableProperty] private List<ApplicationTheme> _availableThemes =
         [ApplicationTheme.Light, ApplicationTheme.Dark];
@@ -20,6 +21,30 @@ public partial class MainViewModel(
     partial void OnThemeChanged(ApplicationTheme value)
     {
         themeManager.Apply(value);
+    }
+
+    [RelayCommand]
+    private void InitializeTray()
+    {
+        trayService.Initialize("Star Resonance DPS");
+    }
+
+    [RelayCommand]
+    private void MinimizeToTray()
+    {
+        trayService.MinimizeToTray();
+    }
+
+    [RelayCommand]
+    private void RestoreFromTray()
+    {
+        trayService.Restore();
+    }
+
+    [RelayCommand]
+    private void ExitFromTray()
+    {
+        trayService.Exit();
     }
 
     [RelayCommand]

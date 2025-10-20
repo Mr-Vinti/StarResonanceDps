@@ -241,6 +241,24 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close application?.
+        /// </summary>
+        public static string App_Exit_Confirm_Content {
+            get {
+                return ResourceManager.GetString("App_Exit_Confirm_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmation.
+        /// </summary>
+        public static string App_Exit_Confirm_Title {
+            get {
+                return ResourceManager.GetString("App_Exit_Confirm_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to StarResonance ToolBox.
         /// </summary>
         public static string App_Name {
@@ -925,7 +943,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Auto Off 的本地化字符串。
+        ///   Looks up a localized string similar to Auto Off.
         /// </summary>
         public static string MainView_Plugin_AutoRunState_Disabled {
             get {
@@ -934,7 +952,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Auto On 的本地化字符串。
+        ///   Looks up a localized string similar to Auto On.
         /// </summary>
         public static string MainView_Plugin_AutoRunState_Enabled {
             get {
@@ -943,7 +961,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Auto start 的本地化字符串。
+        ///   Looks up a localized string similar to Auto start.
         /// </summary>
         public static string MainView_Plugin_AutoStart {
             get {
@@ -1060,7 +1078,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Plugin SDK coming soon! 的本地化字符串。
+        ///   Looks up a localized string similar to Plugin SDK coming soon!.
         /// </summary>
         public static string MainView_Plugin_ThirdPartySdkTips {
             get {
@@ -1069,7 +1087,7 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Crowdsourced live data for each channel&apos;s world boss status 的本地化字符串。
+        ///   Looks up a localized string similar to Crowdsourced live data for each channel&apos;s world boss status.
         /// </summary>
         public static string MainView_Plugin_WorldBoss_Description {
             get {

@@ -61,6 +61,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Hardcodet.Wpf.TaskbarNotification" Version="1.0.5" />
     <PackageReference Include="Ihon.ResXKeyCodeGenerator" Version="0.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
