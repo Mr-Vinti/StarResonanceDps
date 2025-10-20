@@ -19,6 +19,7 @@
     lex:ResxLocalizationProvider.DefaultAssembly="StarResonanceDpsAnalysis.WPF"
     lex:ResxLocalizationProvider.DefaultDictionary="Resources"
     Style="{StaticResource TransparentWindow}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
     <!--  WindowChrome: 开启可拉伸边界  -->
@@ -133,7 +134,10 @@
             <Setter Property="Margin" Value="0,25,0,0" />
         </Style>
 
-        <Style x:Key="PluginListTip" TargetType="TextBlock" BasedOn="{StaticResource NormalTextBlockBaseStyle}">
+        <Style
+            x:Key="PluginListTip"
+            BasedOn="{StaticResource NormalTextBlockBaseStyle}"
+            TargetType="TextBlock">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="#AAA" />
         </Style>
@@ -146,15 +150,22 @@
             <Setter Property="Margin" Value="10,0,10,0" />
         </Style>
 
-        <Style x:Key="PluginAutoStartBorder" TargetType="Border" BasedOn="{StaticResource PluginStateBorderBase}">
+        <Style
+            x:Key="PluginAutoStartBorder"
+            BasedOn="{StaticResource PluginStateBorderBase}"
+            TargetType="Border">
             <Setter Property="Margin" Value="10,0,10,10" />
         </Style>
 
-        <Style x:Key="PluginEnableBorder" TargetType="Border" BasedOn="{StaticResource PluginStateBorderBase}">
-            
-        </Style>
+        <Style
+            x:Key="PluginEnableBorder"
+            BasedOn="{StaticResource PluginStateBorderBase}"
+            TargetType="Border" />
 
-        <Style x:Key="PluginStateText" TargetType="TextBlock" BasedOn="{StaticResource NormalTextBlockBaseStyle}">
+        <Style
+            x:Key="PluginStateText"
+            BasedOn="{StaticResource NormalTextBlockBaseStyle}"
+            TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="9" />
             <Setter Property="Foreground" Value="#6C8CD8" />
@@ -190,9 +201,11 @@
         </Style>
 
         <Style x:Key="PluginButtonBase" TargetType="Border">
-            <Setter Property="Width" Value="80" />
+            <!-- <Setter Property="Width" Value="80" /> -->
+            <Setter Property="MinWidth" Value="80" />
             <Setter Property="Height" Value="36" />
             <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="6,0,6,0" />
         </Style>
 
         <Style
@@ -611,7 +624,8 @@
                 Grid.Row="2"
                 Height="50"
                 Background="Transparent"
-                CancelCommand="{Binding ShutdownCommand}" />
+                CancelCommand="{Binding ShutdownCommand}"
+                ConfirmClick="Footer_OnConfirmClick" />
 
         </Grid>
     </Border>

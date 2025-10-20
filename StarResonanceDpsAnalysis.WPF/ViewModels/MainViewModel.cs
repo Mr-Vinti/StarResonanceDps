@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StarResonanceDpsAnalysis.WPF.Localization;
 using StarResonanceDpsAnalysis.WPF.Plugins;
+using StarResonanceDpsAnalysis.WPF.Properties;
 using StarResonanceDpsAnalysis.WPF.Services;
 using StarResonanceDpsAnalysis.WPF.Themes;
 
@@ -16,7 +17,9 @@ public partial class MainViewModel : BaseViewModel
     private readonly ApplicationThemeManager _themeManager;
     private readonly IWindowManagementService _windowManagement;
     private readonly IApplicationControlService _appControlService;
+    private readonly ITrayService _trayService;
     private readonly LocalizationManager _localizationManager;
+    private readonly IMessageDialogService _dialogService;
     private readonly ObservableCollection<PluginListItemViewModel> _plugins = [];
     private PluginListItemViewModel? _lastSelectedPlugin;
 
@@ -25,13 +28,17 @@ public partial class MainViewModel : BaseViewModel
         DebugFunctions debugFunctions,
         IWindowManagementService windowManagement,
         IApplicationControlService appControlService,
+        ITrayService trayService,
         IPluginManager pluginManager,
-        LocalizationManager localizationManager)
+        LocalizationManager localizationManager,
+        IMessageDialogService dialogService)
     {
         _themeManager = themeManager;
         _windowManagement = windowManagement;
         _appControlService = appControlService;
+        _trayService = trayService;
         _localizationManager = localizationManager;
+        _dialogService = dialogService;
 
         Debug = debugFunctions;
         AvailableThemes = new List<ApplicationTheme> { ApplicationTheme.Light, ApplicationTheme.Dark };
@@ -73,6 +80,30 @@ public partial class MainViewModel : BaseViewModel
     partial void OnThemeChanged(ApplicationTheme value)
     {
         _themeManager.Apply(value);
+    }
+
+    [RelayCommand]
+    private void InitializeTray()
+    {
+        _trayService.Initialize("Star Resonance DPS");
+    }
+
+    [RelayCommand]
+    private void MinimizeToTray()
+    {
+        _trayService.MinimizeToTray();
+    }
+
+    [RelayCommand]
+    private void RestoreFromTray()
+    {
+        _trayService.Restore();
+    }
+
+    [RelayCommand]
+    private void ExitFromTray()
+    {
+        _trayService.Exit();
     }
 
     partial void OnSelectedPluginChanged(PluginListItemViewModel? value)
@@ -138,6 +169,13 @@ public partial class MainViewModel : BaseViewModel
     [RelayCommand]
     private void Shutdown()
     {
-        _appControlService.Shutdown();
+        var title = _localizationManager.GetString(ResourcesKeys.App_Exit_Confirm_Title);
+        var content = _localizationManager.GetString(ResourcesKeys.App_Exit_Confirm_Content);
+
+        var result = _dialogService.Show(title, content);
+        if (result == true)
+        {
+            _appControlService.Shutdown();
+        }
     }
 }
