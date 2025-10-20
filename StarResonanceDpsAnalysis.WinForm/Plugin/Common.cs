@@ -394,7 +394,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                     .GetAsync();
 
                 // 获取响应的内容并解析为 JSON
-                var result = await response.GetJsonAsync();
+                var result = await response.GetJsonAsync<JObject>();
                 data = JObject.FromObject(result);
             }
             catch (HttpRequestException ex)
@@ -429,7 +429,7 @@ namespace StarResonanceDpsAnalysis.WinForm.Plugin
                     .WithCookies(cookies)
                     .WithHeaders(headers)
                     .PostJsonAsync(queryParams)
-                    .ReceiveJson();
+                    .ReceiveJson<JObject>();
                 // 将 JSON 数据转换为 JObject
 
                 data = JObject.FromObject(result);
