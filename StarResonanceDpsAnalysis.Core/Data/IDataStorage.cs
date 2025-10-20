@@ -50,10 +50,10 @@ public interface IDataStorage : IDisposable
     void SetPlayerProfessionID(long playerUid, int professionId);
 
     /// <summary>
-    /// ���ս����־ (���Զ�������־�ֶ�)
+    /// 添加战斗日志 (会自动创建日志分段)
     /// Public method for backwards compatibility - fires events immediately
     /// </summary>
-    /// <param name="log">ս����־</param>
+    /// <param name="log">战斗日志</param>
     void AddBattleLog(BattleLog log);
 
     void SetPlayerRankLevel(long playerUid, int readInt32);
