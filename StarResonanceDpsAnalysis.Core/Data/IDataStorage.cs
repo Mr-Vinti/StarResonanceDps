@@ -50,10 +50,10 @@ public interface IDataStorage : IDisposable
     void SetPlayerProfessionID(long playerUid, int professionId);
 
     /// <summary>
-    /// Ìí¼ÓÕ½¶·ÈÕÖ¾ (»á×Ô¶¯´´½¨ÈÕÖ¾·Ö¶Î)
+    /// ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½Ö¾ (ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½Ö¶ï¿½)
     /// Public method for backwards compatibility - fires events immediately
     /// </summary>
-    /// <param name="log">Õ½¶·ÈÕÖ¾</param>
+    /// <param name="log">Õ½ï¿½ï¿½ï¿½ï¿½Ö¾</param>
     void AddBattleLog(BattleLog log);
 
     void SetPlayerRankLevel(long playerUid, int readInt32);

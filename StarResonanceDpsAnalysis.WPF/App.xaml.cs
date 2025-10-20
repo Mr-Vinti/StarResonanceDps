@@ -15,6 +15,9 @@ using SharpPcap;
 using StarResonanceDpsAnalysis.WPF.Config;
 using StarResonanceDpsAnalysis.WPF.Extensions;
 using StarResonanceDpsAnalysis.WPF.Localization;
+using StarResonanceDpsAnalysis.WPF.Plugins;
+using StarResonanceDpsAnalysis.WPF.Plugins.BuiltIn;
+using StarResonanceDpsAnalysis.WPF.Plugins.Interfaces;
 using StarResonanceDpsAnalysis.WPF.Services;
 using StarResonanceDpsAnalysis.WPF.Themes;
 using StarResonanceDpsAnalysis.WPF.ViewModels;
@@ -96,6 +99,7 @@ public partial class App : Application
             {
                 services.AddJsonConfiguration();
                 services.Configure<AppConfig>(context.Configuration.GetSection("Config"));
+
                 RegisterViewModels(services);
                 RegisterViews(services);
 
@@ -103,8 +107,9 @@ public partial class App : Application
                 services.AddThemes();
                 services.AddWindowManagementService();
                 services.AddMessageDialogService();
+
                 services.AddSingleton<DebugFunctions>();
-                services.AddSingleton<CaptureDeviceList>(CaptureDeviceList.Instance);
+                services.AddSingleton(CaptureDeviceList.Instance);
                 services.AddSingleton<IApplicationControlService, ApplicationControlService>();
                 services.AddSingleton<IDeviceManagementService, DeviceManagementService>();
                 services.AddSingleton<IApplicationStartup, ApplicationStartup>();
@@ -112,13 +117,17 @@ public partial class App : Application
                 services.AddSingleton<IGlobalHotkeyService, GlobalHotkeyService>();
                 services.AddSingleton<IMousePenetrationService, MousePenetrationService>();
                 services.AddSingleton<ITopmostService, TopmostService>();
+                services.AddSingleton<IPluginManager, PluginManager>();
+                services.AddSingleton<IPlugin, DpsPlugin>();
+                services.AddSingleton<IPlugin, ModuleSolverPlugin>();
+                services.AddSingleton<IPlugin, WorldBossPlugin>();
 
                 if (_logStream != null) services.AddSingleton<IObservable<LogEvent>>(_logStream);
 
                 services.AddSingleton(_ => Current.Dispatcher);
 
                 // Localization manager singleton
-                services.AddSingleton<LocalizationManager>(_ => new LocalizationManager(new LocalizationConfiguration
+                services.AddSingleton(_ => new LocalizationManager(new LocalizationConfiguration
                 {
                     LocalizationDirectory = Path.Combine(AppContext.BaseDirectory, "Data")
                 }));

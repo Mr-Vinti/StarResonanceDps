@@ -1,72 +1,143 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StarResonanceDpsAnalysis.WPF.Localization;
+using StarResonanceDpsAnalysis.WPF.Plugins;
 using StarResonanceDpsAnalysis.WPF.Services;
 using StarResonanceDpsAnalysis.WPF.Themes;
 
 namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
-public partial class MainViewModel(
-    ApplicationThemeManager themeManager,
-    DebugFunctions debugFunctions,
-    IWindowManagementService windowManagement,
-    IApplicationControlService appControlService) : BaseViewModel
+public partial class MainViewModel : BaseViewModel
 {
-    [ObservableProperty] private List<ApplicationTheme> _availableThemes =
-        [ApplicationTheme.Light, ApplicationTheme.Dark];
+    private readonly ApplicationThemeManager _themeManager;
+    private readonly IWindowManagementService _windowManagement;
+    private readonly IApplicationControlService _appControlService;
+    private readonly LocalizationManager _localizationManager;
+    private readonly ObservableCollection<PluginListItemViewModel> _plugins = [];
+    private PluginListItemViewModel? _lastSelectedPlugin;
 
-    [ObservableProperty] private ApplicationTheme _theme = themeManager.GetAppTheme();
-    public DebugFunctions Debug { get; init; } = debugFunctions;
+    public MainViewModel(
+        ApplicationThemeManager themeManager,
+        DebugFunctions debugFunctions,
+        IWindowManagementService windowManagement,
+        IApplicationControlService appControlService,
+        IPluginManager pluginManager,
+        LocalizationManager localizationManager)
+    {
+        _themeManager = themeManager;
+        _windowManagement = windowManagement;
+        _appControlService = appControlService;
+        _localizationManager = localizationManager;
+
+        Debug = debugFunctions;
+        AvailableThemes = new List<ApplicationTheme> { ApplicationTheme.Light, ApplicationTheme.Dark };
+        Theme = _themeManager.GetAppTheme();
+
+        var pluginStates = pluginManager.GetPluginStates();
+        foreach (var plugin in pluginManager.GetPlugins())
+        {
+            if (!pluginStates.TryGetValue(plugin, out var state))
+            {
+                state = new PluginState();
+            }
+
+            _plugins.Add(new PluginListItemViewModel(plugin, state));
+        }
+
+        Plugins = new ReadOnlyObservableCollection<PluginListItemViewModel>(_plugins);
+        SelectedPlugin = Plugins.FirstOrDefault();
+
+        _localizationManager.CultureChanged += OnCultureChanged;
+    }
+
+    public DebugFunctions Debug { get; }
+
+    public ReadOnlyObservableCollection<PluginListItemViewModel> Plugins { get; }
+
+    [ObservableProperty]
+    private List<ApplicationTheme> _availableThemes = [];
+
+    [ObservableProperty]
+    private ApplicationTheme _theme;
+
+    [ObservableProperty]
+    private PluginListItemViewModel? _selectedPlugin;
+
+    [ObservableProperty]
+    private bool _isDebugTabActive;
 
     partial void OnThemeChanged(ApplicationTheme value)
     {
-        themeManager.Apply(value);
+        _themeManager.Apply(value);
     }
 
-    [RelayCommand]
-    private void CallDpsStatisticsView()
+    partial void OnSelectedPluginChanged(PluginListItemViewModel? value)
     {
-        windowManagement.DpsStatisticsView.Show();
+        if (value != null)
+        {
+            _lastSelectedPlugin = value;
+            IsDebugTabActive = false;
+        }
+    }
+
+    partial void OnIsDebugTabActiveChanged(bool value)
+    {
+        if (value)
+        {
+            if (SelectedPlugin != null)
+            {
+                _lastSelectedPlugin = SelectedPlugin;
+            }
+            SelectedPlugin = null;
+        }
+        else if (SelectedPlugin is null && _lastSelectedPlugin != null)
+        {
+            if (_plugins.Contains(_lastSelectedPlugin))
+            {
+                SelectedPlugin = _lastSelectedPlugin;
+            }
+        }
+    }
+
+    private void OnCultureChanged(object? sender, CultureInfo e)
+    {
+        foreach (var plugin in _plugins)
+        {
+            plugin.RefreshLocalization();
+        }
     }
 
     [RelayCommand]
     private void CallSettingsView()
     {
-        windowManagement.SettingsView.Show();
+        _windowManagement.SettingsView.Show();
     }
 
     [RelayCommand]
     private void CallSkillBreakdownView()
     {
-        windowManagement.SkillBreakdownView.Show();
+        _windowManagement.SkillBreakdownView.Show();
     }
 
     [RelayCommand]
     private void CallAboutView()
     {
-        windowManagement.AboutView.ShowDialog();
+        _windowManagement.AboutView.ShowDialog();
     }
 
     [RelayCommand]
     private void CallDamageReferenceView()
     {
-        windowManagement.DamageReferenceView.Show();
-    }
-
-    [RelayCommand]
-    private void CallModuleSolveView()
-    {
-        windowManagement.ModuleSolveView.Show();
-    }
-
-    [RelayCommand]
-    private void CallBossTrackerView() 
-    {
-        windowManagement.BossTrackerView.Show();
+        _windowManagement.DamageReferenceView.Show();
     }
 
     [RelayCommand]
     private void Shutdown()
     {
-        appControlService.Shutdown();
+        _appControlService.Shutdown();
     }
 }

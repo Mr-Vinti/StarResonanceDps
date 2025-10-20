@@ -1,5 +1,4 @@
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using StarResonanceDpsAnalysis.WPF.Themes.SystemThemes;
 using StarResonanceDpsAnalysis.WPF.ViewModels;
 
@@ -23,29 +22,5 @@ public partial class MainView : Window
 #else
         false;
 #endif
-
-    private void UnderConstructionButton_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show("This feature is under construction.", "Info", MessageBoxButton.OK,
-            MessageBoxImage.Information);
-    }
-
-    private void TabSelector_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is not ToggleButton tb || !int.TryParse(tb.Tag?.ToString(), out var index)) return;
-        MainTabControl.SelectedIndex = index;
-        SyncSelectorWithTab();
-    }
-
-    private void SyncSelectorWithTab()
-    {
-        if (TabControlIndexChanger == null) return;
-
-        foreach (var child in LogicalTreeHelper.GetChildren(TabControlIndexChanger))
-        {
-            if (child is not ToggleButton t || !int.TryParse(t.Tag?.ToString(), out var tagIndex)) continue;
-            t.IsChecked = tagIndex == MainTabControl.SelectedIndex;
-        }
-    }
 
 }
