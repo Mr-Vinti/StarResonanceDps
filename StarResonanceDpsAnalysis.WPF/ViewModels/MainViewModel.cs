@@ -1,5 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StarResonanceDpsAnalysis.WPF.Localization;
+using StarResonanceDpsAnalysis.WPF.Properties;
 using StarResonanceDpsAnalysis.WPF.Services;
 using StarResonanceDpsAnalysis.WPF.Themes;
 
@@ -9,10 +11,13 @@ public partial class MainViewModel(
     ApplicationThemeManager themeManager,
     DebugFunctions debugFunctions,
     IWindowManagementService windowManagement,
-    IApplicationControlService appControlService) : BaseViewModel
+    IApplicationControlService appControlService,
     ITrayService trayService,
+    LocalizationManager localizationManager,
+    IMessageDialogService dialogService) : BaseViewModel
 {
-    [ObservableProperty] private List<ApplicationTheme> _availableThemes =
+    [ObservableProperty]
+    private List<ApplicationTheme> _availableThemes =
         [ApplicationTheme.Light, ApplicationTheme.Dark];
 
     [ObservableProperty] private ApplicationTheme _theme = themeManager.GetAppTheme();
@@ -84,7 +89,7 @@ public partial class MainViewModel(
     }
 
     [RelayCommand]
-    private void CallBossTrackerView() 
+    private void CallBossTrackerView()
     {
         windowManagement.BossTrackerView.Show();
     }
@@ -92,6 +97,13 @@ public partial class MainViewModel(
     [RelayCommand]
     private void Shutdown()
     {
-        appControlService.Shutdown();
+        var title = localizationManager.GetString(ResourcesKeys.App_Exit_Confirm_Title);
+        var content = localizationManager.GetString(ResourcesKeys.App_Exit_Confirm_Content);
+
+        var result = dialogService.Show(title, content);
+        if (result == true)
+        {
+            appControlService.Shutdown();
+        }
     }
 }

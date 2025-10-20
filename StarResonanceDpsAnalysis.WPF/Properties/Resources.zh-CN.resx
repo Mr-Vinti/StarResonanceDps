@@ -877,4 +877,10 @@
   <data name="MainView_Plugin_ThirdPartySdkTips" xml:space="preserve">
     <value>第三方插件 SDK 功能即将开放，敬请期待。</value>
   </data>
+  <data name="App_Exit_Confirm_Title" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="App_Exit_Confirm_Content" xml:space="preserve">
+    <value>确定退出？</value>
+  </data>
 </root>

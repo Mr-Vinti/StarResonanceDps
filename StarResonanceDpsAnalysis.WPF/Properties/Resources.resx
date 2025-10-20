@@ -904,4 +904,10 @@
   <data name="MainView_Plugin_ThirdPartySdkTips" xml:space="preserve">
     <value>Plugin SDK coming soon!</value>
   </data>
+  <data name="App_Exit_Confirm_Title" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="App_Exit_Confirm_Content" xml:space="preserve">
+    <value>Close application?</value>
+  </data>
 </root>

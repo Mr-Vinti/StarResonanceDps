@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="App_Name" xml:space="preserve">
-    <value />
+    <value>StarResonance ToolBox</value>
   </data>
   <data name="Menu_Settings" xml:space="preserve">
     <value>Configurações</value>
@@ -798,5 +798,11 @@
   </data>
   <data name="MainView_Plugin_ThirdPartySdkTips" xml:space="preserve">
     <value />
+  </data>
+  <data name="App_Exit_Confirm_Title" xml:space="preserve">
+    <value>Confirmação</value>
+  </data>
+  <data name="App_Exit_Confirm_Content" xml:space="preserve">
+    <value>Fechar aplicativo?</value>
   </data>
 </root>
