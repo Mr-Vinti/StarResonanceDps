@@ -167,6 +167,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         _storage.ClearAllDpsData();
         _battleTimer.Reset();
         _fullBattleTimer.Reset();
+
+        // Clear current UI data for all statistic types and rebuild from the new section snapshot
+        foreach (var subVm in StatisticData.Values)
+        {
+            subVm.Reset();
+        }
     }
 
     [RelayCommand]
@@ -519,6 +525,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         {
             _battleTimer.Reset();
             UpdateBattleDuration();
+
+            // Clear current UI data for all statistic types and rebuild from the new section snapshot
+            foreach (var subVm in StatisticData.Values)
+            {
+                subVm.Reset();
+            }
         });
     }
 

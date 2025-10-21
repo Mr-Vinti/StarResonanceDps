@@ -185,7 +185,7 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
     public void UpdateData(IReadOnlyList<DpsData> data)
     {
         _logger.LogDebug("Enter updatedata");
-        
+
         var currentPlayerUid = _storage.CurrentPlayerInfo.UID;
         var hasCurrentPlayer = currentPlayerUid != 0;
 
@@ -194,7 +194,7 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
         {
             var slot = GetOrAddStatisticDataViewModel(dpsData);
             var value = GetValueForType(dpsData);
-            
+
             // Calculate duration once
             var duration = (dpsData.LastLoggedTick - (dpsData.StartLoggedTick ?? 0)).ConvertToUnsigned();
 
@@ -232,7 +232,7 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
         {
             var maxValue = Data.Max(d => d.Value);
             var totalValue = Data.Sum(d => Convert.ToDouble(d.Value));
-            
+
             var hasMaxValue = maxValue > 0;
             var hasTotalValue = totalValue > 0;
 
@@ -255,7 +255,7 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
     internal void UpdateDataOptimized(Dictionary<long, DpsDataProcessed> processedData, long currentPlayerUid)
     {
         // _logger.LogDebug("Enter updatedata (optimized)");
-        
+
         var hasCurrentPlayer = currentPlayerUid != 0;
 
         // Update all slots with pre-processed data
@@ -266,7 +266,7 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
                 continue;
 
             var slot = GetOrAddStatisticDataViewModel(processed.OriginalData);
-            
+
             // Update slot values with pre-computed data
             slot.Value = processed.Value;
             slot.Duration = processed.Duration;
@@ -291,7 +291,7 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
         {
             var maxValue = Data.Max(d => d.Value);
             var totalValue = Data.Sum(d => Convert.ToDouble(d.Value));
-            
+
             var hasMaxValue = maxValue > 0;
             var hasTotalValue = totalValue > 0;
 
@@ -524,4 +524,12 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
     }
 
     #endregion
+
+    public void Reset()
+    {
+        // Clear items (will also clear DataDictionary via CollectionChanged Reset handler)
+        Data.Clear();
+        SelectedSlot = null;
+        CurrentPlayerSlot = null;
+    }
 }
