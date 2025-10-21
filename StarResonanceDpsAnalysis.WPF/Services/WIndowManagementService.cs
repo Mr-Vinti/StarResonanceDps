@@ -30,7 +30,7 @@ public class WindowManagementService(IServiceProvider provider) : IWindowManagem
             view.Owner = main;
             view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
         }
-        view.ShowInTaskbar = false; // only one taskbar icon (main)
+        // view.ShowInTaskbar = false; // only one taskbar icon (main)
     }
 
     private DpsStatisticsView CreateDpsStatisticsView()
