@@ -38,7 +38,7 @@ internal sealed class SyncContainerDirtyDataProcessor(IDataStorage storage, ILog
 
             switch (fieldIndex)
             {
-                case 2: ProcessNameAndCombatPower(br, playerUid); break;
+                case 2: ProcessNameAndPowerLevel(br, playerUid); break;
                 case 16: ProcessHp(br, playerUid); break;
                 case 61: ProcessProfession(br, playerUid); break;
             }
@@ -49,7 +49,7 @@ internal sealed class SyncContainerDirtyDataProcessor(IDataStorage storage, ILog
         }
     }
 
-    private void ProcessNameAndCombatPower(BinaryReader br, long playerUid)
+    private void ProcessNameAndPowerLevel(BinaryReader br, long playerUid)
     {
         if (!DoesStreamHaveIdentifier(br)) return;
         var fieldIndex = br.ReadUInt32();

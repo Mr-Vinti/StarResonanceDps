@@ -6,6 +6,7 @@ using StarResonanceDpsAnalysis.Core.Extends.BlueProto;
 using StarResonanceDpsAnalysis.Core.Extends.System;
 using StarResonanceDpsAnalysis.Core.Tools;
 using StarResonanceDpsAnalysis.WPF.Data;
+using Google.Protobuf;
 
 namespace StarResonanceDpsAnalysis.Core.Analyze.V2.Processors;
 
@@ -29,11 +30,61 @@ public abstract class BaseDeltaInfoProcessor(IDataStorage storage, ILogger? logg
         var isTargetPlayer = targetUuidRaw.IsUuidPlayerRaw();
         var targetUuid = targetUuidRaw.ShiftRight16();
 
-        // Attribute processing logic can be further refactored if needed
-        if (delta.Attrs?.Attrs != null)
+        // Re-enable attribute updates from delta packets (parity with v1)
+        var attrCollection = delta.Attrs;
+        if (attrCollection?.Attrs != null && isTargetPlayer)
         {
-            // This part might need access to the entity sync handlers or be refactored
-            // For now, we assume attribute updates are handled by SyncNearEntitiesProcessor
+            // Ensure player exists in storage
+            _storage.EnsurePlayer(targetUuid);
+
+            foreach (var attr in attrCollection.Attrs)
+            {
+                if (attr.Id == 0 || attr.RawData == null || attr.RawData.Length == 0) continue;
+                var reader = new CodedInputStream(attr.RawData.ToByteArray());
+
+                var attrType = (AttrType)attr.Id;
+                // silently skip unknown ids to be robust to protocol changes
+                switch (attrType)
+                {
+                    case AttrType.AttrName:
+                        _storage.SetPlayerName(targetUuid, reader.ReadString());
+                        break;
+                    case AttrType.AttrProfessionId:
+                        _storage.SetPlayerProfessionID(targetUuid, reader.ReadInt32());
+                        break;
+                    case AttrType.AttrFightPoint:
+                        _storage.SetPlayerCombatPower(targetUuid, reader.ReadInt32());
+                        break;
+                    case AttrType.AttrLevel:
+                        _storage.SetPlayerLevel(targetUuid, reader.ReadInt32());
+                        break;
+                    case AttrType.AttrRankLevel:
+                        _storage.SetPlayerRankLevel(targetUuid, reader.ReadInt32());
+                        break;
+                    case AttrType.AttrCri:
+                        _storage.SetPlayerCritical(targetUuid, reader.ReadInt32());
+                        break;
+                    case AttrType.AttrLucky:
+                        _storage.SetPlayerLucky(targetUuid, reader.ReadInt32());
+                        break;
+                    case AttrType.AttrHp:
+                        _storage.SetPlayerHP(targetUuid, reader.ReadInt32());
+                        break;
+                    case AttrType.AttrMaxHp:
+                        _storage.SetPlayerMaxHP(targetUuid, reader.ReadInt32());
+                        break;
+                    case AttrType.AttrId:
+                    case AttrType.AttrElementFlag:
+                    case AttrType.AttrReductionLevel:
+                    case AttrType.AttrReduntionId:
+                    case AttrType.AttrEnergyFlag:
+                        _ = reader.ReadInt32();
+                        break;
+                    default:
+                        // ignore unknown
+                        break;
+                }
+            }
         }
 
         var skillEffect = delta.SkillEffects;
