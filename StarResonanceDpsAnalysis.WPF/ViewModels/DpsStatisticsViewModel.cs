@@ -254,7 +254,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
     private void UpdateData(IReadOnlyList<DpsData> data)
     {
-        _logger.LogInformation("Update data");
+        _logger.LogTrace("Update data");
 
         var currentPlayerUid = _storage.CurrentPlayerInfo.UID;
 
@@ -270,8 +270,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                 subViewModel.UpdateDataOptimized(processedData, currentPlayerUid);
             }
         }
-
-        // UpdateBattleDuration();
     }
 
     /// <summary>
@@ -299,12 +297,15 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             string playerName;
             Classes playerClass;
             ClassSpec playerSpec;
+            int powerLevel = 0;
+
 
             if (_storage.ReadOnlyPlayerInfoDatas.TryGetValue(dpsData.UID, out var playerInfo))
             {
                 playerName = playerInfo.Name ?? $"UID: {dpsData.UID}";
                 playerClass = playerInfo.ProfessionID.GetClassNameById();
                 playerSpec = playerInfo.Spec;
+                powerLevel = playerInfo.CombatPower ?? 0;
             }
             else
             {
@@ -318,7 +319,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             if (damageValue > 0)
             {
                 result[StatisticType.Damage][dpsData.UID] = new DpsDataProcessed(
-                    dpsData, damageValue, duration, skillList, playerName, playerClass, playerSpec);
+                    dpsData, damageValue, duration, skillList, playerName, playerClass, playerSpec,
+                    powerLevel);
             }
 
             // Process Healing
@@ -326,7 +328,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             if (healingValue > 0)
             {
                 result[StatisticType.Healing][dpsData.UID] = new DpsDataProcessed(
-                    dpsData, healingValue, duration, skillList, playerName, playerClass, playerSpec);
+                    dpsData, healingValue, duration, skillList, playerName, playerClass, playerSpec, powerLevel);
             }
 
             // Process TakenDamage
@@ -337,12 +339,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                 if (dpsData.IsNpcData)
                 {
                     result[StatisticType.NpcTakenDamage][dpsData.UID] = new DpsDataProcessed(
-                        dpsData, takenDamageValue, duration, skillList, playerName, playerClass, playerSpec);
+                        dpsData, takenDamageValue, duration, skillList, playerName, playerClass, playerSpec, powerLevel);
                 }
                 else
                 {
                     result[StatisticType.TakenDamage][dpsData.UID] = new DpsDataProcessed(
-                        dpsData, takenDamageValue, duration, skillList, playerName, playerClass, playerSpec);
+                        dpsData, takenDamageValue, duration, skillList, playerName, playerClass, playerSpec, powerLevel);
                 }
             }
         }

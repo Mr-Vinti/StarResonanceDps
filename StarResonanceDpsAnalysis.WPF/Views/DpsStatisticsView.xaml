@@ -221,8 +221,9 @@
                         Visibility="{Binding Player.IsNpc, Converter={StaticResource BoolToVisibilityConverter}}" />
                     <TextBlock Style="{StaticResource PlayerInfoTextStyle}" Visibility="{Binding Player.IsNpc, Converter={StaticResource BoolToInvertedVisibilityConverter}}">
                         <!--  Player name (visible when not NPC)  -->
-                        <Run Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Common_Dash}}" />
+                        <Run Text=" -" />
                         <Run Text="{lex:Loc {Binding Player.Spec, StringFormat=ClassSpec_{0}}}" />
+                        <Run Text="{Binding Player.PowerLevel, StringFormat={}({0})}" />
                     </TextBlock>
                 </StackPanel>
 

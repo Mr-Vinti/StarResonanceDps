@@ -11,4 +11,5 @@ public partial class PlayerInfoViewModel : BaseViewModel
     [ObservableProperty] private ClassSpec _spec = ClassSpec.Unknown;
     [ObservableProperty] private long _uid;
     [ObservableProperty] private bool _isNpc = false;
+    [ObservableProperty] private int _powerLevel = 0;
 }

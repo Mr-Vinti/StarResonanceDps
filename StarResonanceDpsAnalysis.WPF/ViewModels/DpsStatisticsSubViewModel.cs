@@ -26,7 +26,8 @@ public readonly record struct DpsDataProcessed(
     List<SkillItemViewModel> SkillList,
     string PlayerName,
     Classes PlayerClass,
-    ClassSpec PlayerSpec);
+    ClassSpec PlayerSpec,
+    int PowerLevel);
 
 public partial class DpsStatisticsSubViewModel : BaseViewModel
 {
@@ -254,8 +255,6 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
     /// </summary>
     internal void UpdateDataOptimized(Dictionary<long, DpsDataProcessed> processedData, long currentPlayerUid)
     {
-        // _logger.LogDebug("Enter updatedata (optimized)");
-
         var hasCurrentPlayer = currentPlayerUid != 0;
 
         // Update all slots with pre-processed data
@@ -277,6 +276,7 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
             slot.Player.Class = processed.PlayerClass;
             slot.Player.Spec = processed.PlayerSpec;
             slot.Player.Uid = uid;
+            slot.Player.PowerLevel = processed.PowerLevel;
 
             // Set current player slot if this is the current player
             if (hasCurrentPlayer && uid == currentPlayerUid)
@@ -304,8 +304,6 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
 
         // Sort data in place 
         SortSlotsInPlace();
-
-        // _logger.LogDebug("Exit updatedata (optimized)");
     }
 
     private ulong GetValueForType(DpsData dpsData)
