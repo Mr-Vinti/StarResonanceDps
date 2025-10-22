@@ -21,7 +21,7 @@
     -->
 
     <!--  未知职业 (Unknown)  -->
-    <DrawingImage x:Key="ClassesUnknownIcon">
+    <DrawingImage x:Key="ClassesUnknownIcon" RenderOptions.EdgeMode="Aliased">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V377 H375 V0 H0 Z">
                 <DrawingGroup.Transform>
@@ -43,7 +43,7 @@
     <!--  神盾骑士 (ShieldKnight)  -->
     <BitmapImage x:Key="ClassesShieldKnightIcon" UriSource="pack://application:,,,/Assets/Images/Classes_ShieldKnight.png" />
     <!-- <BitmapImage x:Key="{x:Static models:Classes.ShieldKnight}" UriSource="pack://application:,,,/Assets/Images/Classes_ShieldKnight.png" /> -->
-    <DrawingImage x:Key="{x:Static models:Classes.ShieldKnight}">
+    <DrawingImage x:Key="{x:Static models:Classes.ShieldKnight}" RenderOptions.EdgeMode="Aliased">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M155.616,0 V1000 H845.616 V155.616 H0 Z">
                 <DrawingGroup.Transform>
@@ -57,7 +57,7 @@
     <!--  巨刃守卫者 (HeavyGuardian)  -->
     <BitmapImage x:Key="ClassesHeavyGuardianIcon" UriSource="pack://application:,,,/Assets/Images/Classes_HeavyGuardian.png" />
     <!-- <BitmapImage x:Key="{x:Static models:Classes.HeavyGuardian}" UriSource="pack://application:,,,/Assets/Images/Classes_HeavyGuardian.png" /> -->
-    <DrawingImage x:Key="{x:Static models:Classes.HeavyGuardian}">
+    <DrawingImage x:Key="{x:Static models:Classes.HeavyGuardian}" RenderOptions.EdgeMode="Aliased">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,4 V96 H100 V0 H4 Z">
                 <DrawingGroup.Transform>
@@ -71,7 +71,7 @@
     <!--  雷影剑士 (Stormblade)  -->
     <BitmapImage x:Key="ClassesStormbladeIcon" UriSource="pack://application:,,,/Assets/Images/Classes_Stormblade.png" />
     <!-- <BitmapImage x:Key="{x:Static models:Classes.Stormblade}" UriSource="pack://application:,,,/Assets/Images/Classes_Stormblade.png" /> -->
-    <DrawingImage x:Key="{x:Static models:Classes.Stormblade}">
+    <DrawingImage x:Key="{x:Static models:Classes.Stormblade}" RenderOptions.EdgeMode="Aliased">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M7,0 V100 H93 V7 H0 Z">
                 <DrawingGroup.Transform>
@@ -85,7 +85,7 @@
     <!--  青岚骑士 (WindKnight)  -->
     <BitmapImage x:Key="ClassesWindKnightIcon" UriSource="pack://application:,,,/Assets/Images/Classes_WIndKnight.png" />
     <!-- <BitmapImage x:Key="{x:Static models:Classes.WindKnight}" UriSource="pack://application:,,,/Assets/Images/Classes_WIndKnight.png" /> -->
-    <DrawingImage x:Key="{x:Static models:Classes.WindKnight}">
+    <DrawingImage x:Key="{x:Static models:Classes.WindKnight}" RenderOptions.EdgeMode="Aliased">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M181,0 V1000 H820 V181 H0 Z">
                 <DrawingGroup.Transform>
@@ -99,7 +99,7 @@
     <!--  冰魔导师 (FrostMage)  -->
     <BitmapImage x:Key="ClassesFrostMageIcon" UriSource="pack://application:,,,/Assets/Images/Classes_FrostMage.png" />
     <!-- <BitmapImage x:Key="{x:Static models:Classes.FrostMage}" UriSource="pack://application:,,,/Assets/Images/Classes_FrostMage.png" /> -->
-    <DrawingImage x:Key="{x:Static models:Classes.FrostMage}">
+    <DrawingImage x:Key="{x:Static models:Classes.FrostMage}" RenderOptions.EdgeMode="Aliased">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V100 H64 V0 H0 Z">
                 <GeometryDrawing Brush="#FFDC7575" Geometry="F1 M64,100z M0,0z M32,0L36,20C34,21 33,22 33,23 44,23 47,33 54,33 46,36 44,26 32,26 20,26 18,36 10,33 17,33 20,23 31,23 31,22 30,21 28,20z M32,29A1,1,0,0,1,32,49A1,1,0,0,1,32,29 M32,31A1,1,0,0,0,32,47A1,1,0,0,0,32,31 M32,33A1,1,0,0,1,32,45A1,1,0,0,1,32,33 M41,36L64,36C62,38 55,36 51,42 51,40 51,39 50,38L41,39z M23,39L14,38C13,39 13,40 13,42 9,36 2,38 0,36L23,36z M5,39C10,40 12,44 12,47 12,50 15,55 18,57 21,59 21,59 24,60 27,61 28,61 28,64L28,70C26,69 28,66 24,65 20,64 18,63 15,61 12,59 9,54 8,51 7,48 7,44 7,43 7,42 6,40 5,39 M59,39C58,40 57,42 57,43 57,44 57,48 56,51 55,54 52,59 49,61 46,63 44,64 40,65 36,66 38,69 36,70L36,64C36,61 37,61 40,60 43,59 43,59 46,57 49,55 52,50 52,47 52,44 54,40 59,39 M33,48L33,52C39,52 42,50 47,48 44,53 39,53 34,56 34,57 35,59 36,59 35,59 34,61 34,62L34,77C34,80 34,80 40,81 35,82 34,82 34,84 34,85 35,85 39,86 35,87 34,87 34,88 34,89 34,90 35,91L32,100 29,91C30,90 30,89 30,88 30,87 29,87 25,86 29,85 30,85 30,84 30,82 29,82 24,81 30,80 30,80 30,77L30,62C30,61 29,59 28,59 29,59 30,57 30,56 25,53 20,53 17,48 22,50 25,52 31,52L31,48z" />
@@ -110,7 +110,7 @@
     <!--  神射手 (Marksman)  -->
     <BitmapImage x:Key="ClassesMarksmanIcon" UriSource="pack://application:,,,/Assets/Images/Classes_Marksman.png" />
     <!-- <BitmapImage x:Key="{x:Static models:Classes.Marksman}" UriSource="pack://application:,,,/Assets/Images/Classes_Marksman.png" /> -->
-    <DrawingImage x:Key="{x:Static models:Classes.Marksman}">
+    <DrawingImage x:Key="{x:Static models:Classes.Marksman}" RenderOptions.EdgeMode="Aliased">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,78 V923 H1000 V0 H78 Z">
                 <DrawingGroup.Transform>
@@ -126,7 +126,7 @@
     <!--  森语者 (VerdantOracle)  -->
     <BitmapImage x:Key="ClassesIconVerdantOracleIcon" UriSource="pack://application:,,,/Assets/Images/Classes_VerdantOracle.png" />
     <!-- <BitmapImage x:Key="{x:Static models:Classes.VerdantOracle}" UriSource="pack://application:,,,/Assets/Images/Classes_VerdantOracle.png" /> -->
-    <DrawingImage x:Key="{x:Static models:Classes.VerdantOracle}">
+    <DrawingImage x:Key="{x:Static models:Classes.VerdantOracle}" RenderOptions.EdgeMode="Aliased">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M6,43 V959 H1006 V6 H43 Z">
                 <DrawingGroup.Transform>
@@ -140,7 +140,7 @@
     <!--  灵魂乐手 (SoulMusician)  -->
     <BitmapImage x:Key="ClassesIconShieldKnightIcon" UriSource="pack://application:,,,/Assets/Images/Classes_SoulMusician.png" />
     <!-- <BitmapImage x:Key="{x:Static models:Classes.SoulMusician}" UriSource="pack://application:,,,/Assets/Images/Classes_SoulMusician.png" /> -->
-    <DrawingImage x:Key="{x:Static models:Classes.SoulMusician}">
+    <DrawingImage x:Key="{x:Static models:Classes.SoulMusician}" RenderOptions.EdgeMode="Aliased">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M32,0 V100 H68 V32 H0 Z">
                 <DrawingGroup.Transform>

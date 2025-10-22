@@ -221,12 +221,18 @@
                 </TextBlock>
 
                 <!--  职业图标  -->
+                <!--  Width="{Binding ActualHeight, ElementName=PlayerName}"  -->
+                <!--  Height="{Binding ActualHeight, ElementName=PlayerName}"  -->
                 <Image
                     Grid.Column="1"
-                    Width="{Binding ActualHeight, ElementName=PlayerName}"
-                    Height="{Binding ActualHeight, ElementName=PlayerName}"
+                    Width="22"
+                    Height="22"
                     Margin="2"
-                    Source="{Binding Player.Class, Converter={StaticResource ClassesToIconConverter}, FallbackValue={StaticResource ClassesUnknownIcon}}" />
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    SnapsToDevicePixels="True"
+                    Source="{Binding Player.Class, Converter={StaticResource ClassesToIconConverter}, FallbackValue={StaticResource ClassesUnknownIcon}}"
+                    Stretch="Uniform"
+                    UseLayoutRounding="True" />
                 <!--  昵称  -->
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                     <StackPanel.Resources>
