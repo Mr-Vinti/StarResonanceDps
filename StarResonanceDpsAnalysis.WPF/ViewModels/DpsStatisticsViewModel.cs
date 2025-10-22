@@ -35,8 +35,10 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private readonly IApplicationControlService _appControlService;
     private readonly IConfigManager _configManager;
     private readonly Dispatcher _dispatcher;
-    private readonly Stopwatch _battleTimer = new();
-    private readonly Stopwatch _fullBattleTimer = new();
+    // Use a single stopwatch for both total and section durations
+    private readonly Stopwatch _timer = new();
+    // Snapshot of elapsed time at the moment a new section starts
+    private TimeSpan _sectionStartElapsed = TimeSpan.Zero;
     private readonly ILogger<DpsStatisticsViewModel> _logger;
     private readonly IDataStorage _storage;
     private readonly IWindowManagementService _windowManagement;
@@ -105,7 +107,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     public DebugFunctions DebugFunctions { get; }
 
     public DpsStatisticsOptions Options { get; } = new();
-    private Stopwatch InUsingTimer => ScopeTime == ScopeTime.Total ? _fullBattleTimer : _battleTimer;
 
     public void Dispose()
     {
@@ -165,8 +166,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private void ResetAll()
     {
         _storage.ClearAllDpsData();
-        _battleTimer.Reset();
-        _fullBattleTimer.Reset();
+        _timer.Reset();
+        _sectionStartElapsed = TimeSpan.Zero;
 
         // Clear current UI data for all statistic types and rebuild from the new section snapshot
         foreach (var subVm in StatisticData.Values)
@@ -179,7 +180,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private void ResetSection()
     {
         _storage.ClearDpsData();
-        _battleTimer.Reset();
+        // Move section start to current elapsed so section duration becomes zero
+        _sectionStartElapsed = _timer.Elapsed;
     }
 
     /// <summary>
@@ -236,20 +238,23 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
     private void DataStorage_DpsDataUpdated()
     {
-        if (!_fullBattleTimer.IsRunning)
-        {
-            _fullBattleTimer.Start();
-        }
-
-        if (!_battleTimer.IsRunning)
-        {
-            _battleTimer.Start();
-        }
-
         var dpsList = ScopeTime == ScopeTime.Total
             ? _storage.ReadOnlyFullDpsDataList
             : _storage.ReadOnlySectionedDpsDataList;
+
+        // Only start the timer when there is actual damage data present
+        if (!_timer.IsRunning && HasDamageData(dpsList))
+        {
+            _timer.Start();
+        }
+
         UpdateData(dpsList);
+        UpdateBattleDuration();
+    }
+
+    private static bool HasDamageData(IReadOnlyList<DpsData> data)
+    {
+        return data.Any(t => t.TotalAttackDamage > 0);
     }
 
     private void UpdateData(IReadOnlyList<DpsData> data)
@@ -513,9 +518,16 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             return;
         }
 
-        if (InUsingTimer.IsRunning)
+        if (_timer.IsRunning)
         {
-            var elapsed = InUsingTimer.Elapsed;
+            var elapsed = ScopeTime == ScopeTime.Total
+                ? _timer.Elapsed
+                : _timer.Elapsed - _sectionStartElapsed;
+
+            if (elapsed < TimeSpan.Zero)
+            {
+                elapsed = TimeSpan.Zero;
+            }
 
             BattleDuration = elapsed;
         }
@@ -525,7 +537,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     {
         _dispatcher.BeginInvoke(() =>
         {
-            _battleTimer.Reset();
+            // Reset section start point to current elapsed to start section timing anew
+            _sectionStartElapsed = _timer.Elapsed;
             UpdateBattleDuration();
 
             // Clear current UI data for all statistic types and rebuild from the new section snapshot

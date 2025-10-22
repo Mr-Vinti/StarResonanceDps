@@ -324,11 +324,11 @@
 
                                 <ListBox
                                     Grid.Row="0"
-                                    Style="{StaticResource PluginListBox}"
                                     ItemsSource="{Binding Plugins}"
-                                    SelectedItem="{Binding SelectedPlugin, Mode=TwoWay}"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    SelectedItem="{Binding SelectedPlugin, Mode=TwoWay}"
+                                    Style="{StaticResource PluginListBox}">
                                     <ListBox.ItemContainerStyle>
                                         <Style TargetType="ListBoxItem">
                                             <Setter Property="Padding" Value="0" />
@@ -379,10 +379,10 @@
                                                         <RowDefinition Height="Auto" />
                                                         <RowDefinition Height="Auto" />
                                                     </Grid.RowDefinitions>
-                                                    <Border Style="{StaticResource PluginAutoStartBorder}" Grid.Row="0">
+                                                    <Border Grid.Row="0" Style="{StaticResource PluginAutoStartBorder}">
                                                         <TextBlock Style="{StaticResource PluginStateText}" Text="{Binding AutoStartText}" />
                                                     </Border>
-                                                    <Border Style="{StaticResource PluginEnableBorder}" Grid.Row="1">
+                                                    <Border Grid.Row="1" Style="{StaticResource PluginEnableBorder}">
                                                         <TextBlock Style="{StaticResource PluginStateText}" Text="{Binding RunningStateText}" />
                                                     </Border>
                                                 </Grid>
@@ -440,9 +440,7 @@
                                     Grid.Row="2"
                                     Margin="0,5,0,0"
                                     Style="{StaticResource PluginBorder}">
-                                    <TextBlock
-                                        Style="{StaticResource PluginListTip}"
-                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_ThirdPartySdkTips}}" />
+                                    <TextBlock Style="{StaticResource PluginListTip}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_ThirdPartySdkTips}}" />
                                 </Border>
                             </Grid>
 
@@ -452,169 +450,168 @@
                     <GridSplitter Grid.Column="1" />
 
                     <Border Grid.Column="2" Style="{StaticResource PluginDetailBorder}">
-                                            <Grid>
-                        <ContentControl Content="{Binding SelectedPlugin}">
-                            <ContentControl.Resources>
-                                <DataTemplate DataType="{x:Type vms:PluginListItemViewModel}">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
+                        <Grid>
+                            <ContentControl Content="{Binding SelectedPlugin}">
+                                <ContentControl.Resources>
+                                    <DataTemplate DataType="{x:Type vms:PluginListItemViewModel}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
 
-                                        <Border Grid.Row="0" Style="{StaticResource PluginDetailTitleBorder}">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-
-                                                <Grid Grid.Column="0">
-                                                    <TextBlock Style="{StaticResource PluginDetailName}" Text="{Binding Name}" />
-
-                                                    <Grid Style="{StaticResource AutoRunGrid}">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto" />
-                                                            <ColumnDefinition Width="*" />
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <ctrl:SwitchControl
-                                                            Grid.Column="0"
-                                                            IsChecked="{Binding State.IsAutoStart, Mode=OneWay}"
-                                                            IsEnabled="False"
-                                                            OffContent="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Switch_Off}}"
-                                                            OnContent="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Switch_On}}" />
-
-                                                        <TextBlock
-                                                            Grid.Column="1"
-                                                            Style="{StaticResource AutoRunText}"
-                                                            Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoStart}}" />
-                                                    </Grid>
-                                                </Grid>
-
-                                                <Grid Grid.Column="1">
+                                            <Border Grid.Row="0" Style="{StaticResource PluginDetailTitleBorder}">
+                                                <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
                                                         <ColumnDefinition Width="Auto" />
                                                     </Grid.ColumnDefinitions>
 
-                                                    <Button Grid.Column="0" Command="{Binding OpenSettingsCommand}">
-                                                        <Button.Template>
-                                                            <ControlTemplate>
-                                                                <Border x:Name="bb" Style="{StaticResource PluginSettingButton}">
-                                                                    <TextBlock Style="{StaticResource PluginSettingText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Settings}}" />
-                                                                </Border>
+                                                    <Grid Grid.Column="0">
+                                                        <TextBlock Style="{StaticResource PluginDetailName}" Text="{Binding Name}" />
 
-                                                                <ControlTemplate.Triggers>
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter TargetName="bb" Property="Background" Value="#F8F8F8" />
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Button.Template>
-                                                    </Button>
+                                                        <Grid Style="{StaticResource AutoRunGrid}">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
 
-                                                    <Button Grid.Column="1" Command="{Binding RunCommand}">
-                                                        <Button.Template>
-                                                            <ControlTemplate>
-                                                                <Border x:Name="bb" Style="{StaticResource PluginRunButton}">
-                                                                    <TextBlock Style="{StaticResource PluginRunText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Common_Action_Open}}" />
-                                                                </Border>
+                                                            <ctrl:SwitchControl
+                                                                Grid.Column="0"
+                                                                IsChecked="{Binding State.IsAutoStart, Mode=OneWay}"
+                                                                IsEnabled="False"
+                                                                OffContent="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Switch_Off}}"
+                                                                OnContent="{lex:Loc Key={x:Static loc:ResourcesKeys.Settings_Switch_On}}" />
 
-                                                                <ControlTemplate.Triggers>
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter TargetName="bb" Property="Background" Value="#C8D0E8" />
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Button.Template>
-                                                    </Button>
+                                                            <TextBlock
+                                                                Grid.Column="1"
+                                                                Style="{StaticResource AutoRunText}"
+                                                                Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_AutoStart}}" />
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <Grid Grid.Column="1">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Button Grid.Column="0" Command="{Binding OpenSettingsCommand}">
+                                                            <Button.Template>
+                                                                <ControlTemplate>
+                                                                    <Border x:Name="bb" Style="{StaticResource PluginSettingButton}">
+                                                                        <TextBlock Style="{StaticResource PluginSettingText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Settings}}" />
+                                                                    </Border>
+
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="bb" Property="Background" Value="#F8F8F8" />
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Button.Template>
+                                                        </Button>
+
+                                                        <Button Grid.Column="1" Command="{Binding RunCommand}">
+                                                            <Button.Template>
+                                                                <ControlTemplate>
+                                                                    <Border x:Name="bb" Style="{StaticResource PluginRunButton}">
+                                                                        <TextBlock Style="{StaticResource PluginRunText}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.Common_Action_Open}}" />
+                                                                    </Border>
+
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="bb" Property="Background" Value="#C8D0E8" />
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Button.Template>
+                                                        </Button>
+                                                    </Grid>
                                                 </Grid>
-                                            </Grid>
-                                        </Border>
+                                            </Border>
 
-                                        <Border Grid.Row="1" Style="{StaticResource PluginDetailIntroBorder}">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="10" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
+                                            <Border Grid.Row="1" Style="{StaticResource PluginDetailIntroBorder}">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="10" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
 
-                                                <TextBlock
-                                                    Grid.Row="0"
-                                                    Grid.Column="0"
-                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Label_Author}}" />
-                                                <TextBlock
-                                                    Grid.Row="0"
-                                                    Grid.Column="2"
-                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Author_OfficialTeam}}"
-                                                    TextWrapping="Wrap" />
+                                                    <TextBlock
+                                                        Grid.Row="0"
+                                                        Grid.Column="0"
+                                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Label_Author}}" />
+                                                    <TextBlock
+                                                        Grid.Row="0"
+                                                        Grid.Column="2"
+                                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Author_OfficialTeam}}"
+                                                        TextWrapping="Wrap" />
 
-                                                <TextBlock
-                                                    Grid.Row="1"
-                                                    Grid.Column="0"
-                                                    Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Label_Intro}}" />
-                                                <TextBlock
-                                                    Grid.Row="1"
-                                                    Grid.Column="2"
-                                                    Text="{Binding Description}"
-                                                    TextWrapping="Wrap" />
-                                            </Grid>
-                                        </Border>
-                                    </Grid>
-                                </DataTemplate>
-                            </ContentControl.Resources>
-                            <ContentControl.Style>
-                                <Style TargetType="ContentControl">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding SelectedPlugin}" Value="{x:Null}">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsDebugTabActive}" Value="True">
-                                            <Setter Property="Visibility" Value="Collapsed" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ContentControl.Style>
-                        </ContentControl>
+                                                    <TextBlock
+                                                        Grid.Row="1"
+                                                        Grid.Column="0"
+                                                        Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Plugin_Label_Intro}}" />
+                                                    <TextBlock
+                                                        Grid.Row="1"
+                                                        Grid.Column="2"
+                                                        Text="{Binding Description}"
+                                                        TextWrapping="Wrap" />
+                                                </Grid>
+                                            </Border>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ContentControl.Resources>
+                                <ContentControl.Style>
+                                    <Style TargetType="ContentControl">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedPlugin}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsDebugTabActive}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ContentControl.Style>
+                            </ContentControl>
 
-                        <Grid Visibility="{Binding IsDebugTabActive, Converter={StaticResource BooleanToVisibilityConverter}}"
-                              Background="Transparent">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                            <Grid Background="Transparent" Visibility="{Binding IsDebugTabActive, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
 
-                            <Border Grid.Row="0" Style="{StaticResource PluginDetailTitleBorder}">
-                                <TextBlock Style="{StaticResource PluginDetailName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Group_Title}}" />
-                            </Border>
+                                <Border Grid.Row="0" Style="{StaticResource PluginDetailTitleBorder}">
+                                    <TextBlock Style="{StaticResource PluginDetailName}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Group_Title}}" />
+                                </Border>
 
-                            <Border Grid.Row="1" Style="{StaticResource PluginDetailIntroBorder}">
-                                <StackPanel Margin="10">
-                                    <StackPanel>
-                                        <ComboBox
-                                            ItemsSource="{Binding AvailableThemes}"
-                                            SelectedIndex="0"
-                                            SelectedItem="{Binding Theme}" />
+                                <Border Grid.Row="1" Style="{StaticResource PluginDetailIntroBorder}">
+                                    <StackPanel Margin="10">
+                                        <StackPanel>
+                                            <ComboBox
+                                                ItemsSource="{Binding AvailableThemes}"
+                                                SelectedIndex="0"
+                                                SelectedItem="{Binding Theme}" />
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource TestTextBlockStyle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_ThemeTest}}" />
+                                            <Button Command="{Binding Debug.CallDebugWindowCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_PcapTest}}" />
+                                            <Button Command="{Binding CallSkillBreakdownViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_SkillBreakdown}}" />
+                                            <Button Command="{Binding CallDamageReferenceViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_DamageReference}}" />
+                                            <Button Command="{Binding CallSettingsViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_Settings}}" />
+                                            <Button Command="{Binding CallAboutViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_About}}" />
+                                        </StackPanel>
                                     </StackPanel>
-                                    <StackPanel>
-                                        <TextBlock Style="{StaticResource TestTextBlockStyle}" Text="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_ThemeTest}}" />
-                                        <Button Command="{Binding Debug.CallDebugWindowCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_PcapTest}}" />
-                                        <Button Command="{Binding CallSkillBreakdownViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_SkillBreakdown}}" />
-                                        <Button Command="{Binding CallDamageReferenceViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_DamageReference}}" />
-                                        <Button Command="{Binding CallSettingsViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_Settings}}" />
-                                        <Button Command="{Binding CallAboutViewCommand}" Content="{lex:Loc Key={x:Static loc:ResourcesKeys.MainView_Debug_Button_About}}" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border>
+                                </Border>
+                            </Grid>
                         </Grid>
-                    </Grid>
                     </Border>
 
                 </Grid>

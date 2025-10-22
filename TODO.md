@@ -7,8 +7,8 @@
 - [ ] SettingsView -> Theme setting needs to be implemented.
  - [x] MessageView -> Consider refactoring to MVVM (if needed).
  - [x] SettingsView (VM) -> Review the i18n usage in Cancel() for correctness.
- - [ ] 玩家信息更新
- - [ ] 战斗信息不刷新
+ - [x] 玩家信息更新
+ - [x] 战斗信息不刷新
 
 ### Issues
 

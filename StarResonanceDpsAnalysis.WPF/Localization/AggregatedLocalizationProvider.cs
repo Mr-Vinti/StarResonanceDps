@@ -120,25 +120,14 @@ public class AggregatedLocalizationProvider : ILocalizationProvider
 
     private void RefreshAvailableCultures()
     {
-        var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        var union = new List<CultureInfo?>();
-
-        void AddRange(IEnumerable<CultureInfo?> cultures)
-        {
-            foreach (var c in cultures)
-            {
-                if (c == null) continue;
-                if (set.Add(c.Name)) union.Add(c);
-            }
-        }
-
-        if (_jsonProvider.AvailableCultures != null)
-            AddRange(_jsonProvider.AvailableCultures);
-        if (_resxProvider.AvailableCultures != null)
-            AddRange(_resxProvider.AvailableCultures);
+        var cultures = Enumerable.Empty<CultureInfo>()
+            .Concat(_jsonProvider.AvailableCultures ?? Enumerable.Empty<CultureInfo>())
+            .Concat(_resxProvider.AvailableCultures ?? Enumerable.Empty<CultureInfo>())
+            .DistinctBy(c => c.Name, StringComparer.OrdinalIgnoreCase)
+            .OrderBy(c => c.Name, StringComparer.OrdinalIgnoreCase);
 
         AvailableCultures.Clear();
-        foreach (var c in union.OrderBy(c => c.Name))
+        foreach (var c in cultures)
             AvailableCultures.Add(c);
     }
 }
