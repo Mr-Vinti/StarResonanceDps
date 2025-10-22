@@ -6,14 +6,14 @@ using System.Runtime.InteropServices;
 namespace StarResonanceDpsAnalysis.WPF.Services;
 
 /// <summary>
-/// Periodically discovers local TCP/UDP ports owned by a target process name.
+/// Periodically discovers local TCP/UDP ports owned by any of the target process names.
 /// IPv4 only for now.
 /// </summary>
 internal sealed class ProcessPortsWatcher : IDisposable
 {
     private const uint NO_ERROR = 0;
     private const uint ERROR_INSUFFICIENT_BUFFER = 122;
-    private readonly string _processName;
+    private readonly HashSet<string> _processNames;
     private readonly TimeSpan _refreshInterval;
     private volatile HashSet<int> _tcpPorts = [];
     private Timer? _timer;
@@ -21,7 +21,19 @@ internal sealed class ProcessPortsWatcher : IDisposable
 
     public ProcessPortsWatcher(string processName, TimeSpan? refreshInterval = null)
     {
-        _processName = NormalizeProcessName(processName);
+        _processNames = NormalizeProcessNames([processName]);
+        _refreshInterval = refreshInterval ?? TimeSpan.FromSeconds(2);
+    }
+
+    public ProcessPortsWatcher(IEnumerable<string> processNames, TimeSpan? refreshInterval = null)
+    {
+        _processNames = NormalizeProcessNames(processNames);
+        _refreshInterval = refreshInterval ?? TimeSpan.FromSeconds(2);
+    }
+
+    public ProcessPortsWatcher(TimeSpan? refreshInterval = null, params string[] processNames)
+    {
+        _processNames = NormalizeProcessNames(processNames);
         _refreshInterval = refreshInterval ?? TimeSpan.FromSeconds(2);
     }
 
@@ -117,8 +129,23 @@ internal sealed class ProcessPortsWatcher : IDisposable
     {
         try
         {
-            var processes = Process.GetProcessesByName(_processName);
-            return processes.Select(p => p.Id).ToHashSet();
+            var ids = new HashSet<int>();
+            foreach (var name in _processNames)
+            {
+                try
+                {
+                    var processes = Process.GetProcessesByName(name);
+                    foreach (var p in processes)
+                    {
+                        ids.Add(p.Id);
+                    }
+                }
+                catch
+                {
+                    // ignore this name on failure
+                }
+            }
+            return ids;
         }
         catch
         {
@@ -132,6 +159,17 @@ internal sealed class ProcessPortsWatcher : IDisposable
         if (n.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
             n = n[..^4];
         return n;
+    }
+
+    private static HashSet<string> NormalizeProcessNames(IEnumerable<string> names)
+    {
+        var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var n in names)
+        {
+            if (string.IsNullOrWhiteSpace(n)) continue;
+            set.Add(NormalizeProcessName(n));
+        }
+        return set;
     }
 
     // Windows IP Helper interop (IPv4 only)

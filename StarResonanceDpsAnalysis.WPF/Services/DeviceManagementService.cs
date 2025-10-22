@@ -104,7 +104,7 @@ public class DeviceManagementService(
             _portsWatcher = null;
         }
 
-        _portsWatcher = new ProcessPortsWatcher("star.exe");
+        _portsWatcher = new ProcessPortsWatcher(["star.exe", "BPSR_STEAM.exe", "BPSR_EPIC.exe", "BPSR.exe"]);
         _portsWatcher.PortsChanged += PortsWatcherOnPortsChanged;
 
         var device = captureDeviceList.FirstOrDefault(d => d.Name == adapter.Name);
