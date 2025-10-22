@@ -525,6 +525,13 @@ public partial class DpsStatisticsSubViewModel : BaseViewModel
 
     public void Reset()
     {
+        // Ensure collection modifications happen on the UI thread
+        if (!_dispatcher.CheckAccess())
+        {
+            _dispatcher.Invoke(Reset);
+            return;
+        }
+
         // Clear items (will also clear DataDictionary via CollectionChanged Reset handler)
         Data.Clear();
         SelectedSlot = null;

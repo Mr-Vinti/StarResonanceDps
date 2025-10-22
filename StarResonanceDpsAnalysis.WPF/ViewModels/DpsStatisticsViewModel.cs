@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -39,6 +40,10 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private readonly Stopwatch _timer = new();
     // Snapshot of elapsed time at the moment a new section starts
     private TimeSpan _sectionStartElapsed = TimeSpan.Zero;
+    // Whether we are waiting for the first datapoint of a new section
+    private bool _awaitingSectionStart;
+    // Captured elapsed of the last section to freeze UI until new data arrives
+    private TimeSpan _lastSectionElapsed = TimeSpan.Zero;
     private readonly ILogger<DpsStatisticsViewModel> _logger;
     private readonly IDataStorage _storage;
     private readonly IWindowManagementService _windowManagement;
@@ -168,6 +173,8 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         _storage.ClearAllDpsData();
         _timer.Reset();
         _sectionStartElapsed = TimeSpan.Zero;
+        _awaitingSectionStart = false;
+        _lastSectionElapsed = TimeSpan.Zero;
 
         // Clear current UI data for all statistic types and rebuild from the new section snapshot
         foreach (var subVm in StatisticData.Values)
@@ -238,6 +245,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
     private void DataStorage_DpsDataUpdated()
     {
+        if (!_dispatcher.CheckAccess())
+        {
+            _dispatcher.BeginInvoke(DataStorage_DpsDataUpdated);
+            return;
+        }
+
         var dpsList = ScopeTime == ScopeTime.Total
             ? _storage.ReadOnlyFullDpsDataList
             : _storage.ReadOnlySectionedDpsDataList;
@@ -246,6 +259,19 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         if (!_timer.IsRunning && HasDamageData(dpsList))
         {
             _timer.Start();
+        }
+
+        // If a new section was created, wait until first datapoint to reset UI and mark section start
+        var hasSectionDamage = HasDamageData(_storage.ReadOnlySectionedDpsDataList);
+        if (_awaitingSectionStart && hasSectionDamage)
+        {
+            foreach (var subVm in StatisticData.Values)
+            {
+                subVm.Reset();
+            }
+            _sectionStartElapsed = _timer.Elapsed;
+            _lastSectionElapsed = TimeSpan.Zero;
+            _awaitingSectionStart = false;
         }
 
         UpdateData(dpsList);
@@ -269,11 +295,9 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         // Update each subViewModel with its pre-processed data
         foreach (var (statisticType, processedData) in processedDataByType)
         {
-            if (StatisticData.TryGetValue(statisticType, out var subViewModel))
-            {
-                subViewModel.ScopeTime = ScopeTime;
-                subViewModel.UpdateDataOptimized(processedData, currentPlayerUid);
-            }
+            if (!StatisticData.TryGetValue(statisticType, out var subViewModel)) continue;
+            subViewModel.ScopeTime = ScopeTime;
+            subViewModel.UpdateDataOptimized(processedData, currentPlayerUid);
         }
     }
 
@@ -520,6 +544,13 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
         if (_timer.IsRunning)
         {
+            if (ScopeTime == ScopeTime.Current && _awaitingSectionStart)
+            {
+                // Freeze to last section elapsed until new data arrives
+                BattleDuration = _lastSectionElapsed;
+                return;
+            }
+
             var elapsed = ScopeTime == ScopeTime.Total
                 ? _timer.Elapsed
                 : _timer.Elapsed - _sectionStartElapsed;
@@ -537,15 +568,12 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     {
         _dispatcher.BeginInvoke(() =>
         {
-            // Reset section start point to current elapsed to start section timing anew
-            _sectionStartElapsed = _timer.Elapsed;
+            // Freeze current section duration and await first datapoint of the new section
+            _lastSectionElapsed = _timer.IsRunning ? (_timer.Elapsed - _sectionStartElapsed) : TimeSpan.Zero;
+            _awaitingSectionStart = true;
             UpdateBattleDuration();
 
-            // Clear current UI data for all statistic types and rebuild from the new section snapshot
-            foreach (var subVm in StatisticData.Values)
-            {
-                subVm.Reset();
-            }
+            // Do NOT clear current UI data here; wait until data for the new section arrives
         });
     }
 
