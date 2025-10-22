@@ -3,6 +3,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using Microsoft.Extensions.Logging;
 using StarResonanceDpsAnalysis.WPF.Config;
+using StarResonanceDpsAnalysis.WPF.ViewModels;
 
 namespace StarResonanceDpsAnalysis.WPF.Services;
 
@@ -11,12 +12,14 @@ public sealed class GlobalHotkeyService(
     IWindowManagementService windowManager,
     IConfigManager configManager,
     IMousePenetrationService mousePenetration,
-    ITopmostService topmostService)
+    ITopmostService topmostService,
+    DpsStatisticsViewModel dpsStatisticsViewModel)
     : IGlobalHotkeyService
 {
     private const int WM_HOTKEY = 0x0312;
     private const int HOTKEY_ID_MOUSETHROUGH = 0x1001;
     private const int HOTKEY_ID_TOPMOST = 0x1002;
+    private const int HOTKEY_ID_RESET_STATISTIC = 0x1003;
     private AppConfig _config = configManager.CurrentConfig;
 
     private HwndSource? _source;
@@ -87,6 +90,7 @@ public sealed class GlobalHotkeyService(
         {
             RegisterMouseThroughHotkey();
             RegisterTopmostHotkey();
+            RegisterResetDpsStatistic();
         }
         catch (Exception ex)
         {
@@ -145,6 +149,23 @@ public sealed class GlobalHotkeyService(
         }
     }
 
+    private void RegisterResetDpsStatistic()
+    {
+        var key = _config.ClearDataShortcut.Key;
+        var mods = _config.ClearDataShortcut.Modifiers;
+        if (key == Key.None) return;
+
+        var (vk, fsMods) = ToNative(key, mods);
+        var hWnd = _source?.Handle ?? IntPtr.Zero;
+        if (hWnd == IntPtr.Zero) return;
+
+        UnregisterHotKey(hWnd, HOTKEY_ID_RESET_STATISTIC);
+        if (!RegisterHotKey(hWnd, HOTKEY_ID_RESET_STATISTIC, fsMods, vk))
+        {
+            logger.LogWarning("RegisterHotKey failed for Topmost: {Key}+{Mods}", key, mods);
+        }
+    }
+
     private static (uint vk, uint fsMods) ToNative(Key key, ModifierKeys mods)
     {
         var vk = (uint)KeyInterop.VirtualKeyFromKey(key);
@@ -158,19 +179,23 @@ public sealed class GlobalHotkeyService(
 
     private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        if (msg == WM_HOTKEY)
+        if (msg != WM_HOTKEY) return IntPtr.Zero;
+
+        var id = wParam.ToInt32();
+        switch (id)
         {
-            var id = wParam.ToInt32();
-            if (id == HOTKEY_ID_MOUSETHROUGH)
-            {
+            case HOTKEY_ID_MOUSETHROUGH:
                 ToggleMouseThrough();
                 handled = true;
-            }
-            else if (id == HOTKEY_ID_TOPMOST)
-            {
+                break;
+            case HOTKEY_ID_TOPMOST:
                 ToggleTopmost();
                 handled = true;
-            }
+                break;
+            case HOTKEY_ID_RESET_STATISTIC:
+                TriggerReset();
+                handled = true;
+                break;
         }
 
         return IntPtr.Zero;
@@ -205,6 +230,18 @@ public sealed class GlobalHotkeyService(
         catch (Exception ex)
         {
             logger.LogWarning(ex, "ToggleTopmost failed");
+        }
+    }
+
+    private void TriggerReset()
+    {
+        try
+        {
+            dpsStatisticsViewModel.ResetSection();
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "TriggerReset failed");
         }
     }
 

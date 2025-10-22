@@ -9,6 +9,7 @@
  - [x] SettingsView (VM) -> Review the i18n usage in Cancel() for correctness.
  - [x] 玩家信息更新
  - [x] 战斗信息不刷新
+ - [ ] 治疗技能列表不正确
 
 ### Issues
 

@@ -168,7 +168,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     }
 
     [RelayCommand]
-    private void ResetAll()
+    public void ResetAll()
     {
         _storage.ClearAllDpsData();
         _timer.Reset();
@@ -184,7 +184,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     }
 
     [RelayCommand]
-    private void ResetSection()
+    public void ResetSection()
     {
         _storage.ClearDpsData();
         // Move section start to current elapsed so section duration becomes zero
