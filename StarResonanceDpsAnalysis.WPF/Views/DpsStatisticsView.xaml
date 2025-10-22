@@ -54,7 +54,14 @@
         <Style x:Key="TitleBar" TargetType="Border">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToColorConverter}, ConverterParameter='#BABABA'}" />
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#BABABA">
+                                <Binding Path="DataContext.AppConfig.Opacity" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                <Binding Path="DataContext.AppConfig.MouseThroughEnabled" RelativeSource="{RelativeSource AncestorType=Window}" />
+                            </MultiBinding>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
                 </Setter.Value>
             </Setter>
             <Setter Property="VerticalAlignment" Value="Top" />
@@ -89,7 +96,14 @@
         <Style x:Key="SortedDpsBorder" TargetType="Border">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToColorConverter}, ConverterParameter='#191919'}" />
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#191919">
+                                <Binding Path="DataContext.AppConfig.Opacity" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                <Binding Path="DataContext.AppConfig.MouseThroughEnabled" RelativeSource="{RelativeSource AncestorType=Window}" />
+                            </MultiBinding>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -99,7 +113,14 @@
             <Setter Property="Height" Value="5" />
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToColorConverter}, ConverterParameter='#191919'}" />
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#191919">
+                                <Binding Path="DataContext.AppConfig.Opacity" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                <Binding Path="DataContext.AppConfig.MouseThroughEnabled" RelativeSource="{RelativeSource AncestorType=Window}" />
+                            </MultiBinding>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -117,7 +138,14 @@
         <Style x:Key="FooterContentBorder" TargetType="Border">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToColorConverter}, ConverterParameter='#BABABA'}" />
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#BABABA">
+                                <Binding Path="DataContext.AppConfig.Opacity" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                <Binding Path="DataContext.AppConfig.MouseThroughEnabled" RelativeSource="{RelativeSource AncestorType=Window}" />
+                            </MultiBinding>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
                 </Setter.Value>
             </Setter>
             <Setter Property="VerticalAlignment" Value="Bottom" />
@@ -339,8 +367,14 @@
                             OverlayTemplate="{StaticResource StatisticDetailDataTemplate}"
                             Percentage="{Binding PercentOfMax}"
                             PopupContent="{Binding}"
-                            PopupTemplate="{StaticResource PopupTemplate}"
-                            TrackOpacity="{Binding DataContext.AppConfig.Opacity, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PercentToOpacityConverter}}" />
+                            PopupTemplate="{StaticResource PopupTemplate}">
+                            <ctrl:DpsIndicatorControl.TrackOpacity>
+                                <MultiBinding Converter="{StaticResource ConditionalPercentToOpacityConverter}">
+                                    <Binding Path="DataContext.AppConfig.Opacity" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                    <Binding Path="DataContext.AppConfig.MouseThroughEnabled" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                </MultiBinding>
+                            </ctrl:DpsIndicatorControl.TrackOpacity>
+                        </ctrl:DpsIndicatorControl>
                     </Grid>
                 </Button>
             </Grid>

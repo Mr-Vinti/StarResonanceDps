@@ -14,6 +14,8 @@
     <converters:PercentOfMaxConverter x:Key="PercentOfMaxConverter" />
     <converters:PercentToOpacityConverter x:Key="PercentToOpacityConverter" />
     <converters:PercentToColorConverter x:Key="PercentToColorConverter" />
+    <converters:ConditionalPercentToOpacityConverter x:Key="ConditionalPercentToOpacityConverter" />
+    <converters:ConditionalPercentToColorConverter x:Key="ConditionalPercentToColorConverter" />
     <converters:BrushWithOpacityConverter x:Key="BrushWithOpacityConverter" />
     <converters:DivisionMultiValueConverter x:Key="DivisionMultiValueConverter" />
     <converters:DpsConverter x:Key="DpsConverter" />
