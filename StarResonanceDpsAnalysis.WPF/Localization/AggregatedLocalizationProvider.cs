@@ -11,7 +11,7 @@ namespace StarResonanceDpsAnalysis.WPF.Localization;
 public class AggregatedLocalizationProvider : ILocalizationProvider
 {
     private readonly JsonLocalizationProvider _jsonProvider;
-    private readonly ILocalizationProvider _resxProvider;
+    private readonly ResxLocalizationProvider _resxProvider;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AggregatedLocalizationProvider"/> class.

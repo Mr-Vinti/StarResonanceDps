@@ -463,7 +463,7 @@
     <value>Utilitários de debug</value>
   </data>
   <data name="MainView_Header_Title" xml:space="preserve">
-    <value />
+    <value>StarResonance ToolBox</value>
   </data>
   <data name="MainView_PluginList_Title" xml:space="preserve">
     <value>Plugins</value>
@@ -758,13 +758,13 @@
     <value>Automático</value>
   </data>
   <data name="MainView_Plugin_Search_PlaceHolder" xml:space="preserve">
-    <value />
+    <value>Pesquisar...</value>
   </data>
   <data name="MainView_Plugin_State_Inactive" xml:space="preserve">
-    <value />
+    <value>Inativo</value>
   </data>
   <data name="MainView_Plugin_State_Running" xml:space="preserve">
-    <value />
+    <value>Em execução</value>
   </data>
   <data name="MainView_Plugin_Settings" xml:space="preserve">
     <value>Configurações</value>
@@ -791,13 +791,13 @@
     <value>Descartar todas as alterações? As mudanças não salvas serão perdidas.</value>
   </data>
   <data name="MainView_Plugin_AutoRunState_Enabled" xml:space="preserve">
-    <value />
+    <value>Inicialização Automática: On</value>
   </data>
   <data name="MainView_Plugin_AutoRunState_Disabled" xml:space="preserve">
-    <value />
+    <value>Inicialização Automática: Off</value>
   </data>
   <data name="MainView_Plugin_ThirdPartySdkTips" xml:space="preserve">
-    <value />
+    <value>SDK do Plugin em breve!</value>
   </data>
   <data name="App_Exit_Confirm_Title" xml:space="preserve">
     <value>Confirmação</value>

@@ -1,4 +1,5 @@
 using System.Globalization;
+using StarResonanceDpsAnalysis.WPF.Localization;
 using StarResonanceDpsAnalysis.WPF.Properties;
 
 namespace StarResonanceDpsAnalysis.WPF.Plugins.BuiltIn;
@@ -20,13 +21,13 @@ internal static class PluginLocalizationHelper
             }
         }
 
-        var localized = Resources.ResourceManager.GetString(resourceKey, culture);
+        var localized = LocalizationManager.Instance.GetString(resourceKey, culture);
         if (!string.IsNullOrEmpty(localized))
         {
             return localized;
         }
 
-        localized = Resources.ResourceManager.GetString(resourceKey, CultureInfo.InvariantCulture);
+        localized = LocalizationManager.Instance.GetString(resourceKey, CultureInfo.InvariantCulture);
         return !string.IsNullOrEmpty(localized) ? localized : resourceKey;
     }
 }

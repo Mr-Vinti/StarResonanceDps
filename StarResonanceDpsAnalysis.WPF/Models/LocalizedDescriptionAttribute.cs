@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging.Abstractions;
 using StarResonanceDpsAnalysis.WPF.Localization;
 
 namespace StarResonanceDpsAnalysis.WPF.Models;
@@ -20,7 +21,7 @@ public class LocalizedDescriptionAttribute(string resourceKey) : DescriptionAttr
             if (loc != null) return loc.GetString(resourceKey);
             // Fallback for design-time
             var opts = new LocalizationConfiguration();
-            return new LocalizationManager(opts).GetString(resourceKey);
+            return new LocalizationManager(opts, NullLogger<LocalizationManager>.Instance).GetString(resourceKey);
         }
     }
 }

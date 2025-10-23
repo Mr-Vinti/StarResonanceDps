@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StarResonanceDpsAnalysis.WPF.Localization;
 using StarResonanceDpsAnalysis.WPF.Plugins;
 using StarResonanceDpsAnalysis.WPF.Plugins.Interfaces;
 using StarResonanceDpsAnalysis.WPF.Properties;
@@ -11,11 +12,13 @@ namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 public sealed partial class PluginListItemViewModel : ObservableObject
 {
     private readonly PluginState _state;
+    private readonly LocalizationManager _localizationManager;
 
-    public PluginListItemViewModel(IPlugin plugin, PluginState state)
+    public PluginListItemViewModel(IPlugin plugin, PluginState state, LocalizationManager localizationManager)
     {
         Plugin = plugin;
         _state = state;
+        _localizationManager = localizationManager;
         RunCommand = new RelayCommand(ExecuteRun);
         OpenSettingsCommand = new RelayCommand(ExecuteSettings);
     }
@@ -24,17 +27,17 @@ public sealed partial class PluginListItemViewModel : ObservableObject
 
     public PluginState State => _state;
 
-    public string Name => Plugin.GetPluginName(CultureInfo.CurrentUICulture.Name);
+    public string Name => Plugin.GetPluginName(CultureInfo.CurrentUICulture);
 
-    public string Description => Plugin.GetPluginDescription(CultureInfo.CurrentUICulture.Name);
+    public string Description => Plugin.GetPluginDescription(CultureInfo.CurrentUICulture);
 
     public string AutoStartText => _state.IsAutoStart
-        ? Resources.MainView_Plugin_AutoRunState_Enabled
-        : Resources.MainView_Plugin_AutoRunState_Disabled;
+        ? _localizationManager.GetString(ResourcesKeys.MainView_Plugin_AutoRunState_Enabled)
+        : _localizationManager.GetString(ResourcesKeys.MainView_Plugin_AutoRunState_Disabled);
 
     public string RunningStateText => _state.InRunning
-        ? Resources.MainView_Plugin_State_Running
-        : Resources.MainView_Plugin_State_Inactive;
+        ? _localizationManager.GetString(ResourcesKeys.MainView_Plugin_State_Running)
+        : _localizationManager.GetString(ResourcesKeys.MainView_Plugin_State_Inactive);
 
     public IRelayCommand RunCommand { get; }
 

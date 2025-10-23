@@ -128,10 +128,11 @@ public partial class App : Application
                 services.AddSingleton(_ => Current.Dispatcher);
 
                 // Localization manager singleton
-                services.AddSingleton(_ => new LocalizationManager(new LocalizationConfiguration
+                services.AddSingleton<LocalizationConfiguration>(new LocalizationConfiguration
                 {
                     LocalizationDirectory = Path.Combine(AppContext.BaseDirectory, "Data")
-                }));
+                });
+                services.AddSingleton<LocalizationManager>();
             })
             .ConfigureLogging(lb => lb.ClearProviders());
     }

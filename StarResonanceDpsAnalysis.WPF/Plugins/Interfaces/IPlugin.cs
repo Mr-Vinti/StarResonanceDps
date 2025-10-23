@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 
-namespace StarResonanceDpsAnalysis.WPF.Plugins.Interfaces
+namespace StarResonanceDpsAnalysis.WPF.Plugins.Interfaces;
+
+public interface IPlugin
 {
-    public interface IPlugin
-    {
-        public string PackageName { get; }
-        public string PackageVersion { get; }
-        public string GetPluginName(string calture);
-        public string GetPluginDescription(string calture);
+    public string PackageName { get; }
+    public string PackageVersion { get; }
+    public string GetPluginName(CultureInfo cultureInfo);
+    public string GetPluginDescription(CultureInfo cultureInfo);
 
-        void OnRequestRun();
+    void OnRequestRun();
 
-        void OnRequestSetting();
-    }
+    void OnRequestSetting();
 }

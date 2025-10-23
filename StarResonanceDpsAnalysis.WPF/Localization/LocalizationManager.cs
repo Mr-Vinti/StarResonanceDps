@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using StarResonanceDpsAnalysis.WPF.Models;
 using StarResonanceDpsAnalysis.WPF.Properties;
 using WPFLocalizeExtension.Engine;
@@ -30,6 +32,7 @@ public sealed class LocalizationConfiguration
 public sealed class LocalizationManager
 {
     private readonly LocalizationConfiguration _config;
+    private readonly ILogger<LocalizationManager> _logger;
 
     // private readonly string _defaultAssemblyName;
     private readonly CultureInfo _systemDefaultCultureInfo;
@@ -40,9 +43,11 @@ public sealed class LocalizationManager
     /// Initializes a new instance of the <see cref="LocalizationManager"/> class.
     /// </summary>
     /// <param name="config">The localization configuration.</param>
-    public LocalizationManager(LocalizationConfiguration config)
+    /// <param name="logger"></param>
+    public LocalizationManager(LocalizationConfiguration config, ILogger<LocalizationManager> logger)
     {
         _config = config;
+        _logger = logger;
         _systemDefaultCultureInfo = CultureInfo.CurrentUICulture;
         // var assemblyName = typeof(App).Assembly.GetName().Name;
         // _defaultAssemblyName = string.IsNullOrWhiteSpace(assemblyName)
@@ -51,9 +56,20 @@ public sealed class LocalizationManager
 
         _aggregatedProvider = null!; // Will be initialized in ConfigureProviders
         ConfigureProviders();
-        LocalizeDictionary.Instance.IncludeInvariantCulture = false;
-        LocalizeDictionary.Instance.SetCurrentThreadCulture = false;
+        LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+        LocalizeDictionary.Instance.IncludeInvariantCulture = true;
+        LocalizeDictionary.Instance.MissingKeyEvent += InstanceOnMissingKeyEvent;
         Instance = this;
+    }
+
+    private void InstanceOnMissingKeyEvent(object? sender, MissingKeyEventArgs e)
+    {
+        _logger.LogWarning(e.Key);
+        var ret = GetString(e.Key, CultureInfo.InvariantCulture); // Get the fallback string
+        if (!string.IsNullOrEmpty(ret))
+        {
+            e.MissingKeyResult = ret;
+        }
     }
 
     /// <summary>
@@ -64,7 +80,7 @@ public sealed class LocalizationManager
     /// <summary>
     /// Gets the singleton instance of the <see cref="LocalizationManager"/>.
     /// </summary>
-    public static LocalizationManager Instance { get; private set; } = new(new LocalizationConfiguration()); // this instance will be used in design time viewmodel
+    public static LocalizationManager Instance { get; private set; } = new(new LocalizationConfiguration(), NullLogger<LocalizationManager>.Instance); // this instance will be used in design time viewmodel
 
     /// <summary>
     /// Applies the specified language to the application.
@@ -90,10 +106,11 @@ public sealed class LocalizationManager
     /// Retrieves the localized string for the given key.
     /// </summary>
     /// <param name="key">The localization key.</param>
+    /// <param name="cultureInfo">Force culture info</param>
     /// <returns>The localized string, or the key if not found.</returns>
-    public string GetString(string key)
+    public string GetString(string key, CultureInfo? cultureInfo = null)
     {
-        var culture = LocalizeDictionary.Instance.Culture ?? CultureInfo.CurrentUICulture;
+        var culture = cultureInfo ?? LocalizeDictionary.Instance.Culture ?? CultureInfo.CurrentUICulture;
         var localized = _aggregatedProvider.GetLocalizedObject(key, null, culture) as string;
 
         return !string.IsNullOrEmpty(localized)

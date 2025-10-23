@@ -41,7 +41,7 @@ public partial class MainViewModel : BaseViewModel
         _dialogService = dialogService;
 
         Debug = debugFunctions;
-        AvailableThemes = new List<ApplicationTheme> { ApplicationTheme.Light, ApplicationTheme.Dark };
+        AvailableThemes = [ApplicationTheme.Light, ApplicationTheme.Dark];
         Theme = _themeManager.GetAppTheme();
 
         var pluginStates = pluginManager.GetPluginStates();
@@ -52,7 +52,7 @@ public partial class MainViewModel : BaseViewModel
                 state = new PluginState();
             }
 
-            _plugins.Add(new PluginListItemViewModel(plugin, state));
+            _plugins.Add(new PluginListItemViewModel(plugin, state, localizationManager));
         }
 
         Plugins = new ReadOnlyObservableCollection<PluginListItemViewModel>(_plugins);
