@@ -18,6 +18,7 @@
  - [ ] i18n fallback
  - [ ] DPS Statistics View -> Binding error
  - [ ] Export DPS statistics image
+ - [ ] Not to update port filter if the ports are same
 
 ### Issues
 

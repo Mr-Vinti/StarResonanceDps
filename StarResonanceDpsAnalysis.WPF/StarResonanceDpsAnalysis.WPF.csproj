@@ -80,6 +80,8 @@
     <PackageReference Include="Serilog.Sinks.Console" />
     <PackageReference Include="Serilog.Sinks.Observable" />
     <PackageReference Include="Serilog.Settings.Configuration" />
+    <!-- Add the Serilog file sink to support rolling file names like logs-YYYYMMDD.log -->
+    <PackageReference Include="Serilog.Sinks.File" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StarResonanceDpsAnalysis.Assets\StarResonanceDpsAnalysis.Assets.csproj" />

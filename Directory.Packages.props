@@ -25,6 +25,7 @@
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
     <PackageVersion Include="Serilog.Sinks.Observable" Version="3.0.0" />
     <PackageVersion Include="Serilog.Settings.Configuration" Version="9.0.0" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
 
     <!-- Core -->
     <PackageVersion Include="Google.Protobuf" Version="3.33.0" />
