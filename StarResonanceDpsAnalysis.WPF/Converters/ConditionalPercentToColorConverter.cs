@@ -19,7 +19,7 @@ public sealed class ConditionalPercentToColorConverter : IMultiValueConverter
         if (values is null || values.Length < 2)
             return baseColor;
 
-        var enabled = values[1] as bool? ?? (values[1] is string s && bool.TryParse(s, out var b) ? b : false);
+        var enabled = values[1] as bool? ?? (values[1] is string s && bool.TryParse(s, out var b) && b);
 
         // If not enabled, force opaque
         if (!enabled)
@@ -36,26 +36,30 @@ public sealed class ConditionalPercentToColorConverter : IMultiValueConverter
 
     public object[] ConvertBack(object? value, Type[] targetTypes, object? parameter, CultureInfo culture)
     {
-        return new object[] { DependencyProperty.UnsetValue, DependencyProperty.UnsetValue };
+        return [DependencyProperty.UnsetValue, DependencyProperty.UnsetValue];
     }
 
     private static Color GetBaseColor(object? parameter)
     {
-        if (parameter is Color color) return color;
-        if (parameter is SolidColorBrush brush) return brush.Color;
-        if (parameter is string colorString && ColorConverter.ConvertFromString(colorString) is Color parsedColor)
-            return parsedColor;
-        return Colors.Transparent;
+        return parameter switch
+        {
+            Color color => color,
+            SolidColorBrush brush => brush.Color,
+            string colorString when ColorConverter.ConvertFromString(colorString) is Color parsedColor => parsedColor,
+            _ => Colors.Transparent
+        };
     }
 
     private static double GetOpacityFactor(object? value, CultureInfo culture)
     {
         return value switch
         {
-            double d when d <= 1d => Math.Clamp(d, 0d, 1d),
-            double d => Math.Clamp(d / 100d, 0d, 1d),
+            // double d when d <= 1d => Math.Clamp(d, 0d, 1d),
+            double d => Math.Clamp(d, 0d, 1d),
+            // double d => Math.Clamp(d / 100d, 0d, 1d),
             int i => Math.Clamp(i / 100d, 0d, 1d),
-            string s when double.TryParse(s, NumberStyles.Any, culture, out var parsed) => Math.Clamp(parsed / 100d, 0d, 1d),
+            string s when double.TryParse(s, NumberStyles.Any, culture, out var parsed) => Math.Clamp(parsed / 100d, 0d,
+                1d),
             _ => 1d
         };
     }
