@@ -55,8 +55,6 @@ internal sealed class TcpStreamProcessor : IDisposable
     [MethodImpl(MethodImplOptions.AggressiveOptimization)]
     public void Process(RawCapture raw)
     {
-        _storage.IsServerConnected = true;
-
         var packet = Packet.ParsePacket(raw.LinkLayerType, raw.Data);
         var tcpPacket = packet.Extract<TcpPacket>();
         if (tcpPacket == null) return;
@@ -101,7 +99,6 @@ internal sealed class TcpStreamProcessor : IDisposable
         else
         {
             // No current server, try to detect one
-            _logger?.LogTrace("TryDetect Server");
             TryDetectServer(endpoint, payload, seq);
         }
     }
@@ -262,6 +259,7 @@ internal sealed class TcpStreamProcessor : IDisposable
 
     private void TryDetectServer(ServerEndpoint endpoint, byte[] payload, uint sequenceNumber)
     {
+        _logger?.LogTrace("TryDetect Server");
         try
         {
             if (payload.Length > 10 && payload[4] == 0)
@@ -352,6 +350,9 @@ internal sealed class TcpStreamProcessor : IDisposable
         _logger?.LogInformation("Got Scene Server: {Server}", currentServerStr);
         Console.WriteLine($"Got Scene Server Address: {currentServerStr}");
 
+        // Mark as connected only after we have positively detected the server
+        _storage.IsServerConnected = true;
+
         _storage.RaiseServerChanged(currentServerStr, prevServer);
     }
 
@@ -382,6 +383,9 @@ internal sealed class TcpStreamProcessor : IDisposable
         }
 
         _pipe = new Pipe(new PipeOptions(useSynchronizationContext: false));
+
+        // Ensure we report disconnected after a reset
+        _storage.IsServerConnected = false;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
