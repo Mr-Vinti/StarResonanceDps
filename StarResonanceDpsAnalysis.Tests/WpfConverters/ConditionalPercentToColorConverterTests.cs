@@ -30,7 +30,7 @@ public class ConditionalPercentToColorConverterTests
     [InlineData(0d, true, 0)]
     [InlineData(0.5d, true, 128)]
     [InlineData(1.0d, true, 255)]
-    [InlineData(1.5d, true, 255)]
+    [InlineData(150d, true, 255)]
     [InlineData(-0.1d, true, 0)]
     public void Convert_FromDoubleFactor_Enabled_ComputesAlpha(double factor, bool enabled, int expectedAlpha)
     {
