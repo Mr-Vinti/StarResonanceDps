@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using StarResonanceDpsAnalysis.Core.Analyze;
 
-namespace StarResonanceDpsAnalysis.Core.Tests;
+namespace StarResonanceDpsAnalysis.Tests;
 
 public class PacketAnalyzerTests
 {

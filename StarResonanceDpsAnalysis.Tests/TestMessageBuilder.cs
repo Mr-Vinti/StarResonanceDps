@@ -4,7 +4,7 @@ using Google.Protobuf;
 using StarResonanceDpsAnalysis.Core.Analyze;
 using StarResonanceDpsAnalysis.Core.Analyze.Models;
 
-namespace StarResonanceDpsAnalysis.Core.Tests;
+namespace StarResonanceDpsAnalysis.Tests;
 
 internal static class TestMessageBuilder
 {

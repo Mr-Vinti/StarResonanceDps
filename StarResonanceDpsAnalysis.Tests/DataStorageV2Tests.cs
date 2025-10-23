@@ -1,11 +1,8 @@
-using System;
-using System.Linq;
 using Microsoft.Extensions.Logging.Abstractions;
 using StarResonanceDpsAnalysis.Core.Data;
 using StarResonanceDpsAnalysis.Core.Data.Models;
-using Xunit;
 
-namespace StarResonanceDpsAnalysis.Core.Tests;
+namespace StarResonanceDpsAnalysis.Tests;
 
 public class DataStorageV2Tests
 {

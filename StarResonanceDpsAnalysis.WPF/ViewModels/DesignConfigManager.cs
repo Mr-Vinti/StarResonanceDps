@@ -11,4 +11,9 @@ internal sealed class DesignConfigManager : IConfigManager
     {
         return Task.CompletedTask;
     }
+
+    private void OnConfigurationUpdated(AppConfig e)
+    {
+        ConfigurationUpdated?.Invoke(this, e);
+    }
 }

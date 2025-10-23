@@ -6,7 +6,7 @@ using StarResonanceDpsAnalysis.Core.Analyze;
 using StarResonanceDpsAnalysis.Core.Data;
 using StarResonanceDpsAnalysis.WPF.Data;
 
-namespace StarResonanceDpsAnalysis.Core.Tests;
+namespace StarResonanceDpsAnalysis.Tests;
 
 public class PacketAnalyzerV2Tests
 {
@@ -165,7 +165,7 @@ public class PacketAnalyzerV2Tests
     }
 
     [Fact]
-    public async void CheckServerDetect_ServerSignature()
+    public async Task CheckServerDetect_ServerSignature()
     {
         // Arrange
         _analyzer.Start();
@@ -186,7 +186,7 @@ public class PacketAnalyzerV2Tests
     }
 
     [Fact]
-    public async void CheckServerDetect_LoginSignature()
+    public async Task CheckServerDetect_LoginSignature()
     {
         // Arrange
         _analyzer.Start();
@@ -206,7 +206,7 @@ public class PacketAnalyzerV2Tests
     }
 
     [Fact]
-    public async void ResetCaptureState_ResetsProcessorState()
+    public async Task ResetCaptureState_ResetsProcessorState()
     {
         // Arrange
         _analyzer.Start();

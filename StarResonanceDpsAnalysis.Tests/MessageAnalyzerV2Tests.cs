@@ -1,11 +1,8 @@
-using System;
-using System.Linq;
 using Microsoft.Extensions.Logging.Abstractions;
 using StarResonanceDpsAnalysis.Core.Analyze;
 using StarResonanceDpsAnalysis.Core.Data;
-using Xunit;
 
-namespace StarResonanceDpsAnalysis.Core.Tests;
+namespace StarResonanceDpsAnalysis.Tests;
 
 public class MessageAnalyzerV2Tests
 {

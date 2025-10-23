@@ -26,12 +26,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StarResonanceDpsAnalysis.Core\StarResonanceDpsAnalysis.Core.csproj" />
+    <ProjectReference Include="..\StarResonanceDpsAnalysis.WPF\StarResonanceDpsAnalysis.WPF.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="TestData\msgBytes.bin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

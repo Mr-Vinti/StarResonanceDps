@@ -1,9 +1,7 @@
-using System;
 using StarResonanceDpsAnalysis.Core.Analyze;
 using StarResonanceDpsAnalysis.Core.Data;
-using Xunit;
 
-namespace StarResonanceDpsAnalysis.Core.Tests;
+namespace StarResonanceDpsAnalysis.Tests;
 
 public class MessageAnalyzerTests : IDisposable
 {

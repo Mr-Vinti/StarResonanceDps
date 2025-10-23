@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace StarResonanceDpsAnalysis.Core.Tests;
+namespace StarResonanceDpsAnalysis.Tests;
 
 public static class TestUtils
 {

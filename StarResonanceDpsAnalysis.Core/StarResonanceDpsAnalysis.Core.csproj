@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="StarResonanceDpsAnalysis.WPF" />
-    <InternalsVisibleTo Include="StarResonanceDpsAnalysis.Core.Tests" />
+    <InternalsVisibleTo Include="StarResonanceDpsAnalysis.Tests" />
     <InternalsVisibleTo Include="StarResonanceDpsAnalysis.Core.Benchmarks" />
   </ItemGroup>
 

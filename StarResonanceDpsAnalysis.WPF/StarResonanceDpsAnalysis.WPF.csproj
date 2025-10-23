@@ -37,9 +37,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <!-- Link WinForm default monster names to WPF output for fallback -->
-    <Content Include="..\StarResonanceDpsAnalysis.WinForm\Core\TabelJson\monster_names.json" Link="Core\TabelJson\monster_names.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <!-- Copy localization JSON files -->
     <Content Include="Localization\*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

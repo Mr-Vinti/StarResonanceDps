@@ -179,4 +179,14 @@ public class JsonLocalizationProvider : ILocalizationProvider
         foreach (var culture in cultures)
             yield return culture;
     }
+
+    protected virtual void OnProviderError(ProviderErrorEventArgs args)
+    {
+        ProviderError?.Invoke(this, args);
+    }
+
+    protected virtual void OnValueChanged(ValueChangedEventArgs args)
+    {
+        ValueChanged?.Invoke(this, args);
+    }
 }
