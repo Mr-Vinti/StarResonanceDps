@@ -10,8 +10,8 @@
  - [x] 玩家信息更新
  - [x] 战斗信息不刷新
  - [ ] 治疗技能列表不正确
- - [ ] Fix TryDetect Server when there is no process running
- - [ ] RegisterHotKey failed for Topmost: F7+Control
+ - [x] Fix TryDetect Server when there is no process running
+ - [x] RegisterHotKey failed for Topmost: F7+Control
  - [ ] simplify logging
  - [ ] logging detail for syncing
  - [ ] Optimize nuget references

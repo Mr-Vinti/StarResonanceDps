@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -47,9 +48,22 @@ public sealed class GlobalHotkeyService(
     public void UpdateFromConfig(AppConfig config)
     {
         _config = config;
-        // Re-register hotkeys to reflect new key or modifiers
-        UnregisterAll();
-        RegisterAll();
+        // Ensure all (un)registration runs on the UI thread owning the window/handle
+        var dispatcher = windowManager.DpsStatisticsView.Dispatcher;
+        if (dispatcher.CheckAccess())
+        {
+            // Re-register hotkeys to reflect new key or modifiers
+            UnregisterAll();
+            RegisterAll();
+        }
+        else
+        {
+            dispatcher.Invoke(() =>
+            {
+                UnregisterAll();
+                RegisterAll();
+            });
+        }
     }
 
     private void OnConfigUpdated(object? sender, AppConfig e)
@@ -107,6 +121,7 @@ public sealed class GlobalHotkeyService(
             {
                 UnregisterHotKey(hWnd, HOTKEY_ID_MOUSETHROUGH);
                 UnregisterHotKey(hWnd, HOTKEY_ID_TOPMOST);
+                UnregisterHotKey(hWnd, HOTKEY_ID_RESET_STATISTIC);
             }
         }
         catch (Exception ex)
@@ -125,11 +140,7 @@ public sealed class GlobalHotkeyService(
         var hWnd = _source?.Handle ?? IntPtr.Zero;
         if (hWnd == IntPtr.Zero) return;
 
-        UnregisterHotKey(hWnd, HOTKEY_ID_MOUSETHROUGH);
-        if (!RegisterHotKey(hWnd, HOTKEY_ID_MOUSETHROUGH, fsMods, vk))
-        {
-            logger.LogWarning("RegisterHotKey failed for MouseThrough: {Key}+{Mods}", key, mods);
-        }
+        TryRegisterHotKey(hWnd, HOTKEY_ID_MOUSETHROUGH, fsMods, vk, key, mods);
     }
 
     private void RegisterTopmostHotkey()
@@ -142,11 +153,7 @@ public sealed class GlobalHotkeyService(
         var hWnd = _source?.Handle ?? IntPtr.Zero;
         if (hWnd == IntPtr.Zero) return;
 
-        UnregisterHotKey(hWnd, HOTKEY_ID_TOPMOST);
-        if (!RegisterHotKey(hWnd, HOTKEY_ID_TOPMOST, fsMods, vk))
-        {
-            logger.LogWarning("RegisterHotKey failed for Topmost: {Key}+{Mods}", key, mods);
-        }
+        TryRegisterHotKey(hWnd, HOTKEY_ID_TOPMOST, fsMods, vk, key, mods);
     }
 
     private void RegisterResetDpsStatistic()
@@ -159,11 +166,7 @@ public sealed class GlobalHotkeyService(
         var hWnd = _source?.Handle ?? IntPtr.Zero;
         if (hWnd == IntPtr.Zero) return;
 
-        UnregisterHotKey(hWnd, HOTKEY_ID_RESET_STATISTIC);
-        if (!RegisterHotKey(hWnd, HOTKEY_ID_RESET_STATISTIC, fsMods, vk))
-        {
-            logger.LogWarning("RegisterHotKey failed for Topmost: {Key}+{Mods}", key, mods);
-        }
+        TryRegisterHotKey(hWnd, HOTKEY_ID_RESET_STATISTIC, fsMods, vk, key, mods);
     }
 
     private static (uint vk, uint fsMods) ToNative(Key key, ModifierKeys mods)
@@ -175,6 +178,20 @@ public sealed class GlobalHotkeyService(
         if (mods.HasFlag(ModifierKeys.Shift)) fs |= 0x0004; // MOD_SHIFT
         // ignore windows key by design
         return (vk, fs);
+    }
+
+    private bool TryRegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk, Key key, ModifierKeys mods,
+        [CallerMemberName] string? name = null)
+    {
+        // Always attempt to unregister first (safe even if not registered)
+        UnregisterHotKey(hWnd, id);
+        if (!RegisterHotKey(hWnd, id, fsModifiers, vk))
+        {
+            var error = Marshal.GetLastWin32Error();
+            logger.LogWarning("RegisterHotKey failed for {Name}: {Key}+{Mods}. Win32Error={Error}", name, key, mods, error);
+            return false;
+        }
+        return true;
     }
 
     private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -245,9 +262,9 @@ public sealed class GlobalHotkeyService(
         }
     }
 
-    [DllImport("user32.dll")]
+    [DllImport("user32.dll", SetLastError = true)]
     private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
 
-    [DllImport("user32.dll")]
+    [DllImport("user32.dll", SetLastError = true)]
     private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 }
