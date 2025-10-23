@@ -54,9 +54,8 @@ public sealed class ConditionalPercentToColorConverter : IMultiValueConverter
     {
         return value switch
         {
-            // double d when d <= 1d => Math.Clamp(d, 0d, 1d),
-            double d => Math.Clamp(d, 0d, 1d),
-            // double d => Math.Clamp(d / 100d, 0d, 1d),
+            double d when d <= 1d => Math.Clamp(d, 0d, 1d),
+            double d => Math.Clamp(d / 100d, 0d, 1d),
             int i => Math.Clamp(i / 100d, 0d, 1d),
             string s when double.TryParse(s, NumberStyles.Any, culture, out var parsed) => Math.Clamp(parsed / 100d, 0d,
                 1d),

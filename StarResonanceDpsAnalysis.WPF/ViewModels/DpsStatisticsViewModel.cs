@@ -87,11 +87,14 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
                 new DpsStatisticsSubViewModel(logger, dispatcher,StatisticType.TakenDamage, storage, debugFunctions)
             }
         };
+        _configManager = configManager;
+        _configManager.ConfigurationUpdated += ConfigManagerOnConfigurationUpdated;
+        _appConfig = _configManager.CurrentConfig;
+
         DebugFunctions = debugFunctions;
         _appControlService = appControlService;
         _storage = storage;
         _logger = logger;
-        _configManager = configManager;
         _windowManagement = windowManagement;
         _topmostService = topmostService;
         _dispatcher = dispatcher;
@@ -101,8 +104,6 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         _storage.PlayerInfoUpdated += StorageOnPlayerInfoUpdated;
 
         // set config
-        _appConfig = _configManager.CurrentConfig;
-        _configManager.ConfigurationUpdated += ConfigManagerOnConfigurationUpdated;
     }
 
     public Dictionary<StatisticType, DpsStatisticsSubViewModel> StatisticData { get; }

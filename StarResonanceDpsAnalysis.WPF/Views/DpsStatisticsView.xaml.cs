@@ -22,9 +22,8 @@ public partial class DpsStatisticsView : Window
 
     public DpsStatisticsView(DpsStatisticsViewModel vm)
     {
-        InitializeComponent();
-
         DataContext = vm;
+        InitializeComponent();
     }
 
     public bool Collapse

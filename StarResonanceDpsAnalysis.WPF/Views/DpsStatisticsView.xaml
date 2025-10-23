@@ -51,35 +51,6 @@
         <converters:DoubleNegateConverter x:Key="DoubleNegateConverter" />
         <converters:DoubleSumConverter x:Key="DoubleSumConverter" />
 
-        <Style x:Key="TitleBar" TargetType="Border">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush>
-                        <SolidColorBrush.Color>
-                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#BABABA">
-                                <Binding Path="DataContext.AppConfig.Opacity" RelativeSource="{RelativeSource AncestorType=Window}" />
-                                <Binding Path="DataContext.AppConfig.MouseThroughEnabled" RelativeSource="{RelativeSource AncestorType=Window}" />
-                            </MultiBinding>
-                        </SolidColorBrush.Color>
-                    </SolidColorBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="Panel.ZIndex" Value="1" />
-            <Setter Property="CornerRadius">
-                <Setter.Value>
-                    <CornerRadius
-                        BottomLeft="0"
-                        BottomRight="0"
-                        TopLeft="{StaticResource MainCornerRadiusDouble}"
-                        TopRight="{StaticResource MainCornerRadiusDouble}" />
-                </Setter.Value>
-            </Setter>
-
-            <EventSetter Event="MouseLeftButtonDown" Handler="TitleBar_MouseLeftButtonDown" />
-        </Style>
-
         <Style x:Key="StatisticTypeText" TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Foreground" Value="#FFF" />
@@ -93,38 +64,6 @@
             <Setter Property="Foreground" Value="White" />
         </Style>
 
-        <Style x:Key="SortedDpsBorder" TargetType="Border">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush>
-                        <SolidColorBrush.Color>
-                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#191919">
-                                <Binding Path="DataContext.AppConfig.Opacity" RelativeSource="{RelativeSource AncestorType=Window}" />
-                                <Binding Path="DataContext.AppConfig.MouseThroughEnabled" RelativeSource="{RelativeSource AncestorType=Window}" />
-                            </MultiBinding>
-                        </SolidColorBrush.Color>
-                    </SolidColorBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="LoadingGrid" TargetType="Border">
-            <!--  TODO: 当 DataStorage 触发 ServerConnectionStateChanged 时, 隐藏该 Grid  -->
-            <Setter Property="Height" Value="5" />
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush>
-                        <SolidColorBrush.Color>
-                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#191919">
-                                <Binding Path="DataContext.AppConfig.Opacity" RelativeSource="{RelativeSource AncestorType=Window}" />
-                                <Binding Path="DataContext.AppConfig.MouseThroughEnabled" RelativeSource="{RelativeSource AncestorType=Window}" />
-                            </MultiBinding>
-                        </SolidColorBrush.Color>
-                    </SolidColorBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <Style x:Key="LoadingBlockRectangle" TargetType="Rectangle">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="Width" Value="150" />
@@ -136,18 +75,6 @@
         </Style>
 
         <Style x:Key="FooterContentBorder" TargetType="Border">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush>
-                        <SolidColorBrush.Color>
-                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#BABABA">
-                                <Binding Path="DataContext.AppConfig.Opacity" RelativeSource="{RelativeSource AncestorType=Window}" />
-                                <Binding Path="DataContext.AppConfig.MouseThroughEnabled" RelativeSource="{RelativeSource AncestorType=Window}" />
-                            </MultiBinding>
-                        </SolidColorBrush.Color>
-                    </SolidColorBrush>
-                </Setter.Value>
-            </Setter>
             <Setter Property="VerticalAlignment" Value="Bottom" />
             <Setter Property="Height" Value="25" />
             <Setter Property="Opacity" Value="1" />
@@ -396,7 +323,28 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="25" />
             </Grid.RowDefinitions>
-            <Border Style="{StaticResource TitleBar}">
+            <Border
+                Height="25"
+                VerticalAlignment="Top"
+                Panel.ZIndex="1"
+                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Border.CornerRadius>
+                    <CornerRadius
+                        BottomLeft="0"
+                        BottomRight="0"
+                        TopLeft="{StaticResource MainCornerRadiusDouble}"
+                        TopRight="{StaticResource MainCornerRadiusDouble}" />
+                </Border.CornerRadius>
+                <Border.Background>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#BABABA">
+                                <Binding Path="AppConfig.Opacity" />
+                                <Binding Path="AppConfig.MouseThroughEnabled" />
+                            </MultiBinding>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Border.Background>
                 <!--  顶部栏,Grid 一般不设置属性  -->
                 <Grid Margin="2">
                     <!--  统计类型标注  -->
@@ -648,7 +596,17 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="1" Style="{StaticResource SortedDpsBorder}">
+            <Border Grid.Row="1">
+                <Border.Background>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#191919">
+                                <Binding Path="AppConfig.Opacity" />
+                                <Binding Path="AppConfig.MouseThroughEnabled" />
+                            </MultiBinding>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Border.Background>
                 <ctrl:SortedDpsControl
                     ItemTemplate="{StaticResource ProgressBarDataTemplate}"
                     ItemsSource="{Binding CurrentStatisticData.Data}"
@@ -658,9 +616,20 @@
             <Border
                 x:Name="LoadingGridHost"
                 Grid.Row="2"
-                ClipToBounds="True"
-                Style="{StaticResource LoadingGrid}">
+                Height="5"
+                ClipToBounds="True">
+                <Border.Background>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#191919">
+                                <Binding Path="AppConfig.Opacity" />
+                                <Binding Path="AppConfig.MouseThroughEnabled" />
+                            </MultiBinding>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Border.Background>
 
+                <!--  TODO: 当 DataStorage 触发 ServerConnectionStateChanged 时, 隐藏该 Grid  -->
                 <Rectangle x:Name="LoadingStripe" Style="{StaticResource LoadingBlockRectangle}">
                     <Rectangle.Triggers>
                         <EventTrigger RoutedEvent="Loaded">
@@ -704,6 +673,16 @@
                 x:Name="ContentBorder"
                 Grid.Row="3"
                 Style="{StaticResource FooterContentBorder}">
+                <Border.Background>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <MultiBinding Converter="{StaticResource ConditionalPercentToColorConverter}" ConverterParameter="#BABABA">
+                                <Binding Path="DataContext.AppConfig.Opacity" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                <Binding Path="DataContext.AppConfig.MouseThroughEnabled" RelativeSource="{RelativeSource AncestorType=Window}" />
+                            </MultiBinding>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Border.Background>
                 <Grid Margin="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -733,7 +712,7 @@
                                     FallbackValue="--"
                                     Path="CurrentStatisticData.CurrentPlayerSlot.Value"
                                     TargetNullValue="--" />
-                                <Binding Path="DataContext.NumberDisplayMode" RelativeSource="{RelativeSource AncestorType=Window}" />
+                                <Binding Path="DataContext.AppConfig.DamageDisplayType" RelativeSource="{RelativeSource AncestorType=Window, Mode=FindAncestor}" />
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
