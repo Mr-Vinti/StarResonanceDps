@@ -34,4 +34,4 @@ If this project helps you, please consider giving it a star ⭐
 
 ---
 
-**Disclaimer**: This tool is for learning and analysis of game data only. Do not use it in ways that violate the game's Terms of Service. You are solely responsible for any risks incurred. The maintainers are not responsible for any misuse of this tool to discriminate against other players. Please adhere to the rules and ethical standards of the game's community.
+**Disclaimer**: This tool is for learning and analysis of game data only. Do not use it in ways that violate the game's Terms of Service. You are solely responsible for any risks incurred. The maintainers are not responsible for any misuse of this tool to discriminate against other players. Please adhere to the rules and ethical standards of the game's community
