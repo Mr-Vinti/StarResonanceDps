@@ -31,3 +31,21 @@ jobs:
 
     - name: Run tests
       run: dotnet test StarResonanceDpsAnalysis.sln --configuration ${{ matrix.configuration }} --no-build
+
+    - name: Publish application
+      run: |
+        dotnet publish StarResonanceDpsAnalysis.sln `
+          --configuration ${{ matrix.configuration }} `
+          --output ./publish `
+          --no-build `
+          -p:PublishSingleFile=true `
+          -p:IncludeAllContentForSelfExtract=true
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: StarResonanceDpsAnalysis-${{ matrix.configuration }}
+        path: |
+          ./publish/**/*.exe
+          ./publish/**/*.dll
+        retention-days: 30
