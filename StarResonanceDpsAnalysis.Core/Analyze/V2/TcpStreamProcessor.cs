@@ -8,6 +8,7 @@ using SharpPcap;
 using StarResonanceDpsAnalysis.Core.Collections;
 using StarResonanceDpsAnalysis.WPF.Data;
 using System.IO.Pipelines;
+using StarResonanceDpsAnalysis.Core.Logging;
 
 namespace StarResonanceDpsAnalysis.Core.Analyze;
 
@@ -67,8 +68,6 @@ internal sealed class TcpStreamProcessor : IDisposable
 
         var now = DateTime.Now;
         var seq = tcpPacket.SequenceNumber;
-        // hot path: disable per-packet info log
-        // _logger?.LogInformation("TcpSeq:{seq}", seq);
         var endpoint = ServerEndpoint.FromPacket(ipv4Packet, tcpPacket);
 
         // --- State-based processing ---
@@ -150,6 +149,7 @@ internal sealed class TcpStreamProcessor : IDisposable
         if ((now - _tcpLastTime).TotalSeconds > 5)
         {
             _tcpCache.ForceEviction();
+            // No count available; rely on Count if needed
         }
     }
 
@@ -182,7 +182,7 @@ internal sealed class TcpStreamProcessor : IDisposable
 
             if (hasData)
             {
-                // Write reassembled bytes into the pipe and flush
+                _logger?.LogTrace("Writing {Bytes} bytes to pipe for parsing", messageLength);
                 _pipe.Writer.Write(messageBuffer.AsSpan(0, messageLength));
                 _ = _pipe.Writer.FlushAsync().GetAwaiter().GetResult();
             }
@@ -203,6 +203,7 @@ internal sealed class TcpStreamProcessor : IDisposable
         {
             var buffer = result.Buffer;
             long consumedBytes = 0;
+            var parsedPackets = 0;
 
             while (true)
             {
@@ -241,9 +242,14 @@ internal sealed class TcpStreamProcessor : IDisposable
                     _messageAnalyzer.Process(exactPacket);
                 }
 
-                // Advance the buffer
+                parsedPackets++;
                 buffer = buffer.Slice(packetSize);
                 consumedBytes += packetSize;
+            }
+
+            if (parsedPackets > 0)
+            {
+                _logger?.LogTrace("Parsed {Count} framed messages from pipe", parsedPackets);
             }
 
             var consumed = result.Buffer.GetPosition(consumedBytes);
@@ -259,7 +265,7 @@ internal sealed class TcpStreamProcessor : IDisposable
 
     private void TryDetectServer(ServerEndpoint endpoint, byte[] payload, uint sequenceNumber)
     {
-        _logger?.LogTrace("TryDetect Server");
+        _logger?.LogTrace("TryDetect Server on {Endpoint} with {Bytes} bytes", endpoint.ToString(), payload.Length);
         try
         {
             if (payload.Length > 10 && payload[4] == 0)
@@ -347,8 +353,7 @@ internal sealed class TcpStreamProcessor : IDisposable
 
         _lastAnyPacketAt = DateTime.Now;
         var currentServerStr = endpoint.ToString();
-        _logger?.LogInformation("Got Scene Server: {Server}", currentServerStr);
-        Console.WriteLine($"Got Scene Server Address: {currentServerStr}");
+        _logger?.LogInformation(CoreLogEvents.ServerDetected, "Got Scene Server: {Server}", currentServerStr);
 
         // Mark as connected only after we have positively detected the server
         _storage.IsServerConnected = true;
@@ -359,6 +364,7 @@ internal sealed class TcpStreamProcessor : IDisposable
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void ResetCaptureState()
     {
+        var prev = CurrentServerEndpoint.ToString();
         CurrentServerEndpoint = default;
         _tcpNextSeq = null;
         _tcpLastTime = DateTime.MinValue;
@@ -366,42 +372,41 @@ internal sealed class TcpStreamProcessor : IDisposable
         _waitingGapSince = null;
         _tcpCache.Clear();
 
-        try { _pipe.Writer.Complete(); }
+        try
+        {
+            _pipe.Writer.Complete();
+        }
         catch
         {
-#if DEBUG
-            throw;
-#endif
+            //Ignore
         }
 
-        try { _pipe.Reader.Complete(); }
+        try
+        {
+            _pipe.Reader.Complete();
+        }
         catch
         {
-#if DEBUG
-            throw;
-#endif
+            //Ignore
         }
 
         _pipe = new Pipe(new PipeOptions(useSynchronizationContext: false));
-
-        // Ensure we report disconnected after a reset
         _storage.IsServerConnected = false;
+        _logger?.LogInformation(CoreLogEvents.Reconnect, "Capture state reset, previous server was {Prev}", prev);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void ForceReconnect(string reason)
     {
         _storage.IsServerConnected = false;
-        _logger?.LogInformation("Forcing reconnect due to {Reason}", reason);
-        Console.WriteLine($"[PacketAnalyzer] Reconnect due to {reason} @ {DateTime.Now:HH:mm:ss}");
+        _logger?.LogInformation(CoreLogEvents.Reconnect, "Forcing reconnect due to {Reason}", reason);
         ResetCaptureState();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void ForceResyncTo(uint seq)
     {
-        _logger?.LogWarning("Resyncing TCP stream to seq={Seq}", seq);
-        Console.WriteLine($"[PacketAnalyzer] Resync to seq={seq}");
+        _logger?.LogWarning(CoreLogEvents.Resync, "Resyncing TCP stream to seq={Seq}", seq);
         _tcpCache.Clear();
         _tcpNextSeq = seq;
         _waitingGapSince = null;
@@ -424,7 +429,22 @@ internal sealed class TcpStreamProcessor : IDisposable
 
     public void Dispose()
     {
-        try { _pipe.Writer.Complete(); } catch { }
-        try { _pipe.Reader.Complete(); } catch { }
+        try
+        {
+            _pipe.Writer.Complete();
+        }
+        catch
+        {
+            //Ignore
+        }
+
+        try
+        {
+            _pipe.Reader.Complete();
+        }
+        catch
+        {
+            //Ignore
+        }
     }
 }

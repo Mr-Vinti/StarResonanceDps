@@ -1,6 +1,7 @@
 using System.Threading.Channels;
 using Microsoft.Extensions.Logging;
 using SharpPcap;
+using StarResonanceDpsAnalysis.Core.Logging;
 using StarResonanceDpsAnalysis.WPF.Data;
 
 namespace StarResonanceDpsAnalysis.Core.Analyze;
@@ -60,7 +61,7 @@ public sealed class PacketAnalyzerV2(
 
             _processingTask = Task.Run(() => ProcessChannelAsync(_cts.Token), _cts.Token);
             _isRunning = true;
-            logger?.LogInformation("PacketAnalyzerV2 started.");
+            logger?.LogInformation(CoreLogEvents.PacketStart, "Packet analyzer started");
         }
         finally
         {
@@ -92,7 +93,7 @@ public sealed class PacketAnalyzerV2(
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex, "Exception during packet processing task shutdown.");
+                logger?.LogError(CoreLogEvents.AnalyzerError, ex, "Exception during packet processing task shutdown");
             }
             finally
             {
@@ -101,7 +102,7 @@ public sealed class PacketAnalyzerV2(
                 _processingTask = null;
                 _channel = null;
                 _isRunning = false;
-                logger?.LogInformation("PacketAnalyzerV2 stopped.");
+                logger?.LogInformation(CoreLogEvents.PacketStop, "Packet analyzer stopped");
             }
         }
         finally
@@ -172,6 +173,7 @@ public sealed class PacketAnalyzerV2(
         if (_channel == null) return;
 
         var reader = _channel.Reader;
+        var count = 0;
         while (await reader.WaitToReadAsync(token))
         {
             while (reader.TryRead(out var raw))
@@ -179,24 +181,17 @@ public sealed class PacketAnalyzerV2(
                 try
                 {
                     _streamProcessor.Process(raw);
+                    if (++count % 1000 == 0)
+                    {
+                        logger?.LogTrace("Processed {Count} packets from channel", count);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    logger?.LogError(ex, "Error processing packet from channel.");
+                    logger?.LogError(CoreLogEvents.AnalyzerError, ex, "Error processing packet from channel");
                 }
             }
         }
-        // await foreach (var raw in _channel.Reader.ReadAllAsync(token))
-        // {
-        //     try
-        //     {
-        //         _streamProcessor.Process(raw);
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         logger?.LogError(ex, "Error processing packet from channel.");
-        //     }
-        // }
     }
 
     public void ResetCaptureState()

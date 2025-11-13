@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using BlueProto;
 using Google.Protobuf;
 using Google.Protobuf.Collections;
@@ -64,7 +65,11 @@ internal sealed class SyncNearEntitiesProcessor : IMessageProcessor
             var attrType = (AttrType)attr.Id;
             if (!Enum.IsDefined(attrType))
             {
+#if DEBUG
                 _logger?.LogWarning("Unknown attribute type: {AttrType}", attrType);
+#else
+                _logger?.LogTrace("Unknown attribute type: {AttrType}", attrType);
+#endif
                 continue;
             }
             switch (attrType)
@@ -96,6 +101,11 @@ internal sealed class SyncNearEntitiesProcessor : IMessageProcessor
                 case AttrType.AttrMaxHp:
                     _storage.SetPlayerMaxHP(playerUid, reader.ReadInt32());
                     break;
+
+                case (AttrType)0x2CB0: // AttrDreamIntensity
+                    _logger?.LogWarning("[SyncNearEntitiesProcessor] Test for get AttrDreamIntensity: targetUuid[{playerUid}], intensity[{value}]", playerUid, reader.ReadInt32());
+                    break;
+
                 case AttrType.AttrId:
                 case AttrType.AttrElementFlag:
                 case AttrType.AttrReductionLevel:

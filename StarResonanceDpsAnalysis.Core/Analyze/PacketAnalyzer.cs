@@ -6,6 +6,7 @@ using PacketDotNet;
 using SharpPcap;
 using StarResonanceDpsAnalysis.Core.Data;
 using StarResonanceDpsAnalysis.Core.Extends.System;
+using StarResonanceDpsAnalysis.Core.Logging;
 
 namespace StarResonanceDpsAnalysis.Core.Analyze;
 
@@ -45,22 +46,8 @@ public class PacketAnalyzer(ILogger<PacketAnalyzer>? logger = null) : IPacketAna
             catch (Exception ex)
             {
                 var taskIdStr = (Task.CurrentId?.ToString() ?? "?") + ' ';
-                logger?.LogCritical("""
-
-                                    ==== ThreadID: {PadRight}==============
-                                    封包分析时遇到关键性崩溃: {ExMessage}
-                                    {ExStackTrace}
-                                    =======================
-
-                                    """, taskIdStr.PadRight(8, '='), ex.Message, ex.StackTrace);
-                Console.WriteLine($"""
-
-                                   ==== ThreadID: {taskIdStr.PadRight(8, '=')}==============
-                                   封包分析时遇到关键性崩溃: {ex.Message}
-                                   {ex.StackTrace}
-                                   =======================
-
-                                   """);
+                logger?.LogCritical(CoreLogEvents.AnalyzerError, ex,
+                    "Packet analyzer crashed on thread {ThreadId}.", taskIdStr.Trim());
                 return false;
             }
         });
@@ -81,8 +68,8 @@ public class PacketAnalyzer(ILogger<PacketAnalyzer>? logger = null) : IPacketAna
     {
         DataStorage.IsServerConnected = false;
 
-        logger?.LogTrace("[PacketAnalyzer] Reconnect due to {Reason} @ {DateTime:HH:mm:ss}", reason, DateTime.Now);
-        Console.WriteLine($"[PacketAnalyzer] Reconnect due to {reason} @ {DateTime.Now:HH:mm:ss}");
+        logger?.LogWarning(CoreLogEvents.Reconnect,
+            "Reconnect due to {Reason} at {Time}", reason, DateTime.Now.ToString("HH:mm:ss"));
         // 清空状态，让后续包重新走“识别服务器”的逻辑
         ResetCaptureState();
     }
@@ -90,8 +77,7 @@ public class PacketAnalyzer(ILogger<PacketAnalyzer>? logger = null) : IPacketAna
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void ForceResyncTo(uint seq)
     {
-        logger?.LogTrace("[PacketAnalyzer] Resync to seq={Seq}", seq);
-        Console.WriteLine($"[PacketAnalyzer] Resync to seq={seq}");
+        logger?.LogInformation(CoreLogEvents.Resync, "Resync TCP stream to seq={Seq}", seq);
         TcpCache.Clear();
         TcpStream.Position = 0;
         TcpStream.SetLength(0); // 完全丢弃当前未对齐的数据
@@ -204,7 +190,6 @@ public class PacketAnalyzer(ILogger<PacketAnalyzer>? logger = null) : IPacketAna
             var tcpPacket = packet.Extract<TcpPacket>();
             if (tcpPacket == null) return;
 
-            //logger?.LogInformation("TcpSeq:{seq}", tcpPacket.SequenceNumber);
             // 提取 IPv4 数据包（如果不是 IPv4，也会返回 null）
             var ipv4Packet = packet.Extract<IPv4Packet>();
             if (ipv4Packet == null) return;
@@ -229,7 +214,7 @@ public class PacketAnalyzer(ILogger<PacketAnalyzer>? logger = null) : IPacketAna
 
                     if (LastAnyPacketAt != DateTime.MinValue && now - LastAnyPacketAt > IdleTimeout)
                     {
-                        ForceReconnect("idle timeout (no packets for current flow)");
+                        ForceReconnect("idle timeout");
                         // 继续往下走，让新包有机会被识别为新的服务器
                     }
                 }
@@ -280,30 +265,16 @@ public class PacketAnalyzer(ILogger<PacketAnalyzer>? logger = null) : IPacketAna
 
                                             TcpNextSeq = tcpPacket.SequenceNumber + (uint)payload.Length;
 
-                                            logger?.LogInformation("Got Scene Server Address: {Server}", srcServer);
-                                            Console.WriteLine($"Got Scene Server Address: {srcServer}");
+                                            logger?.LogInformation(CoreLogEvents.ServerDetected,
+                                                "Detected scene server {Server}", srcServer);
 
                                             DataStorage.InvokeServerChangedEvent(CurrentServer, prevServer);
                                         }
                                     }
                                     catch (Exception ex)
                                     {
-                                        logger?.LogCritical("""
-
-                                                            =======================
-                                                            HandleRaw 检测场景服务器时遇到关键性崩溃: {ExMessage}
-                                                            {ExStackTrace}
-                                                            =======================
-
-                                                            """, ex.Message, ex.StackTrace);
-                                        Console.WriteLine($"""
-
-                                                           =======================
-                                                           HandleRaw 检测场景服务器时遇到关键性崩溃: {ex.Message}
-                                                           {ex.StackTrace}
-                                                           =======================
-
-                                                           """);
+                                        logger?.LogError(CoreLogEvents.AnalyzerError, ex,
+                                            "Error while detecting scene server");
                                     }
                                 } while (tmp.Length > 0);
                             }
@@ -324,8 +295,8 @@ public class PacketAnalyzer(ILogger<PacketAnalyzer>? logger = null) : IPacketAna
 
                                     TcpNextSeq = tcpPacket.SequenceNumber + (uint)payload.Length;
 
-                                    logger?.LogTrace("Got Scene Server Address by Login Return Packet: {SrcServer}", srcServer);
-                                    Console.WriteLine($"Got Scene Server Address by Login Return Packet: {srcServer}");
+                                    logger?.LogInformation(CoreLogEvents.ServerDetected,
+                                        "Detected scene server (login) {Server}", srcServer);
 
                                     DataStorage.InvokeServerChangedEvent(CurrentServer, prevServer);
                                 }
@@ -334,14 +305,7 @@ public class PacketAnalyzer(ILogger<PacketAnalyzer>? logger = null) : IPacketAna
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"""
-
-                                           =======================
-                                           HandleRaw 中遇到关键性崩溃: {ex.Message}
-                                           {ex.StackTrace}
-                                           =======================
-
-                                           """);
+                        logger?.LogError(CoreLogEvents.AnalyzerError, ex, "Error in server detection phase");
                     }
 
                     return;
@@ -350,8 +314,7 @@ public class PacketAnalyzer(ILogger<PacketAnalyzer>? logger = null) : IPacketAna
 
                 if (TcpNextSeq == null)
                 {
-                    logger?.LogWarning("Unexpected TCP capture state! tcp_next_seq is NULL");
-                    Console.WriteLine("Unexpected TCP capture error! tcp_next_seq is NULL");
+                    logger?.LogWarning("Unexpected TCP capture state: tcp_next_seq is NULL");
                     if (payload.Length > 4 && BinaryPrimitives.ReadUInt32BigEndian(payload) < 0x0fffff)
                     {
                         TcpNextSeq = tcpPacket.SequenceNumber;
@@ -478,8 +441,7 @@ public class PacketAnalyzer(ILogger<PacketAnalyzer>? logger = null) : IPacketAna
         catch (Exception ex)
         {
             // 捕获异常，避免程序崩溃，同时打印异常信息
-            logger?.LogError("包处理异常: {ExMessage}\r\n{ExStackTrace}", ex.Message, ex.StackTrace);
-            Console.WriteLine($"包处理异常: {ex.Message}\r\n{ex.StackTrace}");
+            logger?.LogError(CoreLogEvents.AnalyzerError, ex, "Packet processing error");
         }
     }
 
@@ -495,14 +457,19 @@ public class PacketAnalyzer(ILogger<PacketAnalyzer>? logger = null) : IPacketAna
             TcpCache.Clear();
             TcpCacheTime.Clear();
 
-            // 如果上一轮流变得很大，直接丢弃换新更省内存
-            if (TcpStream.Capacity > 1 << 20) // >1MB 就换新，阈值自定
+            // 如果上一轮流变得很大，直接丢弃换新，阈值自定
+            if (TcpStream.Capacity > 1 << 20) // >1MB 就换新
             {
-                // 清空并可选收缩容量，避免再次使用已Dispose的流
                 TcpStream.Position = 0;
                 TcpStream.SetLength(0);
-                // 如果需要 GetBuffer，确保用可公开缓冲的构造
-                TcpStream.Dispose();
+                try
+                {
+                    TcpStream.Dispose();
+                }
+                catch
+                {
+                    // Ignore
+                }
             }
             else
             {

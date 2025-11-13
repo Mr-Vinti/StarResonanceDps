@@ -22,6 +22,12 @@ public class ConfigManger : IConfigManager
         _optionsMonitor.OnChange(OnConfigurationChanged);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="newConfig"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
     public async Task SaveAsync(AppConfig? newConfig = null)
     {
         try

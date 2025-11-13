@@ -5,6 +5,7 @@ using StarResonanceDpsAnalysis.WPF.Config;
 using StarResonanceDpsAnalysis.WPF.Data;
 using StarResonanceDpsAnalysis.WPF.Localization;
 using StarResonanceDpsAnalysis.WPF.Models;
+using StarResonanceDpsAnalysis.WPF.Logging;
 
 namespace StarResonanceDpsAnalysis.WPF.Services;
 
@@ -21,6 +22,7 @@ public sealed class ApplicationStartup(
     {
         try
         {
+            logger.LogInformation(WpfLogEvents.StartupInit, "Startup initialization started");
             // Apply localization
             localization.Initialize(configManager.CurrentConfig.Language);
 
@@ -30,6 +32,7 @@ public sealed class ApplicationStartup(
             // Start analyzer
             packetAnalyzer.Start();
             hotkeyService.Start();
+            logger.LogInformation(WpfLogEvents.StartupInit, "Startup initialization completed");
         }
         catch (Exception ex)
         {
@@ -56,11 +59,7 @@ public sealed class ApplicationStartup(
         // If preferred not found, try automatic selection via routing
         if (target == null)
         {
-            var auto = await deviceManagementService.GetAutoSelectedNetworkAdapterAsync();
-            if (auto != null)
-            {
-                target = auto;
-            }
+            target = await deviceManagementService.GetAutoSelectedNetworkAdapterAsync();
         }
 
         target ??= adapters.Count > 0
@@ -69,9 +68,14 @@ public sealed class ApplicationStartup(
 
         if (target != null)
         {
+            logger.LogInformation(WpfLogEvents.StartupAdapter, "Activating adapter: {Name}", target.Name);
             deviceManagementService.SetActiveNetworkAdapter(target);
             configManager.CurrentConfig.PreferredNetworkAdapter = target;
             _ = configManager.SaveAsync();
+        }
+        else
+        {
+            logger.LogWarning(WpfLogEvents.StartupAdapter, "No adapters available for activation");
         }
     }
 
@@ -79,6 +83,7 @@ public sealed class ApplicationStartup(
     {
         try
         {
+            logger.LogInformation(WpfLogEvents.Shutdown, "Application shutdown");
             deviceManagementService.StopActiveCapture();
             packetAnalyzer.Stop();
             hotkeyService.Stop();

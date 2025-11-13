@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Remove="App.xaml" />
+    <Compile Include="Logging\WpfLogEvents.cs" />
     <Page Include="App.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -67,12 +68,9 @@
     <PackageReference Include="Serilog.Extensions.Logging.File" />
     <PackageReference Include="WPFLocalizeExtension" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
-    <PackageReference Include="DotNetProjects.SVGImage" />
-    <PackageReference Include="INIParser" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Extensions.Logging" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" />
-    <PackageReference Include="SharpVectors" />
     <PackageReference Include="System.Reactive" />
     <!-- Serilog observable sink -->
     <PackageReference Include="Serilog" />

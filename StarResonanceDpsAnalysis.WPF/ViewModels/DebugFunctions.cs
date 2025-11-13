@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Threading;
@@ -21,18 +20,26 @@ namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
 public partial class DebugFunctions : BaseViewModel, IDisposable
 {
-    private const int MaxLogEntries = 500;
-    private const int FilterDebounceMs = 300;
-    private const int BatchSize = 10; // Process logs in batches to reduce UI freezing
+    private const int MaxLogEntries = 2000; // allow more lines for context
+    private const int FilterDebounceMs = 250;
+    private const int BatchSize = 20; // Process logs in larger batches
 
     private readonly Dispatcher _dispatcher;
+    private readonly LocalizationManager _localizationManager;
     private readonly ILogger<DebugFunctions> _logger;
     private readonly IDisposable? _logSubscription;
-    // private readonly PacketAnalyzer _packetAnalyzer = new();
     private readonly IPacketAnalyzer _packetAnalyzer;
-    private readonly LocalizationManager _localizationManager;
     private readonly Queue<LogEntry> _pendingLogs = new();
     [ObservableProperty] private bool _autoScrollEnabled = true;
+
+    [ObservableProperty] private List<Option<Language>> _availableLanguages =
+    [
+        new(Language.Auto, Language.Auto.GetLocalizedDescription()),
+        new(Language.ZhCn, Language.ZhCn.GetLocalizedDescription()),
+        new(Language.EnUs, Language.EnUs.GetLocalizedDescription()),
+        new(Language.PtBr, Language.PtBr.GetLocalizedDescription())
+    ];
+
     [ObservableProperty] private bool _enabled;
     private Timer? _filterDebounceTimer;
     [ObservableProperty] private int _filteredLogCount;
@@ -45,17 +52,8 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
     [ObservableProperty] private ObservableCollection<LogEntry> _logs = new();
     private CancellationTokenSource? _replayCts;
     private Task? _replayTask;
-    [ObservableProperty] private LogLevel _selectedLogLevel = LogLevel.Trace;
-
-    [ObservableProperty]
-    private List<Option<Language>> _availableLanguages =
-    [
-        new(Language.Auto, Language.Auto.GetLocalizedDescription()),
-        new(Language.ZhCn, Language.ZhCn.GetLocalizedDescription()),
-        new(Language.EnUs, Language.EnUs.GetLocalizedDescription()),
-        new(Language.PtBr, Language.PtBr.GetLocalizedDescription()),
-    ];
     [ObservableProperty] private Option<Language>? _selectedLanguage;
+    [ObservableProperty] private LogLevel _selectedLogLevel = LogLevel.Information;
 
     public DebugFunctions(Dispatcher dispatcher,
         ILogger<DebugFunctions> logger,
@@ -77,7 +75,7 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
         _packetAnalyzer = packetAnalyzer;
         _localizationManager = localizationManager;
 
-        _logger.LogInformation("DebugFunctions initialized with Serilog observable sink");
+        _logger.LogInformation("Debug panel initialized");
     }
 
     public LogLevel[] AvailableLogLevels { get; } =
@@ -102,6 +100,7 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
 
     // Event to request sample data addition - removes direct dependency on DpsStatisticsViewModel
     public event EventHandler? SampleDataRequested;
+
     partial void OnSelectedLanguageChanged(Option<Language>? value)
     {
         if (value == null) return;
@@ -220,23 +219,24 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
 
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(FilterText))
+        switch (e.PropertyName)
         {
-            // Debounce filter text changes
-            _filterDebounceTimer?.Dispose();
-            _filterDebounceTimer = new Timer(_ =>
-            {
-                _dispatcher.BeginInvoke(() =>
+            case nameof(FilterText):
+                // Debounce filter text changes
+                _filterDebounceTimer?.Dispose();
+                _filterDebounceTimer = new Timer(_ =>
                 {
-                    FilteredLogs?.Refresh();
-                    UpdateFilteredLogCount();
-                }, DispatcherPriority.Background);
-            }, null, FilterDebounceMs, Timeout.Infinite);
-        }
-        else if (e.PropertyName == nameof(SelectedLogLevel))
-        {
-            FilteredLogs?.Refresh();
-            UpdateFilteredLogCount();
+                    _dispatcher.BeginInvoke(() =>
+                    {
+                        FilteredLogs?.Refresh();
+                        UpdateFilteredLogCount();
+                    }, DispatcherPriority.Background);
+                }, null, FilterDebounceMs, Timeout.Infinite);
+                break;
+            case nameof(SelectedLogLevel):
+                FilteredLogs?.Refresh();
+                UpdateFilteredLogCount();
+                break;
         }
     }
 
@@ -274,7 +274,7 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
         LogCount = 0;
         FilteredLogCount = 0;
         LastLogTime = null;
-        _logger.LogInformation("Debug logs cleared");
+        _logger.LogInformation("Logs cleared");
     }
 
     [RelayCommand]
@@ -335,7 +335,7 @@ public partial class DebugFunctions : BaseViewModel, IDisposable
         };
         if (dlg.ShowDialog() != true) return;
         StartPcapReplay(dlg.FileName);
-        _logger.LogInformation("Started replaying PCAP file: {File}", Path.GetFileName(dlg.FileName));
+        _logger.LogInformation("Replaying PCAP: {File}", Path.GetFileName(dlg.FileName));
     }
 
     private void StartPcapReplay(string filePath, bool realtime = true, double speed = 1.0)

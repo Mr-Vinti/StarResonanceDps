@@ -294,6 +294,7 @@ namespace StarResonanceDpsAnalysis.Core.Analyze
                                     DataStorage.CurrentPlayerInfo.Name = playerName;
                                     DataStorage.SetPlayerName(playerUid, playerName);
                                 }
+
                                 break;
 
                             // 战力
@@ -305,9 +306,11 @@ namespace StarResonanceDpsAnalysis.Core.Analyze
                                     DataStorage.CurrentPlayerInfo.CombatPower = fightPoint;
                                     DataStorage.SetPlayerCombatPower(playerUid, fightPoint);
                                 }
+
                                 break;
 
                         }
+
                         break;
 
                     // HP
@@ -332,6 +335,7 @@ namespace StarResonanceDpsAnalysis.Core.Analyze
                                 break;
 
                         }
+
                         break;
 
                     // 职业
@@ -349,13 +353,17 @@ namespace StarResonanceDpsAnalysis.Core.Analyze
                                 DataStorage.SetPlayerProfessionID(playerUid, curProfessionId);
                             }
                         }
+
                         break;
 
                 }
 
 
             }
-            catch { }
+            catch
+            {
+                // ignore
+            }
         }
 
 

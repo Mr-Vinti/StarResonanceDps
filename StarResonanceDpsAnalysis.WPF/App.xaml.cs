@@ -15,6 +15,7 @@ using SharpPcap;
 using StarResonanceDpsAnalysis.WPF.Config;
 using StarResonanceDpsAnalysis.WPF.Extensions;
 using StarResonanceDpsAnalysis.WPF.Localization;
+using StarResonanceDpsAnalysis.WPF.Logging;
 using StarResonanceDpsAnalysis.WPF.Plugins;
 using StarResonanceDpsAnalysis.WPF.Plugins.BuiltIn;
 using StarResonanceDpsAnalysis.WPF.Plugins.Interfaces;
@@ -41,7 +42,7 @@ public partial class App : Application
         Host = CreateHostBuilder(args, configRoot).Build();
         _logger = Host.Services.GetRequiredService<ILogger<App>>();
 
-        _logger.LogInformation("Application starting");
+        _logger.LogInformation(WpfLogEvents.AppStarting, "Application starting");
 
         var app = new App();
         app.InitializeComponent();
@@ -64,7 +65,7 @@ public partial class App : Application
             // ignored
         }
 
-        _logger.LogInformation("Application exiting");
+        _logger.LogInformation(WpfLogEvents.AppExiting, "Application exiting");
         Log.CloseAndFlush();
     }
 

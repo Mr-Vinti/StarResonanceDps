@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
 using SharpPcap;
 using StarResonanceDpsAnalysis.Core.Analyze;
+using StarResonanceDpsAnalysis.WPF.Logging;
 using StarResonanceDpsAnalysis.WPF.Models;
 
 namespace StarResonanceDpsAnalysis.WPF.Services;
@@ -131,7 +132,7 @@ public class DeviceManagementService(
         ApplyProcessPortsFilter(_portsWatcher.TcpPorts, _portsWatcher.UdpPorts);
 
         packetAnalyzer.Start();
-        logger.LogInformation("Active capture device switched to: {Name}", adapter.Name);
+        logger.LogInformation(WpfLogEvents.DeviceSwitched, "Active capture device switched to: {Name}", adapter.Name);
     }
 
     public void StopActiveCapture()
@@ -164,6 +165,7 @@ public class DeviceManagementService(
 
     private void PortsWatcherOnPortsChanged(object? sender, PortsChangedEventArgs e)
     {
+        logger.LogDebug(WpfLogEvents.PortsChanged, "Process ports changed: TCP={TcpCount}, UDP={UdpCount}", e.TcpPorts.Count, e.UdpPorts.Count);
         ApplyProcessPortsFilter(e.TcpPorts, e.UdpPorts);
     }
 
@@ -207,7 +209,7 @@ public class DeviceManagementService(
             try
             {
                 dev.Filter = filter;
-                logger.LogDebug("Updated capture filter: {Filter}", filter);
+                logger.LogDebug(WpfLogEvents.CaptureFilterUpdated, "Capture filter updated: {Filter}", filter);
             }
             catch (Exception ex)
             {

@@ -17,6 +17,7 @@ using StarResonanceDpsAnalysis.WPF.Data;
 using StarResonanceDpsAnalysis.WPF.Extensions;
 using StarResonanceDpsAnalysis.WPF.Models;
 using StarResonanceDpsAnalysis.WPF.Services;
+using StarResonanceDpsAnalysis.WPF.Logging;
 
 namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
@@ -49,6 +50,10 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private readonly IWindowManagementService _windowManagement;
     private readonly ITopmostService _topmostService;
     private DispatcherTimer? _durationTimer;
+
+    // Timer for active update mode
+    private DispatcherTimer? _dpsUpdateTimer;
+
     private bool _isInitialized;
     [ObservableProperty] private ScopeTime _scopeTime = ScopeTime.Current;
     [ObservableProperty] private bool _showContextMenu;
@@ -143,12 +148,32 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     {
         if (_dispatcher.CheckAccess())
         {
+            var oldMode = AppConfig.DpsUpdateMode;
+            var oldInterval = AppConfig.DpsUpdateInterval;
+
             AppConfig = newConfig;
+
+            // If update mode or interval changed, reconfigure update mechanism
+            if (oldMode != newConfig.DpsUpdateMode || oldInterval != newConfig.DpsUpdateInterval)
+            {
+                ConfigureDpsUpdateMode();
+        }
         }
         else
         {
-            _dispatcher.Invoke(() => AppConfig = newConfig);
+            _dispatcher.Invoke(() =>
+            {
+                var oldMode = AppConfig.DpsUpdateMode;
+                var oldInterval = AppConfig.DpsUpdateInterval;
+
+                AppConfig = newConfig;
+
+                if (oldMode != newConfig.DpsUpdateMode || oldInterval != newConfig.DpsUpdateInterval)
+                {
+                    ConfigureDpsUpdateMode();
         }
+            });
+    }
     }
 
     private void OnSampleDataRequested(object? sender, EventArgs e)
@@ -165,7 +190,15 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private async Task ToggleTopmost()
     {
         AppConfig.TopmostEnabled = !AppConfig.TopmostEnabled;
-        try { await _configManager.SaveAsync(AppConfig); } catch { }
+        try
+        {
+            await _configManager.SaveAsync(AppConfig);
+        }
+        catch(InvalidOperationException ex)
+        {
+            // Ignore
+            _logger.LogError(ex, "Failed to save AppConfig");
+        }
     }
 
     [RelayCommand]
@@ -222,15 +255,14 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
             vm.Initialized = true;
         }
 
-        _logger.LogDebug("VM Loaded");
+        _logger.LogDebug(WpfLogEvents.VmLoaded, "DpsStatisticsViewModel loaded");
         LoadPlayerCache();
 
         EnsureDurationTimerStarted();
         UpdateBattleDuration();
 
-        // 开始监听DPS更新事件
-        _storage.DpsDataUpdated += DataStorage_DpsDataUpdated;
-        _storage.NewSectionCreated += StorageOnNewSectionCreated;
+        // Configure update mode based on settings
+        ConfigureDpsUpdateMode();
     }
 
     [RelayCommand]
@@ -242,6 +274,94 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     private void OnResize()
     {
         _logger.LogDebug("Window Resized");
+    }
+
+    /// <summary>
+    /// Configure DPS update mode based on AppConfig settings
+    /// </summary>
+    private void ConfigureDpsUpdateMode()
+    {
+        if (!_isInitialized) return;
+
+        _logger.LogInformation("Configuring DPS update mode: {Mode}, Interval: {Interval}ms",
+            AppConfig.DpsUpdateMode, AppConfig.DpsUpdateInterval);
+
+        switch (AppConfig.DpsUpdateMode)
+        {
+            case DpsUpdateMode.Passive:
+                // Passive mode: subscribe to event
+                StopDpsUpdateTimer();
+                _storage.DpsDataUpdated -= DataStorage_DpsDataUpdated; // Unsubscribe first to avoid duplicate
+                _storage.DpsDataUpdated += DataStorage_DpsDataUpdated;
+                _storage.NewSectionCreated -= StorageOnNewSectionCreated;
+                _storage.NewSectionCreated += StorageOnNewSectionCreated;
+                _logger.LogDebug("Passive mode enabled: listening to DpsDataUpdated event");
+                break;
+
+            case DpsUpdateMode.Active:
+                // Active mode: use timer, unsubscribe from event
+                _storage.DpsDataUpdated -= DataStorage_DpsDataUpdated;
+                _storage.NewSectionCreated -= StorageOnNewSectionCreated;
+                StartDpsUpdateTimer(AppConfig.DpsUpdateInterval);
+                _logger.LogDebug("Active mode enabled: timer interval {Interval}ms", AppConfig.DpsUpdateInterval);
+                break;
+
+            default:
+                _logger.LogWarning("Unknown DPS update mode: {Mode}", AppConfig.DpsUpdateMode);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Start or restart DPS update timer with specified interval
+    /// </summary>
+    private void StartDpsUpdateTimer(int intervalMs)
+    {
+        // Validate interval
+        var clampedInterval = Math.Clamp(intervalMs, 100, 5000);
+        if (clampedInterval != intervalMs)
+        {
+            _logger.LogWarning("DPS update interval {Original}ms clamped to {Clamped}ms",
+                intervalMs, clampedInterval);
+        }
+
+        if (_dpsUpdateTimer == null)
+        {
+            _dpsUpdateTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(clampedInterval)
+            };
+            _dpsUpdateTimer.Tick += DpsUpdateTimerOnTick;
+        }
+        else
+        {
+            _dpsUpdateTimer.Stop();
+            _dpsUpdateTimer.Interval = TimeSpan.FromMilliseconds(clampedInterval);
+        }
+
+        _dpsUpdateTimer.Start();
+        _logger.LogDebug("DPS update timer started with interval {Interval}ms", clampedInterval);
+    }
+
+    /// <summary>
+    /// Stop DPS update timer
+    /// </summary>
+    private void StopDpsUpdateTimer()
+    {
+        if (_dpsUpdateTimer != null)
+        {
+            _dpsUpdateTimer.Stop();
+            _logger.LogDebug("DPS update timer stopped");
+        }
+    }
+
+    /// <summary>
+    /// Timer tick handler for active update mode
+    /// </summary>
+    private void DpsUpdateTimerOnTick(object? sender, EventArgs e)
+    {
+        // Call the same update logic as event-based mode
+        DataStorage_DpsDataUpdated();
     }
 
     private void DataStorage_DpsDataUpdated()
@@ -261,6 +381,11 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
         {
             _timer.Start();
         }
+        // else if (_timer.IsRunning && !HasDamageData(dpsList))
+        // {
+        //     // Stop recording if timer was running but no more damage data
+        //     // (IsRecordingActive removed - not part of interface)
+        // }
 
         // If a new section was created, wait until first datapoint to reset UI and mark section start
         var hasSectionDamage = HasDamageData(_storage.ReadOnlySectionedDpsDataList);
@@ -286,7 +411,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
 
     private void UpdateData(IReadOnlyList<DpsData> data)
     {
-        _logger.LogTrace("Update data");
+        _logger.LogTrace(WpfLogEvents.VmUpdateData, "Update data requested: {Count} entries", data.Count);
 
         var currentPlayerUid = _storage.CurrentPlayerInfo.UID;
 
@@ -483,7 +608,7 @@ public partial class DpsStatisticsViewModel : BaseViewModel, IDisposable
     [RelayCommand]
     private void Refresh()
     {
-        _logger.LogDebug("Manual refresh requested");
+        _logger.LogDebug(WpfLogEvents.VmRefresh, "Manual refresh requested");
 
         // Reload cached player details so that recent changes in the on-disk
         // cache are reflected in the UI.
