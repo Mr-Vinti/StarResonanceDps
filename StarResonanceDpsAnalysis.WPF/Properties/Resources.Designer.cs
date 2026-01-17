@@ -2388,6 +2388,15 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Average.
+        /// </summary>
+        public static string SkillBreakdown_Label_Average {
+            get {
+                return ResourceManager.GetString("SkillBreakdown_Label_Average", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Average hit.
         /// </summary>
         public static string SkillBreakdown_Label_AverageDamage {
@@ -2514,6 +2523,33 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Percentage.
+        /// </summary>
+        public static string SkillBreakdown_Label_Percentage {
+            get {
+                return ResourceManager.GetString("SkillBreakdown_Label_Percentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Power.
+        /// </summary>
+        public static string SkillBreakdown_Label_Power {
+            get {
+                return ResourceManager.GetString("SkillBreakdown_Label_Power", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skill(Name).
+        /// </summary>
+        public static string SkillBreakdown_Label_SkillName {
+            get {
+                return ResourceManager.GetString("SkillBreakdown_Label_SkillName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total.
         /// </summary>
         public static string SkillBreakdown_Label_Total {
@@ -2573,6 +2609,24 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         public static string SkillBreakdown_Label_TotalHitsTaken {
             get {
                 return ResourceManager.GetString("SkillBreakdown_Label_TotalHitsTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UID.
+        /// </summary>
+        public static string SkillBreakdown_Label_Uid {
+            get {
+                return ResourceManager.GetString("SkillBreakdown_Label_Uid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Percent.
+        /// </summary>
+        public static string SkillBreakdown_Label_ValuePercentToTotal {
+            get {
+                return ResourceManager.GetString("SkillBreakdown_Label_ValuePercentToTotal", resourceCulture);
             }
         }
         
@@ -2672,6 +2726,42 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         public static string SkillBreakdown_Section_HealingSkillsAnalysis {
             get {
                 return ResourceManager.GetString("SkillBreakdown_Section_HealingSkillsAnalysis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to casts.
+        /// </summary>
+        public static string SkillBreakdown_Suffix_Casts {
+            get {
+                return ResourceManager.GetString("SkillBreakdown_Suffix_Casts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to crits Number.
+        /// </summary>
+        public static string SkillBreakdown_Suffix_Crits {
+            get {
+                return ResourceManager.GetString("SkillBreakdown_Suffix_Crits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Luck rate.
+        /// </summary>
+        public static string SkillBreakdown_Suffix_Lucky {
+            get {
+                return ResourceManager.GetString("SkillBreakdown_Suffix_Lucky", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to progress.
+        /// </summary>
+        public static string SkillBreakdown_Suffix_Progress {
+            get {
+                return ResourceManager.GetString("SkillBreakdown_Suffix_Progress", resourceCulture);
             }
         }
         
@@ -2852,6 +2942,150 @@ namespace StarResonanceDpsAnalysis.WPF.Properties {
         public static string SkillBreakdown_Value_TotalDamage {
             get {
                 return ResourceManager.GetString("SkillBreakdown_Value_TotalDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Log.
+        /// </summary>
+        public static string SkillLog_Button_Clear {
+            get {
+                return ResourceManager.GetString("SkillLog_Button_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string SkillLog_Button_Close {
+            get {
+                return ResourceManager.GetString("SkillLog_Button_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CONNECTION:STABLE.
+        /// </summary>
+        public static string SkillLog_Footer_Connection {
+            get {
+                return ResourceManager.GetString("SkillLog_Footer_Connection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LOGGING ENABLED.
+        /// </summary>
+        public static string SkillLog_Footer_Logging {
+            get {
+                return ResourceManager.GetString("SkillLog_Footer_Logging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SYSTEM ONLINE.
+        /// </summary>
+        public static string SkillLog_Header_Status {
+            get {
+                return ResourceManager.GetString("SkillLog_Header_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BATTLE LOG.
+        /// </summary>
+        public static string SkillLog_Header_Title {
+            get {
+                return ResourceManager.GetString("SkillLog_Header_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DMG.
+        /// </summary>
+        public static string SkillLog_Label_Damage {
+            get {
+                return ResourceManager.GetString("SkillLog_Label_Damage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HEAL.
+        /// </summary>
+        public static string SkillLog_Label_Heal {
+            get {
+                return ResourceManager.GetString("SkillLog_Label_Heal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avg Damage.
+        /// </summary>
+        public static string SkillLog_Popup_AvgDamage {
+            get {
+                return ResourceManager.GetString("SkillLog_Popup_AvgDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crit Damage.
+        /// </summary>
+        public static string SkillLog_Popup_CritDamage {
+            get {
+                return ResourceManager.GetString("SkillLog_Popup_CritDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Critical.
+        /// </summary>
+        public static string SkillLog_Popup_Critical {
+            get {
+                return ResourceManager.GetString("SkillLog_Popup_Critical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hit Count.
+        /// </summary>
+        public static string SkillLog_Popup_HitCount {
+            get {
+                return ResourceManager.GetString("SkillLog_Popup_HitCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lucky Damage.
+        /// </summary>
+        public static string SkillLog_Popup_LuckyDamage {
+            get {
+                return ResourceManager.GetString("SkillLog_Popup_LuckyDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lucky Hit.
+        /// </summary>
+        public static string SkillLog_Popup_LuckyHit {
+            get {
+                return ResourceManager.GetString("SkillLog_Popup_LuckyHit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Damage.
+        /// </summary>
+        public static string SkillLog_Popup_TotalDamage {
+            get {
+                return ResourceManager.GetString("SkillLog_Popup_TotalDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Battle Log.
+        /// </summary>
+        public static string SkillLog_Title {
+            get {
+                return ResourceManager.GetString("SkillLog_Title", resourceCulture);
             }
         }
         

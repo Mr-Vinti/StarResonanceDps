@@ -4,6 +4,64 @@
     xmlns:lex="http://wpflocalizeextension.codeplex.com"
     xmlns:viewModels="clr-namespace:StarResonanceDpsAnalysis.WPF.ViewModels">
 
+    <!--  Section Header Styles (used by SkillListPanel template)  -->
+    <Style x:Key="SectionHeaderBorder" TargetType="Border">
+        <Setter Property="Padding" Value="20,16" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BorderBrush" Value="#F0F0F0" />
+        <Setter Property="BorderThickness" Value="1,1,1,0" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#FFFFFF" />
+                    <GradientStop Offset="1" Color="#F9FAFB" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SectionTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="#262626" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC" />
+    </Style>
+
+    <Style x:Key="SortRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="#8C8C8C" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Margin" Value="8,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="#1890FF" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="#1890FF" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SkillListBorder" TargetType="Border">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BorderBrush" Value="#F0F0F0" />
+        <Setter Property="BorderThickness" Value="1,0,1,1" />
+        <Setter Property="Padding" Value="0,0,0,8" />
+    </Style>
+
     <!--  Skill Card Styles  -->
     <Style x:Key="SkillCardBorder" TargetType="Border">
         <Setter Property="Background" Value="Transparent" />
@@ -63,7 +121,8 @@
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="4,0,0,0" />
-        <Setter Property="FontWeight" Value="Light" /></Style>
+        <Setter Property="FontWeight" Value="Light" />
+    </Style>
 
     <!--  Skill List Item Template for Damage  -->
     <DataTemplate x:Key="SkillListItemTemplateDamage" DataType="{x:Type viewModels:SkillItemViewModel}">
@@ -76,7 +135,7 @@
                 <Border HorizontalAlignment="Left" Background="#F0F7FF" Opacity="1.0">
                     <Border.Width>
                         <MultiBinding Converter="{StaticResource PercentToWidthConverter}">
-                            <Binding Path="Percentage" />
+                            <Binding Path="RateToMax" />
                             <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=Grid}" />
                         </MultiBinding>
                     </Border.Width>
@@ -93,52 +152,46 @@
 
                     <!--  Skill Name with Icon  -->
                     <StackPanel Grid.Column="0" Orientation="Horizontal">
-                        <Border Style="{StaticResource SkillIconBorder}" Tag="{Binding SkillName}"><Border.Background><MultiBinding Converter="{StaticResource SkillNameToRandomGradientConverter}"><Binding Path="SkillName" /><Binding Path="Tag" RelativeSource="{RelativeSource Self}" /></MultiBinding></Border.Background>
-                            <TextBlock Style="{StaticResource SkillIconText}" Text="{Binding SkillName, Converter={StaticResource StringFirstCharConverter}}" />
+                        <Border Style="{StaticResource SkillIconBorder}" Tag="{Binding SkillName}">
+                            <Border.Background>
+                                <MultiBinding Converter="{StaticResource SkillNameToRandomGradientConverter}">
+                                    <Binding Path="SkillName" />
+                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </Border.Background>
+                            <TextBlock Style="{StaticResource SkillIconText}"
+                                       Text="{Binding SkillName, Converter={StaticResource StringFirstCharConverter}}" />
                         </Border>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock x:Name="SkillNameText" Style="{StaticResource SkillNameText}" Text="{Binding SkillName}" />
-                            <StackPanel x:Name="DetailsPanel" Orientation="Horizontal" Visibility="Collapsed" Margin="0,2,0,0">
-                                <TextBlock 
-                                    FontFamily="Segoe MDL2 Assets" 
-                                    Text="&#xE946;" 
-                                    FontSize="10" 
-                                    Foreground="#8C8C8C" 
-                                    VerticalAlignment="Center" 
-                                    Margin="0,0,4,0"/>
-                                <TextBlock 
-                                    Text="Click for details" 
-                                    FontSize="10" 
-                                    Foreground="#8C8C8C" 
-                                    VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </StackPanel>
+                        <TextBlock x:Name="SkillNameText" Style="{StaticResource SkillNameText}"
+                                   Text="{Binding SkillName}" />
                     </StackPanel>
 
                     <!--  Total Value  -->
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource StatColumnText}" FontWeight="Bold"
-                        Text="{Binding Damage.TotalValue, StringFormat={}{0:N0}}" />
+                    <TextBlock Grid.Column="1" Style="{StaticResource StatColumnText}"
+                               Text="{Binding TotalValue, StringFormat={}{0:N0}}" />
 
                     <!--  Hit Count  -->
                     <StackPanel Grid.Column="2" HorizontalAlignment="Right"
-                        Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource StatColumnText}" Text="{Binding Damage.HitCount, StringFormat={}{0:N0}}" />
-                        <TextBlock Style="{StaticResource StatColumnLightText}" Text="{lex:Loc Key=SkillBreakdown_Unit_Hits}" />
+                                Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource StatColumnText}"
+                                   Text="{Binding HitCount, StringFormat={}{0:N0}}" />
+                        <TextBlock Style="{StaticResource StatColumnLightText}"
+                                   Text="{lex:Loc Key=SkillBreakdown_Unit_Hits}" />
                     </StackPanel>
 
                     <!--  Crit Rate  -->
                     <StackPanel Grid.Column="3" HorizontalAlignment="Right"
-                        Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource StatColumnText}" Text="{Binding Damage.CritRate, StringFormat={}{0:P1}}" />
+                                Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource StatColumnText}"
+                                   Text="{Binding CritRate, StringFormat={}{0:P1}}" />
                         <TextBlock
-                            Margin="4,0,0,0"
                             Style="{StaticResource StatColumnLightText}"
-                            Text="{Binding Damage.CritCount, StringFormat={}({0})}" />
+                            Text="{Binding CritCount, StringFormat={}({0})}" />
                     </StackPanel>
 
                     <!--  Average  -->
-                    <TextBlock x:Name="AverageText" Grid.Column="4" HorizontalAlignment="Right" Style="{StaticResource StatColumnText}"
-                        Text="{Binding Damage.Average, StringFormat={}{0:N0}}" />
+                    <TextBlock x:Name="AverageText" Grid.Column="4" Style="{StaticResource StatColumnText}"
+                               Text="{Binding Average, StringFormat={}{0:N0}}" />
                 </Grid>
             </Grid>
         </Border>
@@ -146,8 +199,6 @@
             <DataTrigger Binding="{Binding IsMouseOver, ElementName=CardBorder}" Value="True">
                 <Setter TargetName="SkillNameText" Property="Foreground" Value="#1890FF" />
                 <Setter TargetName="SkillNameText" Property="FontWeight" Value="SemiBold" />
-                <Setter TargetName="AverageText" Property="Foreground" Value="#1890FF" />
-                <Setter TargetName="DetailsPanel" Property="Visibility" Value="Visible" />
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
@@ -160,7 +211,7 @@
                 <Border HorizontalAlignment="Left" Background="#F0FFF4" Opacity="1.0">
                     <Border.Width>
                         <MultiBinding Converter="{StaticResource PercentToWidthConverter}">
-                            <Binding Path="Percentage" />
+                            <Binding Path="RateToMax" />
                             <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=Grid}" />
                         </MultiBinding>
                     </Border.Width>
@@ -177,52 +228,46 @@
 
                     <!--  Skill Name with Icon  -->
                     <StackPanel Grid.Column="0" Orientation="Horizontal">
-                        <Border Style="{StaticResource SkillIconBorder}" Tag="{Binding SkillName}"><Border.Background><MultiBinding Converter="{StaticResource SkillNameToRandomGradientConverter}"><Binding Path="SkillName" /><Binding Path="Tag" RelativeSource="{RelativeSource Self}" /></MultiBinding></Border.Background>
-                            <TextBlock Style="{StaticResource SkillIconText}" Text="{Binding SkillName, Converter={StaticResource StringFirstCharConverter}}" />
+                        <Border Style="{StaticResource SkillIconBorder}" Tag="{Binding SkillName}">
+                            <Border.Background>
+                                <MultiBinding Converter="{StaticResource SkillNameToRandomGradientConverter}">
+                                    <Binding Path="SkillName" />
+                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </Border.Background>
+                            <TextBlock Style="{StaticResource SkillIconText}"
+                                       Text="{Binding SkillName, Converter={StaticResource StringFirstCharConverter}}" />
                         </Border>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock x:Name="SkillNameText" Style="{StaticResource SkillNameText}" Text="{Binding SkillName}" />
-                            <StackPanel x:Name="DetailsPanel" Orientation="Horizontal" Visibility="Collapsed" Margin="0,2,0,0">
-                                <TextBlock 
-                                    FontFamily="Segoe MDL2 Assets" 
-                                    Text="&#xE946;" 
-                                    FontSize="10" 
-                                    Foreground="#8C8C8C" 
-                                    VerticalAlignment="Center" 
-                                    Margin="0,0,4,0"/>
-                                <TextBlock 
-                                    Text="Click for details" 
-                                    FontSize="10" 
-                                    Foreground="#8C8C8C" 
-                                    VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </StackPanel>
+                        <TextBlock x:Name="SkillNameText" Style="{StaticResource SkillNameText}"
+                                   Text="{Binding SkillName}" />
                     </StackPanel>
 
                     <!--  Total Value  -->
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource StatColumnText}" FontWeight="Bold"
-                        Text="{Binding Heal.TotalValue, StringFormat={}{0:N0}}" />
+                    <TextBlock Grid.Column="1" Style="{StaticResource StatColumnText}"
+                               Text="{Binding TotalValue, StringFormat={}{0:N0}}" />
 
                     <!--  Hit Count  -->
                     <StackPanel Grid.Column="2" HorizontalAlignment="Right"
-                        Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource StatColumnText}" Text="{Binding Heal.HitCount, StringFormat={}{0:N0}}" />
-                        <TextBlock Style="{StaticResource StatColumnLightText}" Text="{lex:Loc Key=SkillBreakdown_Unit_Hits}" />
+                                Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource StatColumnText}"
+                                   Text="{Binding HitCount, StringFormat={}{0:N0}}" />
+                        <TextBlock Style="{StaticResource StatColumnLightText}"
+                                   Text="{lex:Loc Key=SkillBreakdown_Unit_Hits}" />
                     </StackPanel>
 
                     <!--  Crit Rate  -->
                     <StackPanel Grid.Column="3" HorizontalAlignment="Right"
-                        Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource StatColumnText}" Text="{Binding Heal.CritRate, StringFormat={}{0:P1}}" />
+                                Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource StatColumnText}"
+                                   Text="{Binding CritRate, StringFormat={}{0:P1}}" />
                         <TextBlock
-                            Margin="4,0,0,0"
                             Style="{StaticResource StatColumnLightText}"
-                            Text="{Binding Heal.CritCount, StringFormat={}({0})}" />
+                            Text="{Binding CritCount, StringFormat={}({0})}" />
                     </StackPanel>
 
                     <!--  Average  -->
-                    <TextBlock x:Name="AverageText" Grid.Column="4" HorizontalAlignment="Right" Style="{StaticResource StatColumnText}"
-                        Text="{Binding Heal.Average, StringFormat={}{0:N0}}" />
+                    <TextBlock x:Name="AverageText" Grid.Column="4" Style="{StaticResource StatColumnText}"
+                               Text="{Binding Average, StringFormat={}{0:N0}}" />
                 </Grid>
             </Grid>
         </Border>
@@ -230,8 +275,6 @@
             <DataTrigger Binding="{Binding IsMouseOver, ElementName=CardBorder}" Value="True">
                 <Setter TargetName="SkillNameText" Property="Foreground" Value="#1890FF" />
                 <Setter TargetName="SkillNameText" Property="FontWeight" Value="SemiBold" />
-                <Setter TargetName="AverageText" Property="Foreground" Value="#1890FF" />
-                <Setter TargetName="DetailsPanel" Property="Visibility" Value="Visible" />
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
@@ -244,7 +287,7 @@
                 <Border HorizontalAlignment="Left" Background="#FFF0F0" Opacity="1.0">
                     <Border.Width>
                         <MultiBinding Converter="{StaticResource PercentToWidthConverter}">
-                            <Binding Path="Percentage" />
+                            <Binding Path="RateToMax" />
                             <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=Grid}" />
                         </MultiBinding>
                     </Border.Width>
@@ -261,52 +304,46 @@
 
                     <!--  Skill Name with Icon  -->
                     <StackPanel Grid.Column="0" Orientation="Horizontal">
-                        <Border Style="{StaticResource SkillIconBorder}" Tag="{Binding SkillName}"><Border.Background><MultiBinding Converter="{StaticResource SkillNameToRandomGradientConverter}"><Binding Path="SkillName" /><Binding Path="Tag" RelativeSource="{RelativeSource Self}" /></MultiBinding></Border.Background>
-                            <TextBlock Style="{StaticResource SkillIconText}" Text="{Binding SkillName, Converter={StaticResource StringFirstCharConverter}}" />
+                        <Border Style="{StaticResource SkillIconBorder}" Tag="{Binding SkillName}">
+                            <Border.Background>
+                                <MultiBinding Converter="{StaticResource SkillNameToRandomGradientConverter}">
+                                    <Binding Path="SkillName" />
+                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </Border.Background>
+                            <TextBlock Style="{StaticResource SkillIconText}"
+                                       Text="{Binding SkillName, Converter={StaticResource StringFirstCharConverter}}" />
                         </Border>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock x:Name="SkillNameText" Style="{StaticResource SkillNameText}" Text="{Binding SkillName}" />
-                            <StackPanel x:Name="DetailsPanel" Orientation="Horizontal" Visibility="Collapsed" Margin="0,2,0,0">
-                                <TextBlock 
-                                    FontFamily="Segoe MDL2 Assets" 
-                                    Text="&#xE946;" 
-                                    FontSize="10" 
-                                    Foreground="#8C8C8C" 
-                                    VerticalAlignment="Center" 
-                                    Margin="0,0,4,0"/>
-                                <TextBlock 
-                                    Text="Click for details" 
-                                    FontSize="10" 
-                                    Foreground="#8C8C8C" 
-                                    VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </StackPanel>
+                        <TextBlock x:Name="SkillNameText" Style="{StaticResource SkillNameText}"
+                                   Text="{Binding SkillName}" />
                     </StackPanel>
 
                     <!--  Total Value  -->
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource StatColumnText}" FontWeight="Bold"
-                        Text="{Binding TakenDamage.TotalValue, StringFormat={}{0:N0}}" />
+                    <TextBlock Grid.Column="1" Style="{StaticResource StatColumnText}"
+                               Text="{Binding TotalValue, StringFormat={}{0:N0}}" />
 
                     <!--  Hit Count  -->
                     <StackPanel Grid.Column="2" HorizontalAlignment="Right"
-                        Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource StatColumnText}" Text="{Binding TakenDamage.HitCount, StringFormat={}{0:N0}}" />
-                        <TextBlock Style="{StaticResource StatColumnLightText}" Text="{lex:Loc Key=SkillBreakdown_Unit_Hits}" />
+                                Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource StatColumnText}"
+                                   Text="{Binding HitCount, StringFormat={}{0:N0}}" />
+                        <TextBlock Style="{StaticResource StatColumnLightText}"
+                                   Text="{lex:Loc Key=SkillBreakdown_Unit_Hits}" />
                     </StackPanel>
 
                     <!--  Crit Rate  -->
                     <StackPanel Grid.Column="3" HorizontalAlignment="Right"
-                        Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource StatColumnText}" Text="{Binding TakenDamage.CritRate, StringFormat={}{0:P1}}" />
+                                Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource StatColumnText}"
+                                   Text="{Binding CritRate, StringFormat={}{0:P1}}" />
                         <TextBlock
-                            Margin="4,0,0,0"
                             Style="{StaticResource StatColumnLightText}"
-                            Text="{Binding TakenDamage.CritCount, StringFormat={}({0})}" />
+                            Text="{Binding CritCount, StringFormat={}({0})}" />
                     </StackPanel>
 
                     <!--  Average  -->
-                    <TextBlock x:Name="AverageText" Grid.Column="4" HorizontalAlignment="Right" Style="{StaticResource StatColumnText}"
-                        Text="{Binding TakenDamage.Average, StringFormat={}{0:N0}}" />
+                    <TextBlock x:Name="AverageText" Grid.Column="4" Style="{StaticResource StatColumnText}"
+                               Text="{Binding Average, StringFormat={}{0:N0}}" />
                 </Grid>
             </Grid>
         </Border>
@@ -314,22 +351,486 @@
             <DataTrigger Binding="{Binding IsMouseOver, ElementName=CardBorder}" Value="True">
                 <Setter TargetName="SkillNameText" Property="Foreground" Value="#1890FF" />
                 <Setter TargetName="SkillNameText" Property="FontWeight" Value="SemiBold" />
-                <Setter TargetName="DetailsPanel" Property="Visibility" Value="Visible" />
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
 
+    <!-- Control Templates for New Controls -->
+    <!--<Style TargetType="skillBreakdown:TabContentPanel">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="skillBreakdown:TabContentPanel">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Offset="0" Color="#FFFFFF" />
+                                    <GradientStop Offset="1" Color="#F5F7FA" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <skillBreakdown:SkillStatsSummaryPanel
+                                Margin="16,16,16,16"
+                                DataContext="{Binding StatsViewModel}" />
+                        </Border>
+
+                        <Border Grid.Row="1" Height="1" Background="#E8E8E8" />
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" MinWidth="300" />
+                                <ColumnDefinition Width="3" />
+                                <ColumnDefinition Width="7*" MinWidth="600" />
+                            </Grid.ColumnDefinitions>
+
+                            <GridSplitter
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                Background="#E8E8E8" />
+
+                            <ScrollViewer
+                                Grid.Column="0"
+                                Padding="16,16,8,16"
+                                VerticalScrollBarVisibility="Auto">
+                                <skillBreakdown:ChartPanel DataContext="{Binding ChartViewModel}" />
+                            </ScrollViewer>
+
+                            <skillBreakdown:SkillListPanel
+                                Grid.Column="2"
+                                Margin="0"
+                                DataContext="{Binding SkillListViewModel}"
+                                ItemTemplate="{TemplateBinding ItemTemplate}" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <!--<Style TargetType="skillBreakdown:SkillListPanel">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="skillBreakdown:SkillListPanel">
+                    <Grid Grid.IsSharedSizeScope="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Style="{StaticResource SectionHeaderBorder}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Path
+                                        Width="16"
+                                        Height="16"
+                                        Margin="0,0,8,0"
+                                        Data="M3 4h18v2H3zm0 7h18v2H3zm0 7h18v2H3z"
+                                        Stretch="Uniform">
+                                        <Path.Fill>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Offset="0" Color="#1890FF" />
+                                                <GradientStop Offset="1" Color="#69C0FF" />
+                                            </LinearGradientBrush>
+                                        </Path.Fill>
+                                    </Path>
+                                    <TextBlock Style="{StaticResource SectionTitle}" Text="{Binding SectionTitle}" />
+                                </StackPanel>
+
+                                <Border
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    BorderBrush="#E8E8E8"
+                                    BorderThickness="1"
+                                    CornerRadius="14"
+                                    Padding="12,4">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock
+                                            Margin="0,0,4,0"
+                                            VerticalAlignment="Center"
+                                            FontSize="13"
+                                            Foreground="#8C8C8C"
+                                            Text="{lex:Loc Key=ModuleSolve_Sort_Label}" />
+
+                                        <RadioButton
+                                            Content="{lex:Loc Key=SkillBreakdown_Label_Total}"
+                                            GroupName="SortGroup"
+                                            IsChecked="True"
+                                            Style="{StaticResource SortRadioButtonStyle}" />
+
+                                        <Border
+                                            Width="1"
+                                            Height="12"
+                                            Margin="0,0"
+                                            VerticalAlignment="Center"
+                                            Background="#E8E8E8" />
+
+                                        <RadioButton
+                                            Content="{lex:Loc Key=SkillBreakdown_Label_AverageDps}"
+                                            GroupName="SortGroup"
+                                            Style="{StaticResource SortRadioButtonStyle}" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="1" Background="#F9FAFB" BorderBrush="#E8E8E8" BorderThickness="0,1,0,1">
+                            <Grid>
+                                <Border Padding="16,8">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2.5*" MinWidth="180" SharedSizeGroup="ColSkill" />
+                                            <ColumnDefinition Width="1.2*" MinWidth="100" SharedSizeGroup="ColTotal" />
+                                            <ColumnDefinition Width="1*" MinWidth="80" SharedSizeGroup="ColHits" />
+                                            <ColumnDefinition Width="1*" MinWidth="80" SharedSizeGroup="ColCrit" />
+                                            <ColumnDefinition Width="1*" MinWidth="80" SharedSizeGroup="ColAvg" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Left"
+                                            FontSize="11"
+                                            FontWeight="Bold"
+                                            Foreground="#B0B0B0"
+                                            VerticalAlignment="Center"
+                                            FontFamily="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC"
+                                            Text="SKILL (NAME)" />
+
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right"
+                                            FontSize="11"
+                                            FontWeight="Bold"
+                                            Foreground="#B0B0B0"
+                                            VerticalAlignment="Center"
+                                            FontFamily="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC"
+                                            Text="{lex:Loc Key=SkillBreakdown_Label_Total}" />
+
+                                        <TextBlock
+                                            Grid.Column="2"
+                                            HorizontalAlignment="Right"
+                                            FontSize="11"
+                                            FontWeight="Bold"
+                                            Foreground="#B0B0B0"
+                                            VerticalAlignment="Center"
+                                            FontFamily="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC"
+                                            Text="{lex:Loc Key=SkillBreakdown_Label_HitCount}" />
+
+                                        <TextBlock
+                                            Grid.Column="3"
+                                            HorizontalAlignment="Right"
+                                            FontSize="11"
+                                            FontWeight="Bold"
+                                            Foreground="#B0B0B0"
+                                            VerticalAlignment="Center"
+                                            FontFamily="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC"
+                                            Text="{lex:Loc Key=SkillBreakdown_Label_CritRate}" />
+
+                                        <TextBlock
+                                            Grid.Column="4"
+                                            HorizontalAlignment="Right"
+                                            FontSize="11"
+                                            FontWeight="Bold"
+                                            Foreground="#B0B0B0"
+                                            VerticalAlignment="Center"
+                                            FontFamily="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC"
+                                            Text="{lex:Loc Key=SkillBreakdown_Label_AverageDamage}" />
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="2" Style="{StaticResource SkillListBorder}">
+                            <ScrollViewer VerticalScrollBarVisibility="Visible" Padding="0">
+                                <ItemsControl
+                                    x:Name="SkillItemsControl"
+                                    ItemsSource="{Binding SkillItems}"
+                                    ItemTemplate="{TemplateBinding ItemTemplate}"
+                                    Tag="{Binding IconColor}" />
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <!--  Chart Panel Styles  -->
+    <Style x:Key="ChartCardBorder" TargetType="Border">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Margin" Value="0,0,0,16" />
+        <Setter Property="Padding" Value="20,16" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="BorderBrush" Value="#F0F0F0" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect
+                    BlurRadius="8"
+                    Opacity="0.08"
+                    ShadowDepth="2"
+                    Color="#000000" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ChartTitle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#262626" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="pack://application:,,,/Assets/Fonts/#HarmonyOS Sans SC" />
+    </Style>
+
+    <Style x:Key="ChartIcon" TargetType="Path">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Margin" Value="0,0,8,0" />
+        <Setter Property="Stretch" Value="Uniform" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="ChartSubTitle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#8C8C8C" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="0,0,0,8" />
+    </Style>
+
+    <!--<Style TargetType="skillBreakdown:ChartPanel">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="skillBreakdown:ChartPanel">
+                    <StackPanel>
+                        <Border Style="{StaticResource ChartCardBorder}">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,16">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Path
+                                            Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
+                                            Fill="#4C83FF"
+                                            Style="{StaticResource ChartIcon}" />
+                                        -->
+    <!--<TextBlock Style="{StaticResource ChartTitle}" Text="{Binding TimeSeriesTitle}" />-->
+    <!--
+                                        <TextBlock Style="{StaticResource ChartTitle}" Text="{Binding ChartTitle}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Button
+                                            Width="24"
+                                            Height="24"
+                                            Margin="2,0"
+                                            Command="{Binding ResetZoomCommand}"
+                                            Content="?"
+                                            Style="{StaticResource AntButtonStyle}"
+                                            ToolTip="{lex:Loc Key=SkillBreakdown_Tooltip_ResetZoom}" />
+                                        <Button
+                                            Width="24"
+                                            Height="24"
+                                            Margin="2,0"
+                                            Command="{Binding ZoomOutCommand}"
+                                            Content="-"
+                                            Style="{StaticResource AntButtonStyle}" />
+                                        <Button
+                                            Width="24"
+                                            Height="24"
+                                            Margin="2,0"
+                                            Command="{Binding ZoomInCommand}"
+                                            Content="+"
+                                            Style="{StaticResource AntButtonStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                                <oxy:PlotView Height="200" Model="{Binding SeriesPlotModel}" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource ChartCardBorder}">
+                            <StackPanel>
+                                <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
+                                    <Path
+                                        Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 2.05c3.95.23 7.18 3.25 7.75 7.15h-7.75V4.05zM11 19.95c-3.95-.23-7.18-3.25-7.75-7.15h7.75v7.15zm-1-8.15H2.25c.57-3.9 3.8-6.92 7.75-7.15v7.15z"
+                                        Fill="#738192"
+                                        Style="{StaticResource ChartIcon}" />
+                                    <TextBlock Style="{StaticResource ChartTitle}" Text="{TemplateBinding PieChartTitle}" />
+                                </StackPanel>
+                                <oxy:PlotView Height="280" Model="{Binding PiePlotModel}" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource ChartCardBorder}">
+                            <StackPanel>
+                                <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
+                                    <Path
+                                        Data="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8h2.8v6h-2.8z"
+                                        Fill="#738192"
+                                        Style="{StaticResource ChartIcon}" />
+                                    <TextBlock Style="{StaticResource ChartTitle}" Text="{Binding HitTypeChartTitle}" />
+                                </StackPanel>
+
+                                <StackPanel Margin="0,8">
+                                    <Grid Margin="0,0,0,16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0" Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="#64748B">
+                                                <Run Text="{lex:Loc Key=Common_HitType_Lucky}" />
+                                                <Run Text=" (Lucky)" FontSize="12" Foreground="#94A3B8" />
+                                            </TextBlock>
+                                            <TextBlock Grid.Column="1" FontSize="13" FontWeight="Bold" Foreground="#1E293B">
+                                                <Run Text="{Binding LuckyCount, StringFormat={}{0:N0}, Mode=OneWay}" />
+                                                <Run Text=" (" Foreground="#64748B" />
+                                                <Run Text="{Binding LuckyPercentage, StringFormat={}{0:F1}, Mode=OneWay}" Foreground="#FACC15" />
+                                                <Run Text="%" Foreground="#FACC15" />
+                                                <Run Text=")" Foreground="#64748B" />
+                                            </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="1" Height="8">
+                                            <Border Background="#F1F5F9" CornerRadius="4" />
+                                            <Border Background="#FACC15" CornerRadius="4" HorizontalAlignment="Left">
+                                                <Border.Width>
+                                                    <MultiBinding Converter="{StaticResource PercentToWidthConverter}">
+                                                        <Binding Path="LuckyPercentage" />
+                                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=Grid}" />
+                                                    </MultiBinding>
+                                                </Border.Width>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid Margin="0,0,0,16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0" Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="#64748B">
+                                                <Run Text="{lex:Loc Key=Common_HitType_Critical}" />
+                                                <Run Text=" (Crit)" FontSize="12" Foreground="#94A3B8" />
+                                            </TextBlock>
+                                            <TextBlock Grid.Column="1" FontSize="13" FontWeight="Bold" Foreground="#1E293B">
+                                                <Run Text="{Binding CritCount, StringFormat={}{0:N0}, Mode=OneWay}" />
+                                                <Run Text=" (" Foreground="#64748B" />
+                                                <Run Text="{Binding CritPercentage, StringFormat={}{0:F1}, Mode=OneWay}" Foreground="#34D399" />
+                                                <Run Text="%" Foreground="#34D399" />
+                                                <Run Text=")" Foreground="#64748B" />
+                                            </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="1" Height="8">
+                                            <Border Background="#F1F5F9" CornerRadius="4" />
+                                            <Border Background="#34D399" CornerRadius="4" HorizontalAlignment="Left">
+                                                <Border.Width>
+                                                    <MultiBinding Converter="{StaticResource PercentToWidthConverter}">
+                                                        <Binding Path="CritPercentage" />
+                                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=Grid}" />
+                                                    </MultiBinding>
+                                                </Border.Width>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0" Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="#64748B">
+                                                <Run Text="{lex:Loc Key=Common_HitType_Normal}" />
+                                                <Run Text=" (Normal)" FontSize="12" Foreground="#94A3B8" />
+                                            </TextBlock>
+                                            <TextBlock Grid.Column="1" FontSize="13" FontWeight="Bold" Foreground="#1E293B">
+                                                <Run Text="{Binding NormalCount, StringFormat={}{0:N0}, Mode=OneWay}" />
+                                                <Run Text=" (" Foreground="#64748B" />
+                                                <Run Text="{Binding NormalPercentage, StringFormat={}{0:F1}, Mode=OneWay}" Foreground="#3B82F6" />
+                                                <Run Text="%" Foreground="#3B82F6" />
+                                                <Run Text=")" Foreground="#64748B" />
+                                            </TextBlock>
+                                        </Grid>
+                                        <Grid Grid.Row="1" Height="8">
+                                            <Border Background="#F1F5F9" CornerRadius="4" />
+                                            <Border Background="#3B82F6" CornerRadius="4" HorizontalAlignment="Left">
+                                                <Border.Width>
+                                                    <MultiBinding Converter="{StaticResource PercentToWidthConverter}">
+                                                        <Binding Path="NormalPercentage" />
+                                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType=Grid}" />
+                                                    </MultiBinding>
+                                                </Border.Width>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <!--  Skill Stats Summary Styles -->
+    <Style x:Key="StatCardBorder" TargetType="Border">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="8,0" />
+        <Setter Property="Padding" Value="0,20" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style x:Key="StatValueText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="#1F1F1F" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="StatLabelText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="#8C8C8C" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,8,0,0" />
+    </Style>
+
+    <Style x:Key="StatSubText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="#BFBFBF" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,4,0,0" />
+    </Style>
+
+    <!--<ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Styles/SkillStatsSummaryPanelStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Styles/ChartPanelStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Styles/SkillListPanelStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Styles/TabContentPanelStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>-->
+
 </ResourceDictionary>
-
-
-
-
-
-
-
-
-
-
-
-
-

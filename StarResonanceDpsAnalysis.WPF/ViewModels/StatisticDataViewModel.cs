@@ -6,8 +6,10 @@ using StarResonanceDpsAnalysis.WPF.Localization;
 
 namespace StarResonanceDpsAnalysis.WPF.ViewModels;
 
+public record struct SkillViewModelCollection(List<SkillItemViewModel> Damage, List<SkillItemViewModel> Healing, List<SkillItemViewModel> Taken);
+
 [DebuggerDisplay("Name:{Player?.Name};Value:{Value}")]
-public partial class StatisticDataViewModel(DebugFunctions debug, LocalizationManager localizationManager) : BaseViewModel, IComparable<StatisticDataViewModel>
+public partial class StatisticDataViewModel(DebugFunctions debug, LocalizationManager localizationManager, Func<long , SkillViewModelCollection> fetchSkillListFunc) : BaseViewModel, IComparable<StatisticDataViewModel>
 {
     [ObservableProperty] private long _durationTicks;
     [ObservableProperty] private long _index;
@@ -52,7 +54,7 @@ public partial class StatisticDataViewModel(DebugFunctions debug, LocalizationMa
     /// and triggers the UI update.
     /// </summary>
     /// <param name="limit">The maximum number of skills to display (0 for all)</param>
-    public void RefreshSkillLists(int limit)
+    public void RefreshFilterLists(int limit)
     {
         Damage.RefreshFilteredList(limit);
         Heal.RefreshFilteredList(limit);
@@ -60,15 +62,33 @@ public partial class StatisticDataViewModel(DebugFunctions debug, LocalizationMa
         SkillListRefreshTrigger++;
     }
 
-    [RelayCommand]
-    private void MouseEnter(int limit)
+    private void SortSkillList()
     {
-        SetHoverStateAction?.Invoke(true);
-        RefreshSkillLists(limit);
+        Damage.SortSkillList();
+        Heal.SortSkillList();
+        TakenDamage.SortSkillList();
+        SkillListRefreshTrigger++;
+    }
+
+    private void FetchSkillList()
+    {
+        var (damage, healing, taken) = fetchSkillListFunc.Invoke(Player.Uid);
+        Damage.TotalSkillList = damage;
+        Heal.TotalSkillList = healing;
+        TakenDamage.TotalSkillList = taken;
     }
 
     [RelayCommand]
-    private void MouseLeave()
+    private void MouseEnterItem(int limit)
+    {
+        SetHoverStateAction?.Invoke(true);
+        FetchSkillList();
+        SortSkillList();
+        RefreshFilterLists(limit);
+    }
+
+    [RelayCommand]
+    private void MouseLeaveItem()
     {
         SetHoverStateAction?.Invoke(false);
     }
@@ -78,7 +98,9 @@ public partial class StatisticDataViewModel(DebugFunctions debug, LocalizationMa
         [ObservableProperty] private IReadOnlyList<SkillItemViewModel> _filteredSkillList = [];
         [ObservableProperty] private IReadOnlyList<SkillItemViewModel> _totalSkillList = [];
 
-        [ObservableProperty] private ObservableCollection<(TimeSpan duration, double section, double total)> _dps = new();
+        // Note: DPS time series data is now stored in PlayerStatistics in the Core layer
+        // This property is kept for backward compatibility with existing views
+        [ObservableProperty] private ObservableCollection<(TimeSpan time, double value)> _dps = new();
 
         public void Reset()
         {
@@ -99,6 +121,14 @@ public partial class StatisticDataViewModel(DebugFunctions debug, LocalizationMa
              : TotalSkillList.ToList();
 
             FilteredSkillList = newFiltered;
+        }
+
+        /// <summary>
+        /// Sort TotalSkillList by TotalValue descending<br/>
+        /// </summary>
+        public void SortSkillList()
+        {
+            TotalSkillList = TotalSkillList.OrderByDescending(s => s.TotalValue).ToList();
         }
 
         public event Action<IReadOnlyList<SkillItemViewModel>?>? SkillChanged;

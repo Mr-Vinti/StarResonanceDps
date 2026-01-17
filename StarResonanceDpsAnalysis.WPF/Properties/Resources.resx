@@ -174,6 +174,21 @@
   <data name="Menu_ExitSnapshotMode" xml:space="preserve">
     <value>Exit Snapshot Mode</value>
   </data>
+  <data name="DpsStatistics_Snapshot_ViewFull_Title" xml:space="preserve">
+    <value>View full snapshot</value>
+  </data>
+  <data name="DpsStatistics_Snapshot_ViewFull_EmptyMessage" xml:space="preserve">
+    <value>No full snapshot data available.</value>
+  </data>
+  <data name="DpsStatistics_Snapshot_ViewCurrent_Title" xml:space="preserve">
+    <value>View battle snapshot</value>
+  </data>
+  <data name="DpsStatistics_Snapshot_ViewCurrent_EmptyMessage" xml:space="preserve">
+    <value>No battle snapshot data available.</value>
+  </data>
+  <data name="DpsStatistics_Snapshot_Label" xml:space="preserve">
+    <value>[Snapshot]</value>
+  </data>
   <data name="Menu_Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
@@ -747,6 +762,32 @@
   <data name="DpsStatistics_TestButton_Tooltip" xml:space="preserve">
     <value>Add Test Item</value>
   </data>
+  <data name="Common_SkillDisplayLimitChanged" xml:space="preserve">
+    <value>Skill display limit set to</value>
+  </data>
+  <data name="Common_SkillDisplayLimitSaved" xml:space="preserve">
+    <value>Skill display limit saved to config:</value>
+  </data>
+  <data name="Common_SkillListRefreshed" xml:space="preserve">
+    <value>Skill list refreshed for all slots</value>
+  </data>
+  <data name="Command_OpenSkillLog" xml:space="preserve">
+    <value>Open skill log window</value>
+  </data>
+  <data name="Warning_UidNotConfigured" xml:space="preserve">
+    <value>Tried to open personal training mode without UID configured</value>
+  </data>
+  <data name="Dialog_UidRequired_Title" xml:space="preserve">
+    <value>Character UID required</value>
+  </data>
+  <data name="Dialog_UidRequired_Message" xml:space="preserve">
+    <value>Please configure your character UID in Settings before using personal training mode.
+
+How to get UID: in game, the bottom-left player number is your UID.</value>
+  </data>
+  <data name="Info_OpeningPersonalDps" xml:space="preserve">
+    <value>Opening personal training mode</value>
+  </data>
   <data name="Common_Dash" xml:space="preserve">
     <value>-</value>
   </data>
@@ -764,6 +805,18 @@
   </data>
   <data name="StatisticType_NpcTakenDamage" xml:space="preserve">
     <value>NPC Dmg In</value>
+  </data>
+  <data name="DpsStatistics_TeamTotal_Damage" xml:space="preserve">
+    <value>Team DPS</value>
+  </data>
+  <data name="DpsStatistics_TeamTotal_Healing" xml:space="preserve">
+    <value>Team Healing</value>
+  </data>
+  <data name="DpsStatistics_TeamTotal_TakenDamage" xml:space="preserve">
+    <value>Team Damage Taken</value>
+  </data>
+  <data name="DpsStatistics_TeamTotal_NpcTakenDamage" xml:space="preserve">
+    <value>NPC Damage Taken</value>
   </data>
   <data name="ScopeTime_Current" xml:space="preserve">
     <value>Current</value>
@@ -1074,7 +1127,7 @@ How to get: After a fight, your character will automatically appear in the stats
   <data name="Settings_PlayerInfoCustomization_Description" xml:space="preserve">
     <value>Custom player info display</value>
   </data>
-    <data name="Settings_PlayerInfo_UseCustomFormat" xml:space="preserve">
+  <data name="Settings_PlayerInfo_UseCustomFormat" xml:space="preserve">
     <value>Enable Custom Format</value>
   </data>
   <data name="Settings_PlayerInfo_QuickPresets" xml:space="preserve">
@@ -1120,33 +1173,75 @@ How to get: After a fight, your character will automatically appear in the stats
     <value>casts</value>
   </data>
   <data name="SkillBreakdown_Suffix_Crits" xml:space="preserve">
-    <value>crits</value>
+    <value>crits Number</value>
   </data>
   <data name="SkillBreakdown_Suffix_Lucky" xml:space="preserve">
-    <value>lucky</value>
+    <value>Luck rate</value>
   </data>
-  <data name="SkillBreakdown_Suffix_Progress" xml:space="preserve">
-    <value>progress</value>
+  <data name="SkillBreakdown_Label_Average" xml:space="preserve">
+    <value>Average</value>
   </data>
-  <data name="SkillBreakdown_Suffix_Casts" xml:space="preserve">
-    <value>casts</value>
+  <data name="SkillLog_Title" xml:space="preserve">
+    <value>Battle Log</value>
   </data>
-  <data name="SkillBreakdown_Suffix_Crits" xml:space="preserve">
-    <value>crits</value>
+  <data name="SkillLog_Header_Title" xml:space="preserve">
+    <value>BATTLE LOG</value>
   </data>
-  <data name="SkillBreakdown_Suffix_Lucky" xml:space="preserve">
-    <value>lucky</value>
+  <data name="SkillLog_Header_Status" xml:space="preserve">
+    <value>SYSTEM ONLINE</value>
   </data>
-  <data name="SkillBreakdown_Suffix_Progress" xml:space="preserve">
-    <value>progress</value>
+  <data name="SkillLog_Popup_TotalDamage" xml:space="preserve">
+    <value>Total Damage</value>
   </data>
-  <data name="SkillBreakdown_Suffix_Casts" xml:space="preserve">
-    <value>casts</value>
+  <data name="SkillLog_Popup_HitCount" xml:space="preserve">
+    <value>Hit Count</value>
   </data>
-  <data name="SkillBreakdown_Suffix_Crits" xml:space="preserve">
-    <value>crits</value>
+  <data name="SkillLog_Popup_AvgDamage" xml:space="preserve">
+    <value>Avg Damage</value>
   </data>
-  <data name="SkillBreakdown_Suffix_Lucky" xml:space="preserve">
-    <value>lucky</value>
+  <data name="SkillLog_Popup_Critical" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="SkillLog_Popup_LuckyHit" xml:space="preserve">
+    <value>Lucky Hit</value>
+  </data>
+  <data name="SkillLog_Label_Damage" xml:space="preserve">
+    <value>DMG</value>
+  </data>
+  <data name="SkillLog_Label_Heal" xml:space="preserve">
+    <value>HEAL</value>
+  </data>
+  <data name="SkillLog_Footer_Connection" xml:space="preserve">
+    <value>CONNECTION:STABLE</value>
+  </data>
+  <data name="SkillLog_Footer_Logging" xml:space="preserve">
+    <value>LOGGING ENABLED</value>
+  </data>
+  <data name="SkillLog_Button_Clear" xml:space="preserve">
+    <value>Clear Log</value>
+  </data>
+  <data name="SkillLog_Button_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="SkillLog_Popup_CritDamage" xml:space="preserve">
+    <value>Crit Damage</value>
+  </data>
+  <data name="SkillLog_Popup_LuckyDamage" xml:space="preserve">
+    <value>Lucky Damage</value>
+  </data>
+  <data name="SkillBreakdown_Label_Percentage" xml:space="preserve">
+    <value>Percentage</value>
+  </data>
+  <data name="SkillBreakdown_Label_SkillName" xml:space="preserve">
+    <value>Skill(Name)</value>
+  </data>
+  <data name="SkillBreakdown_Label_Uid" xml:space="preserve">
+    <value>UID</value>
+  </data>
+  <data name="SkillBreakdown_Label_Power" xml:space="preserve">
+    <value>Power</value>
+  </data>
+  <data name="SkillBreakdown_Label_ValuePercentToTotal" xml:space="preserve">
+    <value>Percent</value>
   </data>
 </root>
